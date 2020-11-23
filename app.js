@@ -24,7 +24,17 @@ app.engine(
     partialsDir: __dirname + "/views/partials",
   })
 );
+// DB connect
+const db = require("./config/dbConfig");
+db.connect((err) => {
+  if (err) {
+    console.error(err);
+  } else {
+    console.log("Database connected");
+  }
+});
 
+// Middlewares
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

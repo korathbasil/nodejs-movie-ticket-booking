@@ -3,7 +3,7 @@ const router = express.Router();
 
 // Admin home
 router.get("/", (req, res) => {
-  res.send("Iam admin");
+  res.render("admin/admin-home", { admin: true });
 });
 
 module.exports = router;
