@@ -12,7 +12,12 @@
   {{else}}
   {{>user-header}}
   {{/if}}
-  {{{body}}}
+  <div class="main-contents">
+    {{#if admin}}
+    {{>admin-sidebar}}
+    {{/if}}
+    {{{body}}}
+  </div>
 </body>
 
 </html>

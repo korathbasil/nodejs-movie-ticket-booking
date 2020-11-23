@@ -5,12 +5,15 @@
 }
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  /* Colors */
+  --admin-primary: #2f3547;
+  --admin-secondary: #e6f9fe;
 }
 
 a {
   color: #00b7ff;
 }
-
+/* Layout Styling */
 /* Admin header */
 .admin-header {
   width: 100%;
@@ -19,9 +22,47 @@ a {
   align-items: center;
   justify-content: space-between;
   padding: 0 2rem;
+  background-color: var(--admin-primary);
+  color: white;
+}
+.admin-header > h1 {
+  font-size: 30px;
+  font-weight: 1000;
+  letter-spacing: 5px;
 }
 .admin-header > a {
   background-color: blue;
   padding: 10px 20px;
   border-radius: 30px;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.main-contents {
+  display: flex;
+}
+/* Sidebar */
+.sidebar {
+  flex: 0.2;
+  height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+}
+.admin-sidebar {
+  background-color: var(--admin-secondary);
+  padding: 20px;
+}
+.admin-nav {
+  margin-top: 20px;
+}
+.admin-nav > li {
+  list-style: none;
+  margin-bottom: 20px;
+}
+.admin-nav-link {
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 800;
+  color: Black;
 }
