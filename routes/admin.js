@@ -1,12 +1,13 @@
 const express = require("express");
+const session = require("express-session");
 const router = express.Router();
 
 const adminHelpers = require("../helpers/admin-helpers");
 const verifylogin = require("../middlewares/verify-admin-login");
 
-// Login
+// Authentication
 router.get("/login", (req, res) => {
-  res.render("admin/login", { admin: true });
+  res.render("admin/login", { adminRoute: true });
 });
 router.post("/login", (req, res) => {
   adminHelpers
@@ -19,21 +20,35 @@ router.post("/login", (req, res) => {
       res.redirect("/admin/login");
     });
 });
+router.get("/logout", (req, res) => {
+  // req.session.destroy();
+  req.session.admin = false;
+  res.redirect("/");
+});
 // Dashboard
 router.get("/", verifylogin, (req, res) => {
-  res.render("admin/dashboard", { admin: true });
+  res.render("admin/dashboard", { adminRoute: true, admin: req.session.admin });
 });
 // Theatre Mangement
 router.get("/theater", verifylogin, (req, res) => {
-  res.render("admin/theater-management", { admin: true });
+  res.render("admin/theater-management", {
+    adminRoute: true,
+    admin: req.session.admin,
+  });
 });
 // User Mangement
 router.get("/user", verifylogin, (req, res) => {
-  res.render("admin/user-management", { admin: true });
+  res.render("admin/user-management", {
+    adminRoute: true,
+    admin: req.session.admin,
+  });
 });
 // User Activity Tracker
 router.get("/user-activity", verifylogin, (req, res) => {
-  res.render("admin/user-activity", { admin: true });
+  res.render("admin/user-activity", {
+    adminRoute: true,
+    admin: req.session.admin,
+  });
 });
 
 module.exports = router;

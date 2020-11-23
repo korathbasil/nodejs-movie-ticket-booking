@@ -1,4 +1,8 @@
 <header class="admin-header">
     <h1>CineMax</h1>
-    <a href="/">Logout</a>
+    {{#if admin}}
+    <a href="/admin/logout">Logout</a>
+    {{else}}
+    <a href="/">Home</a>
+    {{/if}}
 </header>

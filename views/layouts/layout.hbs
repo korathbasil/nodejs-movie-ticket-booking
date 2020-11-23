@@ -4,13 +4,13 @@
 <head>
   <title>{{title}}</title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
-  {{#if admin}}
+  {{#if adminRoute}}
   <link rel="stylesheet" href="/stylesheets/admin.css">
   {{/if}}
 </head>
 
 <body>
-  {{#if admin}}
+  {{#if adminRoute}}
   {{>admin-header}}
   {{else}}
   {{>user-header}}

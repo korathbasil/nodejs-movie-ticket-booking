@@ -44,7 +44,7 @@ a {
 }
 /* Sidebar */
 .sidebar {
-  flex: 0.2;
+  width: 280px;
   height: calc(100vh - 80px);
   display: flex;
   flex-direction: column;
