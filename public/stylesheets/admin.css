@@ -30,11 +30,27 @@
   border-radius: 10px;
   margin-bottom: 10px;
 }
+.admin-headings {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.admin-headings > h2 {
+  font-size: 25px;
+  font-weight: 800;
+  color: var(--admin-primary);
+  margin-left: 15px;
+}
+.admin-header-selector {
+  width: 5px;
+  height: 30px;
+  background-color: var(--admin-tertiary);
+}
 .admin-dashboard {
   width: 100%;
+  padding: 20px;
 }
 .cards {
-  padding: 20px;
   /* background-color: aqua; */
   width: 100%;
   display: grid;
@@ -103,25 +119,8 @@
   width: 70%;
   padding-top: 20px;
 }
-.admin-headings {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
-.admin-headings > h2 {
-  font-size: 25px;
-  font-weight: 800;
-  color: var(--admin-primary);
-  margin-left: 15px;
-}
-.admin-header-selector {
-  width: 5px;
-  height: 30px;
-  background-color: var(--admin-tertiary);
-}
 .admin-user-table {
   width: 100%;
-  /* background-color: lightcyan; */
 }
 th,
 td {

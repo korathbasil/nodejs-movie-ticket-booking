@@ -10,6 +10,7 @@ const session = require("express-session");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const adminRouter = require("./routes/admin");
+const theaterRoute = require("./routes/theater");
 
 const app = express();
 
@@ -48,6 +49,7 @@ app.use(
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/admin", adminRouter);
+app.use("/theater", theaterRoute);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -12,6 +12,8 @@
 <body>
   {{#if adminRoute}}
   {{>admin-header}}
+  {{else if theaterRoute}}
+  {{>theater-header}}
   {{else}}
   {{>user-header}}
   {{/if}}
