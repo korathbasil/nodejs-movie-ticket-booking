@@ -72,7 +72,7 @@ a {
 .admin-nav-selector {
   position: absolute;
   left: 0;
-  height: 20px;
+  height: 25px;
   width: 5px;
   background-color: var(--admin-primary);
   display: none;
@@ -86,10 +86,10 @@ a {
   font-weight: 800;
   color: Black;
 }
-.admin-nav-link:active {
+.admin-nav-link--active {
   color: var(--admin-tertiary);
   margin-left: 15px;
 }
-.admin-nav-link:active .admin-nav-selector {
+.admin-nav-link--active .admin-nav-selector {
   display: inline-block;
 }
