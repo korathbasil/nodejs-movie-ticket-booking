@@ -1,4 +1,9 @@
 /* Login */
+.admin-parent {
+  width: 100%;
+  height: calc(100% - 80px);
+  display: flex;
+}
 .admin-login-box {
   width: 400px;
   margin: 0 auto;
