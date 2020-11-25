@@ -1,6 +1,11 @@
 const express = require("express");
 const router = express.Router();
 
+// Login
+router.get("/login", (req, res) => {
+  res.render("theater/login", { theaterRoute: true });
+});
+router.post("/login", (req, res) => {});
 // Dashboard
 router.get("/", (req, res) => {
   res.render("theater/dashboard", { theaterRoute: true });
