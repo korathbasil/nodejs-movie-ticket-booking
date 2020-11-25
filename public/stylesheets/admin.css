@@ -96,6 +96,7 @@
 /* User Management */
 .admin-user-management {
   width: 100%;
+  overflow-y: scroll;
 }
 .user-management-container {
   margin: 0 auto;
@@ -124,7 +125,7 @@
 }
 th,
 td {
-  height: 50px;
+  height: 60px;
   text-align: center;
   vertical-align: center;
 }
@@ -137,6 +138,12 @@ th {
 tr:hover {
   border-radius: 15px;
   background-color: #c7c5c54f;
+}
+td > img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 999px;
 }
 .user-table-button {
   padding: 5px 10px;
