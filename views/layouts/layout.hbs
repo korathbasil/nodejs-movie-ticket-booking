@@ -2,12 +2,12 @@
 <html>
 
 <head>
-  <title>{{title}}</title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="/stylesheets/style.css" />
   {{#if adminRoute}}
-  <link rel="stylesheet" href="/stylesheets/admin.css">
+  <link rel="stylesheet" href="/stylesheets/admin.css" />
   {{else if theaterRoute}}
-  <link rel="stylesheet" href="/stylesheets/theater.css">
+  <link rel="stylesheet" href="/stylesheets/theater.css" />
   {{/if}}
 </head>
 
@@ -19,12 +19,6 @@
   {{else}}
   {{>user-header}}
   {{/if}}
-  {{!-- <div class="main-contents">
-    {{#if admin}}
-    {{>admin-sidebar}}
-    {{/if}}
-    {{{body}}}
-  </div> --}}
   {{{body}}}
 </body>
 
