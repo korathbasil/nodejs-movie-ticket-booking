@@ -49,14 +49,15 @@ a {
 /* Sidebar */
 .sidebar {
   width: 320px;
-  height: calc(100vh - 80px);
   display: flex;
   flex-direction: column;
 }
 .admin-sidebar {
+  min-width: 300px;
   background-color: var(--admin-secondary);
   padding: 20px;
   align-items: center;
+  height: 100%;
 }
 .admin-sidebar > h2 {
   font-size: 28px;
@@ -86,7 +87,7 @@ a {
 .admin-nav-link {
   text-decoration: none;
   font-size: 20px;
-  font-weight: 800;
+  /* font-weight: 800; */
   color: Black;
 }
 .admin-nav-link--active {
