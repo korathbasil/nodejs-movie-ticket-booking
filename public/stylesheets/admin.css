@@ -122,38 +122,31 @@
   width: 100%;
   /* background-color: lightcyan; */
 }
-/* .admin-user-table-row {
-  width: 100%;
-  height: 40px;
-  display: flex;
-}
-.admin-user-table > th,
-.admin-user-table > td {
-  height: 100px;
-}
-.admin-user-table-column1 {
-  flex: 0.05;
-}
-.admin-user-table-column2 {
-  flex: 0.3;
-}
-.admin-user-table-column3 {
-  flex: 0.3;
-}
-.admin-user-table-column4 {
-  flex: 0.2;
-}
-.admin-user-table-column5 {
-  flex: 0.2;
-} */
-td,
-th {
-  height: 40px;
+th,
+td {
+  height: 50px;
   text-align: center;
   vertical-align: center;
 }
 th {
-  height: 50px;
-  background-color: lightgrey;
-  border-radius: 10px;
+  height: 30px;
+  background-color: var(--admin-secondary);
+  border-radius: 5px;
+  color: var(--admin-primary);
+}
+tr:hover {
+  border-radius: 15px;
+  background-color: #c7c5c54f;
+}
+.user-table-button {
+  padding: 5px 10px;
+  border-radius: 20px;
+  color: white;
+  background-color: blue;
+  font-weight: 800;
+  text-decoration: none;
+  margin-right: 15px;
+}
+.user-table-button:nth-child(2) {
+  background-color: red;
 }
