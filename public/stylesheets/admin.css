@@ -69,20 +69,22 @@
   position: relative;
   transition: transform 0.2s ease-in;
   color: white;
+  box-shadow: 5px 5px 20px #989898f1;
 }
 .card > h2 {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 30px;
+  left: 30px;
 }
 .card > h1 {
   position: absolute;
-  bottom: 20px;
-  right: 20px;
+  bottom: 30px;
+  right: 30px;
+  font-size: 40px;
 }
-.card:hover {
-  transform: scale(1.03);
-}
+/* .card:hover {
+  transform: scale(1.01);
+} */
 .card:nth-child(1) {
   background: linear-gradient(
     165deg,
