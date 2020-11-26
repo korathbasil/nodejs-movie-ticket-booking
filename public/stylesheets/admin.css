@@ -124,18 +124,30 @@
   width: 70%;
   margin: 0 auto;
 }
+.theater-owner-table-button {
+  padding: 5px 10px;
+  border-radius: 20px;
+  color: white;
+  background-color: blue;
+  font-weight: 800;
+  text-decoration: none;
+  margin-right: 15px;
+}
+.theater-owner-table-button:nth-child(2) {
+  background-color: yellow;
+}
+.theater-owner-table-button:nth-child(2) {
+  background-color: red;
+}
 /* User Management */
 .admin-user-management {
   width: 100%;
   overflow-y: scroll;
-}
-.user-management-container {
-  margin: 0 auto;
-  width: 70%;
-  padding-top: 20px;
+  padding: 20px;
 }
 .admin-user-table {
-  width: 100%;
+  margin: 0 auto;
+  width: 70%;
 }
 th,
 td {
