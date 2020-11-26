@@ -114,6 +114,16 @@
     rgba(252, 176, 69, 1) 100%
   );
 }
+/* Theater Management */
+.admin-theater-management {
+  width: 100%;
+  padding: 20px;
+  overflow-y: scroll;
+}
+.admin-theater-owner-table {
+  width: 70%;
+  margin: 0 auto;
+}
 /* User Management */
 .admin-user-management {
   width: 100%;
