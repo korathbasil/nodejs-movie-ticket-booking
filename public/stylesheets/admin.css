@@ -88,32 +88,30 @@
 .card:nth-child(1) {
   background: linear-gradient(
     165deg,
-    rgba(0, 58, 180, 0.8026769402321805) 0%,
-    rgba(33, 95, 94, 0.7942499739400457) 100%
+    rgba(43, 72, 134, 1) 0%,
+    rgba(34, 193, 195, 1) 100%
   );
 }
 .card:nth-child(2) {
   background: linear-gradient(
-    0deg,
+    165deg,
     rgba(34, 193, 195, 1) 0%,
     rgba(253, 187, 45, 1) 100%
   );
 }
 
 .card:nth-child(3) {
-  background: radial-gradient(
-    circle,
-    rgba(63, 94, 251, 1) 0%,
+  background: linear-gradient(
+    165deg,
+    rgba(253, 187, 45, 1) 0%,
     rgba(252, 70, 107, 1) 100%
   );
 }
-
 .card:nth-child(4) {
   background: linear-gradient(
-    90deg,
-    rgba(131, 58, 180, 1) 0%,
-    rgba(253, 29, 29, 1) 50%,
-    rgba(252, 176, 69, 1) 100%
+    165deg,
+    rgba(252, 70, 107, 1) 0%,
+    rgba(43, 72, 134, 1) 100%
   );
 }
 /* Theater Management */
