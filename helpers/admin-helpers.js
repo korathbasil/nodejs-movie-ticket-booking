@@ -1,4 +1,5 @@
 const { ObjectID } = require("mongodb");
+const bcrypt = require("bcrypt");
 const db = require("../config/dbConfig");
 const collections = require("../config/collections");
 
@@ -26,9 +27,14 @@ module.exports = {
         .find()
         .toArray();
       if (admin.length == 0) {
+        const hashedPassword = await bcrypt.hash(data.password, 10);
+        const newAdmin = {
+          email: data.email,
+          password: hashedPassword,
+        };
         db.getDb()
           .collection(collections.ADMIN_COLLECTION)
-          .insertOne(data)
+          .insertOne(newAdmin)
           .then(() => resolve());
       } else {
         reject({ message: "Admin already Exists!!" });
@@ -42,8 +48,11 @@ module.exports = {
         .collection("admin")
         .findOne({ email: data.email });
       if (selectedUser) {
-        console.log(selectedUser);
-        if (selectedUser.password === data.password) {
+        isPasswordTrue = await bcrypt.compare(
+          data.password,
+          selectedUser.password
+        );
+        if (isPasswordTrue) {
           resolve();
         } else {
           reject({ message: "Incorrect password" });
