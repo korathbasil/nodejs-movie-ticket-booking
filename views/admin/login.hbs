@@ -1,11 +1,24 @@
 <div class="admin-login-box">
-    <h1>Login</h1>
+    {{#if adminExists}}
+    <h1>Admin, Welcome back.</h1>
+    <h3>Please enter your password to login</h3>
     <form action="/admin/login" method="POST">
         <label for="email">Email</label>
         <input type="email" name="email" id="">
         <label for="password">Password</label>
         <input type="password" name="password" id="">
-        <button type="submit">Login</button>
+        <button type="submit">Create</button>
         <p><a href="">Forgot password?</a></p>
     </form>
+    {{else}}
+    <h1>Create Admin</h1>
+    <form action="/admin/signup" method="POST">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="">
+        <button type="submit">Create</button>
+        <p><a href="">Forgot password?</a></p>
+    </form>
+    {{/if}}
 </div>

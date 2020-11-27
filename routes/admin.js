@@ -5,8 +5,26 @@ const adminHelpers = require("../helpers/admin-helpers");
 const verifylogin = require("../middlewares/verify-admin-login");
 
 // Authentication
+router.post("/signup", (req, res) => {
+  adminHelpers
+    .signup(req.body)
+    .then(() => {
+      req.session.admin = true;
+      res.redirect("/admin");
+    })
+    .catch(() => {
+      req.redirect("/admin/login");
+    });
+});
 router.get("/login", (req, res) => {
-  res.render("admin/login", { adminRoute: true });
+  adminHelpers
+    .findAdmin()
+    .then(() => {
+      res.render("admin/login", { adminRoute: true, adminExists: true });
+    })
+    .catch(() => {
+      res.render("admin/login", { adminRoute: true, adminExists: false });
+    });
 });
 router.post("/login", (req, res) => {
   adminHelpers
