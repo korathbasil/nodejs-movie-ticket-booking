@@ -52,6 +52,13 @@ router.get("/theater", verifylogin, (req, res) => {
     admin: req.session.admin,
   });
 });
+// View All theaters of a selected owner
+router.get("/theater/view-theaters", verifylogin, (req, res) => {
+  res.render("admin/theaters", {
+    adminRoute: true,
+    admin: req.session.admin,
+  });
+});
 // User Mangement
 router.get("/user", verifylogin, (req, res) => {
   res.render("admin/user-management", {
