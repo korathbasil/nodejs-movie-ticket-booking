@@ -54,6 +54,8 @@
 .admin-dashboard {
   width: 100%;
   padding: 20px;
+  overflow-y: scroll;
+  max-height: 100%;
 }
 .cards {
   /* background-color: aqua; */
@@ -188,8 +190,30 @@ td > img {
 }
 
 /* Breakpoints */
+@media (max-width: 1300px) {
+  .admin-user-table {
+    margin: 0 20px;
+    width: calc(100% - 40px);
+  }
+}
 @media (max-width: 1200px) {
   .cards {
     grid-template-columns: repeat(2, 49%);
+  }
+}
+@media (max-width: 1150px) {
+  .admin-theater-owner-table {
+    margin: 0 20px;
+    width: calc(100% - 40px);
+  }
+}
+@media (max-width: 900px) {
+  .sidebar {
+    display: none;
+  }
+}
+@media (max-width: 500px) {
+  .cards {
+    grid-template-columns: 100%;
   }
 }
