@@ -59,8 +59,8 @@
   /* background-color: aqua; */
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(4, 23.5%);
-  grid-gap: 2%;
+  grid-template-columns: repeat(4, auto);
+  grid-gap: 15px;
 }
 .card {
   width: 100%;
@@ -82,9 +82,6 @@
   right: 30px;
   font-size: 40px;
 }
-/* .card:hover {
-  transform: scale(1.01);
-} */
 .card:nth-child(1) {
   background: linear-gradient(
     165deg,
@@ -188,4 +185,11 @@ td > img {
   width: 100%;
   padding: 20px;
   overflow-y: scroll;
+}
+
+/* Breakpoints */
+@media (max-width: 1200px) {
+  .cards {
+    grid-template-columns: repeat(2, 49%);
+  }
 }
