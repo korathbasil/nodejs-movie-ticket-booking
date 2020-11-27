@@ -5,6 +5,7 @@ const collections = require("../config/collections");
 
 module.exports = {
   findAdmin: () => {
+    // Checking if an Admin already exists
     return new Promise(async (resolve, reject) => {
       const admin = await db
         .getDb()

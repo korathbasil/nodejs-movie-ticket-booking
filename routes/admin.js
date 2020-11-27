@@ -20,10 +20,10 @@ router.get("/login", (req, res) => {
   adminHelpers
     .findAdmin()
     .then(() => {
-      res.render("admin/login", { adminRoute: true, adminExists: true });
+      res.render("admin/login", { adminRoute: true, adminExists: true }); // Admin exists, render login form. There would be only one admin
     })
     .catch(() => {
-      res.render("admin/login", { adminRoute: true, adminExists: false });
+      res.render("admin/login", { adminRoute: true, adminExists: false }); // Admin doesn't exist, render signup form
     });
 });
 router.post("/login", (req, res) => {
@@ -38,7 +38,6 @@ router.post("/login", (req, res) => {
     });
 });
 router.get("/logout", (req, res) => {
-  // req.session.destroy();
   req.session.admin = false;
   res.redirect("/");
 });
