@@ -1,4 +1,5 @@
 <div class="admin-parent">
+    {{!-- Sidebar --}}
     <div class="sidebar admin-sidebar">
         <h2>Admin Panel</h2>
         <ul class="admin-nav">
@@ -15,12 +16,13 @@
                 <a class="admin-nav-link" href="/admin/user">User Management
                     <div class="admin-nav-selector"></div></a>
             </li>
-            <li>
+            <li class="admin-nav-item-aactive">
                 <a class="admin-nav-link admin-nav-link--active" href="/admin/user-activity">Users Activity Tracker
                     <div class="admin-nav-selector"></div></a>
             </li>
         </ul>
     </div>
+    {{!-- Sidebar End --}}
     <section class="admin-user-activity">
         <div class="admin-headings">
             <div class="admin-header-selector"></div>
