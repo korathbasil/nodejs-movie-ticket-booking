@@ -17,14 +17,18 @@ router.post("/signup", (req, res) => {
     });
 });
 router.get("/login", (req, res) => {
-  adminHelpers
-    .findAdmin()
-    .then(() => {
-      res.render("admin/login", { adminRoute: true, adminExists: true }); // Admin exists, render login form. There would be only one admin
-    })
-    .catch(() => {
-      res.render("admin/login", { adminRoute: true, adminExists: false }); // Admin doesn't exist, render signup form
-    });
+  if (req.session.admin) {
+    res.redirect("/admin");
+  } else {
+    adminHelpers
+      .findAdmin()
+      .then(() => {
+        res.render("admin/login", { adminRoute: true, adminExists: true }); // Admin exists, render login form. There would be only one admin
+      })
+      .catch(() => {
+        res.render("admin/login", { adminRoute: true, adminExists: false }); // Admin doesn't exist, render signup form
+      });
+  }
 });
 router.post("/login", (req, res) => {
   adminHelpers
