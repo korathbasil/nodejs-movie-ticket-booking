@@ -20,7 +20,12 @@
   {{else}}
   {{>user-header}}
   {{/if}}
-  {{{body}}}
+  <div class="main-body">
+    {{#if adminRoute}}
+    {{>admin-sidebar}}
+    {{/if}}
+    {{{body}}}
+  </div>
 </body>
 
 </html>

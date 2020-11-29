@@ -35,66 +35,6 @@
   border-radius: 10px;
   margin-bottom: 10px;
 }
-/* Sidebar */
-.admin-sidebar {
-  min-width: 270px;
-  background-color: white;
-  /* padding: 20px; */
-  align-items: center;
-  height: 100%;
-  box-shadow: 3px 3px 3px rgba(211, 211, 211, 0.677);
-}
-.admin-sidebar > h2 {
-  font-size: 28px;
-  color: var(--admin-primary);
-}
-.admin-nav {
-  width: 100%;
-  /* margin-top: 20px; */
-}
-.admin-nav > li {
-  padding: 10px;
-  list-style: none;
-  /* margin-bottom: 5px; */
-  position: relative;
-  /* transition: transform 0.2s ease-in; */
-  /* border-radius: 10px; */
-  transition: background-color 0.2s ease-in;
-}
-.admin-nav-selector {
-  position: absolute;
-  left: 10px;
-  height: 25px;
-  width: 5px;
-  background-color: white;
-  display: none;
-}
-.admin-nav > li:hover {
-  background-color: rgba(0, 0, 255, 0.408);
-}
-.admin-nav-link {
-  text-decoration: none;
-  font-size: 20px;
-  /* font-weight: 800; */
-  color: Black;
-}
-.admin-nav-item-aactive {
-  background-color: var(--admin-tertiary);
-}
-.admin-nav-item-aactive:hover {
-  background-color: var(--admin-primary);
-}
-.admin-nav-link--active {
-  margin-left: 15px;
-  color: white;
-  /* background-color: red; */
-  border-radius: 10px;
-}
-.admin-nav-link--active .admin-nav-selector {
-  display: inline-block;
-}
-
-/* Sidebar End */
 .content-card {
   width: 100%;
   background-color: white;
