@@ -1,4 +1,3 @@
-const { ObjectID } = require("mongodb");
 const bcrypt = require("bcrypt");
 const db = require("../config/dbConfig");
 const collections = require("../config/collections");
@@ -12,7 +11,6 @@ module.exports = {
         .collection(collections.ADMIN_COLLECTION)
         .find()
         .toArray();
-      console.log(admin);
       if (admin.length == 0) {
         reject();
       } else {

@@ -63,6 +63,13 @@ router.get("/theater/view-theaters", verifylogin, (req, res) => {
     admin: req.session.admin,
   });
 });
+// Add theater owner
+router.get("/theater/add-owner", (req, res) => {
+  res.render("admin/add-theater-owner", {
+    adminRoute: true,
+    admin: req.session.admin,
+  });
+});
 // User Mangement
 router.get("/user", verifylogin, (req, res) => {
   res.render("admin/user-management", {
