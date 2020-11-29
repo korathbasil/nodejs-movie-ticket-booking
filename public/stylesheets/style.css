@@ -9,6 +9,7 @@ body {
   --admin-primary: #2f3547;
   --admin-secondary: #d8d8d8;
   --admin-tertiary: blue;
+  background-color: rgba(218, 205, 179, 0.387);
 }
 
 a {
