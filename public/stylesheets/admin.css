@@ -37,7 +37,7 @@
 }
 /* Sidebar */
 .admin-sidebar {
-  min-width: 300px;
+  min-width: 270px;
   background-color: white;
   /* padding: 20px; */
   align-items: center;
@@ -55,10 +55,11 @@
 .admin-nav > li {
   padding: 10px;
   list-style: none;
-  margin-bottom: 5px;
+  /* margin-bottom: 5px; */
   position: relative;
-  transition: transform 0.2s ease-in;
+  /* transition: transform 0.2s ease-in; */
   /* border-radius: 10px; */
+  transition: background-color 0.2s ease-in;
 }
 .admin-nav-selector {
   position: absolute;
@@ -69,7 +70,7 @@
   display: none;
 }
 .admin-nav > li:hover {
-  background-color: rgba(128, 128, 128, 0.297);
+  background-color: rgba(0, 0, 255, 0.408);
 }
 .admin-nav-link {
   text-decoration: none;
