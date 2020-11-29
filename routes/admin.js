@@ -47,7 +47,11 @@ router.get("/logout", (req, res) => {
 });
 // Dashboard
 router.get("/", verifylogin, (req, res) => {
-  res.render("admin/dashboard", { adminRoute: true, admin: req.session.admin });
+  res.render("admin/dashboard", {
+    adminRoute: true,
+    admin: req.session.admin,
+    route: "dashboard",
+  });
 });
 // Theatre Mangement
 router.get("/theater", verifylogin, (req, res) => {

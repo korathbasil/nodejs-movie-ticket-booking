@@ -1,7 +1,7 @@
 <div class="sidebar admin-sidebar">
     <ul class="admin-nav">
         <li>
-            <a class="admin-nav-link" href="/admin">
+            <a id="dashboard" class="admin-nav-link" href="/admin">
                 <i class="fas fa-home"></i>
                 <span>Dashboard</span>
             </a>
@@ -26,3 +26,13 @@
         </li>
     </ul>
 </div>
+<script type="text/javascript">
+    const nav = {{ route }};
+    const activeMenuHighlighter = () => {
+        console.log(route)
+        if (route === "dashboard") {
+            document.querySelector("#dashboard").classList.add("admin-nav-link--active");
+        }
+    }
+    activeMenuHighlighter()
+</script>
