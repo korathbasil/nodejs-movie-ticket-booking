@@ -25,8 +25,8 @@ a {
   align-items: center;
   justify-content: space-between;
   padding: 0 2rem;
-  background-color: var(--admin-primary);
-  color: white;
+  background-color: white;
+  box-shadow: 3px 3px 3px rgba(211, 211, 211, 0.677);
 }
 .admin-header > h1,
 .theater-header > h1 {

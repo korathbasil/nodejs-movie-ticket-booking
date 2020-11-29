@@ -1,6 +1,5 @@
 <div class="admin-parent">
   <div class="sidebar admin-sidebar">
-    <h2>Admin Panel</h2>
     <ul class="admin-nav">
       <li>
         <a class="admin-nav-link" href="/admin">Dashboard
@@ -22,68 +21,75 @@
     </ul>
   </div>
   {{!-- Sidebar End --}}
+
   <section class="admin-theater-management">
-    <div class="admin-headings">
-      <div class="admin-header-selector"></div>
-      <h2>Theater Owners List</h2>
+    <div class="content-card">
+      <div class="admin-headings">
+        <div class="admin-header-selector"></div>
+        <h2>Theater Owners List</h2>
+      </div>
+      <a href="/admin/theater/add-owner">Add theater Owner</a>
+      <table class="admin-theater-owner-table">
+        <tr class="admin-user-table-row">
+          <th class="admin-user-table-column1">No</th>
+          <th class="admin-user-table-column2">Name</th>
+          <th class="admin-user-table-column3">Theater Name</th>
+          <th class="admin-user-table-column4">Theaters</th>
+          <th class="admin-user-table-column5">Actions</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>
+            <img src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?size=626&ext=jpg"
+              alt="" />Bazil Korath
+          </td>
+          <td>PVR Films</td>
+          <td><a class="theater-owner-table-button" href="/admin/theater/view-theaters">VIEW</a< /td>
+          <td>
+            <a class="theater-owner-table-button" href="">EDIT</a><a class="theater-owner-table-button"
+              href="">DELETE</a>
+          </td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>
+            <img src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?size=626&ext=jpg"
+              alt="" />Bazil Korath
+          </td>
+          <td>PVR Films</td>
+          <td><a class="theater-owner-table-button" href="">VIEW</a< /td>
+          <td>
+            <a class="theater-owner-table-button" href="">EDIT</a><a class="theater-owner-table-button"
+              href="">DELETE</a>
+          </td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>
+            <img src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?size=626&ext=jpg"
+              alt="" />Bazil Korath
+          </td>
+          <td>PVR Films</td>
+          <td><a class="theater-owner-table-button" href="">VIEW</a< /td>
+          <td>
+            <a class="theater-owner-table-button" href="">EDIT</a><a class="theater-owner-table-button"
+              href="">DELETE</a>
+          </td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>
+            <img src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?size=626&ext=jpg"
+              alt="" />Bazil Korath
+          </td>
+          <td>PVR Films</td>
+          <td><a class="theater-owner-table-button" href="">VIEW</a< /td>
+          <td>
+            <a class="theater-owner-table-button" href="">EDIT</a><a class="theater-owner-table-button"
+              href="">DELETE</a>
+          </td>
+        </tr>
+      </table>
     </div>
-    <a href="/admin/theater/add-owner">Add theater Owner</a>
-    <table class="admin-theater-owner-table">
-      <tr class="admin-user-table-row">
-        <th class="admin-user-table-column1">No</th>
-        <th class="admin-user-table-column2">Name</th>
-        <th class="admin-user-table-column3">Theater Name</th>
-        <th class="admin-user-table-column4">Theaters</th>
-        <th class="admin-user-table-column5">Actions</th>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>
-          <img src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?size=626&ext=jpg"
-            alt="" />Bazil Korath
-        </td>
-        <td>PVR Films</td>
-        <td><a class="theater-owner-table-button" href="/admin/theater/view-theaters">VIEW</a< /td>
-        <td>
-          <a class="theater-owner-table-button" href="">EDIT</a><a class="theater-owner-table-button" href="">DELETE</a>
-        </td>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>
-          <img src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?size=626&ext=jpg"
-            alt="" />Bazil Korath
-        </td>
-        <td>PVR Films</td>
-        <td><a class="theater-owner-table-button" href="">VIEW</a< /td>
-        <td>
-          <a class="theater-owner-table-button" href="">EDIT</a><a class="theater-owner-table-button" href="">DELETE</a>
-        </td>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>
-          <img src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?size=626&ext=jpg"
-            alt="" />Bazil Korath
-        </td>
-        <td>PVR Films</td>
-        <td><a class="theater-owner-table-button" href="">VIEW</a< /td>
-        <td>
-          <a class="theater-owner-table-button" href="">EDIT</a><a class="theater-owner-table-button" href="">DELETE</a>
-        </td>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>
-          <img src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?size=626&ext=jpg"
-            alt="" />Bazil Korath
-        </td>
-        <td>PVR Films</td>
-        <td><a class="theater-owner-table-button" href="">VIEW</a< /td>
-        <td>
-          <a class="theater-owner-table-button" href="">EDIT</a><a class="theater-owner-table-button" href="">DELETE</a>
-        </td>
-      </tr>
-    </table>
   </section>
 </div>
