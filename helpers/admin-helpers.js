@@ -61,4 +61,13 @@ module.exports = {
       }
     });
   },
+  addTheaterOwner: (data) => {
+    return new Promise((resolve, reject) => {
+      db.getDb()
+        .collection(collections.OWNERS_COLLECTION)
+        .insertOne(data)
+        .then(() => resolve())
+        .catch(() => reject());
+    });
+  },
 };

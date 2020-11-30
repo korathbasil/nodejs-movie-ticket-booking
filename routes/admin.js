@@ -68,14 +68,17 @@ router.get("/theater/view-theaters", verifylogin, (req, res) => {
   });
 });
 // Add theater owner
-router.get("/theater/add-owner", (req, res) => {
+router.get("/theater/add-owner", verifylogin, (req, res) => {
   res.render("admin/add-theater-owner", {
     adminRoute: true,
     admin: req.session.admin,
   });
 });
 router.post("/theater/add-owner", (req, res) => {
-  console.log(req.body);
+  adminHelpers
+    .addTheaterOwner(req.body)
+    .then(() => res.redirect("/admin"))
+    .catch(() => res.redirect("/admin/theater/add-owner"));
   res.redirect("/admin");
 });
 // User Mangement

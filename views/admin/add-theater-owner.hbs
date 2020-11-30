@@ -4,7 +4,7 @@
             <div class="admin-header-selector"></div>
             <h2>Add Theater Owner</h2>
         </div>
-        <form class="add-theater-owner-form" action="">
+        <form class="add-theater-owner-form" action="/admin/theater/add-owner" method="POST">
             <label for="email">
                 Email
             </label>
@@ -17,6 +17,10 @@
                 Phone
             </label>
             <input type="tel" name="phone">
+            <label for="theater">
+                Theater Name
+            </label>
+            <input type="text" name="theater">
             <label for="password">
                 Password
             </label>
@@ -25,6 +29,7 @@
                 Confirm Password
             </label>
             <input type="password" name="password2">
+            <button class="admin-form-submit-button" type="submit">Submit</button>
         </form>
     </div>
 </div>
