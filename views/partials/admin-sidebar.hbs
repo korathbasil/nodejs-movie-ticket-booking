@@ -7,32 +7,23 @@
             </a>
         </li>
         <li>
-            <a class="admin-nav-link" href="/admin/theater">
+            <a id="theater-management" class="admin-nav-link" href="/admin/theater">
                 <i class="fas fa-film"></i>
                 <span>Theater Management</span>
             </a>
         </li>
         <li>
-            <a class="admin-nav-link" href="/admin/user">
+            <a id="user-management" class="admin-nav-link" href="/admin/user">
                 <i class="fas fa-user"></i>
                 <span>User Management</span>
             </a>
         </li>
         <li class="admin-nav-item-aactive">
-            <a class="admin-nav-link admin-nav-link--active" href="/admin/user-activity">
+            <a id="user-activity" class="admin-nav-link" href="/admin/user-activity">
                 <i class="fas fa-chart-line"></i>
                 <span>User Activity Tracker</span>
             </a>
         </li>
     </ul>
 </div>
-<script type="text/javascript">
-    const nav = {{ route }};
-    const activeMenuHighlighter = () => {
-        console.log(route)
-        if (route === "dashboard") {
-            document.querySelector("#dashboard").classList.add("admin-nav-link--active");
-        }
-    }
-    activeMenuHighlighter()
-</script>
+<script src="/javascripts/admin.js"></script>
