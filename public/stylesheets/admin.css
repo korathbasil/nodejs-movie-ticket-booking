@@ -30,14 +30,21 @@
   width: 100%;
   height: 40px;
   border: 1px solid grey;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   margin-bottom: 20px;
+  outline: none;
 }
 .admin-login-box > form > button {
   height: 40px;
   padding: 0 20px;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   margin-bottom: 10px;
+  outline: none;
+  border: none;
+  background-color: var(--admin-tertiary);
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
 }
 .admin-headings {
   display: flex;
@@ -148,6 +155,30 @@
 .admin-add-theater-owner {
   width: 100%;
   padding: 20px;
+}
+.add-theater-owner-form {
+  width: 60%;
+  max-width: 600px;
+  margin: 0 auto;
+  /* background-color: violet; */
+  display: flex;
+  flex-direction: column;
+}
+.add-theater-owner-form > p {
+  font-size: 18px;
+  font-weight: 600;
+}
+.add-theater-owner-form > label {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.add-theater-owner-form > input {
+  height: 40px;
+  border: none;
+  outline: none;
+  margin-bottom: 20px;
+  background-color: var(--background);
 }
 /* User Management */
 .admin-user-management {

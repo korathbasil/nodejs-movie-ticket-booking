@@ -74,6 +74,10 @@ router.get("/theater/add-owner", (req, res) => {
     admin: req.session.admin,
   });
 });
+router.post("/theater/add-owner", (req, res) => {
+  console.log(req.body);
+  res.redirect("/admin");
+});
 // User Mangement
 router.get("/user", verifylogin, (req, res) => {
   res.render("admin/user-management", {
