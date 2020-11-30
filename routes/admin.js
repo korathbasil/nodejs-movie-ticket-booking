@@ -23,10 +23,18 @@ router.get("/login", (req, res) => {
     adminHelpers
       .findAdmin()
       .then(() => {
-        res.render("admin/login", { adminRoute: true, adminExists: true }); // Admin exists, render login form. There would be only one admin
+        res.render("admin/login", {
+          title: "Login - Admin - Cinemax",
+          adminRoute: true,
+          adminExists: true,
+        }); // Admin exists, render login form. There would be only one admin
       })
       .catch(() => {
-        res.render("admin/login", { adminRoute: true, adminExists: false }); // Admin doesn't exist, render signup form
+        res.render("admin/login", {
+          title: "Login - Admin - CineMax",
+          adminRoute: true,
+          adminExists: false,
+        }); // Admin doesn't exist, render signup form
       });
   }
 });
@@ -48,14 +56,15 @@ router.get("/logout", (req, res) => {
 // Dashboard
 router.get("/", verifylogin, (req, res) => {
   res.render("admin/dashboard", {
+    title: "Dashboard - Admin - CineMax",
     adminRoute: true,
     admin: req.session.admin,
-    route: "dashboard",
   });
 });
 // Theatre Mangement
 router.get("/theater", verifylogin, (req, res) => {
   res.render("admin/theater-management", {
+    title: "Theater Management - Admin - CineMax",
     adminRoute: true,
     admin: req.session.admin,
   });
@@ -63,6 +72,7 @@ router.get("/theater", verifylogin, (req, res) => {
 // View All theaters of a selected owner
 router.get("/theater/view-theaters", verifylogin, (req, res) => {
   res.render("admin/theaters", {
+    title: "Theater Management - Admin - CineMax",
     adminRoute: true,
     admin: req.session.admin,
   });
@@ -70,6 +80,7 @@ router.get("/theater/view-theaters", verifylogin, (req, res) => {
 // Add theater owner
 router.get("/theater/add-owner", verifylogin, (req, res) => {
   res.render("admin/add-theater-owner", {
+    title: "Theater Management - Admin - CineMax",
     adminRoute: true,
     admin: req.session.admin,
   });
@@ -84,6 +95,7 @@ router.post("/theater/add-owner", (req, res) => {
 // User Mangement
 router.get("/user", verifylogin, (req, res) => {
   res.render("admin/user-management", {
+    title: "User Management - Admin - CineMax",
     adminRoute: true,
     admin: req.session.admin,
   });
@@ -91,6 +103,7 @@ router.get("/user", verifylogin, (req, res) => {
 // User Activity Tracker
 router.get("/user-activity", verifylogin, (req, res) => {
   res.render("admin/user-activity", {
+    title: "User Activity Tracker - Admin - CineMax",
     adminRoute: true,
     admin: req.session.admin,
   });
