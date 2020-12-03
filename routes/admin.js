@@ -63,10 +63,13 @@ router.get("/", verifylogin, (req, res) => {
 });
 // Theatre Mangement
 router.get("/theater", verifylogin, (req, res) => {
-  res.render("admin/theater-management", {
-    title: "Theater Management - Admin - CineMax",
-    adminRoute: true,
-    admin: req.session.admin,
+  adminHelpers.getAllTheterOwners().then((owners) => {
+    res.render("admin/theater-management", {
+      title: "Theater Management - Admin - CineMax",
+      adminRoute: true,
+      admin: req.session.admin,
+      owners: owners,
+    });
   });
 });
 // View All theaters of a selected owner
@@ -91,6 +94,17 @@ router.post("/theater/add-owner", (req, res) => {
     .then(() => res.redirect("/admin"))
     .catch(() => res.redirect("/admin/theater/add-owner"));
   res.redirect("/admin");
+});
+
+// Edit theater owner
+router.get("/theater/edit-owner/:ownerId", (req, res) => {
+  const ownerId = req.params.ownerId;
+  adminHelpers.getTheaterOwner(ownerId);
+  res.render("admin/edit-theater-owner", {
+    title: "Theater Management - Admin - CineMax",
+    adminRoute: true,
+    admin: req.session.admin,
+  });
 });
 // User Mangement
 router.get("/user", verifylogin, (req, res) => {

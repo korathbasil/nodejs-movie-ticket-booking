@@ -1,0 +1,39 @@
+<div class="admin-edit-theater-owner">
+    <div class="content-card">
+        <div class="admin-headings">
+            <div class="admin-header-selector"></div>
+            <h2>Edit Theater Owner</h2>
+        </div>
+        <form class="add-theater-owner-form" action="/admin/theater/add-owner" method="POST">
+            <label for="email">
+                Email
+            </label>
+            <input type="email" name="email">
+            <label for="username">
+                Username
+            </label>
+            <input type="text" name="username">
+            <label for="phone">
+                Phone
+            </label>
+            <input type="tel" name="phone">
+            <label for="theater">
+                Theater Name
+            </label>
+            <input type="text" name="theater">
+            <label for="password">
+                Password
+            </label>
+            <input type="password" name="password">
+            <label for="password2">
+                Confirm Password
+            </label>
+            <input type="password" name="password2">
+            <button class="admin-form-submit-button" type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+{{!-- Scripts --}}
+<script>
+    setActiveTab("theater-management")
+</script>

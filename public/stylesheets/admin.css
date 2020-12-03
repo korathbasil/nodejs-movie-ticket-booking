@@ -180,6 +180,10 @@
   margin-bottom: 20px;
   background-color: var(--background);
 }
+.admin-edit-theater-owner {
+  width: 100%;
+  padding: 20px;
+}
 /* User Management */
 .admin-user-management {
   width: 100%;

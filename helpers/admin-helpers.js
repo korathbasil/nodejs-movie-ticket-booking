@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const db = require("../config/dbConfig");
 const collections = require("../config/collections");
+const { ObjectID } = require("mongodb");
 
 module.exports = {
   findAdmin: () => {
@@ -61,6 +62,16 @@ module.exports = {
       }
     });
   },
+  getAllTheterOwners: () => {
+    return new Promise(async (resolve, reject) => {
+      const owners = await db
+        .getDb()
+        .collection(collections.OWNERS_COLLECTION)
+        .find()
+        .toArray();
+      resolve(owners);
+    });
+  },
   addTheaterOwner: (data) => {
     return new Promise((resolve, reject) => {
       db.getDb()
@@ -68,6 +79,16 @@ module.exports = {
         .insertOne(data)
         .then(() => resolve())
         .catch(() => reject());
+    });
+  },
+  getTheaterOwner: (ownerId) => {
+    return new Promise((resolve, reject) => {
+      db.getDb()
+        .collection(collections.OWNERS_COLLECTION)
+        .findOne({ _id: ObjectID(ownerId) })
+        .then((owner) => {
+          console.log(owner);
+        });
     });
   },
 };
