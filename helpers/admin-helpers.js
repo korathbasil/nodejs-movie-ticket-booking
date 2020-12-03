@@ -87,7 +87,7 @@ module.exports = {
         .collection(collections.OWNERS_COLLECTION)
         .findOne({ _id: ObjectID(ownerId) })
         .then((owner) => {
-          console.log(owner);
+          resolve(owner);
         });
     });
   },

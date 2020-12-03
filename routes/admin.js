@@ -99,11 +99,13 @@ router.post("/theater/add-owner", (req, res) => {
 // Edit theater owner
 router.get("/theater/edit-owner/:ownerId", (req, res) => {
   const ownerId = req.params.ownerId;
-  adminHelpers.getTheaterOwner(ownerId);
-  res.render("admin/edit-theater-owner", {
-    title: "Theater Management - Admin - CineMax",
-    adminRoute: true,
-    admin: req.session.admin,
+  adminHelpers.getTheaterOwner(ownerId).then((ownerDetails) => {
+    res.render("admin/edit-theater-owner", {
+      title: "Theater Management - Admin - CineMax",
+      adminRoute: true,
+      admin: req.session.admin,
+      ownerDetails: ownerDetails,
+    });
   });
 });
 // User Mangement
