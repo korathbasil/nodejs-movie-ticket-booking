@@ -241,11 +241,17 @@ tr:hover {
   border-radius: 15px;
   background-color: #c7c5c54f;
 }
-td > img {
+.table-image-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.table-image-name > img {
   width: 40px;
   height: 40px;
   object-fit: cover;
   border-radius: 999px;
+  margin-right: 10px;
 }
 .user-table-button {
   padding: 5px 10px;

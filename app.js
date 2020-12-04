@@ -45,7 +45,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
-  session({ secret: "_this_is_my_session_secret", cookie: { maxAge: 6000000 } })
+  session({
+    secret: "_this_is_my_session_secret",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 6000000 },
+  })
 );
 
 app.use("/", indexRouter);
