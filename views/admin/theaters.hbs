@@ -1,5 +1,5 @@
-<div class="admin-parent">
-    <section class="admin-theater-management">
+<section class="admin-theater-management">
+    <div class="content-card">
         <div class="admin-headings">
             <div class="admin-header-selector"></div>
             <h2>Theaters Owners List</h2>
@@ -9,7 +9,7 @@
                 <th class="admin-user-table-column1">No</th>
                 <th class="admin-user-table-column2">Theater Name</th>
                 <th class="admin-user-table-column3">Owner</th>
-                <th class="admin-user-table-column4">Adde Date</th>
+                <th class="admin-user-table-column4">Added Date</th>
             </tr>
             <tr>
                 <td>1</td>
@@ -20,9 +20,18 @@
                 <td>22/10/2020</td>
             </tr>
         </table>
-    </section>
-</div>
+    </div>
+</section>
+
 {{!-- Scripts --}}
 <script>
     setActiveTab("theater-management")
+    const rowNumbers = () => {
+        const columns = document.querySelectorAll(".admin-theater-owner-theaters-table-no")
+        columns.forEach(column => {
+            console.log(column.innerHTML)
+            const value = parseInt(column.innerHTML);
+            column.innerHTML = value + 1;
+        })
+    }
 </script>

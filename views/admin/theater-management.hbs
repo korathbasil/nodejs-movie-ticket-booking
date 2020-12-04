@@ -16,7 +16,7 @@
         </tr>
         {{#each owners}}
         <tr>
-          <td>{{@index}}</td>
+          <td class="admin-theater-owner-table-no">{{@index}}</td>
           <td>
             <div class="table-image-name">
               <img src="{{this.image}}" alt="" />{{this.name}}
@@ -37,4 +37,13 @@
 {{!-- Scripts --}}
 <script>
   setActiveTab("theater-management")
+  const rowNumbers = () => {
+    const columns = document.querySelectorAll(".admin-theater-owner-table-no")
+    columns.forEach(column => {
+      console.log(column.innerHTML)
+      const value = parseInt(column.innerHTML);
+      column.innerHTML = value + 1;
+    })
+  }
+  rowNumbers()
 </script>
