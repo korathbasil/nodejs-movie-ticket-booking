@@ -165,20 +165,38 @@
   flex-direction: column;
 }
 .add-theater-owner-form > p {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
+  color: var(--admin-tertiary);
+  margin-bottom: 10px;
 }
 .add-theater-owner-form > label {
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 .add-theater-owner-form > input {
   height: 40px;
   border: none;
   outline: none;
   margin-bottom: 20px;
-  background-color: var(--background);
+  /* background-color: var(--background); */
+  border: 1px solid var(--admin-tertiary);
+  padding: 0 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--admin-tertiary);
+}
+.add-theater-owner-form > button {
+  width: fit-content;
+  padding: 10px 20px;
+  background-color: var(--admin-tertiary);
+  font-size: 18px;
+  color: white;
+  font-weight: 800;
+  outline: none;
+  border: none;
+  cursor: pointer;
 }
 .admin-edit-theater-owner {
   width: 100%;
