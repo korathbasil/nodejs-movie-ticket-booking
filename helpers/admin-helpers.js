@@ -73,7 +73,9 @@ module.exports = {
     });
   },
   addTheaterOwner: (ownerData) => {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
+      const hashedPassword = await bcrypt.hash(ownerData.password, 10);
+      ownerData.password = hashedPassword;
       db.getDb()
         .collection(collections.OWNERS_COLLECTION)
         .insertOne(ownerData)
