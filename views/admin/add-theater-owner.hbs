@@ -4,7 +4,8 @@
             <div class="admin-header-selector"></div>
             <h2>Add Theater Owner</h2>
         </div>
-        <form class="add-theater-owner-form" action="/admin/theater/add-owner" method="POST">
+        <form class="add-theater-owner-form" action="/admin/theater/add-owner" method="POST"
+            enctype="multipart/form-data">
             <p>Fill the form below.</p>
             <label for="name">
                 Name
@@ -22,6 +23,8 @@
                 Theater Name
             </label>
             <input type="text" name="theater">
+            <label for="image">Profile Image</label>
+            <input type="file" name="image" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
             <button class="admin-form-submit-button" type="submit">Submit</button>
         </form>
     </div>

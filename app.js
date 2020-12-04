@@ -6,6 +6,7 @@ const logger = require("morgan");
 const dotenv = require("dotenv");
 const hbs = require("express-handlebars");
 const session = require("express-session");
+const fileUpload = require("express-fileupload");
 
 // Router imports
 const indexRouter = require("./routes/index");
@@ -42,11 +43,12 @@ db.connect((err) => {
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(fileUpload());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
   session({
-    secret: "_this_is_my_session_secret",
+    secret: process.env.SESSION_SECTRET,
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 6000000 },

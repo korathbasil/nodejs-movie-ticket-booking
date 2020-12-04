@@ -89,6 +89,7 @@ router.get("/theater/add-owner", verifylogin, (req, res) => {
   });
 });
 router.post("/theater/add-owner", (req, res) => {
+  console.log(req.files);
   adminHelpers
     .addTheaterOwner(req.body)
     .then(() => res.redirect("/admin"))
