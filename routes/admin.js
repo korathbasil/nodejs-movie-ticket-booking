@@ -93,7 +93,6 @@ router.post("/theater/add-owner", (req, res) => {
     .addTheaterOwner(req.body)
     .then(() => res.redirect("/admin"))
     .catch(() => res.redirect("/admin/theater/add-owner"));
-  res.redirect("/admin");
 });
 
 // Edit theater owner
@@ -107,6 +106,14 @@ router.get("/theater/edit-owner/:ownerId", (req, res) => {
       ownerDetails: ownerDetails,
     });
   });
+});
+// Delete theater owner
+router.get("/theater/delete-owner/:ownerId", (req, res) => {
+  const ownerId = req.params.ownerId;
+  adminHelpers
+    .deleteTheaterOwner(ownerId)
+    .then(() => res.redirect("/admin/theater"))
+    .catch((e) => console.log(e));
 });
 // User Mangement
 router.get("/user", verifylogin, (req, res) => {

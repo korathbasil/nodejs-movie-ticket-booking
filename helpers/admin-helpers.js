@@ -77,7 +77,27 @@ module.exports = {
       db.getDb()
         .collection(collections.OWNERS_COLLECTION)
         .insertOne(data)
-        .then(() => resolve())
+        .then(() => {
+          // const nodemailer = require("nodemailer");
+          // const sendgridTransport = require("nodemailer-sendgrid-transport");
+          // const transporter = nodemailer.createTestAccount(
+          //   sendgridTransport({
+          //     auth: {
+          //       api_key: process.env.SENDGRID_API_KEY,
+          //     },
+          //   })
+          // );
+          // transporter
+          //   .sendMail({
+          //     from: "support@email.com",
+          //     to: "korathbasil@live.com",
+          //     subject: "Signup done",
+          //     html: "<h1>Signup finished</h1>",
+          //   })
+          //   .then(() => resolve())
+          //   .catch((e) => console.log(e));
+          resolve();
+        })
         .catch(() => reject());
     });
   },
@@ -89,6 +109,15 @@ module.exports = {
         .then((owner) => {
           resolve(owner);
         });
+    });
+  },
+  deleteTheaterOwner: (ownerId) => {
+    return new Promise((resolve, reject) => {
+      db.getDb()
+        .collection(collections.OWNERS_COLLECTION)
+        .deleteOne({ _id: ObjectID(ownerId) })
+        .then(() => resolve())
+        .catch(() => reject());
     });
   },
 };
