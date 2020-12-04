@@ -1,6 +1,6 @@
 <div class="content-card admin-login-box">
     {{#if adminExists}}
-    <h1>Admin, Welcome back.</h1>
+    <h2>Admin, Welcome back.</h2>
     {{!-- <h3>Please enter your password to login</h3> --}}
     <form action="/admin/login" method="POST">
         <label for="email">Email</label>
@@ -8,17 +8,16 @@
         <label for="password">Password</label>
         <input type="password" name="password" id="">
         <button type="submit">Create</button>
-        <p><a href="">Forgot password?</a></p>
     </form>
+    <p><a href="">Forgot password?</a></p>
     {{else}}
-    <h1>Create Admin</h1>
+    <h2>Create Admin</h2>
     <form action="/admin/signup" method="POST">
         <label for="email">Email</label>
         <input type="email" name="email" id="">
         <label for="password">Password</label>
         <input type="password" name="password" id="">
         <button type="submit">Create</button>
-        <p><a href="">Forgot password?</a></p>
     </form>
     {{/if}}
 </div>
