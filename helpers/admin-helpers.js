@@ -81,24 +81,22 @@ module.exports = {
         .insertOne(ownerData)
         .then(() => {
           const nodemailer = require("nodemailer");
-          const sendgridTransport = require("nodemailer-sendgrid-transport");
           const transporter = nodemailer.createTransport({
             service: "gmail",
             auth: {
-              user: "testbazilkorath@gmail.com",
-              pass: "21199121113",
+              user: process.env.GMAIL_ID,
+              pass: process.env.GMAIL_PASSWORD,
             },
           });
           transporter
             .sendMail({
-              from: "testbazilkorath@gmail.com",
-              to: "korathbasil@gmail.com",
-              subject: "Signup done",
-              html: "<h1>Signup finished</h1>",
+              from: process.env.GMAIL_ID,
+              to: ownerData.email,
+              subject: "Theater Owner Account Added - CineMax",
+              html: "<h1>Helloooo</h1>",
             })
             .then(() => resolve())
             .catch((e) => console.log(e));
-          // resolve();
         })
         .catch(() => reject());
     });
