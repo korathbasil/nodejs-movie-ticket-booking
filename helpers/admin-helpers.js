@@ -173,6 +173,20 @@ module.exports = {
         });
     });
   },
+  editTheaterOwner: (newData, ownerId) => {
+    return new Promise((resolve, reject) => {
+      db.getDb()
+        .collection(collections.OWNERS_COLLECTION)
+        .updateOne(
+          { _id: ObjectID(ownerId) },
+          {
+            $set: newData,
+          }
+        )
+        .then(() => resolve())
+        .catch(() => reject());
+    });
+  },
   deleteTheaterOwner: (ownerId) => {
     return new Promise((resolve, reject) => {
       db.getDb()

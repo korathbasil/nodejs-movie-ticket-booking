@@ -129,6 +129,17 @@ router.get("/theater/edit-owner/:ownerId", verifylogin, (req, res) => {
     });
   });
 });
+router.post("/theater/edit-owner/:ownerId", (req, res) => {
+  const ownerId = req.params.ownerId;
+  adminHelpers
+    .editTheaterOwner(req.body, ownerId)
+    .then(() => {
+      res.redirect("/admin/theater");
+    })
+    .catch(() => {
+      res.redirect("/admin/theater");
+    });
+});
 // Delete theater owner
 router.get("/theater/delete-owner/:ownerId", verifylogin, (req, res) => {
   const ownerId = req.params.ownerId;
