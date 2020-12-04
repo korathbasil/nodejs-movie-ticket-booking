@@ -72,11 +72,11 @@ module.exports = {
       resolve(owners);
     });
   },
-  addTheaterOwner: (data) => {
+  addTheaterOwner: (ownerData) => {
     return new Promise((resolve, reject) => {
       db.getDb()
         .collection(collections.OWNERS_COLLECTION)
-        .insertOne(data)
+        .insertOne(ownerData)
         .then(() => {
           // const nodemailer = require("nodemailer");
           // const sendgridTransport = require("nodemailer-sendgrid-transport");

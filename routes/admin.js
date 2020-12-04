@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const sharp = require("sharp");
 
 const adminHelpers = require("../helpers/admin-helpers");
 const verifylogin = require("../middlewares/verify-admin-login");
@@ -88,8 +89,15 @@ router.get("/theater/add-owner", verifylogin, (req, res) => {
     admin: req.session.admin,
   });
 });
-router.post("/theater/add-owner", (req, res) => {
-  console.log(req.files);
+router.post("/theater/add-owner", async (req, res) => {
+  const image = req.files.image;
+  const fileExtension = image.name.split(".")[image.name.split(".").length - 1]; // Getting file extension by splitting on extesion dot(.)
+  const fileName = new Date().toISOString() + "." + fileExtension; // Creating a new file name with new Date() and fileExtension
+  const imagePath = "/images/owners/" + fileName; // Setting the public path
+  req.body.image = imagePath;
+  await sharp(req.files.image.data)
+    .resize({ width: 360 })
+    .toFile(`./public/images/owners/${fileName}`);
   adminHelpers
     .addTheaterOwner(req.body)
     .then(() => res.redirect("/admin"))
