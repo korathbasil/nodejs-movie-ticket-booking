@@ -80,25 +80,25 @@ module.exports = {
         .collection(collections.OWNERS_COLLECTION)
         .insertOne(ownerData)
         .then(() => {
-          // const nodemailer = require("nodemailer");
-          // const sendgridTransport = require("nodemailer-sendgrid-transport");
-          // const transporter = nodemailer.createTestAccount(
-          //   sendgridTransport({
-          //     auth: {
-          //       api_key: process.env.SENDGRID_API_KEY,
-          //     },
-          //   })
-          // );
-          // transporter
-          //   .sendMail({
-          //     from: "support@email.com",
-          //     to: "korathbasil@live.com",
-          //     subject: "Signup done",
-          //     html: "<h1>Signup finished</h1>",
-          //   })
-          //   .then(() => resolve())
-          //   .catch((e) => console.log(e));
-          resolve();
+          const nodemailer = require("nodemailer");
+          const sendgridTransport = require("nodemailer-sendgrid-transport");
+          const transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+              user: "testbazilkorath@gmail.com",
+              pass: "21199121113",
+            },
+          });
+          transporter
+            .sendMail({
+              from: "testbazilkorath@gmail.com",
+              to: "korathbasil@gmail.com",
+              subject: "Signup done",
+              html: "<h1>Signup finished</h1>",
+            })
+            .then(() => resolve())
+            .catch((e) => console.log(e));
+          // resolve();
         })
         .catch(() => reject());
     });
