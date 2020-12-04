@@ -55,10 +55,10 @@ module.exports = {
         if (isPasswordTrue) {
           resolve();
         } else {
-          reject({ message: "Incorrect password" });
+          reject({ message: "Incorrect Password" });
         }
       } else {
-        reject({ message: "User not found" });
+        reject({ message: "User Not Found" });
       }
     });
   },

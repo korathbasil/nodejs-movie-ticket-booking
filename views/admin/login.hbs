@@ -1,7 +1,9 @@
 <div class="content-card admin-login-box">
+    {{#if errorMessage}}
+    <h3><span><i class="fas fa-exclamation-circle"></i></span>{{errorMessage}}</h3>
+    {{/if}}
     {{#if adminExists}}
     <h2>Admin, Welcome back.</h2>
-    {{!-- <h3>Please enter your password to login</h3> --}}
     <form action="/admin/login" method="POST">
         <label for="email">Email</label>
         <input type="email" name="email" id="">

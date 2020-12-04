@@ -14,7 +14,7 @@ router.post("/signup", (req, res) => {
       res.redirect("/admin");
     })
     .catch(() => {
-      req.redirect("/admin/login");
+      res.redirect("/admin/login");
     });
 });
 router.get("/login", (req, res) => {
@@ -24,11 +24,14 @@ router.get("/login", (req, res) => {
     adminHelpers
       .findAdmin()
       .then(() => {
+        // console.log(req.session.adminErrors);
         res.render("admin/login", {
           title: "Login - Admin - Cinemax",
           adminRoute: true,
           adminExists: true,
+          errorMessage: req.session.errorMessage,
         }); // Admin exists, render login form. There would be only one admin
+        req.session.errorMessage = null;
       })
       .catch(() => {
         res.render("admin/login", {
@@ -47,6 +50,7 @@ router.post("/login", (req, res) => {
       res.redirect("/admin");
     })
     .catch((e) => {
+      req.session.errorMessage = e.message;
       res.redirect("/admin/login");
     });
 });
@@ -74,11 +78,15 @@ router.get("/theater", verifylogin, (req, res) => {
   });
 });
 // View All theaters of a selected owner
-router.get("/theater/view-theaters", verifylogin, (req, res) => {
-  res.render("admin/theaters", {
-    title: "Theater Management - Admin - CineMax",
-    adminRoute: true,
-    admin: req.session.admin,
+router.get("/theater/view-theaters/:ownerId", verifylogin, (req, res) => {
+  const ownerId = req.params.ownerId;
+  adminHelpers.getTheaterOwner(ownerId).then((ownerDetails) => {
+    res.render("admin/theaters", {
+      title: "Theater Management - Admin - CineMax",
+      adminRoute: true,
+      admin: req.session.admin,
+      ownerDetails: ownerDetails,
+    });
   });
 });
 // Add theater owner
@@ -89,7 +97,7 @@ router.get("/theater/add-owner", verifylogin, (req, res) => {
     admin: req.session.admin,
   });
 });
-router.post("/theater/add-owner", async (req, res) => {
+router.post("/theater/add-owner", verifylogin, async (req, res) => {
   const image = req.files.image;
   const fileExtension = image.name.split(".")[image.name.split(".").length - 1]; // Getting file extension by splitting on extesion dot(.)
   const fileName = new Date().toISOString() + "." + fileExtension; // Creating a new file name with new Date() and fileExtension
@@ -100,12 +108,12 @@ router.post("/theater/add-owner", async (req, res) => {
     .toFile(`./public/images/owners/${fileName}`);
   adminHelpers
     .addTheaterOwner(req.body)
-    .then(() => res.redirect("/admin"))
+    .then(() => res.redirect("/admin/theater"))
     .catch(() => res.redirect("/admin/theater/add-owner"));
 });
 
 // Edit theater owner
-router.get("/theater/edit-owner/:ownerId", (req, res) => {
+router.get("/theater/edit-owner/:ownerId", verifylogin, (req, res) => {
   const ownerId = req.params.ownerId;
   adminHelpers.getTheaterOwner(ownerId).then((ownerDetails) => {
     res.render("admin/edit-theater-owner", {
@@ -117,7 +125,7 @@ router.get("/theater/edit-owner/:ownerId", (req, res) => {
   });
 });
 // Delete theater owner
-router.get("/theater/delete-owner/:ownerId", (req, res) => {
+router.get("/theater/delete-owner/:ownerId", verifylogin, (req, res) => {
   const ownerId = req.params.ownerId;
   adminHelpers
     .deleteTheaterOwner(ownerId)

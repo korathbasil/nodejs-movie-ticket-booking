@@ -16,14 +16,14 @@
         </tr>
         {{#each owners}}
         <tr>
-          <td>1</td>
+          <td>{{@index}}</td>
           <td>
             <div class="table-image-name">
               <img src="{{this.image}}" alt="" />{{this.name}}
             </div>
           </td>
           <td>{{this.theater}}</td>
-          <td><a class="theater-owner-table-button" href="/admin/theater/view-theaters">VIEW</a< /td>
+          <td><a class="theater-owner-table-button" href="/admin/theater/view-theaters/{{this._id}}">VIEW</a< /td>
           <td>
             <a class="theater-owner-table-button" href="/admin/theater/edit-owner/{{this._id}}">EDIT</a><a
               class="theater-owner-table-button" href="/admin/theater/delete-owner/{{this._id}}">DELETE</a>

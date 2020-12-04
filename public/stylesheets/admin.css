@@ -16,6 +16,7 @@
   margin-top: 100px;
   border: 1px solid lightgrey;
   height: fit-content;
+  position: relative;
 }
 .admin-login-box > h2 {
   font-size: 20px;
@@ -58,6 +59,22 @@
 .admin-login-box > p {
   margin-top: 10px;
   font-size: 12px;
+}
+.admin-login-box > h3 {
+  color: red;
+  position: absolute;
+  bottom: 40px;
+  right: 30px;
+
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+}
+.fa-exclamation {
+  font-size: 14px;
+  background-color: rgba(211, 211, 211, 0.677);
+  margin: 0;
 }
 .admin-headings {
   display: flex;
