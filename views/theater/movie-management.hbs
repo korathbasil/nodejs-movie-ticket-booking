@@ -4,27 +4,26 @@
             <div class="theater-header-selector"></div>
             <h2>Now Showing Movies</h2>
         </div>
+        <a href="/theater/movie/add-movie">Add movies</a> <a href="">Upcoming</a>
         <table class="owner-movie-table">
             <tr>
                 <th>No</th>
-                <th>Screen Name</th>
-                <th>Total Seats</th>
-                <th>Schedule</th>
+                <th>Movie Name</th>
+                <th>Release date</th>
+                <th>Runtime</th>
                 <th>Actions</th>
             </tr>
             <tr>
                 <td>1</td>
-                <td>
-                    AUDI
-                </td>
-                <td>200</td>
-                <td><a href="">view schedule</a></td>
-                <td></td>
+                <td>AUDI</td>
+                <td>15/01/20</td>
+                <td>2hr30min</td>
+                <td><a href="/theater/movie/edit-movie">EDIT</a><a href="/theater/movie/delete-movie">DELETE</a></td>
             </tr>
         </table>
     </div>
 </section>
 {{!-- Scripts --}}
 <script>
-    setActiveTab("movie-management")
+    setActiveTab("movie-management");
 </script>

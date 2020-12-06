@@ -53,6 +53,24 @@ router.get("/movie", (req, res) => {
     theaterOwner: true,
   });
 });
+// Add Movie
+router.get("/movie/add-movie", (req, res) => {
+  res.render("theater/add-movie", {
+    theaterRoute: true,
+    title: "Movie Management - Theater Owner - Cinemax",
+    theaterOwner: true,
+  });
+});
+// Edit Movie
+router.get("/movie/edit-movie", (req, res) => {
+  res.render("theater/edit-movie", {
+    theaterRoute: true,
+    title: "Movie Management - Theater Owner - Cinemax",
+    theaterOwner: true,
+  });
+});
+// Delete Movie
+router.get("/movie/edit-movie", (req, res) => {});
 // User Activity Tracker
 router.get("/user-activity", (req, res) => {
   res.render("theater/user-activity", {
