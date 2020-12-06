@@ -10,7 +10,17 @@ router.get("/login", (req, res) => {
     title: "Login - Theater - Cinemax",
   });
 });
-router.post("/login", (req, res) => {});
+router.post("/login", (req, res) => {
+  console.log(req.body);
+  theaterHelpers
+    .login(req.body)
+    .then(() => {
+      req.session.theaterLogin = true;
+      console.log("Loggedn In");
+      res.redirect("/theater");
+    })
+    .catch(() => res.redirect("/theater/login"));
+});
 // Dashboard
 router.get("/", (req, res) => {
   res.render("theater/dashboard", {
