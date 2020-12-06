@@ -161,6 +161,19 @@
   width: 100%;
   padding: 20px;
   overflow-y: scroll;
+  position: relative;
+}
+.admin-theater-management-add-link {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  background-color: blue;
+  padding: 10px 20px;
+  border-radius: 30px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
 }
 .admin-theater-owner-table {
   width: 70%;
@@ -180,6 +193,24 @@
 }
 .theater-owner-table-button:nth-child(2) {
   background-color: red;
+}
+.admin-theater-dialogue {
+  width: 300px;
+  padding: 20px;
+  background-color: lightgrey;
+  z-index: 1;
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 15px;
+  display: none;
+}
+.admin-theater-dialogue > h3 {
+  margin-bottom: 30px;
 }
 /* Add theater owner */
 .admin-add-theater-owner {
@@ -216,6 +247,15 @@
   font-size: 16px;
   font-weight: 600;
   color: var(--admin-tertiary);
+}
+.form-image-container {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background);
+  border-radius: 20px;
 }
 .add-theater-owner-form > button {
   width: fit-content;

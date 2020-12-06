@@ -5,7 +5,12 @@
         <div class="admin-header-selector"></div>
         <h2>Theater Owners List</h2>
       </div>
-      <a href="/admin/theater/add-owner">Add theater Owner</a>
+      <div id="admin-theter-dialogue" class="admin-theater-dialogue">
+        <h3>Are you sure ?</h3>
+        <div class=""><a href="" class="theater-owner-table-button">YES</a>
+          <a href="" class="theater-owner-table-button">NO</a></div>
+      </div>
+      <a class="admin-theater-management-add-link" href="/admin/theater/add-owner">Add theater Owner</a>
       <table class="admin-theater-owner-table">
         <tr class="admin-user-table-row">
           <th class="admin-user-table-column1">No</th>
@@ -46,4 +51,8 @@
     })
   }
   rowNumbers()
+  const openConfirmDialogue = (e, id) => {
+    e.preventDefault();
+    document.getElementById("admin-theter-dialogue").style.display = flex;
+  }
 </script>

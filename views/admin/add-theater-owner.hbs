@@ -10,21 +10,24 @@
             <label for="name">
                 Name
             </label>
-            <input type="text" name="name">
+            <input type="text" name="name" required>
             <label for="email">
                 Email
             </label>
-            <input type="email" name="email">
+            <input type="email" name="email" required>
             <label for="phone">
                 Phone
             </label>
-            <input type="tel" name="phone">
+            <input type="tel" name="phone" required>
             <label for="theater">
                 Theater Name
             </label>
-            <input type="text" name="theater">
+            <input type="text" name="theater" required>
+            {{!-- <div class="form-image-container">
+                <i class="fas fa-camera"></i>
+            </div> --}}
             <label for="image">Profile Image</label>
-            <input type="file" name="image" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
+            <input type="file" name="image" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" required>
             <button class="admin-form-submit-button" type="submit">Submit</button>
         </form>
     </div>

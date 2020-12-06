@@ -106,15 +106,25 @@ router.post("/theater/add-owner", verifylogin, async (req, res) => {
   const username =
     req.body.email.split("@")[0] + Math.floor(Math.random() * 10000 + 1); // Generating a username with email address
   const password = Math.random().toString(36).substring(7); // Generating password
-  req.body.username = username;
-  req.body.password = password;
-  await sharp(req.files.image.data)
-    .resize({ width: 360 })
-    .toFile(`./public/images/owners/${fileName}`);
-  adminHelpers
-    .addTheaterOwner(req.body)
-    .then(() => res.redirect("/admin/theater"))
-    .catch(() => res.redirect("/admin/theater/add-owner"));
+  adminHelpers.sendAddTheaterOwnerMail(
+    req.body.email,
+    username,
+    password,
+    async (e) => {
+      if (e) console.log(e);
+      else {
+        req.body.username = username;
+        req.body.password = password;
+        await sharp(req.files.image.data)
+          .resize({ width: 360 })
+          .toFile(`./public/images/owners/${fileName}`);
+        adminHelpers
+          .addTheaterOwner(req.body)
+          .then(() => res.redirect("/admin/theater"))
+          .catch(() => res.redirect("/admin/theater/add-owner"));
+      }
+    }
+  );
 });
 
 // Edit theater owner

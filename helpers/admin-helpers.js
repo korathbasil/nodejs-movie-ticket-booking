@@ -72,24 +72,16 @@ module.exports = {
       resolve(owners);
     });
   },
-  addTheaterOwner: (ownerData) => {
-    return new Promise(async (resolve, reject) => {
-      const password = ownerData.password;
-      const hashedPassword = await bcrypt.hash(ownerData.password, 10);
-      ownerData.password = hashedPassword;
-      db.getDb()
-        .collection(collections.OWNERS_COLLECTION)
-        .insertOne(ownerData)
-        .then(() => {
-          const nodemailer = require("nodemailer");
-          const transporter = nodemailer.createTransport({
-            service: "gmail",
-            auth: {
-              user: process.env.GMAIL_ID,
-              pass: process.env.GMAIL_PASSWORD,
-            },
-          });
-          const mailBody = `<body style="font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif">
+  sendAddTheaterOwnerMail: (recieverId, username, password, cb) => {
+    const nodemailer = require("nodemailer");
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.GMAIL_ID,
+        pass: process.env.GMAIL_PASSWORD,
+      },
+    });
+    const mailBody = `<body style="font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif">
           <div
             style="
               width: 100%;
@@ -137,7 +129,7 @@ module.exports = {
                     background-color: lightgrey;
                   "
                 >
-                  <p>Username  :   <strong>${ownerData.username}</strong></p>
+                  <p>Username  :   <strong>${username}</strong></p>
                   <p>Password  :   <strong>${password}</strong></p>
                 </div>
               </div>
@@ -150,16 +142,25 @@ module.exports = {
           </div>
         </body>
         `;
-          transporter
-            .sendMail({
-              from: process.env.GMAIL_ID,
-              to: ownerData.email,
-              subject: "Theater Owner Account Added - CineMax",
-              html: mailBody,
-            })
-            .then(() => resolve())
-            .catch((e) => console.log(e));
-        })
+    transporter
+      .sendMail({
+        from: process.env.GMAIL_ID,
+        to: recieverId,
+        subject: "Theater Owner Account Added - CineMax",
+        html: mailBody,
+      })
+      .then(() => cb())
+      .catch((e) => cb(e));
+  },
+  addTheaterOwner: (ownerData) => {
+    return new Promise(async (resolve, reject) => {
+      const password = ownerData.password;
+      const hashedPassword = await bcrypt.hash(ownerData.password, 10);
+      ownerData.password = hashedPassword;
+      db.getDb()
+        .collection(collections.OWNERS_COLLECTION)
+        .insertOne(ownerData)
+        .then(() => resolve())
         .catch(() => reject());
     });
   },
