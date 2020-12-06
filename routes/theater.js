@@ -2,13 +2,18 @@ const express = require("express");
 const router = express.Router();
 
 const theaterHelpers = require("../helpers/theater-helpers");
+const verifyLogin = require("../middlewares/verify-theater-login");
 
 // Login
 router.get("/login", (req, res) => {
-  res.render("theater/login", {
-    theaterRoute: true,
-    title: "Login - Theater - Cinemax",
-  });
+  if (req.session.theaterLogin) {
+    res.redirect("/theater");
+  } else {
+    res.render("theater/login", {
+      theaterRoute: true,
+      title: "Login - Theater - Cinemax",
+    });
+  }
 });
 router.post("/login", (req, res) => {
   console.log(req.body);
@@ -21,8 +26,13 @@ router.post("/login", (req, res) => {
     })
     .catch(() => res.redirect("/theater/login"));
 });
+// Logout
+router.get("/logout", (req, res) => {
+  req.session.theaterLogin = false;
+  res.redirect("/theater/login");
+});
 // Dashboard
-router.get("/", (req, res) => {
+router.get("/", verifyLogin, (req, res) => {
   res.render("theater/dashboard", {
     theaterRoute: true,
     title: "Dashboard - Theater - Cinemax",
@@ -30,7 +40,7 @@ router.get("/", (req, res) => {
   });
 });
 // Screen Management
-router.get("/screen", (req, res) => {
+router.get("/screen", verifyLogin, (req, res) => {
   res.render("theater/screen-management", {
     theaterRoute: true,
     title: "Screen Management - Theater - Cinemax",
@@ -38,7 +48,7 @@ router.get("/screen", (req, res) => {
   });
 });
 // Add screen
-router.get("/screen/add-screen", (req, res) => {
+router.get("/screen/add-screen", verifyLogin, (req, res) => {
   res.render("theater/add-screen", {
     theaterRoute: true,
     title: "Screen Management - Theater - Cinemax",
@@ -46,7 +56,7 @@ router.get("/screen/add-screen", (req, res) => {
   });
 });
 // Edit screen
-router.get("/screen/edit-screen", (req, res) => {
+router.get("/screen/edit-screen", verifyLogin, (req, res) => {
   res.render("theater/edit-screen", {
     theaterRoute: true,
     title: "Movie Management - Theater - Cinemax",
@@ -54,7 +64,7 @@ router.get("/screen/edit-screen", (req, res) => {
   });
 });
 // Delete Screen
-router.get("/theater/screen/delete-screen", (req, res) => {});
+router.get("/theater/screen/delete-screen", verifyLogin, (req, res) => {});
 // Movie Mangement
 router.get("/movie", (req, res) => {
   res.render("theater/movie-management", {
@@ -64,7 +74,7 @@ router.get("/movie", (req, res) => {
   });
 });
 // Add Movie
-router.get("/movie/add-movie", (req, res) => {
+router.get("/movie/add-movie", verifyLogin, (req, res) => {
   res.render("theater/add-movie", {
     theaterRoute: true,
     title: "Movie Management - Theater - Cinemax",
@@ -72,7 +82,7 @@ router.get("/movie/add-movie", (req, res) => {
   });
 });
 // Edit Movie
-router.get("/movie/edit-movie", (req, res) => {
+router.get("/movie/edit-movie", verifyLogin, (req, res) => {
   res.render("theater/edit-movie", {
     theaterRoute: true,
     title: "Movie Management - Theater - Cinemax",
@@ -80,7 +90,7 @@ router.get("/movie/edit-movie", (req, res) => {
   });
 });
 // Delete Movie
-router.get("/movie/edit-movie", (req, res) => {});
+router.get("/movie/edit-movie", verifyLogin, (req, res) => {});
 // User Activity Tracker
 router.get("/user-activity", (req, res) => {
   res.render("theater/user-activity", {
@@ -90,7 +100,7 @@ router.get("/user-activity", (req, res) => {
   });
 });
 // My Account
-router.get("/account", (req, res) => {
+router.get("/account", verifyLogin, (req, res) => {
   res.render("theater/account", {
     theaterRoute: true,
     title: "My Account - Theater - Cinemax",
