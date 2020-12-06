@@ -35,6 +35,16 @@ router.get("/screen/add-screen", (req, res) => {
     theaterOwner: true,
   });
 });
+// Edit screen
+router.get("/screen/edit-screen", (req, res) => {
+  res.render("theater/edit-screen", {
+    theaterRoute: true,
+    title: "Movie Management - Theater Owner - Cinemax",
+    theaterOwner: true,
+  });
+});
+// Delete Screen
+router.get("/theater/screen/delete-screen", (req, res) => {});
 // Movie Mangement
 router.get("/movie", (req, res) => {
   res.render("theater/movie-management", {
