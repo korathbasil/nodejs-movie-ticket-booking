@@ -111,8 +111,9 @@ router.post("/theater/add-owner", verifylogin, async (req, res) => {
     username,
     password,
     async (e) => {
-      if (e) console.log(e);
-      else {
+      if (e) {
+        res.redirect("/admin/theater/add-owner");
+      } else {
         req.body.username = username;
         req.body.password = password;
         await sharp(req.files.image.data)

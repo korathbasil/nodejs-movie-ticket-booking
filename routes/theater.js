@@ -15,12 +15,16 @@ router.get("/movie", (req, res) => {
   res.render("theater/movie-management", { theaterRoute: true });
 });
 // Screens
-router.get("/screens", (req, res) => {
-  res.render("theater/screens", { theaterRoute: true });
+router.get("/screen", (req, res) => {
+  res.render("theater/screen-management", { theaterRoute: true });
 });
 // User Activity Tracker
 router.get("/user-activity", (req, res) => {
   res.render("theater/user-activity", { theaterRoute: true });
+});
+// My Account
+router.get("/account", (req, res) => {
+  res.render("theater/account", { theaterRoute: true });
 });
 
 module.exports = router;

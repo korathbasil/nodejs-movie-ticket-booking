@@ -28,6 +28,8 @@
   <div class="main-body">
     {{#if admin}}
     {{>admin-sidebar}}
+    {{else if theaterRoute}}
+    {{>theater-sidebar}}
     {{/if}}
     {{{body}}}
   </div>

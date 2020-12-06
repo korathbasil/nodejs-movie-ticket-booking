@@ -39,6 +39,8 @@ a {
 .admin-header-panel {
   font-size: 20px;
   color: var(--admin-primary);
+  letter-spacing: 2px;
+  font-weight: 700;
 }
 .admin-header > a,
 .theater-header > a {
