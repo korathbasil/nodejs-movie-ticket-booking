@@ -7,7 +7,7 @@ const theaterHelpers = require("../helpers/theater-helpers");
 router.get("/login", (req, res) => {
   res.render("theater/login", {
     theaterRoute: true,
-    title: "Login - Theater Owner - Cinemax",
+    title: "Login - Theater - Cinemax",
   });
 });
 router.post("/login", (req, res) => {});
@@ -15,7 +15,7 @@ router.post("/login", (req, res) => {});
 router.get("/", (req, res) => {
   res.render("theater/dashboard", {
     theaterRoute: true,
-    title: "Dashboard - Theater Owner - Cinemax",
+    title: "Dashboard - Theater - Cinemax",
     theaterOwner: true,
   });
 });
@@ -23,7 +23,7 @@ router.get("/", (req, res) => {
 router.get("/screen", (req, res) => {
   res.render("theater/screen-management", {
     theaterRoute: true,
-    title: "Screen Management - Theater Owner - Cinemax",
+    title: "Screen Management - Theater - Cinemax",
     theaterOwner: true,
   });
 });
@@ -31,7 +31,7 @@ router.get("/screen", (req, res) => {
 router.get("/screen/add-screen", (req, res) => {
   res.render("theater/add-screen", {
     theaterRoute: true,
-    title: "Screen Management - Theater Owner - Cinemax",
+    title: "Screen Management - Theater - Cinemax",
     theaterOwner: true,
   });
 });
@@ -39,7 +39,7 @@ router.get("/screen/add-screen", (req, res) => {
 router.get("/screen/edit-screen", (req, res) => {
   res.render("theater/edit-screen", {
     theaterRoute: true,
-    title: "Movie Management - Theater Owner - Cinemax",
+    title: "Movie Management - Theater - Cinemax",
     theaterOwner: true,
   });
 });
@@ -49,7 +49,7 @@ router.get("/theater/screen/delete-screen", (req, res) => {});
 router.get("/movie", (req, res) => {
   res.render("theater/movie-management", {
     theaterRoute: true,
-    title: "Movie Management - Theater Owner - Cinemax",
+    title: "Movie Management - Theater - Cinemax",
     theaterOwner: true,
   });
 });
@@ -57,7 +57,7 @@ router.get("/movie", (req, res) => {
 router.get("/movie/add-movie", (req, res) => {
   res.render("theater/add-movie", {
     theaterRoute: true,
-    title: "Movie Management - Theater Owner - Cinemax",
+    title: "Movie Management - Theater - Cinemax",
     theaterOwner: true,
   });
 });
@@ -65,7 +65,7 @@ router.get("/movie/add-movie", (req, res) => {
 router.get("/movie/edit-movie", (req, res) => {
   res.render("theater/edit-movie", {
     theaterRoute: true,
-    title: "Movie Management - Theater Owner - Cinemax",
+    title: "Movie Management - Theater - Cinemax",
     theaterOwner: true,
   });
 });
@@ -75,7 +75,7 @@ router.get("/movie/edit-movie", (req, res) => {});
 router.get("/user-activity", (req, res) => {
   res.render("theater/user-activity", {
     theaterRoute: true,
-    title: "User Activity Tracker - Theater Owner - Cinemax",
+    title: "User Activity Tracker - Theater - Cinemax",
     theaterOwner: true,
   });
 });
@@ -83,7 +83,7 @@ router.get("/user-activity", (req, res) => {
 router.get("/account", (req, res) => {
   res.render("theater/account", {
     theaterRoute: true,
-    title: "My Account - Theater Owner - Cinemax",
+    title: "My Account - Theater - Cinemax",
     theaterOwner: true,
   });
 });
