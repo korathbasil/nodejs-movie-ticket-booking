@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+const theaterHelpers = require("../helpers/theater-helpers");
+
 // Login
 router.get("/login", (req, res) => {
   res.render("theater/login", {
@@ -13,7 +15,7 @@ router.post("/login", (req, res) => {});
 router.get("/", (req, res) => {
   res.render("theater/dashboard", {
     theaterRoute: true,
-    title: "Dashboard - Cinemax",
+    title: "Dashboard - Theater Owner - Cinemax",
     theaterOwner: true,
   });
 });
@@ -21,7 +23,7 @@ router.get("/", (req, res) => {
 router.get("/screen", (req, res) => {
   res.render("theater/screen-management", {
     theaterRoute: true,
-    title: "Screen Management - Cinemax",
+    title: "Screen Management - Theater Owner - Cinemax",
     theaterOwner: true,
   });
 });
@@ -29,7 +31,7 @@ router.get("/screen", (req, res) => {
 router.get("/movie", (req, res) => {
   res.render("theater/movie-management", {
     theaterRoute: true,
-    title: "Movie Management - Cinemax",
+    title: "Movie Management - Theater Owner - Cinemax",
     theaterOwner: true,
   });
 });
@@ -37,7 +39,7 @@ router.get("/movie", (req, res) => {
 router.get("/user-activity", (req, res) => {
   res.render("theater/user-activity", {
     theaterRoute: true,
-    title: "User Activity Tracker - Cinemax",
+    title: "User Activity Tracker - Theater Owner - Cinemax",
     theaterOwner: true,
   });
 });
@@ -45,7 +47,7 @@ router.get("/user-activity", (req, res) => {
 router.get("/account", (req, res) => {
   res.render("theater/account", {
     theaterRoute: true,
-    title: "My Account - Cinemax",
+    title: "My Account - Theater Owner - Cinemax",
     theaterOwner: true,
   });
 });
