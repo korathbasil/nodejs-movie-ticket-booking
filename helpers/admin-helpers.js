@@ -19,7 +19,7 @@ module.exports = {
       }
     });
   },
-  getAdminById: (id) => {
+  getAdminById: async (id) => {
     return db
       .getDb()
       .collection(collections.ADMIN_COLLECTION)
@@ -37,6 +37,7 @@ module.exports = {
         const newAdmin = {
           email: data.email,
           password: hashedPassword,
+          type: "admin",
         };
         db.getDb()
           .collection(collections.ADMIN_COLLECTION)
