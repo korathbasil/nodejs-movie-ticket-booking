@@ -18,7 +18,7 @@ router.get("/login", (req, res) => {
 });
 router.post(
   "/login",
-  passport.authenticate("local", {
+  passport.authenticate("owner-local", {
     successRedirect: "/theater",
     failureRedirect: "/theater/login",
     failureFlash: true,

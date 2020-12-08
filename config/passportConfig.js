@@ -5,7 +5,7 @@ const theaterHelpers = require("../helpers/theater-helpers");
 const db = require("./dbConfig");
 
 module.exports = (passport) => {
-  const authenticateUser = (username, password, done) => {
+  const authenticateOwner = (username, password, done) => {
     theaterHelpers
       .login({ username: username, password: password })
       .then((user) => {
@@ -23,7 +23,8 @@ module.exports = (passport) => {
       .collection("owners")
       .findOne({ _id: ObjectID(id) });
   };
-  passport.use(new localStrategy(authenticateUser));
+  passport.use("owner-local", new localStrategy(authenticateOwner));
+  //   passport.use("admin-local", new localStrategy(authenticateOwner));
   passport.serializeUser((user, done) => done(null, user._id));
   passport.deserializeUser((id, done) => done(null, getUserByID(id)));
 };
