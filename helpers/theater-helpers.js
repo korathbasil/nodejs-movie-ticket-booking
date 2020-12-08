@@ -5,7 +5,6 @@ const collections = require("../config/collections");
 
 module.exports = {
   login: (data) => {
-    console.log(data);
     return new Promise(async (resolve, reject) => {
       const selectedUser = await db
         .getDb()
@@ -18,15 +17,12 @@ module.exports = {
           selectedUser.password
         );
         if (isPasswordTrue) {
-          console.log("logged in");
-          resolve();
+          resolve(selectedUser);
         } else {
-          console.log("Wrong Password");
-          reject();
+          reject({ message: "Incorrect Password" });
         }
       } else {
-        console.log("object");
-        reject();
+        reject({ message: "User not fonud" });
       }
     });
   },

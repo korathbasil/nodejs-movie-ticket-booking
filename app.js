@@ -7,6 +7,8 @@ const dotenv = require("dotenv");
 const hbs = require("express-handlebars");
 const session = require("express-session");
 const fileUpload = require("express-fileupload");
+const passport = require("passport");
+const flash = require("express-flash");
 
 // Router imports
 const indexRouter = require("./routes/index");
@@ -38,6 +40,10 @@ db.connect((err) => {
     console.log("Database connected");
   }
 });
+// Passport initialize
+const passportConfig = require("./config/passportConfig");
+const { Passport } = require("passport");
+passportConfig(passport);
 
 // Middlewares
 app.use(logger("dev"));
@@ -54,11 +60,22 @@ app.use(
     cookie: { maxAge: 6000000 },
   })
 );
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/admin", adminRouter);
 app.use("/theater", theaterRoute);
+app.post(
+  "/test",
+  passport.authenticate("local", {
+    successRedirect: "/generation",
+    failureRedirect: "/falihygbs",
+    failureFlash: true,
+  })
+);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
