@@ -9,11 +9,11 @@ module.exports = (passport) => {
     theaterHelpers
       .login({ username: username, password: password })
       .then((user) => {
-        console.log(user);
+        // console.log(user);
         done(null, user);
       })
       .catch((e) => {
-        console.log(e);
+        // console.log(e);
         done(null, false, { messge: e.message });
       });
   };

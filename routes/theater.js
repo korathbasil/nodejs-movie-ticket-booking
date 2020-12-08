@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const passport = require("passport");
 
 const theaterHelpers = require("../helpers/theater-helpers");
 const verifyLogin = require("../middlewares/verify-theater-login");
@@ -15,17 +16,25 @@ router.get("/login", (req, res) => {
     });
   }
 });
-router.post("/login", (req, res) => {
-  console.log(req.body);
-  theaterHelpers
-    .login(req.body)
-    .then(() => {
-      req.session.theaterLogin = true;
-      console.log("Loggedn In");
-      res.redirect("/theater");
-    })
-    .catch(() => res.redirect("/theater/login"));
-});
+router.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/theater",
+    failureRedirect: "/theater/login",
+    failureFlash: true,
+  })
+);
+// router.post("/login", (req, res) => {
+//   console.log(req.body);
+//   theaterHelpers
+//     .login(req.body)
+//     .then(() => {
+//       req.session.theaterLogin = true;
+//       console.log("Loggedn In");
+//       res.redirect("/theater");
+//     })
+//     .catch(() => res.redirect("/theater/login"));
+// });
 // Logout
 router.get("/logout", (req, res) => {
   req.session.theaterLogin = false;
