@@ -37,7 +37,6 @@ module.exports = {
         const newAdmin = {
           email: data.email,
           password: hashedPassword,
-          type: "admin",
         };
         db.getDb()
           .collection(collections.ADMIN_COLLECTION)

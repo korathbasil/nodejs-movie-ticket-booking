@@ -99,7 +99,6 @@ router.get("/theater/add-owner", verifylogin, (req, res) => {
   });
 });
 router.post("/theater/add-owner", verifylogin, async (req, res) => {
-  req.body.type = "owner";
   const image = req.files.image;
   const fileExtension = image.name.split(".")[image.name.split(".").length - 1]; // Getting file extension by splitting on extesion dot(.)
   const fileName = new Date().toISOString() + "." + fileExtension; // Creating a new file name with new Date() and fileExtension
