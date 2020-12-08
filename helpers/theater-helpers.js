@@ -2,8 +2,15 @@ const bcrypt = require("bcrypt");
 
 const db = require("../config/dbConfig");
 const collections = require("../config/collections");
+const { ObjectID } = require("mongodb");
 
 module.exports = {
+  getOwnerById: (id) => {
+    return db
+      .getDb()
+      .collection(collections.OWNERS_COLLECTION)
+      .findOne({ _id: ObjectID(id) });
+  },
   login: (data) => {
     return new Promise(async (resolve, reject) => {
       const selectedUser = await db

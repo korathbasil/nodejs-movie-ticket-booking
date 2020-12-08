@@ -19,6 +19,12 @@ module.exports = {
       }
     });
   },
+  getAdminById: (id) => {
+    return db
+      .getDb()
+      .collection(collections.ADMIN_COLLECTION)
+      .findOne({ _id: ObjectID(id) });
+  },
   signup: (data) => {
     return new Promise(async (resolve, reject) => {
       const admin = await db
@@ -53,7 +59,7 @@ module.exports = {
           selectedUser.password
         );
         if (isPasswordTrue) {
-          resolve();
+          resolve(selectedUser);
         } else {
           reject({ message: "Incorrect Password" });
         }
