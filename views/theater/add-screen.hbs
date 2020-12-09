@@ -4,11 +4,11 @@
             <div class="theater-header-selector"></div>
             <h2>Add Screen</h2>
         </div>
-        <form class="form theater-add-screen-form" action="">
+        <form class="form theater-add-screen-form" action="/theater/screen/add-screen" method="POST">
             <label for="name">Name</label>
             <input type="text" name="name">
             <label for="seats">Number of Seats</label>
-            <input type="number" name="seats">
+            <input type="number" name="seats" maxlength="3">
             <button>Submit</button>
         </form>
     </div>

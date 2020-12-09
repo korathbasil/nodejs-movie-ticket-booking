@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const sharp = require("sharp");
+const passport = require("passport");
 
 const adminHelpers = require("../helpers/admin-helpers");
 const verifylogin = require("../middlewares/verify-admin-login");
@@ -43,6 +44,14 @@ router.get("/login", (req, res) => {
       });
   }
 });
+// router.post(
+//   "/login",
+//   passport.authenticate("admin-local", {
+//     successRedirect: "/admin",
+//     failureRedirect: "/admin/login",
+//     failureFlash: true,
+//   })
+// );
 router.post("/login", (req, res) => {
   adminHelpers
     .login(req.body)
@@ -55,7 +64,7 @@ router.post("/login", (req, res) => {
       res.redirect("/admin/login");
     });
 });
-router.get("/logout", (req, res) => {
+router.get("/logout", verifylogin, (req, res) => {
   req.session.admin = false;
   res.redirect("/");
 });

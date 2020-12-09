@@ -33,5 +33,7 @@ module.exports = {
       }
     });
   },
-  signup: () => {},
+  addMovie: (movieDetails) => {
+    return new Promise((resolve, reject) => {});
+  },
 };

@@ -16,25 +16,23 @@ router.get("/login", (req, res) => {
     });
   }
 });
-router.post(
-  "/login",
-  passport.authenticate("owner-local", {
-    successRedirect: "/theater",
-    failureRedirect: "/theater/login",
-    failureFlash: true,
-  })
-);
-// router.post("/login", (req, res) => {
-//   console.log(req.body);
-//   theaterHelpers
-//     .login(req.body)
-//     .then(() => {
-//       req.session.theaterLogin = true;
-//       console.log("Loggedn In");
-//       res.redirect("/theater");
-//     })
-//     .catch(() => res.redirect("/theater/login"));
-// });
+// router.post(
+//   "/login",
+//   passport.authenticate("owner-local", {
+//     successRedirect: "/theater",
+//     failureRedirect: "/theater/login",
+//     failureFlash: true,
+//   })
+// );
+router.post("/login", (req, res) => {
+  theaterHelpers
+    .login(req.body)
+    .then(() => {
+      req.session.theaterLogin = true;
+      res.redirect("/theater");
+    })
+    .catch(() => res.redirect("/theater/login"));
+});
 // Logout
 router.get("/logout", (req, res) => {
   req.session.theaterLogin = false;
@@ -83,12 +81,16 @@ router.get("/movie", (req, res) => {
   });
 });
 // Add Movie
-router.get("/movie/add-movie", verifyLogin, (req, res) => {
+router.get("/movie/add-movie", (req, res) => {
   res.render("theater/add-movie", {
     theaterRoute: true,
     title: "Movie Management - Theater - Cinemax",
     theaterOwner: true,
   });
+});
+router.post("/movie/add-movie", (req, res) => {
+  // theaterHelpers.addMovie(req.body);
+  console.log(req.body);
 });
 // Edit Movie
 router.get("/movie/edit-movie", verifyLogin, (req, res) => {

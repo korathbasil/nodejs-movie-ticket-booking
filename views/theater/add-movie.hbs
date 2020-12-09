@@ -4,7 +4,7 @@
             <div class="theater-header-selector"></div>
             <h2>Add Movie</h2>
         </div>
-        <form class="form theater-add-screen-form" action="">
+        <form class="form theater-add-screen-form" action="/theater/movie/add-movie" method="POST">
             <label for="title">Title</label>
             <input type="text" name="title">
             <label for="cast">Cast</label>
@@ -14,11 +14,16 @@
             <label for="release">Release Date</label>
             <input type="text" name="release">
             <label for="runtime">Runtime</label>
-            <input type="text" name="runtime">
+            <div class="runtime-input-wrapper">
+                <input type="text" name="runtimeHr" maxlength="2" type="number">
+                <label for="runtimeHr">hr</label>
+                <input type="text" name="runtimeMin" maxlength="2" type="number">
+                <label for="runtimeMin">Min</label>
+            </div>
             <label for="lang">Language</label>
             <input type="text" name="lang">
-            <label for="type">Type</label>
-            <input type="text" name="type">
+            <label for="type">Genre</label>
+            <input type="text" name="genre">
             <label for="trailer">trailer Link</label>
             <input type="text" name="trailer">
             <button>Submit</button>
