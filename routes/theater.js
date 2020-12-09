@@ -80,11 +80,23 @@ router.get("/screen/edit-screen", verifyLogin, (req, res) => {
 router.get("/theater/screen/delete-screen", verifyLogin, (req, res) => {});
 // Movie Mangement
 router.get("/movie", (req, res) => {
-  res.render("theater/movie-management", {
-    theaterRoute: true,
-    title: "Movie Management - Theater - Cinemax",
-    theaterOwner: true,
-  });
+  theaterHelpers
+    .getMovies()
+    .then((movies) => {
+      res.render("theater/movie-management", {
+        theaterRoute: true,
+        title: "Movie Management - Theater - Cinemax",
+        theaterOwner: true,
+        movies: movies,
+      });
+    })
+    .catch(() => {
+      res.render("theater/movie-management", {
+        theaterRoute: true,
+        title: "Movie Management - Theater - Cinemax",
+        theaterOwner: true,
+      });
+    });
 });
 // Add Movie
 router.get("/movie/add-movie", (req, res) => {
@@ -95,8 +107,10 @@ router.get("/movie/add-movie", (req, res) => {
   });
 });
 router.post("/movie/add-movie", (req, res) => {
-  // theaterHelpers.addMovie(req.body);
-  console.log(req.body);
+  theaterHelpers
+    .addMovie(req.body)
+    .then(() => res.redirect("/theater/movie"))
+    .catch(() => res.redirect("/theater/movie/add-movie"));
 });
 // Edit Movie
 router.get("/movie/edit-movie", verifyLogin, (req, res) => {

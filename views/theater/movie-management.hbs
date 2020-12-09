@@ -20,6 +20,15 @@
                 <td>2hr30min</td>
                 <td><a href="/theater/movie/edit-movie">EDIT</a><a href="/theater/movie/delete-movie">DELETE</a></td>
             </tr>
+            {{#each movies}}
+            <tr>
+                <td>1</td>
+                <td>{{this.title}}</td>
+                <td>15/01/20</td>
+                <td>2hr30min</td>
+                <td><a href="/theater/movie/edit-movie">EDIT</a><a href="/theater/movie/delete-movie">DELETE</a></td>
+            </tr>
+            {{/each}}
         </table>
     </div>
 </section>
