@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
+const adminHelpers = require("../helpers/admin-helpers");
 
 const theaterHelpers = require("../helpers/theater-helpers");
 const verifyLogin = require("../middlewares/verify-theater-login");
@@ -113,11 +114,15 @@ router.post("/movie/add-movie", (req, res) => {
     .catch(() => res.redirect("/theater/movie/add-movie"));
 });
 // Edit Movie
-router.get("/movie/edit-movie", verifyLogin, (req, res) => {
-  res.render("theater/edit-movie", {
-    theaterRoute: true,
-    title: "Movie Management - Theater - Cinemax",
-    theaterOwner: true,
+router.get("/movie/edit-movie/:movieId", verifyLogin, (req, res) => {
+  const movieId = req.params.movieId;
+  theaterHelpers.getMovieById(movieId).then((movie) => {
+    res.render("theater/edit-movie", {
+      theaterRoute: true,
+      title: "Movie Management - Theater - Cinemax",
+      theaterOwner: true,
+      movie: movie,
+    });
   });
 });
 // Delete Movie

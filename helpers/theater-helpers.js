@@ -67,4 +67,12 @@ module.exports = {
         .catch(() => reject());
     });
   },
+  getMovieById: (movieId) => {
+    return new Promise((resolve, reject) => {
+      db.getDb()
+        .collection(collections.MOVIE_COLLECTION)
+        .findOne({ _id: ObjectID(movieId) })
+        .then((movie) => resolve(movie));
+    });
+  },
 };

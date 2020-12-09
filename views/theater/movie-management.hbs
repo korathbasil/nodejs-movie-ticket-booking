@@ -13,20 +13,14 @@
                 <th>Runtime</th>
                 <th>Actions</th>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>AUDI</td>
-                <td>15/01/20</td>
-                <td>2hr30min</td>
-                <td><a href="/theater/movie/edit-movie">EDIT</a><a href="/theater/movie/delete-movie">DELETE</a></td>
-            </tr>
             {{#each movies}}
             <tr>
                 <td>1</td>
                 <td>{{this.title}}</td>
-                <td>15/01/20</td>
-                <td>2hr30min</td>
-                <td><a href="/theater/movie/edit-movie">EDIT</a><a href="/theater/movie/delete-movie">DELETE</a></td>
+                <td>{{this.release}}</td>
+                <td>{{this.runtimeHr}}Hr {{this.runtimeMin}}Min</td>
+                <td><a href="/theater/movie/edit-movie/{{this._id}}">EDIT</a><a
+                        href="/theater/movie/delete-movie/{{this._id}}">DELETE</a></td>
             </tr>
             {{/each}}
         </table>
