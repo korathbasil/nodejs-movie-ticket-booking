@@ -75,4 +75,18 @@ module.exports = {
         .then((movie) => resolve(movie));
     });
   },
+  editMovie: (newData, movieId) => {
+    return new Promise((resolve, reject) => {
+      db.getDb()
+        .collection(collections.MOVIE_COLLECTION)
+        .updateOne(
+          { _id: ObjectID(movieId) },
+          {
+            $set: newData,
+          }
+        )
+        .then(() => resolve())
+        .catch(() => reject());
+    });
+  },
 };

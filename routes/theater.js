@@ -125,6 +125,12 @@ router.get("/movie/edit-movie/:movieId", verifyLogin, (req, res) => {
     });
   });
 });
+router.post("/movie/edit-movie/:movieId", (req, res) => {
+  const movieId = req.params.movieId;
+  theaterHelpers
+    .editMovie(req.body, movieId)
+    .then(() => res.redirect("/theater/movie"));
+});
 // Delete Movie
 router.get("/movie/edit-movie", verifyLogin, (req, res) => {});
 // User Activity Tracker
