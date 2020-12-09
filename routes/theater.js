@@ -62,6 +62,12 @@ router.get("/screen/add-screen", verifyLogin, (req, res) => {
     theaterOwner: true,
   });
 });
+router.post("/screen/add-screen", (req, res) => {
+  theaterHelpers
+    .addScreen(req.body)
+    .then(() => res.redirect("/theater/screen"))
+    .catch(() => res.redirect("/theater/screen/add-screen"));
+});
 // Edit screen
 router.get("/screen/edit-screen", verifyLogin, (req, res) => {
   res.render("theater/edit-screen", {

@@ -33,6 +33,20 @@ module.exports = {
       }
     });
   },
+  addScreen: (screenData) => {
+    return new Promise((resolve, reject) => {
+      db.getDb()
+        .collection(collections.OWNERS_COLLECTION)
+        .updateOne(
+          { _id: ObjectID("5fcfcffffe6a491c883567a8") },
+          {
+            $push: { screens: screenData },
+          }
+        )
+        .then(() => resolve())
+        .catch(() => reject());
+    });
+  },
   addMovie: (movieDetails) => {
     return new Promise((resolve, reject) => {});
   },
