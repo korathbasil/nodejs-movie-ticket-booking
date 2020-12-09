@@ -7,8 +7,8 @@
       </div>
       <div id="admin-theter-dialogue" class="admin-theater-dialogue">
         <h3>Are you sure ?</h3>
-        <div class=""><a href="" class="theater-owner-table-button">YES</a>
-          <a href="" class="theater-owner-table-button">NO</a></div>
+        <div class=""><a id="delete-theater-confirm-yes" href="" class="theater-owner-table-button">YES</a>
+          <a href="" onclick="closeConfirmDialogue(event)" class="theater-owner-table-button">NO</a></div>
       </div>
       <a class="admin-theater-management-add-link" href="/admin/theater/add-owner">Add theater Owner</a>
       <table class="admin-theater-owner-table">
@@ -30,8 +30,8 @@
           <td>{{this.theater}}</td>
           <td><a class="theater-owner-table-button" href="/admin/theater/view-theaters/{{this._id}}">VIEW</a< /td>
           <td>
-            <a class="theater-owner-table-button" href="/admin/theater/edit-owner/{{this._id}}">EDIT</a><a
-              class="theater-owner-table-button" href="/admin/theater/delete-owner/{{this._id}}">DELETE</a>
+            <a class="theater-owner-table-button" href="/admin/theater/edit-owner/{{this._id}}">EDIT</a>
+            <a class="theater-owner-table-button" href="" onclick="openConfirmDialogue(event,'{{this._id}}')">DELETE</a>
           </td>
         </tr>
         {{/each}}
@@ -53,6 +53,11 @@
   rowNumbers()
   const openConfirmDialogue = (e, id) => {
     e.preventDefault();
-    document.getElementById("admin-theter-dialogue").style.display = flex;
+    document.getElementById("admin-theter-dialogue").style.display = "flex";
+    document.getElementById("delete-theater-confirm-yes").href = `/admin/theater/delete-owner/${id}`
+  }
+  const closeConfirmDialogue = (e) => {
+    e.preventDefault();
+    document.getElementById("admin-theter-dialogue").style.display = "none";
   }
 </script>
