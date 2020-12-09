@@ -89,4 +89,13 @@ module.exports = {
         .catch(() => reject());
     });
   },
+  deleteMovie: (movieId) => {
+    return new Promise((resolve, reject) => {
+      db.getDb()
+        .collection(collections.MOVIE_COLLECTION)
+        .deleteOne({ _id: ObjectID(movieId) })
+        .then(() => resolve())
+        .catch(() => reject());
+    });
+  },
 };

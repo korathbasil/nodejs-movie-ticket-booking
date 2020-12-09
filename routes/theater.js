@@ -132,7 +132,13 @@ router.post("/movie/edit-movie/:movieId", (req, res) => {
     .then(() => res.redirect("/theater/movie"));
 });
 // Delete Movie
-router.get("/movie/edit-movie", verifyLogin, (req, res) => {});
+router.get("/movie/delete-movie/:movieId", verifyLogin, (req, res) => {
+  const movieId = req.params.movieId;
+  theaterHelpers
+    .deleteMovie(movieId)
+    .then(() => res.redirect("/theater/movie"))
+    .catch(() => res.redirect("/theater/movie"));
+});
 // User Activity Tracker
 router.get("/user-activity", (req, res) => {
   res.render("theater/user-activity", {
