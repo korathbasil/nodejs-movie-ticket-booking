@@ -6,6 +6,7 @@ const adminHelpers = require("../helpers/admin-helpers");
 const theaterHelpers = require("../helpers/theater-helpers");
 const verifyLogin = require("../middlewares/verify-theater-login");
 const verifyTheater = require("../middlewares/verify-theater");
+const logout = require("../middlewares/logout");
 
 // Login
 router.get("/login", (req, res) => {
@@ -20,6 +21,7 @@ router.get("/login", (req, res) => {
 });
 router.post(
   "/login",
+  logout,
   passport.authenticate("owner-local", {
     successRedirect: "/theater",
     failureRedirect: "/theater/login",

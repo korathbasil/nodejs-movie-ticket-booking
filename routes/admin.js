@@ -6,6 +6,7 @@ const passport = require("passport");
 const adminHelpers = require("../helpers/admin-helpers");
 const verifylogin = require("../middlewares/verify-admin-login");
 const verifyAdmin = require("../middlewares/verify-admin");
+const logout = require("../middlewares/logout");
 
 // Authentication
 router.post("/signup", (req, res) => {
@@ -47,6 +48,7 @@ router.get("/login", (req, res) => {
 });
 router.post(
   "/login",
+  logout,
   passport.authenticate("admin-local", {
     successRedirect: "/admin",
     failureRedirect: "/admin/login",
