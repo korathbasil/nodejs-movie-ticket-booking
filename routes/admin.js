@@ -56,6 +56,7 @@ router.post(
 // Logout
 router.get("/logout", verifylogin, verifyAdmin, (req, res) => {
   req.session.admin = null;
+  req.session.destroy();
   req.logout();
   res.redirect("/");
 });

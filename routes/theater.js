@@ -28,6 +28,7 @@ router.post(
 // Logout
 router.get("/logout", verifyLogin, verifyTheater, (req, res) => {
   req.session.theater = null;
+  req.session.destroy();
   req.logout();
   res.redirect("/theater/login");
 });
