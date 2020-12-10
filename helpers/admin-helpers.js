@@ -200,6 +200,14 @@ module.exports = {
           .then(() => resolve())
           .catch(() => reject());
       } else {
+        // Email has changed, new username and password has to be generated and send to the new email
+        const username =
+          newData.email.split("@")[0] + Math.floor(Math.random() * 10000 + 1); // Generating a username with email address
+        const password = Math.random().toString(36).substring(7); // Generating password
+
+        newData.username = username;
+        newData.password = await bcrypt.hash(password, 10);
+
         // Configure Nodemailer
         const nodemailer = require("nodemailer");
         const transporter = nodemailer.createTransport({
@@ -209,14 +217,6 @@ module.exports = {
             pass: process.env.GMAIL_PASSWORD,
           },
         });
-        // Email has changed, new username and password has to be generated and send to the new email
-        const username =
-          newData.email.split("@")[0] + Math.floor(Math.random() * 10000 + 1); // Generating a username with email address
-        const password = Math.random().toString(36).substring(7); // Generating password
-
-        newData.username = username;
-        newData.password = await bcrypt.hash(password, 10);
-
         const mailBody = `<body style="font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif">
           <div
             style="
@@ -279,7 +279,7 @@ module.exports = {
         transporter
           .sendMail({
             from: process.env.GMAIL_ID,
-            to: "testbazilkorath@gmail.com",
+            to: newData.email,
             subject: "Registered Email changed - CineMax",
             html: mailBody,
           })
