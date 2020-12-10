@@ -5,11 +5,12 @@ const collections = require("../config/collections");
 const { ObjectID } = require("mongodb");
 
 module.exports = {
-  getOwnerById: (id) => {
-    return db
+  getOwnerById: async (id) => {
+    const owner = await db
       .getDb()
       .collection(collections.OWNERS_COLLECTION)
       .findOne({ _id: ObjectID(id) });
+    return owner;
   },
   login: (data) => {
     return new Promise(async (resolve, reject) => {

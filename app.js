@@ -40,9 +40,9 @@ db.connect((err) => {
     console.log("Database connected");
   }
 });
-// // Passport initialize
-// const passportConfig = require("./config/passportConfig");
-// passportConfig(passport);
+// Passport initialize
+const passportConfig = require("./config/passportConfig");
+passportConfig(passport);
 
 // Middlewares
 app.use(logger("dev"));
@@ -59,15 +59,15 @@ app.use(
     cookie: { maxAge: 6000000 },
   })
 );
-// app.use(flash());
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
-// app.use((req, res, next) => {
-//   // console.log(req._passport.instance);
-//   console.log(req.user);
-//   next();
-// });
+app.use((req, res, next) => {
+  // console.log(req._passport.instance);
+  console.log(req.user);
+  next();
+});
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);

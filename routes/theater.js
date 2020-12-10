@@ -5,6 +5,7 @@ const adminHelpers = require("../helpers/admin-helpers");
 
 const theaterHelpers = require("../helpers/theater-helpers");
 const verifyLogin = require("../middlewares/verify-theater-login");
+const verifyTheater = require("../middlewares/verify-theater");
 
 // Login
 router.get("/login", (req, res) => {
@@ -17,30 +18,30 @@ router.get("/login", (req, res) => {
     });
   }
 });
-// router.post(
-//   "/login",
-//   passport.authenticate("owner-local", {
-//     successRedirect: "/theater",
-//     failureRedirect: "/theater/login",
-//     failureFlash: true,
-//   })
-// );
-router.post("/login", (req, res) => {
-  theaterHelpers
-    .login(req.body)
-    .then(() => {
-      req.session.theaterLogin = true;
-      res.redirect("/theater");
-    })
-    .catch(() => res.redirect("/theater/login"));
-});
+router.post(
+  "/login",
+  passport.authenticate("owner-local", {
+    successRedirect: "/theater",
+    failureRedirect: "/theater/login",
+    failureFlash: true,
+  })
+);
+// router.post("/login", (req, res) => {
+//   theaterHelpers
+//     .login(req.body)
+//     .then(() => {
+//       req.session.theaterLogin = true;
+//       res.redirect("/theater");
+//     })
+//     .catch(() => res.redirect("/theater/login"));
+// });
 // Logout
 router.get("/logout", (req, res) => {
   req.session.theaterLogin = false;
   res.redirect("/theater/login");
 });
 // Dashboard
-router.get("/", verifyLogin, (req, res) => {
+router.get("/", verifyLogin, verifyTheater, (req, res) => {
   res.render("theater/dashboard", {
     theaterRoute: true,
     title: "Dashboard - Theater - Cinemax",

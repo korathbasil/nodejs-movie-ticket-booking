@@ -1,8 +1,7 @@
 module.exports = (req, res, next) => {
-  if (req.session.theaterLogin) {
+  if (req.isAuthenticated()) {
     next();
   } else {
-    // res.redirect("/theater/login");
-    next();
+    res.redirect("/theater/login");
   }
 };

@@ -1,8 +1,7 @@
 module.exports = (req, res, next) => {
-  if (req.session.admin) {
+  if (req.isAuthenticated()) {
     next();
   } else {
-    return res.redirect("/admin/login");
-    // next();
+    res.redirect("/admin/login");
   }
 };

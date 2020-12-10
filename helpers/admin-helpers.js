@@ -20,10 +20,11 @@ module.exports = {
     });
   },
   getAdminById: async (id) => {
-    return db
+    const admin = await db
       .getDb()
       .collection(collections.ADMIN_COLLECTION)
       .findOne({ _id: ObjectID(id) });
+    return admin;
   },
   signup: (data) => {
     return new Promise(async (resolve, reject) => {
