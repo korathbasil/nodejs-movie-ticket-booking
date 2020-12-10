@@ -36,7 +36,8 @@ a {
   letter-spacing: 5px;
   color: var(--admin-tertiary);
 }
-.admin-header-panel {
+.admin-header-panel,
+.theater-header-panel {
   font-size: 20px;
   color: var(--admin-primary);
   letter-spacing: 2px;
