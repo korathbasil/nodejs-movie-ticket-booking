@@ -7,6 +7,11 @@
         <div class="movie-management-links-container">
             <a href="/theater/movie/add-movie">Add movies</a><a href="">Upcoming</a>
         </div>
+        <div id="movie-delete-dialogue" class="movie-delete-dialogue">
+            <h3>Are you sure ?</h3>
+            <div class=""><a id="movie-delete-confirm-yes" href="" class="theater-owner-table-button">YES</a>
+                <a href="" onclick="closeConfirmDialogue(event)" class="theater-owner-table-button">NO</a></div>
+        </div>
         <table class="owner-movie-table">
             <tr>
                 <th>No</th>
@@ -22,7 +27,7 @@
                 <td>{{this.release}}</td>
                 <td>{{this.runtimeHr}}Hr {{this.runtimeMin}}Min</td>
                 <td><a href="/theater/movie/edit-movie/{{this._id}}">EDIT</a><a
-                        href="/theater/movie/delete-movie/{{this._id}}">DELETE</a></td>
+                        onclick="openConfirmDialogue(event, '{{this._id}}')" href="">DELETE</a></td>
             </tr>
             {{/each}}
         </table>
@@ -31,4 +36,13 @@
 {{!-- Scripts --}}
 <script>
     setActiveTab("movie-management");
+    const openConfirmDialogue = (e, id) => {
+        e.preventDefault();
+        document.getElementById("movie-delete-dialogue").style.display = "flex";
+        document.getElementById("movie-delete-confirm-yes").href = `/theater/movie/delete-movie/${id}`
+    }
+    const closeConfirmDialogue = (e) => {
+        e.preventDefault();
+        document.getElementById("movie-delete-dialogue").style.display = "none";
+    }
 </script>
