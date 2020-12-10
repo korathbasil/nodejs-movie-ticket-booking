@@ -9,6 +9,7 @@ const session = require("express-session");
 const fileUpload = require("express-fileupload");
 const passport = require("passport");
 const flash = require("express-flash");
+const MongoStore = require("connect-mongo")(session);
 
 // Router imports
 const indexRouter = require("./routes/index");
@@ -57,6 +58,9 @@ app.use(
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 6000000 },
+    store: new MongoStore({
+      url: "mongodb://localhost:27017/MovieTicketBooking",
+    }),
   })
 );
 app.use(flash());

@@ -13,7 +13,7 @@ module.exports.connect = (done) => {
         done(err);
       } else {
         db = data.db(dbName);
-        done();
+        done(null, db);
       }
     }
   );
