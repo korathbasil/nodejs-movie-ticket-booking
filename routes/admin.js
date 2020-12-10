@@ -4,9 +4,10 @@ const sharp = require("sharp");
 const passport = require("passport");
 
 const adminHelpers = require("../helpers/admin-helpers");
+const verifyLogout = require("../middlewares/verify-admin-logout");
 const verifylogin = require("../middlewares/verify-admin-login");
 const verifyAdmin = require("../middlewares/verify-admin");
-const logout = require("../middlewares/logout");
+const clearSession = require("../middlewares/clear-session");
 
 // Authentication
 router.post("/signup", (req, res) => {
@@ -21,34 +22,30 @@ router.post("/signup", (req, res) => {
       res.redirect("/admin/login");
     });
 });
-router.get("/login", (req, res) => {
-  if (req.session.admin) {
-    res.redirect("/admin");
-  } else {
-    adminHelpers
-      .findAdmin()
-      .then(() => {
-        // console.log(req.session.adminErrors);
-        res.render("admin/login", {
-          title: "Login - Admin - Cinemax",
-          adminRoute: true,
-          adminExists: true,
-          errorMessage: req.session.errorMessage,
-        }); // Admin exists, render login form. There would be only one admin
-        req.session.errorMessage = null;
-      })
-      .catch(() => {
-        res.render("admin/login", {
-          title: "Login - Admin - CineMax",
-          adminRoute: true,
-          adminExists: false,
-        }); // Admin doesn't exist, render signup form
-      });
-  }
+router.get("/login", verifyLogout, (req, res) => {
+  adminHelpers
+    .findAdmin()
+    .then(() => {
+      // console.log(req.session.adminErrors);
+      res.render("admin/login", {
+        title: "Login - Admin - Cinemax",
+        adminRoute: true,
+        adminExists: true,
+        errorMessage: req.session.errorMessage,
+      }); // Admin exists, render login form. There would be only one admin
+      req.session.errorMessage = null;
+    })
+    .catch(() => {
+      res.render("admin/login", {
+        title: "Login - Admin - CineMax",
+        adminRoute: true,
+        adminExists: false,
+      }); // Admin doesn't exist, render signup form
+    });
 });
 router.post(
   "/login",
-  logout,
+  clearSession,
   passport.authenticate("admin-local", {
     successRedirect: "/admin",
     failureRedirect: "/admin/login",

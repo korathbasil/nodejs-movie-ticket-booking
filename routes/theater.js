@@ -4,24 +4,21 @@ const passport = require("passport");
 const adminHelpers = require("../helpers/admin-helpers");
 
 const theaterHelpers = require("../helpers/theater-helpers");
+const verifyLogout = require("../middlewares/verify-theater-logout");
 const verifyLogin = require("../middlewares/verify-theater-login");
 const verifyTheater = require("../middlewares/verify-theater");
-const logout = require("../middlewares/logout");
+const clearSession = require("../middlewares/clear-session");
 
 // Login
-router.get("/login", (req, res) => {
-  if (req.session.theaterLogin) {
-    res.redirect("/theater");
-  } else {
-    res.render("theater/login", {
-      theaterRoute: true,
-      title: "Login - Theater - Cinemax",
-    });
-  }
+router.get("/login", verifyLogout, (req, res) => {
+  res.render("theater/login", {
+    theaterRoute: true,
+    title: "Login - Theater - Cinemax",
+  });
 });
 router.post(
   "/login",
-  logout,
+  clearSession,
   passport.authenticate("owner-local", {
     successRedirect: "/theater",
     failureRedirect: "/theater/login",
