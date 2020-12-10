@@ -4,6 +4,7 @@ const sharp = require("sharp");
 const passport = require("passport");
 
 const adminHelpers = require("../helpers/admin-helpers");
+const theaterHeplers = require("../helpers/theater-helpers");
 const verifylogin = require("../middlewares/verify-admin-login");
 
 // Authentication
@@ -113,9 +114,11 @@ router.post("/theater/add-owner", verifylogin, async (req, res) => {
   const fileName = new Date().toISOString() + "." + fileExtension; // Creating a new file name with new Date() and fileExtension
   const imagePath = "/images/owners/" + fileName; // Setting the public path
   req.body.image = imagePath;
+
   const username =
     req.body.email.split("@")[0] + Math.floor(Math.random() * 10000 + 1); // Generating a username with email address
   const password = Math.random().toString(36).substring(7); // Generating password
+
   adminHelpers.sendAddTheaterOwnerMail(
     req.body.email,
     username,
@@ -152,6 +155,7 @@ router.get("/theater/edit-owner/:ownerId", verifylogin, (req, res) => {
 });
 router.post("/theater/edit-owner/:ownerId", (req, res) => {
   const ownerId = req.params.ownerId;
+  // theaterHeplers.getOwnerById(ownerId)
   adminHelpers
     .editTheaterOwner(req.body, ownerId)
     .then(() => {

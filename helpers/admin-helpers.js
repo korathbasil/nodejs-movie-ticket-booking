@@ -79,6 +79,7 @@ module.exports = {
     });
   },
   sendAddTheaterOwnerMail: (recieverId, username, password, cb) => {
+    // Configure Nodemailer
     const nodemailer = require("nodemailer");
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -181,17 +182,124 @@ module.exports = {
     });
   },
   editTheaterOwner: (newData, ownerId) => {
-    return new Promise((resolve, reject) => {
-      db.getDb()
+    return new Promise(async (resolve, reject) => {
+      const theaterOwner = await db
+        .getDb()
         .collection(collections.OWNERS_COLLECTION)
-        .updateOne(
-          { _id: ObjectID(ownerId) },
-          {
-            $set: newData,
-          }
-        )
-        .then(() => resolve())
-        .catch(() => reject());
+        .findOne({ _id: ObjectID(ownerId) });
+      // Checking if the email is chnged
+      if (theaterOwner.email === newData.email) {
+        db.getDb()
+          .collection(collections.OWNERS_COLLECTION)
+          .updateOne(
+            { _id: ObjectID(ownerId) },
+            {
+              $set: newData,
+            }
+          )
+          .then(() => resolve())
+          .catch(() => reject());
+      } else {
+        // Configure Nodemailer
+        const nodemailer = require("nodemailer");
+        const transporter = nodemailer.createTransport({
+          service: "gmail",
+          auth: {
+            user: process.env.GMAIL_ID,
+            pass: process.env.GMAIL_PASSWORD,
+          },
+        });
+        // Email has changed, new username and password has to be generated and send to the new email
+        const username =
+          newData.email.split("@")[0] + Math.floor(Math.random() * 10000 + 1); // Generating a username with email address
+        const password = Math.random().toString(36).substring(7); // Generating password
+
+        newData.username = username;
+        newData.password = await bcrypt.hash(password, 10);
+
+        const mailBody = `<body style="font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif">
+          <div
+            style="
+              width: 100%;
+              max-width: 700px;
+              margin: 0 auto;
+              box-shadow: 3px 3px 3px lightgrey;
+              padding: 20px;
+            "
+          >
+            <div style="width: 100%">
+              <h1
+                style="
+                  margin-left: 20px;
+                  margin-top: 20px;
+                  margin-bottom: 20px;
+                  font-size: 40px;
+                  color: #2f3547;
+                "
+              >
+                CineMax
+              </h1>
+            </div>
+            <div
+              style="width: 100%; padding-left: 20px; padding-right: 20px"
+            >
+              <p style="margin-bottom: 30px">
+                Your registered email has chnaged. Your new Credentials are given below
+              </p>
+              <p>Your login credentials are given below</p>
+              <div
+                style="
+                  width: 100%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                "
+              >
+                <div
+                  style="
+                    width: fit-content;
+                    padding: 30px;
+                    border-radius: 20px;
+                    background-color: lightgrey;
+                  "
+                >
+                  <p>Username  :   <strong>${username}</strong></p>
+                  <p>Password  :   <strong>${password}</strong></p>
+                </div>
+              </div>
+        
+              <p>To login click <a href="">here</a></p>
+            </div>
+            <div class="footer" style="text-align: center">
+              <p style="margin-bottom: 10px">CIneMax ©</p>
+            </div>
+          </div>
+        </body>
+        `;
+        transporter
+          .sendMail({
+            from: process.env.GMAIL_ID,
+            to: "testbazilkorath@gmail.com",
+            subject: "Registered Email changed - CineMax",
+            html: mailBody,
+          })
+          .then(() => {
+            db.getDb()
+              .collection(collections.OWNERS_COLLECTION)
+              .updateOne(
+                { _id: ObjectID(ownerId) },
+                {
+                  $set: newData,
+                }
+              )
+              .then(() => resolve())
+              .catch(() => reject());
+          })
+          .catch((e) => {
+            console.log(e);
+            reject();
+          });
+      }
     });
   },
   deleteTheaterOwner: (ownerId) => {
