@@ -36,7 +36,7 @@ router.get("/", verifyLogin, verifyTheater, (req, res) => {
   res.render("theater/dashboard", {
     theaterRoute: true,
     title: "Dashboard - Theater - Cinemax",
-    theaterOwner: true,
+    theater: req.session.theater,
   });
 });
 // Screen Management
@@ -44,7 +44,7 @@ router.get("/screen", verifyLogin, verifyTheater, (req, res) => {
   res.render("theater/screen-management", {
     theaterRoute: true,
     title: "Screen Management - Theater - Cinemax",
-    theaterOwner: true,
+    theater: req.session.theater,
   });
 });
 // Add screen
@@ -52,7 +52,7 @@ router.get("/screen/add-screen", verifyLogin, verifyTheater, (req, res) => {
   res.render("theater/add-screen", {
     theaterRoute: true,
     title: "Screen Management - Theater - Cinemax",
-    theaterOwner: true,
+    theater: req.session.theater,
   });
 });
 router.post("/screen/add-screen", verifyLogin, verifyTheater, (req, res) => {
@@ -66,7 +66,7 @@ router.get("/screen/edit-screen", verifyLogin, verifyTheater, (req, res) => {
   res.render("theater/edit-screen", {
     theaterRoute: true,
     title: "Movie Management - Theater - Cinemax",
-    theaterOwner: true,
+    theater: req.session.theater,
   });
 });
 // Delete Screen
@@ -84,7 +84,7 @@ router.get("/movie", verifyLogin, verifyTheater, (req, res) => {
       res.render("theater/movie-management", {
         theaterRoute: true,
         title: "Movie Management - Theater - Cinemax",
-        theaterOwner: true,
+        theater: req.session.theater,
         movies: movies,
       });
     })
@@ -92,7 +92,7 @@ router.get("/movie", verifyLogin, verifyTheater, (req, res) => {
       res.render("theater/movie-management", {
         theaterRoute: true,
         title: "Movie Management - Theater - Cinemax",
-        theaterOwner: true,
+        theater: req.session.theater,
       });
     });
 });
@@ -101,7 +101,7 @@ router.get("/movie/add-movie", verifyLogin, verifyTheater, (req, res) => {
   res.render("theater/add-movie", {
     theaterRoute: true,
     title: "Movie Management - Theater - Cinemax",
-    theaterOwner: true,
+    theater: req.session.theater,
   });
 });
 router.post("/movie/add-movie", verifyLogin, verifyTheater, (req, res) => {
@@ -121,7 +121,7 @@ router.get(
       res.render("theater/edit-movie", {
         theaterRoute: true,
         title: "Movie Management - Theater - Cinemax",
-        theaterOwner: true,
+        theater: req.session.theater,
         movie: movie,
       });
     });
@@ -156,7 +156,7 @@ router.get("/user-activity", verifyLogin, verifyTheater, (req, res) => {
   res.render("theater/user-activity", {
     theaterRoute: true,
     title: "User Activity Tracker - Theater - Cinemax",
-    theaterOwner: true,
+    theater: req.session.theater,
   });
 });
 // My Account
@@ -164,7 +164,7 @@ router.get("/account", verifyLogin, verifyTheater, (req, res) => {
   res.render("theater/account", {
     theaterRoute: true,
     title: "My Account - Theater - Cinemax",
-    theaterOwner: true,
+    theater: req.session.theater,
   });
 });
 
