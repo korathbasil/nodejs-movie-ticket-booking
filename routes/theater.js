@@ -49,7 +49,7 @@ router.get("/", verifyLogin, verifyTheater, (req, res) => {
   });
 });
 // Screen Management
-router.get("/screen", verifyLogin, (req, res) => {
+router.get("/screen", verifyLogin, verifyTheater, (req, res) => {
   res.render("theater/screen-management", {
     theaterRoute: true,
     title: "Screen Management - Theater - Cinemax",
@@ -57,21 +57,21 @@ router.get("/screen", verifyLogin, (req, res) => {
   });
 });
 // Add screen
-router.get("/screen/add-screen", verifyLogin, (req, res) => {
+router.get("/screen/add-screen", verifyLogin, verifyTheater, (req, res) => {
   res.render("theater/add-screen", {
     theaterRoute: true,
     title: "Screen Management - Theater - Cinemax",
     theaterOwner: true,
   });
 });
-router.post("/screen/add-screen", (req, res) => {
+router.post("/screen/add-screen", verifyLogin, verifyTheater, (req, res) => {
   theaterHelpers
     .addScreen(req.body)
     .then(() => res.redirect("/theater/screen"))
     .catch(() => res.redirect("/theater/screen/add-screen"));
 });
 // Edit screen
-router.get("/screen/edit-screen", verifyLogin, (req, res) => {
+router.get("/screen/edit-screen", verifyLogin, verifyTheater, (req, res) => {
   res.render("theater/edit-screen", {
     theaterRoute: true,
     title: "Movie Management - Theater - Cinemax",
@@ -79,9 +79,14 @@ router.get("/screen/edit-screen", verifyLogin, (req, res) => {
   });
 });
 // Delete Screen
-router.get("/theater/screen/delete-screen", verifyLogin, (req, res) => {});
+router.get(
+  "/theater/screen/delete-screen",
+  verifyLogin,
+  verifyTheater,
+  (req, res) => {}
+);
 // Movie Mangement
-router.get("/movie", (req, res) => {
+router.get("/movie", verifyLogin, verifyTheater, (req, res) => {
   theaterHelpers
     .getMovies()
     .then((movies) => {
@@ -101,47 +106,62 @@ router.get("/movie", (req, res) => {
     });
 });
 // Add Movie
-router.get("/movie/add-movie", (req, res) => {
+router.get("/movie/add-movie", verifyLogin, verifyTheater, (req, res) => {
   res.render("theater/add-movie", {
     theaterRoute: true,
     title: "Movie Management - Theater - Cinemax",
     theaterOwner: true,
   });
 });
-router.post("/movie/add-movie", (req, res) => {
+router.post("/movie/add-movie", verifyLogin, verifyTheater, (req, res) => {
   theaterHelpers
     .addMovie(req.body)
     .then(() => res.redirect("/theater/movie"))
     .catch(() => res.redirect("/theater/movie/add-movie"));
 });
 // Edit Movie
-router.get("/movie/edit-movie/:movieId", verifyLogin, (req, res) => {
-  const movieId = req.params.movieId;
-  theaterHelpers.getMovieById(movieId).then((movie) => {
-    res.render("theater/edit-movie", {
-      theaterRoute: true,
-      title: "Movie Management - Theater - Cinemax",
-      theaterOwner: true,
-      movie: movie,
+router.get(
+  "/movie/edit-movie/:movieId",
+  verifyLogin,
+  verifyTheater,
+  (req, res) => {
+    const movieId = req.params.movieId;
+    theaterHelpers.getMovieById(movieId).then((movie) => {
+      res.render("theater/edit-movie", {
+        theaterRoute: true,
+        title: "Movie Management - Theater - Cinemax",
+        theaterOwner: true,
+        movie: movie,
+      });
     });
-  });
-});
-router.post("/movie/edit-movie/:movieId", (req, res) => {
-  const movieId = req.params.movieId;
-  theaterHelpers
-    .editMovie(req.body, movieId)
-    .then(() => res.redirect("/theater/movie"));
-});
+  }
+);
+router.post(
+  "/movie/edit-movie/:movieId",
+  verifyLogin,
+  verifyTheater,
+  (req, res) => {
+    const movieId = req.params.movieId;
+    theaterHelpers
+      .editMovie(req.body, movieId)
+      .then(() => res.redirect("/theater/movie"));
+  }
+);
 // Delete Movie
-router.get("/movie/delete-movie/:movieId", verifyLogin, (req, res) => {
-  const movieId = req.params.movieId;
-  theaterHelpers
-    .deleteMovie(movieId)
-    .then(() => res.redirect("/theater/movie"))
-    .catch(() => res.redirect("/theater/movie"));
-});
+router.get(
+  "/movie/delete-movie/:movieId",
+  verifyLogin,
+  verifyTheater,
+  (req, res) => {
+    const movieId = req.params.movieId;
+    theaterHelpers
+      .deleteMovie(movieId)
+      .then(() => res.redirect("/theater/movie"))
+      .catch(() => res.redirect("/theater/movie"));
+  }
+);
 // User Activity Tracker
-router.get("/user-activity", (req, res) => {
+router.get("/user-activity", verifyLogin, verifyTheater, (req, res) => {
   res.render("theater/user-activity", {
     theaterRoute: true,
     title: "User Activity Tracker - Theater - Cinemax",
@@ -149,7 +169,7 @@ router.get("/user-activity", (req, res) => {
   });
 });
 // My Account
-router.get("/account", verifyLogin, (req, res) => {
+router.get("/account", verifyLogin, verifyTheater, (req, res) => {
   res.render("theater/account", {
     theaterRoute: true,
     title: "My Account - Theater - Cinemax",
