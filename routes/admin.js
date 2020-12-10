@@ -9,7 +9,7 @@ const verifylogin = require("../middlewares/verify-admin-login");
 const verifyAdmin = require("../middlewares/verify-admin");
 const clearSession = require("../middlewares/clear-session");
 
-// Authentication
+// Signup
 router.post("/signup", (req, res) => {
   console.log(req.body);
   adminHelpers
@@ -22,6 +22,7 @@ router.post("/signup", (req, res) => {
       res.redirect("/admin/login");
     });
 });
+// Login
 router.get("/login", verifyLogout, (req, res) => {
   adminHelpers
     .findAdmin()
@@ -52,20 +53,10 @@ router.post(
     failureFlash: true,
   })
 );
-// router.post("/login", (req, res) => {
-//   adminHelpers
-//     .login(req.body)
-//     .then(() => {
-//       req.session.admin = true;
-//       res.redirect("/admin");
-//     })
-//     .catch((e) => {
-//       req.session.errorMessage = e.message;
-//       res.redirect("/admin/login");
-//     });
-// });
+// Logout
 router.get("/logout", verifylogin, verifyAdmin, (req, res) => {
-  req.session.admin = false;
+  req.session.admin = null;
+  req.logout();
   res.redirect("/");
 });
 // Dashboard

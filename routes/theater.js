@@ -25,18 +25,10 @@ router.post(
     failureFlash: true,
   })
 );
-// router.post("/login", (req, res) => {
-//   theaterHelpers
-//     .login(req.body)
-//     .then(() => {
-//       req.session.theaterLogin = true;
-//       res.redirect("/theater");
-//     })
-//     .catch(() => res.redirect("/theater/login"));
-// });
 // Logout
-router.get("/logout", (req, res) => {
-  req.session.theaterLogin = false;
+router.get("/logout", verifyLogin, verifyTheater, (req, res) => {
+  req.session.theater = null;
+  req.logout();
   res.redirect("/theater/login");
 });
 // Dashboard
