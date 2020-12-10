@@ -70,7 +70,7 @@ router.get("/logout", verifylogin, verifyAdmin, (req, res) => {
   res.redirect("/");
 });
 // Dashboard
-router.get("/", verifylogin, (req, res) => {
+router.get("/", verifylogin, verifyAdmin, (req, res) => {
   res.render("admin/dashboard", {
     title: "Dashboard - Admin - CineMax",
     adminRoute: true,

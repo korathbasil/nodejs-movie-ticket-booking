@@ -7,6 +7,6 @@ module.exports = async (req, res, next) => {
     );
     next();
   } else {
-    return res.redirect("/theater/login");
+    res.redirect("/theater/login");
   }
 };

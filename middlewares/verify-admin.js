@@ -7,6 +7,6 @@ module.exports = async (req, res, next) => {
     );
     next();
   } else {
-    return res.redirect("/admin/login");
+    res.redirect("/admin/login");
   }
 };
