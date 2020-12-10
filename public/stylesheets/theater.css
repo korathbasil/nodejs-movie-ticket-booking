@@ -155,9 +155,27 @@ tr:hover {
   margin: 0 auto;
 }
 /* Movie Management */
+.movie-management-parent {
+  position: relative;
+}
 .owner-movie-table {
   width: 70%;
   margin: 0 auto;
+}
+.movie-management-links-container {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+}
+.movie-management-links-container > a {
+  background-color: blue;
+  padding: 10px 20px;
+  border-radius: 30px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 10px;
 }
 /* User Activity Tracker */
 .owner-user-activity-table {
