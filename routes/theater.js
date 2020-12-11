@@ -43,11 +43,13 @@ router.get("/", verifyLogin, verifyTheater, (req, res) => {
 // Screen Management
 router.get("/screen", verifyLogin, verifyTheater, (req, res) => {
   const ownerId = req.session.passport.user;
-  theaterHelpers.getScreens(ownerId);
-  res.render("theater/screen-management", {
-    theaterRoute: true,
-    title: "Screen Management - Theater - Cinemax",
-    theater: req.session.theater,
+  theaterHelpers.getScreens(ownerId).then((screens) => {
+    res.render("theater/screen-management", {
+      theaterRoute: true,
+      title: "Screen Management - Theater - Cinemax",
+      theater: req.session.theater,
+      screens: screens,
+    });
   });
 });
 // Add screen
