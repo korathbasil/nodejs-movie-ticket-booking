@@ -34,17 +34,22 @@ module.exports = {
       }
     });
   },
-  addScreen: (screenData) => {
+  addScreen: (screenData, ownerId) => {
     return new Promise((resolve, reject) => {
       db.getDb()
-        .collection(collections.OWNERS_COLLECTION)
-        .updateOne(
-          { _id: ObjectID("5fcfcffffe6a491c883567a8") },
-          {
-            $push: { screens: screenData },
-          }
-        )
-        .then(() => resolve())
+        .collection(collections.SCREEN_COLLECTION)
+        .insertOne(screenData)
+        .then((data) => {
+          db.getDb()
+            .collection(collections.OWNERS_COLLECTION)
+            .updateOne(
+              { _id: ObjectID(ownerId) },
+              {
+                $push: { screens: ObjectID(data.ops[0]._id) },
+              }
+            )
+            .then(() => resolve());
+        })
         .catch(() => reject());
     });
   },

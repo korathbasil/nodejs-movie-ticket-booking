@@ -57,8 +57,9 @@ router.get("/screen/add-screen", verifyLogin, verifyTheater, (req, res) => {
   });
 });
 router.post("/screen/add-screen", verifyLogin, verifyTheater, (req, res) => {
+  const ownerId = req.session.passport.user;
   theaterHelpers
-    .addScreen(req.body)
+    .addScreen(req.body, ownerId)
     .then(() => res.redirect("/theater/screen"))
     .catch(() => res.redirect("/theater/screen/add-screen"));
 });

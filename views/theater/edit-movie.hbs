@@ -14,7 +14,12 @@
             <label for="release">Release Date</label>
             <input type="text" name="release" value="{{movie.release}}">
             <label for="runtime">Runtime</label>
-            <input type="text" name="runtime">
+            <div class="runtime-input-wrapper">
+                <input type="text" name="runtimeHr" maxlength="2" type="number" value="{{movie.runtimeHr}}">
+                <label for="runtimeHr">hr</label>
+                <input type="text" name="runtimeMin" maxlength="2" type="number" value="{{movie.runtimeMin}}">
+                <label for="runtimeMin">Min</label>
+            </div>
             <label for="lang">Language</label>
             <input type="text" name="lang" value="{{movie.lang}}">
             <label for="type">Type</label>
