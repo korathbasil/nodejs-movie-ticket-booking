@@ -67,6 +67,37 @@ router.post("/screen/add-screen", verifyLogin, verifyTheater, (req, res) => {
     .then(() => res.redirect("/theater/screen"))
     .catch(() => res.redirect("/theater/screen/add-screen"));
 });
+// Screen Schedule
+router.get(
+  "/screen/schedule/:screenId",
+  verifyLogin,
+  verifyTheater,
+  (req, res) => {
+    const screenId = req.params.screenId;
+    theaterHelpers.getScreenbyId(screenId).then((screen) => {
+      res.render("theater/screen-schedule", {
+        theaterRoute: true,
+        title: "Screen Management - Theater - Cinemax",
+        theater: req.session.theater,
+        screen: screen,
+      });
+    });
+  }
+);
+// Add Show
+router.get(
+  "/screen/schedule/add-show",
+  verifyLogin,
+  verifyTheater,
+  (req, res) => {
+    res.render("theater/screen-schedule", {
+      theaterRoute: true,
+      title: "Screen Management - Theater - Cinemax",
+      theater: req.session.theater,
+      screen: screen,
+    });
+  }
+);
 // Edit screen
 router.get(
   "/screen/edit-screen/:screenId",
@@ -89,7 +120,6 @@ router.post(
   verifyLogin,
   verifyTheater,
   (req, res) => {
-    console.log(req.body);
     const screenId = req.params.screenId;
     theaterHelpers
       .editScreen(screenId, req.body)
@@ -104,7 +134,6 @@ router.get(
   (req, res) => {
     const screenId = req.params.screenId;
     const ownerId = req.session.passport.user;
-    console.log(screenId, ownerId);
     theaterHelpers
       .deleteScreen(screenId, ownerId)
       .then(() => res.redirect("/theater/screen"));

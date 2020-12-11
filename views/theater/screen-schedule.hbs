@@ -1,0 +1,39 @@
+<section class="theater-parent movie-management-parent">
+    <div class="content-card">
+        <div class="theater-headings">
+            <div class="theater-header-selector"></div>
+            <h2>Screen Schedule</h2>
+        </div>
+        <div class="movie-management-links-container">
+            <a href="/theater/screen/schedule/add-show">Add Show</a>
+        </div>
+        <div id="movie-delete-dialogue" class="movie-delete-dialogue">
+            <h3>Are you sure ?</h3>
+            <div class=""><a id="movie-delete-confirm-yes" href="" class="theater-owner-table-button">YES</a>
+                <a href="" onclick="closeConfirmDialogue(event)" class="theater-owner-table-button">NO</a></div>
+        </div>
+        <table class="owner-movie-table">
+            <tr>
+                <th>No</th>
+                <th>Movie Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Actions</th>
+            </tr>
+            {{#each screen.shows}}
+            <tr>
+                <td>1</td>
+                <td>{{this.title}}</td>
+                <td>{{this.release}}</td>
+                <td>{{this.runtimeHr}}Hr {{this.runtimeMin}}Min</td>
+                <td><a href="/theater/movie/edit-movie/{{this._id}}">EDIT</a><a
+                        onclick="openConfirmDialogue(event, '{{this._id}}')" href="">DELETE</a></td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+</section>
+{{!-- Scripts --}}
+<script>
+    setActiveTab("movie-management");
+</script>
