@@ -98,10 +98,17 @@ router.post(
 );
 // Delete Screen
 router.get(
-  "/theater/screen/delete-screen",
+  "/screen/delete-screen/:screenId",
   verifyLogin,
   verifyTheater,
-  (req, res) => {}
+  (req, res) => {
+    const screenId = req.params.screenId;
+    const ownerId = req.session.passport.user;
+    console.log(screenId, ownerId);
+    theaterHelpers
+      .deleteScreen(screenId, ownerId)
+      .then(() => res.redirect("/theater/screen"));
+  }
 );
 // Movie Mangement
 router.get("/movie", verifyLogin, verifyTheater, (req, res) => {

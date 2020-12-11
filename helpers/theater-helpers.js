@@ -95,6 +95,24 @@ module.exports = {
         .catch((e) => console.log(e));
     });
   },
+  deleteScreen: (screenId, ownerId) => {
+    return new Promise((resolve, reject) => {
+      db.getDb()
+        .collection(collections.SCREEN_COLLECTION)
+        .deleteOne({ _id: ObjectID(screenId) })
+        .then(() => {
+          db.getDb()
+            .collection(collections.OWNERS_COLLECTION)
+            .updateOne(
+              { _id: ObjectID(ownerId) },
+              {
+                $pull: { screens: ObjectID(screenId) },
+              }
+            )
+            .then(() => resolve());
+        });
+    });
+  },
   getMovies: () => {
     return new Promise(async (resolve, reject) => {
       const movies = await db
