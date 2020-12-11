@@ -26,8 +26,9 @@
                 <td>{{this.title}}</td>
                 <td>{{this.release}}</td>
                 <td>{{this.runtimeHr}}Hr {{this.runtimeMin}}Min</td>
-                <td><a href="/theater/movie/edit-movie/{{this._id}}">EDIT</a><a
-                        onclick="openConfirmDialogue(event, '{{this._id}}')" href="">DELETE</a></td>
+                <td><a class="theater-table-button" href="/theater/movie/edit-movie/{{this._id}}">EDIT</a><a
+                        class="theater-table-button" onclick="openConfirmDialogue(event, '{{this._id}}')"
+                        href="">DELETE</a></td>
             </tr>
             {{/each}}
         </table>

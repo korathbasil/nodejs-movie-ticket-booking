@@ -1,10 +1,12 @@
-<section class="theater-parent">
+<section class="theater-parent theater-screen-parent">
     <div class="content-card">
         <div class="theater-headings">
             <div class="theater-header-selector"></div>
             <h2>Screen Management</h2>
         </div>
-        <a href="/theater/screen/add-screen">Add Screen</a>
+        <div class="movie-management-links-container">
+            <a href="/theater/screen/add-screen">Add Screen</a>
+        </div>
         <table class="owner-screen-table">
             <tr class="owner-screen-table-row">
                 <th>No</th>
@@ -20,9 +22,9 @@
                     {{this.name}}
                 </td>
                 <td>{{this.seats}}</td>
-                <td><a href="/theater/screen/schedule/{{this._id}}">view schedule</a></td>
-                <td><a href="/theater/screen/edit-screen/{{this._id}}">EDIT</a><a
-                        href="/theater/screen/delete-screen/{{this._id}}">DELETE</a>
+                <td><a class="theater-table-button" href="/theater/screen/schedule/{{this._id}}">view schedule</a></td>
+                <td><a class="theater-table-button" href="/theater/screen/edit-screen/{{this._id}}">EDIT</a><a
+                        class="theater-table-button" href="/theater/screen/delete-screen/{{this._id}}">DELETE</a>
                 </td>
             </tr>
             {{/each}}
