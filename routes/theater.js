@@ -74,7 +74,9 @@ router.get(
   verifyTheater,
   (req, res) => {
     const screenId = req.params.screenId;
-    theaterHelpers.getScreenbyId(screenId).then((screen) => {
+    // console.log(screenId);
+    theaterHelpers.getScreenDetailsById(screenId).then((screen) => {
+      // console.log(screen.shows);
       res.render("theater/screen-schedule", {
         theaterRoute: true,
         title: "Screen Management - Theater - Cinemax",
@@ -86,15 +88,30 @@ router.get(
 );
 // Add Show
 router.get(
-  "/screen/schedule/add-show",
+  "/screen/schedule/:screenId/add-show",
   verifyLogin,
   verifyTheater,
   (req, res) => {
-    res.render("theater/screen-schedule", {
-      theaterRoute: true,
-      title: "Screen Management - Theater - Cinemax",
-      theater: req.session.theater,
-      screen: screen,
+    const screenId = req.params.screenId;
+    theaterHelpers.getMovies().then((movies) => {
+      res.render("theater/add-show", {
+        theaterRoute: true,
+        title: "Screen Management - Theater - Cinemax",
+        theater: req.session.theater,
+        screenId: screenId,
+        movies: movies,
+      });
+    });
+  }
+);
+router.post(
+  "/screen/schedule/:screenId/add-show",
+  verifyLogin,
+  verifyTheater,
+  (req, res) => {
+    const screenId = req.params.screenId;
+    theaterHelpers.addShow(screenId, req.body).then(() => {
+      res.redirect(`/theater/screen/schedule/${screenId}`);
     });
   }
 );

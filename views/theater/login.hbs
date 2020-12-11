@@ -1,5 +1,9 @@
 <div class="content-card theater-login-box">
     <h2>Login</h2>
+    {{#if messages.error}}
+    <h3><span><i class="fas fa-exclamation-circle"></i>
+        </span>{{messages.error}}</h3>
+    {{/if}}
     <form action="/theater/login" method="POST">
         <label for="username">Username</label>
         <input type="text" name="username" id="">

@@ -5,4 +5,5 @@ module.exports = {
   THEATER_COLLECTION: "theaters",
   OWNERS_COLLECTION: "owners",
   SCREEN_COLLECTION: "screens",
+  SHOW_COLLECTION: "shows",
 };

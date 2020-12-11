@@ -24,6 +24,8 @@ router.post("/signup", (req, res) => {
 });
 // Login
 router.get("/login", verifyLogout, (req, res) => {
+  var flash = req.flash("message");
+  console.log(flash);
   adminHelpers
     .findAdmin()
     .then(() => {

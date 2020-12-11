@@ -1,8 +1,8 @@
 const bcrypt = require("bcrypt");
+const { ObjectID } = require("mongodb");
 
 const db = require("../config/dbConfig");
 const collections = require("../config/collections");
-const { ObjectID } = require("mongodb");
 
 module.exports = {
   getOwnerById: async (id) => {
@@ -73,12 +73,121 @@ module.exports = {
         .catch(() => reject());
     });
   },
-  getScreenbyId: (screenId) => {
+  getScreenDetailsById: (screenId) => {
+    return new Promise(async (resolve, reject) => {
+      const screen = await db
+        .getDb()
+        .collection(collections.SCREEN_COLLECTION)
+        .aggregate([
+          { $match: { _id: ObjectID(screenId) } },
+          {
+            $lookup: {
+              from: collections.SHOW_COLLECTION,
+              foreignField: "_id",
+              localField: "shows",
+              as: "shows",
+            },
+          },
+          {
+            $unwind: {
+              path: "$shows",
+              preserveNullAndEmptyArrays: true,
+            },
+          },
+          {
+            $lookup: {
+              from: collections.MOVIE_COLLECTION,
+              localField: "shows.movie",
+              foreignField: "_id",
+              as: "shows.movie",
+            },
+          },
+          {
+            $group: {
+              _id: "$_id",
+              name: { $first: "$name" },
+              shows: { $push: "$shows" },
+            },
+          },
+          {
+            $project: {
+              _id: 1,
+              name: 1,
+              shows: {
+                $filter: {
+                  input: "$shows",
+                  as: "shows",
+                  cond: { $ifNull: ["$$shows._id", false] },
+                },
+              },
+              // shows: { $arrayElemAt: ["$movie", 0] },
+              // shows$movie: {
+              //   $filter: {
+              //     input: "$movie",
+              //     as: "movie",
+              //     cond: { $ifNull: ["$$movie._id", false] },
+              //   },
+              // },
+            },
+          },
+          // {
+          //   $lookup: {
+          //     from: collections.SCREEN_COLLECTION,
+          //     let: { partyId: "$_id" },
+          //     pipeline: [
+          //       { $match: { $expr: { $eq: ["$party_id", "$$partyId"] } } },
+          //       {
+          //         $lookup: {
+          //           from: "addressComment",
+          //           let: { addressId: "$_id" },
+          //           pipeline: [
+          //             {
+          //               $match: {
+          //                 $expr: { $eq: ["$address_id", "$$addressId"] },
+          //               },
+          //             },
+          //           ],
+          //           as: "address",
+          //         },
+          //       },
+          //     ],
+          //     as: "address",
+          //   },
+          // },
+          // { $unwind: "$address" },
+        ])
+        .toArray();
+      console.log(screen);
+      console.log(screen[0].shows);
+      resolve(screen[0]);
+    });
+  },
+  addShow: (screenId, showDetails) => {
+    return new Promise((resolve, reject) => {
+      showDetails.movie = ObjectID(showDetails.movie);
+      db.getDb()
+        .collection(collections.SHOW_COLLECTION)
+        .insertOne(showDetails)
+        .then((data) => {
+          db.getDb()
+            .collection(collections.SCREEN_COLLECTION)
+            .updateOne(
+              { _id: ObjectID(screenId) },
+              {
+                $push: { shows: data.ops[0]._id },
+              }
+            )
+            .then(() => resolve());
+        });
+    });
+  },
+  getScreenById: (screenId) => {
     return new Promise((resolve, reject) => {
       db.getDb()
         .collection(collections.SCREEN_COLLECTION)
         .findOne({ _id: ObjectID(screenId) })
-        .then((screen) => resolve(screen));
+        .then((screen) => resolve(screen))
+        .catch((e) => console.log(e));
     });
   },
   editScreen: (screenId, newData) => {

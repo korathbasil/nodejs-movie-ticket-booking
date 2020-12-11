@@ -5,7 +5,7 @@
             <h2>Screen Schedule</h2>
         </div>
         <div class="movie-management-links-container">
-            <a href="/theater/screen/schedule/add-show">Add Show</a>
+            <a href="/theater/screen/schedule/{{screen._id}}/add-show">Add Show</a>
         </div>
         <div id="movie-delete-dialogue" class="movie-delete-dialogue">
             <h3>Are you sure ?</h3>
@@ -23,9 +23,9 @@
             {{#each screen.shows}}
             <tr>
                 <td>1</td>
-                <td>{{this.title}}</td>
-                <td>{{this.release}}</td>
-                <td>{{this.runtimeHr}}Hr {{this.runtimeMin}}Min</td>
+                <td>{{this.movie}}</td>
+                <td>{{this.date}}</td>
+                <td>{{this.showtimeHr}}Hr {{this.showtimeMin}}Min</td>
                 <td><a href="/theater/movie/edit-movie/{{this._id}}">EDIT</a><a
                         onclick="openConfirmDialogue(event, '{{this._id}}')" href="">DELETE</a></td>
             </tr>
@@ -35,5 +35,5 @@
 </section>
 {{!-- Scripts --}}
 <script>
-    setActiveTab("movie-management");
+    setActiveTab("screen-management");
 </script>

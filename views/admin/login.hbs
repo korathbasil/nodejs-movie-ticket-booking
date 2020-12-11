@@ -1,6 +1,7 @@
 <div class="content-card admin-login-box">
-    {{#if errorMessage}}
-    <h3><span><i class="fas fa-exclamation-circle"></i></span>{{errorMessage}}</h3>
+    {{#if messages.error}}
+    <h3><span><i class="fas fa-exclamation-circle"></i>
+        </span>{{messages.error}}</h3>
     {{/if}}
     {{#if adminExists}}
     <h2>Admin, Welcome back.</h2>

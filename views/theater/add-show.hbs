@@ -1,0 +1,44 @@
+<section class="theater-parent">
+    <div class="content-card">
+        <div class="theater-headings">
+            <div class="theater-header-selector"></div>
+            <h2>Add Show</h2>
+        </div>
+        <form class="form theater-add-screen-form" action="/theater/screen/schedule/{{screenId}}/add-show"
+            method="POST">
+            <label for="movie">Movie</label>
+            {{!-- <input type="text" name="title"> --}}
+            <select name="movie" id="">
+                <option value="">SELECT MOVIE</option>
+                {{#each movies}}
+                <option value="{{this._id}}">{{this.title}}</option>
+                {{/each}}
+            </select>
+            <label for="date">Date</label>
+            <input type="text" name="date">
+            <label for="runtime">Showtime</label>
+            <div class="runtime-input-wrapper">
+                <input type="text" name="showtimeHr" maxlength="2" type="number">
+                <label for="showtimeHr">Hr</label>
+                <input type="text" name="showtimeMin" maxlength="2" type="number">
+                <label for="showtimeMin">Min</label>
+            </div>
+            <label for=""><strong>Class Rates</strong></label>
+            <label for="vip">VIP</label>
+            <input type="number" name="vip">
+            <label for="premium">Premium</label>
+            <input type="number" name="premium">
+
+            <label for="executive">Executive</label>
+            <input type="number" name="exectutive">
+            <label for="normal">Normal</label>
+            <input type="number" name="normal">
+
+            <button>Submit</button>
+        </form>
+    </div>
+</section>
+{{!-- Scripts --}}
+<script>
+    setActiveTab("screen-management")
+</script>

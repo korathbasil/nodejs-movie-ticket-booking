@@ -23,6 +23,16 @@
   color: var(--admin-tertiary);
   margin-bottom: 10px;
 }
+.theater-login-box > h3 {
+  color: red;
+  position: absolute;
+  bottom: 25px;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+}
 .theater-login-box > form > label {
   font-size: 12px;
   font-weight: 600;
@@ -235,7 +245,8 @@ tr:hover {
   font-weight: 600;
   margin-bottom: 5px;
 }
-.theater-add-screen-form > input {
+.theater-add-screen-form > input,
+select {
   height: 40px;
   border: none;
   outline: none;

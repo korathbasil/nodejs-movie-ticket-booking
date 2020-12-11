@@ -17,7 +17,7 @@ module.exports = (passport) => {
         done(null, user);
       })
       .catch((e) => {
-        done(null, false, { messge: e.message });
+        done(null, false, { message: e.message });
       });
   };
   passport.use(
