@@ -42,6 +42,8 @@ router.get("/", verifyLogin, verifyTheater, (req, res) => {
 });
 // Screen Management
 router.get("/screen", verifyLogin, verifyTheater, (req, res) => {
+  const ownerId = req.session.passport.user;
+  theaterHelpers.getScreens(ownerId);
   res.render("theater/screen-management", {
     theaterRoute: true,
     title: "Screen Management - Theater - Cinemax",
@@ -64,13 +66,22 @@ router.post("/screen/add-screen", verifyLogin, verifyTheater, (req, res) => {
     .catch(() => res.redirect("/theater/screen/add-screen"));
 });
 // Edit screen
-router.get("/screen/edit-screen", verifyLogin, verifyTheater, (req, res) => {
-  res.render("theater/edit-screen", {
-    theaterRoute: true,
-    title: "Movie Management - Theater - Cinemax",
-    theater: req.session.theater,
-  });
-});
+router.get(
+  "/screen/edit-screen/:screenId",
+  verifyLogin,
+  verifyTheater,
+  (req, res) => {
+    const screenId = req.params.screenId;
+    theaterHelpers.getScreenbyId(screenId).then((screen) => {
+      res.render("theater/edit-screen", {
+        theaterRoute: true,
+        title: "Movie Management - Theater - Cinemax",
+        theater: req.session.theater,
+        screen: screen,
+      });
+    });
+  }
+);
 // Delete Screen
 router.get(
   "/theater/screen/delete-screen",

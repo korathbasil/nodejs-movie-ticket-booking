@@ -13,16 +13,19 @@
                 <th>Schedule</th>
                 <th>Actions</th>
             </tr>
+            {{#each screens}}
             <tr>
                 <td>1</td>
                 <td>
-                    AUDI
+                    {{this.name}}
                 </td>
-                <td>200</td>
+                <td>{{this.seats}}</td>
                 <td><a href="">view schedule</a></td>
-                <td><a href="/theater/screen/edit-screen">EDIT</a><a href="/theater/screen/delete-screen"></a>DELETE
+                <td><a href="/theater/screen/edit-screen/{{this._id}}">EDIT</a><a
+                        href="/theater/screen/delete-screen/{{this._id}}"></a>DELETE
                 </td>
             </tr>
+            {{/each}}
         </table>
     </div>
 </section>

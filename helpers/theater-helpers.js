@@ -34,6 +34,26 @@ module.exports = {
       }
     });
   },
+  getScreens: (ownerId) => {
+    return new Promise(async (resolve, reject) => {
+      const owner = await db
+        .getDb()
+        .collection(collections.OWNERS_COLLECTION)
+        .aggregate([
+          { $match: { _id: ObjectID(ownerId) } },
+          {
+            $lookup: {
+              from: collections.SCREEN_COLLECTION,
+              foreignField: "_id",
+              localField: "screens",
+              as: "screens",
+            },
+          },
+        ])
+        .toArray();
+      resolve(owner[0].screens);
+    });
+  },
   addScreen: (screenData, ownerId) => {
     return new Promise((resolve, reject) => {
       db.getDb()
@@ -51,6 +71,14 @@ module.exports = {
             .then(() => resolve());
         })
         .catch(() => reject());
+    });
+  },
+  getScreenbyId: (screenId) => {
+    return new Promise((resolve, reject) => {
+      db.getDb()
+        .collection(collections.SCREEN_COLLECTION)
+        .findOne({ _id: ObjectID(screenId) })
+        .then((screen) => resolve(screen));
     });
   },
   getMovies: () => {
