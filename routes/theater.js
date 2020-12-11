@@ -185,9 +185,21 @@ router.get("/movie/add-movie", verifyLogin, verifyTheater, (req, res) => {
   });
 });
 router.post("/movie/add-movie", verifyLogin, verifyTheater, (req, res) => {
+  const image = req.files.poster;
+  // console.log(image);
+  const fileExtension = image.name.split(".")[image.name.split(".").length - 1]; // Getting file extension by splitting on extesion dot(.)
+  const fileName = new Date().toISOString() + "." + fileExtension; // Creating a new file name with new Date() and fileExtension
+  const imagePath = "/images/owners/" + fileName; // Setting the public path
+  req.body.image = imagePath;
+
   theaterHelpers
     .addMovie(req.body)
-    .then(() => res.redirect("/theater/movie"))
+    .then(async () => {
+      await sharp(image.data)
+        .resize({ width: 540 })
+        .toFile(`./public/images/movies/${fileName}`);
+      res.redirect("/theater/movie");
+    })
     .catch(() => res.redirect("/theater/movie/add-movie"));
 });
 // Edit Movie
