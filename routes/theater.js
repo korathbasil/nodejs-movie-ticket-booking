@@ -84,6 +84,18 @@ router.get(
     });
   }
 );
+router.post(
+  "/screen/edit-screen/:screenId",
+  verifyLogin,
+  verifyTheater,
+  (req, res) => {
+    console.log(req.body);
+    const screenId = req.params.screenId;
+    theaterHelpers
+      .editScreen(screenId, req.body)
+      .then(() => res.redirect("/theater/screen"));
+  }
+);
 // Delete Screen
 router.get(
   "/theater/screen/delete-screen",

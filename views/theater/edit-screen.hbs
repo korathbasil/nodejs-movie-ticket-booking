@@ -4,7 +4,7 @@
             <div class="theater-header-selector"></div>
             <h2>Edit Screen</h2>
         </div>
-        <form class="form theater-add-screen-form" action="">
+        <form class="form theater-add-screen-form" action="/theater/screen/edit-screen/{{screen._id}}" method="POST">
             <label for="name">Name</label>
             <input type="text" name="name" value="{{screen.name}}">
             <label for="seats">Number of Seats</label>

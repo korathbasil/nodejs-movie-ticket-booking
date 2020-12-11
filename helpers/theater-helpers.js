@@ -81,6 +81,20 @@ module.exports = {
         .then((screen) => resolve(screen));
     });
   },
+  editScreen: (screenId, newData) => {
+    return new Promise((resolve, reject) => {
+      db.getDb()
+        .collection(collections.SCREEN_COLLECTION)
+        .updateOne(
+          { _id: ObjectID(screenId) },
+          {
+            $set: newData,
+          }
+        )
+        .then(() => resolve())
+        .catch((e) => console.log(e));
+    });
+  },
   getMovies: () => {
     return new Promise(async (resolve, reject) => {
       const movies = await db
