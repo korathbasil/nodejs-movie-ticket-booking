@@ -119,6 +119,7 @@ router.get(
   (req, res) => {
     const movieId = req.params.movieId;
     theaterHelpers.getMovieById(movieId).then((movie) => {
+      console.log(movie);
       res.render("theater/edit-movie", {
         theaterRoute: true,
         title: "Movie Management - Theater - Cinemax",
