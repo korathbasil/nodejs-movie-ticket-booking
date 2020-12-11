@@ -299,3 +299,13 @@ select {
   border: none;
   cursor: pointer;
 }
+.add-movie-poster {
+  width: 200px;
+  height: 300;
+  display: none;
+}
+.add-movie-poster > img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}

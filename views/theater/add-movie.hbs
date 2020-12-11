@@ -26,6 +26,11 @@
             <input type="text" name="genre">
             <label for="trailer">trailer Link</label>
             <input type="text" name="trailer">
+            <label for="poster">Poster</label>
+            <input type="file" name="poster" onchange="showImage(event)" id="">
+            <div class="add-movie-poster" id="add-movie-poster">
+                <img id="add-movie-poster-image" src="" alt="">
+            </div>
             <button>Submit</button>
         </form>
     </div>
@@ -33,4 +38,10 @@
 {{!-- Scripts --}}
 <script>
     setActiveTab("movie-management")
+    const showImage = (e) => {
+        if (e.target.files[0]) {
+            document.querySelector("#add-movie-poster").style.display = "block";
+            document.querySelector("#add-movie-poster-image").src = URL.createObjectURL(e.target.files[0])
+        }
+    }
 </script>
