@@ -122,7 +122,7 @@ router.get(
   verifyTheater,
   (req, res) => {
     const screenId = req.params.screenId;
-    theaterHelpers.getScreenbyId(screenId).then((screen) => {
+    theaterHelpers.getScreenById(screenId).then((screen) => {
       res.render("theater/edit-screen", {
         theaterRoute: true,
         title: "Movie Management - Theater - Cinemax",

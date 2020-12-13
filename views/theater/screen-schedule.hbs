@@ -9,8 +9,8 @@
         </div>
         <div id="movie-delete-dialogue" class="movie-delete-dialogue">
             <h3>Are you sure ?</h3>
-            <div class=""><a id="movie-delete-confirm-yes" href="" class="theater-owner-table-button">YES</a>
-                <a href="" onclick="closeConfirmDialogue(event)" class="theater-owner-table-button">NO</a></div>
+            <div class=""><a id="movie-delete-confirm-yes" href="" class="theater-table-button">YES</a>
+                <a href="" onclick="closeConfirmDialogue(event)" class="theater-table-button">NO</a></div>
         </div>
         <table class="owner-movie-table">
             <tr>
@@ -23,11 +23,14 @@
             {{#each screen.shows}}
             <tr>
                 <td>1</td>
-                <td>{{this.movie}}</td>
+                {{#each this.movie}}
+                <td>{{this.title}}</td>
+                {{/each}}
                 <td>{{this.date}}</td>
                 <td>{{this.showtimeHr}}Hr {{this.showtimeMin}}Min</td>
-                <td><a href="/theater/movie/edit-movie/{{this._id}}">EDIT</a><a
-                        onclick="openConfirmDialogue(event, '{{this._id}}')" href="">DELETE</a></td>
+                <td><a class="theater-table-button" href="/theater/movie/edit-movie/{{this._id}}">EDIT</a><a
+                        class="theater-table-button" onclick="openConfirmDialogue(event, '{{this._id}}')"
+                        href="">DELETE</a></td>
             </tr>
             {{/each}}
         </table>

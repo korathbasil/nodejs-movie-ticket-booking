@@ -12,8 +12,7 @@ const flash = require("express-flash");
 const MongoStore = require("connect-mongo")(session);
 
 // Router imports
-const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
+const userRouter = require("./routes/user");
 const adminRouter = require("./routes/admin");
 const theaterRoute = require("./routes/theater");
 
@@ -72,8 +71,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/", userRouter);
 app.use("/admin", adminRouter);
 app.use("/theater", theaterRoute);
 app.post("/test");
