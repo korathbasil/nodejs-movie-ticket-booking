@@ -7,6 +7,9 @@
   height: 400px;
   background-color: chartreuse;
 }
+.movies-container {
+  display: flex;
+}
 .movie-card {
   width: 300px;
   margin: 20px;

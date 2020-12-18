@@ -3,12 +3,14 @@
 
     </div> --}}
     <div class="movies-container">
-        <a href="">
+        {{#each movies}}
+        <a href="/movie/{{this._id}}">
             <div class="movie-card">
                 <img src="https://creativereview.imgix.net/content/uploads/2019/12/joker_full.jpg?auto=compress,format&q=60&w=1012&h=1500"
                     alt="">
-                <h2>TENET</h2>
+                <h2>{{this.title}}</h2>
             </div>
         </a>
+        {{/each}}
     </div>
 </section>
