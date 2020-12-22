@@ -189,16 +189,16 @@ router.post("/movie/add-movie", verifyLogin, verifyTheater, (req, res) => {
   // console.log(image);
   const fileExtension = image.name.split(".")[image.name.split(".").length - 1]; // Getting file extension by splitting on extesion dot(.)
   const fileName = new Date().toISOString() + "." + fileExtension; // Creating a new file name with new Date() and fileExtension
-  const imagePath = "/images/owners/" + fileName; // Setting the public path
-  req.body.image = imagePath;
+  const imagePath = "/images/movies/" + fileName; // Setting the public path
+  req.body.poster = imagePath;
 
   theaterHelpers
     .addMovie(req.body)
     .then(async () => {
-      await sharp(image.data)
+      sharp(image.data)
         .resize({ width: 540 })
-        .toFile(`./public/images/movies/${fileName}`);
-      res.redirect("/theater/movie");
+        .toFile(`../public/images/movies/${fileName}`)
+        .then(() => res.redirect("/theater/movie"));
     })
     .catch(() => res.redirect("/theater/movie/add-movie"));
 });

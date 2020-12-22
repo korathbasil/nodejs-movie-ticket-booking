@@ -17,7 +17,7 @@ module.exports = {
     return new Promise((resolve, reject) => {
       db.getDb()
         .collection(collections.MOVIE_COLLECTION)
-        .find({ _id: ObjectID(movieId) })
+        .findOne({ _id: ObjectID(movieId) })
         .then((movie) => {
           resolve(movie);
         });
