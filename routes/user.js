@@ -34,7 +34,8 @@ router.get("/", function (req, res) {
     res.render("user/home", {
       title: "Home - Cinemax",
       movies: movies,
-      user: true,
+      user: req.session.user,
+      userRoute: true,
     });
   });
 });
@@ -42,16 +43,20 @@ router.get("/", function (req, res) {
 router.get("/movie/:id", (req, res) => {
   const movieId = req.params.id;
   userHelpers.getMovieById(movieId).then((movie) => {
-    res.render("user/movie", { movie: movie, user: true });
+    res.render("user/movie", {
+      movie: movie,
+      user: req.session.user,
+      userRoute: true,
+    });
   });
 });
 // Theaters page
 router.get("/cinemas", (req, res) => {
-  res.render("user/cinemas", { user: true });
+  res.render("user/cinemas", { user: req.session.user, userRoute: true });
 });
 // Account page
 router.get("/account", (req, res) => {
-  res.render("user/account", { user: true });
+  res.render("user/account", { user: req.session.user, userRoute: true });
 });
 
 router.get("/test", (req, res) => {
