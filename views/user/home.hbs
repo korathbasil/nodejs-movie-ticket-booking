@@ -1,7 +1,10 @@
 <section class="user-parent">
-    {{!-- <div class="carousel-container">
+    <div class="carousel-container">
 
-    </div> --}}
+    </div>
+    <div class="movies-header">
+        <h2>NOW SHOWING</h2>
+    </div>
     <div class="movies-container">
         {{#each movies}}
         <a href="/movie/{{this._id}}">
@@ -11,5 +14,39 @@
             </div>
         </a>
         {{/each}}
+        <a href="/movie/{{this._id}}">
+            <div class="movie-card">
+                <img src="{{this.poster}}" alt="">
+                <h2>{{this.title}}</h2>
+            </div>
+        </a><a href="/movie/{{this._id}}">
+            <div class="movie-card">
+                <img src="{{this.poster}}" alt="">
+                <h2>{{this.title}}</h2>
+            </div>
+        </a><a href="/movie/{{this._id}}">
+            <div class="movie-card">
+                <img src="{{this.poster}}" alt="">
+                <h2>{{this.title}}</h2>
+            </div>
+        </a><a href="/movie/{{this._id}}">
+            <div class="movie-card">
+                <img src="{{this.poster}}" alt="">
+                <h2>{{this.title}}</h2>
+            </div>
+        </a><a href="/movie/{{this._id}}">
+            <div class="movie-card">
+                <img src="{{this.poster}}" alt="">
+                <h2>{{this.title}}</h2>
+            </div>
+        </a><a href="/movie/{{this._id}}">
+            <div class="movie-card">
+                <img src="{{this.poster}}" alt="">
+                <h2>{{this.title}}</h2>
+            </div>
+        </a>
+    </div>
+    <div class="movies-header">
+        <h2>UPCOMIG</h2>
     </div>
 </section>

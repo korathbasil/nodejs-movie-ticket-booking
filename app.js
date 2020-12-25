@@ -56,7 +56,7 @@ app.use(
     secret: process.env.SESSION_SECTRET,
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 6000000 },
+    cookie: { maxAge: 16000000 },
     store: new MongoStore({
       url: "mongodb://localhost:27017/MovieTicketBooking",
     }),
