@@ -4,12 +4,12 @@
     <h3><span><i class="fas fa-exclamation-circle"></i>
         </span>{{messages.error}}</h3>
     {{/if}}
-    <form action="/theater/login" method="POST">
+    <form action="/login" method="POST">
         <label for="username">Username</label>
         <input type="text" name="username" id="">
         <label for="password">Password</label>
         <input type="password" name="password" id="">
         <button type="submit">Login</button>
-        {{!-- <p><a href="">Forgot password?</a></p> --}}
+        <p><a href="/signup">Signup</a></p>
     </form>
 </div>
