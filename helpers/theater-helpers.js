@@ -239,7 +239,10 @@ module.exports = {
         .collection(collections.MOVIE_COLLECTION)
         .insertOne(movieDetails)
         .then(() => resolve())
-        .catch(() => reject());
+        .catch((e) => {
+          console.log(e);
+          reject();
+        });
     });
   },
   getMovieById: (movieId) => {

@@ -7,8 +7,18 @@
         <form class="form theater-add-screen-form" action="/theater/screen/add-screen" method="POST">
             <label for="name">Name</label>
             <input type="text" name="name">
-            <label for="seats">Number of Seats</label>
-            <input type="number" name="seats" maxlength="3">
+            <label for="seats">Number of Seats in a row</label>
+            <input type="number" name="rowSeats" maxlength="3">
+            <label for=""><strong>No of Rows in each class</strong></label>
+            <label for="vip">VIP</label>
+            <input type="number" name="vip">
+            <label for="premium">Premium</label>
+            <input type="number" name="premium">
+
+            <label for="executive">Executive</label>
+            <input type="number" name="exectutive">
+            <label for="normal">Normal</label>
+            <input type="number" name="normal">
             <button>Submit</button>
         </form>
     </div>

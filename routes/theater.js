@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-const adminHelpers = require("../helpers/admin-helpers");
+const sharp = require("sharp");
 
 const theaterHelpers = require("../helpers/theater-helpers");
 const verifyLogout = require("../middlewares/verify-theater-logout");
@@ -62,10 +62,13 @@ router.get("/screen/add-screen", verifyLogin, verifyTheater, (req, res) => {
 });
 router.post("/screen/add-screen", verifyLogin, verifyTheater, (req, res) => {
   const ownerId = req.session.passport.user;
-  theaterHelpers
-    .addScreen(req.body, ownerId)
-    .then(() => res.redirect("/theater/screen"))
-    .catch(() => res.redirect("/theater/screen/add-screen"));
+  console.log(req.body);
+  const screen = {};
+  screen.name = req.body.name;
+  // theaterHelpers
+  //   .addScreen(req.body, ownerId)
+  //   .then(() => res.redirect("/theater/screen"))
+  //   .catch(() => res.redirect("/theater/screen/add-screen"));
 });
 // Screen Schedule
 router.get(
@@ -184,24 +187,34 @@ router.get("/movie/add-movie", verifyLogin, verifyTheater, (req, res) => {
     theater: req.session.theater,
   });
 });
-router.post("/movie/add-movie", verifyLogin, verifyTheater, (req, res) => {
-  const image = req.files.poster;
-  // console.log(image);
-  const fileExtension = image.name.split(".")[image.name.split(".").length - 1]; // Getting file extension by splitting on extesion dot(.)
-  const fileName = new Date().toISOString() + "." + fileExtension; // Creating a new file name with new Date() and fileExtension
-  const imagePath = "/images/movies/" + fileName; // Setting the public path
-  req.body.poster = imagePath;
+router.post(
+  "/movie/add-movie",
+  verifyLogin,
+  verifyTheater,
+  async (req, res) => {
+    const image = req.files.poster;
+    // console.log(image);
+    const fileExtension = image.name.split(".")[
+      image.name.split(".").length - 1
+    ]; // Getting file extension by splitting on extesion dot(.)
+    const fileName = new Date().toISOString() + "." + fileExtension; // Creating a new file name with new Date() and fileExtension
+    const imagePath = "/images/movies/" + fileName; // Setting the public path
+    req.body.poster = imagePath;
+    // console.log(req.body);
 
-  theaterHelpers
-    .addMovie(req.body)
-    .then(async () => {
-      sharp(image.data)
-        .resize({ width: 540 })
-        .toFile(`../public/images/movies/${fileName}`)
-        .then(() => res.redirect("/theater/movie"));
-    })
-    .catch(() => res.redirect("/theater/movie/add-movie"));
-});
+    await sharp(req.files.poster.data)
+      .resize({ width: 540 })
+      .toFile(`./public/images/movies/${fileName}`)
+      .then(() => {
+        theaterHelpers
+          .addMovie(req.body)
+          .then(() => {
+            res.redirect("/theater/movie");
+          })
+          .catch(() => res.redirect("/theater/movie/add-movie"));
+      });
+  }
+);
 // Edit Movie
 router.get(
   "/movie/edit-movie/:movieId",

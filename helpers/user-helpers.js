@@ -3,6 +3,12 @@ const collections = require("../config/collections");
 const { ObjectID } = require("mongodb");
 
 module.exports = {
+  signup: (userData) => {
+    return new Promise((resolve, reject) => {});
+  },
+  login: (userData) => {
+    return new Promise((resolve, reject) => {});
+  },
   getAllMovies: () => {
     return new Promise(async (resolve, reject) => {
       const movies = await db

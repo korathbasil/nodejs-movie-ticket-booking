@@ -13,15 +13,22 @@ router.get("/", function (req, res) {
     });
   });
 });
+// Login
+router.get("/login", (req, res) => {
+  res.render("user/login");
+});
+// Movie page
 router.get("/movie/:id", (req, res) => {
   const movieId = req.params.id;
   userHelpers.getMovieById(movieId).then((movie) => {
     res.render("user/movie", { movie: movie, user: true });
   });
 });
+// Theaters page
 router.get("/cinemas", (req, res) => {
   res.render("user/cinemas", { user: true });
 });
+// Account page
 router.get("/account", (req, res) => {
   res.render("user/account", { user: true });
 });
