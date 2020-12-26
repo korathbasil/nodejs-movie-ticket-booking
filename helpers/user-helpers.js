@@ -17,6 +17,84 @@ module.exports = {
         });
     });
   },
+  sendSignupOtp: (otp, email, cb) => {
+    // Configure Nodemailer
+    const nodemailer = require("nodemailer");
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.GMAIL_ID,
+        pass: process.env.GMAIL_PASSWORD,
+      },
+    });
+    const mailBody = `<body style="font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif">
+          <div
+            style="
+              width: 100%;
+              max-width: 700px;
+              margin: 0 auto;
+              box-shadow: 3px 3px 3px lightgrey;
+              padding: 20px;
+            "
+          >
+            <div style="width: 100%">
+              <h1
+                style="
+                  margin-left: 20px;
+                  margin-top: 20px;
+                  margin-bottom: 20px;
+                  font-size: 40px;
+                  color: #2f3547;
+                "
+              >
+                CineMax
+              </h1>
+            </div>
+            <div
+              style="width: 100%; padding-left: 20px; padding-right: 20px"
+            >
+              <p style="margin-bottom: 30px">
+                Your OTP is given below
+              </p>
+              <p>Your login credentials are given below</p>
+              <div
+                style="
+                  width: 100%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                "
+              >
+                <div
+                  style="
+                    width: fit-content;
+                    padding: 30px;
+                    border-radius: 20px;
+                    background-color: lightgrey;
+                  "
+                >
+                  <p>OTP  :   <strong>${otp}</strong></p>
+                </div>
+              </div>
+        
+              <p>To login click <a href="">here</a></p>
+            </div>
+            <div class="footer" style="text-align: center">
+              <p style="margin-bottom: 10px">CIneMax ©</p>
+            </div>
+          </div>
+        </body>
+        `;
+    transporter
+      .sendMail({
+        from: process.env.GMAIL_ID,
+        to: email,
+        subject: "OTP - CineMax",
+        html: mailBody,
+      })
+      .then(() => cb())
+      .catch((e) => cb(e));
+  },
   verifySignupOtp: (userId, otp) => {
     return new Promise(async (resolve, reject) => {
       const selectedUSer = await db
@@ -44,8 +122,8 @@ module.exports = {
         reject({ message: "User not found" });
       } else {
         const isPasswordTrue = await bcrypt.compare(
-          selectedUSer.password,
-          userData.password
+          userData.password,
+          selectedUSer.password
         );
         if (isPasswordTrue) {
           resolve(selectedUSer);
@@ -55,6 +133,97 @@ module.exports = {
       }
     });
   },
+  sendLoginOtp: (email, otp, cb) => {
+    // Configure Nodemailer
+    const nodemailer = require("nodemailer");
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.GMAIL_ID,
+        pass: process.env.GMAIL_PASSWORD,
+      },
+    });
+    const mailBody = `<body style="font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif">
+        <div
+          style="
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            box-shadow: 3px 3px 3px lightgrey;
+            padding: 20px;
+          "
+        >
+          <div style="width: 100%">
+            <h1
+              style="
+                margin-left: 20px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                font-size: 40px;
+                color: #2f3547;
+              "
+            >
+              CineMax
+            </h1>
+          </div>
+          <div
+            style="width: 100%; padding-left: 20px; padding-right: 20px"
+          >
+            <p style="margin-bottom: 30px">
+              Your OTP is given below
+            </p>
+            <p>Your login credentials are given below</p>
+            <div
+              style="
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <div
+                style="
+                  width: fit-content;
+                  padding: 30px;
+                  border-radius: 20px;
+                  background-color: lightgrey;
+                "
+              >
+                <p>OTP  :   <strong>${otp}</strong></p>
+              </div>
+            </div>
+      
+            <p>To login click <a href="">here</a></p>
+          </div>
+          <div class="footer" style="text-align: center">
+            <p style="margin-bottom: 10px">CIneMax ©</p>
+          </div>
+        </div>
+      </body>
+      `;
+    transporter
+      .sendMail({
+        from: process.env.GMAIL_ID,
+        to: email,
+        subject: "OTP - CineMax",
+        html: mailBody,
+      })
+      .then(() => cb())
+      .catch((e) => cb(e));
+  },
+  updateLoginOtp: (userId, otp) => {
+    return new Promise((resolve, reject) => {
+      db.getDb()
+        .collection(collections.USER_COLLECTION)
+        .updateOne(
+          { _id: ObjectID(userId) },
+          {
+            $set: { otp: otp },
+          }
+        )
+        .then(() => resolve());
+    });
+  },
   verifyLoginOtp: (userId, otp) => {
     return new Promise(async (resolve, reject) => {
       const selectedUser = await db
@@ -62,7 +231,7 @@ module.exports = {
         .collection(collections.USER_COLLECTION)
         .findOne({ _id: ObjectID(userId) });
       if (selectedUser.otp == otp) {
-        resolve(user);
+        resolve(selectedUser);
       } else {
         reject({ message: "incorrect OTP" });
       }

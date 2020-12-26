@@ -11,7 +11,13 @@ router.post("/signup", (req, res) => {
   const otp = Math.floor(Math.random() * 1000000);
   req.body.otp = otp;
   userHelpers.signup(req.body).then((id) => {
-    res.render("user/verifySignupOTP", { userId: id });
+    userHelpers.sendSignupOtp(otp, req.body.email, (e) => {
+      if (e) {
+        console.log(e);
+      } else {
+        res.render("user/verifySignupOTP", { userId: id });
+      }
+    });
   });
 });
 router.post("/signup/verifyOTP/:userId", (req, res) => {
@@ -33,12 +39,22 @@ router.get("/login", (req, res) => {
 });
 router.post("/login", (req, res) => {
   const otp = Math.floor(Math.random() * 1000000);
+  console.log(req.body);
   userHelpers
     .login(req.body)
     .then((user) => {
-      res.render("user/verifyLoginOTP", { userId: user._id });
+      userHelpers.updateLoginOtp(user._id, otp).then(() => {
+        userHelpers.sendLoginOtp(user.email, otp, (e) => {
+          if (e) {
+            console.log(e);
+          } else {
+            res.render("user/verifyLoginOTP", { userId: user._id });
+          }
+        });
+      });
     })
     .catch((e) => {
+      console.log(e);
       req.session.error = e;
       res.redirect("/login");
     });
@@ -55,6 +71,11 @@ router.post("/login/verifyOTP/:userId", (req, res) => {
       req.session.error = e;
       res.redirect(`/login`);
     });
+});
+// Logout
+router.get("/logout", (req, res) => {
+  req.session.user = null;
+  res.redirect("/");
 });
 // Home Page
 router.get("/", function (req, res) {
