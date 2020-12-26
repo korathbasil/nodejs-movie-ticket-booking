@@ -35,7 +35,38 @@ module.exports = {
     });
   },
   login: (userData) => {
-    return new Promise((resolve, reject) => {});
+    return new Promise(async (resolve, reject) => {
+      const selectedUSer = await db
+        .getDb()
+        .collection(collections.USER_COLLECTION)
+        .findOne({ email: userData.email });
+      if (!selectedUSer) {
+        reject({ message: "User not found" });
+      } else {
+        const isPasswordTrue = await bcrypt.compare(
+          selectedUSer.password,
+          userData.password
+        );
+        if (isPasswordTrue) {
+          resolve(selectedUSer);
+        } else {
+          reject({ message: "Incorrect password" });
+        }
+      }
+    });
+  },
+  verifyLoginOtp: (userId, otp) => {
+    return new Promise(async (resolve, reject) => {
+      const selectedUser = await db
+        .getDb()
+        .collection(collections.USER_COLLECTION)
+        .findOne({ _id: ObjectID(userId) });
+      if (selectedUser.otp == otp) {
+        resolve(user);
+      } else {
+        reject({ message: "incorrect OTP" });
+      }
+    });
   },
   getAllMovies: () => {
     return new Promise(async (resolve, reject) => {
@@ -51,18 +82,20 @@ module.exports = {
     return new Promise(async (resolve, reject) => {
       const movie = await db
         .getDb()
-        .collection(collections.MOVIE_COLLECTION)
+        .collection(collections.OWNERS_COLLECTION)
         .aggregate([
           { $match: { _id: ObjectID(movieId) } },
           {
             $lookup: {
               from: collections.SHOW_COLLECTION,
-              foreignField: "_id",
-              localField: "shows",
+              foreignField: "movie",
+              localField: "_id",
               as: "shows",
             },
           },
-        ]);
+        ])
+        .toArray();
+      console.log(movie);
     });
   },
   payRazorpay: () => {

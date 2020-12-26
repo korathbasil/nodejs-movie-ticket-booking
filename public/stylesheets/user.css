@@ -87,7 +87,7 @@
   padding: 20px;
 }
 .movie-card {
-  width: 100%;
+  width: auto;
   /* margin: 20px; */
   background-color: lightgray;
 }
