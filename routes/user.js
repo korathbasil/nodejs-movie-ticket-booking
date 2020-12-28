@@ -2,9 +2,10 @@ var express = require("express");
 var router = express.Router();
 
 const userHelpers = require("../helpers/user-helpers");
+const verifyUserLogin = require("../middlewares/verifyUserLogin");
 
 // Signup
-router.get("/signup", (req, res) => {
+router.get("/signup", verifyUserLogin, (req, res) => {
   res.render("user/signup");
 });
 router.post("/signup", (req, res) => {
@@ -34,7 +35,7 @@ router.post("/signup/verifyOTP/:userId", (req, res) => {
     });
 });
 // Login
-router.get("/login", (req, res) => {
+router.get("/login", verifyUserLogin, (req, res) => {
   res.render("user/login");
 });
 router.post("/login", (req, res) => {

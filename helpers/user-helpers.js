@@ -239,12 +239,23 @@ module.exports = {
   },
   getAllMovies: () => {
     return new Promise(async (resolve, reject) => {
-      const movies = await db
+      const scheduledMovies = await db
         .getDb()
-        .collection(collections.MOVIE_COLLECTION)
-        .find()
+        .collection(collections.SHOW_COLLECTION)
+        .aggregate([
+          {
+            $lookup: {
+              from: collections.MOVIE_COLLECTION,
+              foreignField: "_id",
+              localField: "movie",
+              as: "movie",
+            },
+          },
+          { $unwind: "$movie" },
+          { $group: { _id: "$movie" } },
+        ])
         .toArray();
-      resolve(movies);
+      resolve(scheduledMovies);
     });
   },
   getMovieById: (movieId) => {

@@ -7,10 +7,10 @@
     </div>
     <div class="movies-container">
         {{#each movies}}
-        <a href="/movie/{{this._id}}">
+        <a href="/movie/{{this._id._id}}">
             <div class="movie-card">
-                <img src="{{this.poster}}" alt="">
-                <h2>{{this.title}}</h2>
+                <img src="{{this._id.poster}}" alt="">
+                <h2>{{this._id.title}}</h2>
             </div>
         </a>
         {{/each}}
