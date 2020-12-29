@@ -338,7 +338,7 @@ module.exports = {
           };
         }
       }
-      console.log(vipSeats);
+      // console.log(vipSeats);
       // Creating Premium seats
       for (i = vip; i < premium + vip; i++) {
         premiumSeats.push(new Array());
@@ -351,41 +351,60 @@ module.exports = {
           };
         }
       }
-      console.log(premiumSeats);
+      // console.log(premiumSeats);
       // Creating Executive seats
-      for (i = vip + premium; i < premium + vip + executive; i++) {
+      for (i = vip + premium; i < vip + premium + executive; i++) {
         executiveSeats.push(new Array());
       }
-      // for (i = vip + premium; i < premium + vip + executive; i++) {
-      //   for (j = 0; j < rowSeats; j++) {
-      //     executiveSeats[i - (vip + premium)][j] = {
-      //       seatId: lettersArray[i] + numbersArray[j],
-      //       booked: false,
-      //     };
-      //   }
-      // }
-      console.log(executiveSeats);
-      // // Creating Normal seats
-      // for (
-      //   i = vip + premium + executive;
-      //   i < premium + vip + executive + normal;
-      //   i++
-      // ) {
-      //   normalSeats.push(new Array());
-      // }
-      // for (
-      //   i = vip + premium + executive;
-      //   i < premium + vip + executive + normal;
-      //   i++
-      // ) {
-      //   for (j = 0; j < rowSeats; j++) {
-      //     normalSeats[i - (vip + premium + executive)][j] = {
-      //       seatId: lettersArray[i] + numbersArray[j],
-      //       booked: false,
-      //     };
-      //   }
-      // }
+      for (i = vip + premium; i < premium + vip + executive; i++) {
+        for (j = 0; j < rowSeats; j++) {
+          executiveSeats[i - (vip + premium)][j] = {
+            seatId: lettersArray[i] + numbersArray[j],
+            booked: false,
+          };
+        }
+      }
+      // console.log(executiveSeats);
+      // Creating Normal seats
+      for (
+        i = vip + premium + executive;
+        i < premium + vip + executive + normal;
+        i++
+      ) {
+        normalSeats.push(new Array());
+      }
+      for (
+        i = vip + premium + executive;
+        i < premium + vip + executive + normal;
+        i++
+      ) {
+        for (j = 0; j < rowSeats; j++) {
+          normalSeats[i - (vip + premium + executive)][j] = {
+            seatId: lettersArray[i] + numbersArray[j],
+            booked: false,
+          };
+        }
+      }
       // console.log(normalSeats);
+      showDetails.vipSeats = vipSeats;
+      showDetails.premiumSeats = premiumSeats;
+      showDetails.executiveSeats = executiveSeats;
+      showDetails.normalSeats = normalSeats;
+      // Adding show to Show collection
+      db.getDb()
+        .collection(collections.SHOW_COLLECTION)
+        .insertOne(showDetails)
+        .then((data) => {
+          db.getDb()
+            .collection(collections.SCREEN_COLLECTION)
+            .updateOne(
+              { _id: ObjectID(screenId) },
+              {
+                $push: { shows: ObjectID(data.ops[0]._id) },
+              }
+            )
+            .then(() => resolve());
+        });
     });
   },
   getScreenById: (screenId) => {
