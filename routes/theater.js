@@ -44,6 +44,7 @@ router.get("/", verifyLogin, verifyTheater, (req, res) => {
 router.get("/screen", verifyLogin, verifyTheater, (req, res) => {
   const ownerId = req.session.passport.user;
   theaterHelpers.getScreens(ownerId).then((screens) => {
+    console.log(screens);
     res.render("theater/screen-management", {
       theaterRoute: true,
       title: "Screen Management - Theater - Cinemax",
@@ -62,13 +63,13 @@ router.get("/screen/add-screen", verifyLogin, verifyTheater, (req, res) => {
 });
 router.post("/screen/add-screen", verifyLogin, verifyTheater, (req, res) => {
   const ownerId = req.session.passport.user;
-  console.log(req.body);
-  const screen = {};
-  screen.name = req.body.name;
-  // theaterHelpers
-  //   .addScreen(req.body, ownerId)
-  //   .then(() => res.redirect("/theater/screen"))
-  //   .catch(() => res.redirect("/theater/screen/add-screen"));
+  // console.log(req.body);
+  // const screen = {};
+  // screen.name = req.body.name;
+  theaterHelpers
+    .addScreen(req.body, ownerId)
+    .then(() => res.redirect("/theater/screen"))
+    .catch(() => res.redirect("/theater/screen/add-screen"));
 });
 // Screen Schedule
 router.get(
@@ -77,9 +78,8 @@ router.get(
   verifyTheater,
   (req, res) => {
     const screenId = req.params.screenId;
-    // console.log(screenId);
     theaterHelpers.getScreenDetailsById(screenId).then((screen) => {
-      // console.log(screen.shows);
+      // console.log(JSON.stringify(screen, null, 4));
       res.render("theater/screen-schedule", {
         theaterRoute: true,
         title: "Screen Management - Theater - Cinemax",

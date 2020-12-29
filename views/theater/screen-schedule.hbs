@@ -24,9 +24,7 @@
             {{#each screen.shows}}
             <tr>
                 <td>1</td>
-                {{#each this.movie}}
-                <td> {{this.title}}</td>
-                {{/each}}
+                <td> {{this.movie.title}}</td>
                 <td>{{this.date}}</td>
                 <td>{{this.showtimeHr}} : {{this.showtimeMin}}</td>
                 <td><a class="theater-table-button" href="/theater/movie/edit-movie/{{this._id}}">EDIT</a><a

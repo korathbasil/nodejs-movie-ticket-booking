@@ -56,6 +56,7 @@ module.exports = {
   },
   addScreen: (screenData, ownerId) => {
     return new Promise((resolve, reject) => {
+      screenData.shows = [];
       db.getDb()
         .collection(collections.SCREEN_COLLECTION)
         .insertOne(screenData)
@@ -75,91 +76,53 @@ module.exports = {
   },
   getScreenDetailsById: (screenId) => {
     return new Promise(async (resolve, reject) => {
-      const screen = await db
+      let screen = await db
         .getDb()
         .collection(collections.SCREEN_COLLECTION)
-        .aggregate([
-          { $match: { _id: ObjectID(screenId) } },
-          {
-            $lookup: {
-              from: collections.SHOW_COLLECTION,
-              foreignField: "_id",
-              localField: "shows",
-              as: "shows",
-            },
-          },
-          {
-            $unwind: {
-              path: "$shows",
-              preserveNullAndEmptyArrays: true,
-            },
-          },
-          {
-            $lookup: {
-              from: collections.MOVIE_COLLECTION,
-              localField: "shows.movie",
-              foreignField: "_id",
-              as: "shows.movie",
-            },
-          },
-          {
-            $group: {
-              _id: "$_id",
-              name: { $first: "$name" },
-              shows: { $push: "$shows" },
-            },
-          },
-          {
-            $project: {
-              _id: 1,
-              name: 1,
-              shows: {
-                $filter: {
-                  input: "$shows",
-                  as: "shows",
-                  cond: { $ifNull: ["$$shows._id", false] },
-                },
+        .findOne({ _id: ObjectID(screenId) });
+      if (screen.shows.length === 0) {
+        resolve(screen);
+      } else {
+        screen = await db
+          .getDb()
+          .collection(collections.SCREEN_COLLECTION)
+          .aggregate([
+            { $match: { _id: ObjectID(screenId) } },
+            {
+              $lookup: {
+                from: collections.SHOW_COLLECTION,
+                foreignField: "_id",
+                localField: "shows",
+                as: "shows",
               },
-              // shows: { $arrayElemAt: ["$movie", 0] },
-              // shows$movie: {
-              //   $filter: {
-              //     input: "$movie",
-              //     as: "movie",
-              //     cond: { $ifNull: ["$$movie._id", false] },
-              //   },
-              // },
             },
-          },
-          // {
-          //   $lookup: {
-          //     from: collections.SCREEN_COLLECTION,
-          //     let: { partyId: "$_id" },
-          //     pipeline: [
-          //       { $match: { $expr: { $eq: ["$party_id", "$$partyId"] } } },
-          //       {
-          //         $lookup: {
-          //           from: "addressComment",
-          //           let: { addressId: "$_id" },
-          //           pipeline: [
-          //             {
-          //               $match: {
-          //                 $expr: { $eq: ["$address_id", "$$addressId"] },
-          //               },
-          //             },
-          //           ],
-          //           as: "address",
-          //         },
-          //       },
-          //     ],
-          //     as: "address",
-          //   },
-          // },
-          // { $unwind: "$address" },
-        ])
-        .toArray();
-      console.log(screen);
-      console.log(screen[0].shows);
-      resolve(screen[0]);
+            {
+              $unwind: {
+                path: "$shows",
+                preserveNullAndEmptyArrays: true,
+              },
+            },
+            {
+              $lookup: {
+                from: collections.MOVIE_COLLECTION,
+                localField: "shows.movie",
+                foreignField: "_id",
+                as: "shows.movie",
+              },
+            },
+            { $unwind: "$shows.movie" },
+            {
+              $group: {
+                _id: "$_id",
+                name: { $first: "$name" },
+                shows: { $push: "$shows" },
+              },
+            },
+          ])
+          .toArray();
+        // console.log(JSON.stringify(screen, null, 4));
+        resolve(screen[0]);
+      }
     });
   },
   addShow: (screenId, showDetails) => {

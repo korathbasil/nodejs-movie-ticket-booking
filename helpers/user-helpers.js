@@ -264,18 +264,51 @@ module.exports = {
         .getDb()
         .collection(collections.OWNERS_COLLECTION)
         .aggregate([
-          { $match: { _id: ObjectID(movieId) } },
+          {
+            $lookup: {
+              from: collections.SCREEN_COLLECTION,
+              foreignField: "_id",
+              localField: "screens",
+              as: "screens",
+            },
+          },
+          { $unwind: "$screens" },
+          // { $unwind: "$screens.shows" },
+          // { $group: { _id: "$_id", screens: { $push: "$screens" } } },
           {
             $lookup: {
               from: collections.SHOW_COLLECTION,
-              foreignField: "movie",
-              localField: "_id",
-              as: "shows",
+              // foreignField: "_id",
+              // localField: "screens.shows",
+              as: "screens.shows",
+              let: { movie: "screen.shows.movie" },
+              pipeline: [{ $match: { movie: ObjectID(movieId) } }],
             },
           },
+          // { $match: { screen } },
+
+          // {
+          //   $lookup: {
+          //     from: collections.MOVIE_COLLECTION,
+          //     foreignField: "_id",
+          //     localField: "screens.shows.movie",
+          //     as: "screens.shows.movie",
+          //   },
+          // },
+          // { $unwind: "$screens.shows.movie" },
+          // { $project: { theater: 1, screens: 1 } },
+          // {
+          //   $group: {
+          //     _id: "$_id",
+          //     name: { $first: "$theater" },
+          //     // screens: { $push: "$screens" },
+          //     screens$shows: { $push: "$screens.shows" },
+          //   },
+          // },
         ])
         .toArray();
-      console.log(movie);
+      // console.log(movie);
+      console.log(JSON.stringify(movie, null, 4));
     });
   },
   payRazorpay: () => {
