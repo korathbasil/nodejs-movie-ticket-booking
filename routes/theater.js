@@ -121,6 +121,7 @@ router.post(
       req.body,
       (err, show) => {
         if (err) {
+          res.redirect(`/theater/screen/schedule/${screenId}/add-show`);
         } else {
           theaterHelpers.addShow(screenId, show).then(() => {
             res.redirect(`/theater/screen/schedule/${screenId}`);

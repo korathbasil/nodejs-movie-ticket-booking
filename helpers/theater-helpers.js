@@ -125,7 +125,7 @@ module.exports = {
     });
   },
   verifyShowTiming: (currentShows, movie, newShow, cb) => {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       var datefns = require("date-fns");
       // Altering newShow object with start and end time in ISO
       newShow.showStartTime = datefns.parseISO(newShow.datetime);
@@ -138,8 +138,19 @@ module.exports = {
       if (currentShows.length === 0) {
         cb(null, newShow);
       } else {
+        await currentShows.forEach((show) => {
+          // Adding 30min breaktime to the show
+          show.showEndTime = datefns.addMinutes(show.showEndTime, 30);
+          const isTimeOverlapping = datefns.areIntervalsOverlapping(
+            { start: newShow.showStartTime, end: newShow.showEndTime },
+            { start: show.showStartTime, end: show.showEndTime }
+          );
+          if (isTimeOverlapping) {
+            cb(true, null);
+          }
+        });
+        cb(null, newShow);
       }
-      console.log(newShow);
     });
   },
   addShow: (screenId, showDetails) => {
