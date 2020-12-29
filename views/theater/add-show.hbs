@@ -14,17 +14,15 @@
                 <option value="{{this._id}}">{{this.title}}</option>
                 {{/each}}
             </select>
-            <label for="date">Date</label>
-            <input type="text" name="date">
-            <label for="runtime">Showtime</label>
-            <div class="runtime-input-wrapper">
+            <label for="datetime">Date</label>
+            <input type="datetime-local" name="datetime">
+            {{!-- <label for="runtime">Showtime</label> --}}
+            {{!-- <div class="runtime-input-wrapper">
                 <input type="text" name="showtimeHr" maxlength="2" type="number">
                 <label for="showtimeHr">Hr</label>
                 <input type="text" name="showtimeMin" maxlength="2" type="number">
                 <label for="showtimeMin">Min</label>
-            </div>
-
-
+            </div> --}}
             <button>Submit</button>
         </form>
     </div>

@@ -120,9 +120,17 @@ module.exports = {
             },
           ])
           .toArray();
-        // console.log(JSON.stringify(screen, null, 4));
         resolve(screen[0]);
       }
+    });
+  },
+  verifyShowTiming: (currentShows, movie, newShow) => {
+    return new Promise((resolve, reject) => {
+      // console.log(movie);
+      const movieRuntimeInMinutes = movie.runtimeHr * 60 + movie.runtimeHrMin;
+      console.log(movieRuntimeInMinutes);
+      console.log(currentShows);
+      console.log(newShow);
     });
   },
   addShow: (screenId, showDetails) => {
@@ -198,6 +206,9 @@ module.exports = {
   },
   addMovie: (movieDetails) => {
     return new Promise((resolve, reject) => {
+      movieDetails.runtime =
+        parseInt(movieDetails.runtimeHr) * 60 +
+        parseInt(movieDetails.runtimeMin);
       db.getDb()
         .collection(collections.MOVIE_COLLECTION)
         .insertOne(movieDetails)
