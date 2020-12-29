@@ -124,12 +124,21 @@ module.exports = {
       }
     });
   },
-  verifyShowTiming: (currentShows, movie, newShow) => {
+  verifyShowTiming: (currentShows, movie, newShow, cb) => {
     return new Promise((resolve, reject) => {
-      // console.log(movie);
-      const movieRuntimeInMinutes = movie.runtimeHr * 60 + movie.runtimeHrMin;
-      console.log(movieRuntimeInMinutes);
-      console.log(currentShows);
+      var datefns = require("date-fns");
+      // Altering newShow object with start and end time in ISO
+      newShow.showStartTime = datefns.parseISO(newShow.datetime);
+      newShow.showEndTime = datefns.addMinutes(
+        newShow.showStartTime,
+        movie.runtimeInMin
+      );
+      delete newShow.datetime;
+
+      if (currentShows.length === 0) {
+        cb(null, newShow);
+      } else {
+      }
       console.log(newShow);
     });
   },
@@ -206,9 +215,11 @@ module.exports = {
   },
   addMovie: (movieDetails) => {
     return new Promise((resolve, reject) => {
-      movieDetails.runtime =
+      movieDetails.runtimeInMin =
         parseInt(movieDetails.runtimeHr) * 60 +
         parseInt(movieDetails.runtimeMin);
+      delete movieDetails.runtimeHr;
+      delete movieDetails.runtimeMin;
       db.getDb()
         .collection(collections.MOVIE_COLLECTION)
         .insertOne(movieDetails)

@@ -115,10 +115,19 @@ router.post(
     const screenId = req.params.screenId;
     const movie = await theaterHelpers.getMovieById(req.body.movie);
     const screen = await theaterHelpers.getScreenDetailsById(screenId);
-    theaterHelpers.verifyShowTiming(screen.shows, movie, req.body);
-    // theaterHelpers.addShow(screenId, req.body).then(() => {
-    //   res.redirect(`/theater/screen/schedule/${screenId}`);
-    // });
+    theaterHelpers.verifyShowTiming(
+      screen.shows,
+      movie,
+      req.body,
+      (err, show) => {
+        if (err) {
+        } else {
+          theaterHelpers.addShow(screenId, show).then(() => {
+            res.redirect(`/theater/screen/schedule/${screenId}`);
+          });
+        }
+      }
+    );
   }
 );
 // Edit screen
