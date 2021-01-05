@@ -124,3 +124,24 @@
   object-fit: cover;
   margin-right: 30px;
 }
+
+/* Show Seat Selection */
+.screen-contents {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.seats-skeleton-container,
+.ticket-details-container {
+  width: 45%;
+}
+.seats-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+.seat {
+  width: 20px;
+  height: 20px;
+  margin: 3px;
+  background-color: aquamarine;
+}

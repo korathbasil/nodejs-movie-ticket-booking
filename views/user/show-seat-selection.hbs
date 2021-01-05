@@ -1,0 +1,28 @@
+<div class="user-parent">
+    <div class="screen-contents">
+        <div class="seats-skeleton-container">
+            <h2>Screen</h2>
+            <div class="seats-container">
+                {{#each show.vipSeats}}
+                {{!-- <div class="seat"></div> --}}
+
+                <div class="seats-row">
+                    {{#each this}}
+                    <div class="seat"></div>
+                    {{/each}}
+                </div>
+
+
+                {{/each}}
+
+            </div>
+        </div>
+        <div class="ticket-details-container">
+            <h3>Movie</h3>
+            <form action="/show/{{show._id}}/payment">
+                <button type="submit">PROCEED TO PAYMENT</button>
+            </form>
+        </div>
+
+    </div>
+</div>

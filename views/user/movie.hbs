@@ -13,4 +13,19 @@
             <h4>Cast: {{movie.cast}}</h4>
         </div>
     </div>
+    {{!-- {{#each theaters}}
+    <a href="">{{this._id.name}}</a>
+    <h2>{{this._id.name}}</h2>
+    {{#each this.screens}}
+    <h3>{{this.name}}</h3>
+    {{#each this.shows}}
+    <h5>{{this.showStartTime}}</h5>
+    {{/each}}
+    {{/each}}
+    {{/each}} --}}
+    {{#each shows}}
+    <a href="/show/{{this._id}}">
+        <h3>{{this.showStartTime}}</h3>
+    </a>
+    {{/each}}
 </div>

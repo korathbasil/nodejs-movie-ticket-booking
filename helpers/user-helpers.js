@@ -258,9 +258,9 @@ module.exports = {
       resolve(scheduledMovies);
     });
   },
-  getMovieById: (movieId) => {
+  getMovieShowsById: (movieId) => {
     return new Promise(async (resolve, reject) => {
-      const movie = await db
+      const theaters = await db
         .getDb()
         .collection(collections.OWNERS_COLLECTION)
         .aggregate([
@@ -273,18 +273,55 @@ module.exports = {
             },
           },
           { $unwind: "$screens" },
-          // { $unwind: "$screens.shows" },
-          // { $group: { _id: "$_id", screens: { $push: "$screens" } } },
+
           {
             $lookup: {
               from: collections.SHOW_COLLECTION,
-              // foreignField: "_id",
-              // localField: "screens.shows",
+              foreignField: "_id",
+              localField: "screens.shows",
               as: "screens.shows",
-              let: { movie: "screen.shows.movie" },
-              pipeline: [{ $match: { movie: ObjectID(movieId) } }],
+              // let: { movie: "screen.shows.movie" },
+              // pipeline: [{ $match: { movie: ObjectID(movieId) } }],
             },
           },
+          {
+            $group: {
+              _id: {
+                _id: "$_id",
+                name: "$name",
+              },
+              // shows: { $push: "$screens.shows" },
+              screens: { $push: "$screens" },
+            },
+          },
+          {
+            $unwind: {
+              path: "$screens.shows",
+            },
+          },
+
+          {
+            $match: {
+              "screens.shows.movie": ObjectID(movieId),
+            },
+          },
+
+          // {
+          //   $lookup: {
+          //     from: collections.MOVIE_COLLECTION,
+          //     let: { movie: ObjectID(movieId) },
+          //     pipeline: [
+          //       {
+          //         $match: {
+          //           $expr: {
+          //             $eq: ["$_id", "$movie"],
+          //           },
+          //         },
+          //       },
+          //     ],
+          //     as: "screens.shows.movie",
+          //   },
+          // },
           // { $match: { screen } },
 
           // {
@@ -299,30 +336,71 @@ module.exports = {
           // { $project: { theater: 1, screens: 1 } },
           // {
           //   $group: {
-          //     _id: "$_id",
-          //     name: { $first: "$theater" },
-          //     // screens: { $push: "$screens" },
-          //     screens$shows: { $push: "$screens.shows" },
+          //     _id: {
+          //       _id: "$_id",
+          //       name: "$name",
+          //     },
+          //     screens: {
+          //       $group: {
+          //         _id: "$screens._id",
+          //       },
+          //     },
+          //     // screens$shows: { $push: "$screens.shows" },
           //   },
           // },
         ])
         .toArray();
-      // console.log(movie);
-      console.log(JSON.stringify(movie, null, 4));
+      console.log(theaters[0].screens);
+      resolve(theaters);
+      // console.log(JSON.stringify(movie, null, 4));
     });
   },
-  payRazorpay: () => {
-    const instance = new Razorpay({
-      key_id: process.env.RAZORPAY_KEY_ID,
-      key_secret: process.env.RAZORPAY_KEY_SECRET,
+  getAllShows: (movieId) => {
+    return new Promise(async (resolve, reject) => {
+      const shows = await db
+        .getDb()
+        .collection(collections.SHOW_COLLECTION)
+        .aggregate([
+          {
+            $lookup: {
+              from: collections.MOVIE_COLLECTION,
+              localField: "movie",
+              foreignField: "_id",
+              as: "movie",
+            },
+          },
+          { $unwind: "$movie" },
+          { $match: { "movie._id": ObjectID(movieId) } },
+        ])
+        .toArray();
+      resolve(shows);
+      // console.log(shows);
     });
-    let options = {
-      amount: 1000,
-      currency: "INR",
-      receipt: "order_rcptid_11",
-    };
-    instance.orders.create(options, function (err, order) {
-      console.log(order);
+  },
+  getShowById: (showId) => {
+    return new Promise((resolve, reject) => {
+      db.getDb()
+        .collection(collections.SHOW_COLLECTION)
+        .findOne({ _id: ObjectID(showId) })
+        .then((show) => {
+          resolve(show);
+        });
+    });
+  },
+  generateOrderRazorpay: () => {
+    return new Promise((resolve, reject) => {
+      const instance = new Razorpay({
+        key_id: process.env.RAZORPAY_KEY_ID,
+        key_secret: process.env.RAZORPAY_KEY_SECRET,
+      });
+      let options = {
+        amount: 1000,
+        currency: "INR",
+        receipt: "order_rcptid_11",
+      };
+      instance.orders.create(options, function (err, order) {
+        resolve(order);
+      });
     });
   },
 };

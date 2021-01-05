@@ -92,12 +92,36 @@ router.get("/", function (req, res) {
 // Movie page
 router.get("/movie/:id", (req, res) => {
   const movieId = req.params.id;
-  userHelpers.getMovieById(movieId).then((movie) => {
+  // userHelpers.getMovieShowsById(movieId).then((theaters) => {
+  //   res.render("user/movie", {
+  //     theaters: theaters,
+  //     user: req.session.user,
+  //     userRoute: true,
+  //   });
+  // });
+  userHelpers.getAllShows(movieId).then((shows) => {
     res.render("user/movie", {
-      movie: movie,
+      shows: shows,
       user: req.session.user,
       userRoute: true,
     });
+  });
+});
+// Seat selection
+router.get("/show/:showId", (req, res) => {
+  const showId = req.params.showId;
+  userHelpers.getShowById(showId).then((show) => {
+    res.render("user/show-seat-selection", {
+      user: req.session.user,
+      userRoute: true,
+      show: show,
+    });
+  });
+});
+router.get("/show/:showid/payment", (req, res) => {
+  res.render("user/payment", {
+    user: req.session.user,
+    userRoute: true,
   });
 });
 // Theaters page

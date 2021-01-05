@@ -131,6 +131,10 @@ router.post(
     );
   }
 );
+// Edit show
+
+// Delete show
+
 // Edit screen
 router.get(
   "/screen/edit-screen/:screenId",
