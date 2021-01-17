@@ -11,6 +11,8 @@ body {
   --admin-tertiary: blue;
   --background: rgba(218, 205, 179, 0.387);
   background-color: var(--background);
+
+  /* User Colors */
 }
 
 a {
@@ -110,4 +112,25 @@ a {
 }
 .admin-nav > li:hover {
   background-color: rgba(0, 0, 255, 0.408);
+}
+
+/* User Header */
+.header-account {
+  display: flex;
+  align-items: center;
+  background-color: #227373;
+  padding: 3px;
+  border-radius: 99px;
+}
+
+.header-account > img {
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+  margin-right: 10px;
+  border-radius: 999px;
+}
+.header-account > h4 {
+  color: white;
+  margin-right: 10px;
 }

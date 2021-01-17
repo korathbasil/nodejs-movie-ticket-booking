@@ -124,6 +124,12 @@ router.get("/show/:showid/payment", (req, res) => {
     userRoute: true,
   });
 });
+router.get('/pay/razorpay', (req, res) => {
+  userHelpers.generateOrderRazorpay()
+  .then(order => {
+    
+  })
+})
 // Theaters page
 router.get("/cinemas", (req, res) => {
   res.render("user/cinemas", { user: req.session.user, userRoute: true });
