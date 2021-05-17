@@ -22,5 +22,5 @@ module.exports.connect = (done) => {
 module.exports.getDb = () => {
   if (db) {
     return db;
-  }
+  } else console.log("Error happened")
 };
