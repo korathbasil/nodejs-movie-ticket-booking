@@ -15,8 +15,8 @@ router.post("/signup", (req, res) => {
   adminHelpers
     .signup(req.body)
     .then(() => {
-      req.session.admin = true;
-      res.redirect("/admin");
+      req.session.admin = false;
+      res.redirect("/admin/login");
     })
     .catch(() => {
       res.redirect("/admin/login");
