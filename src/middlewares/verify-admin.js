@@ -1,4 +1,4 @@
-const adminHelpers = require("../helpers/admin-helpers");
+const adminHelpers = require("../services/admin-helpers");
 
 module.exports = async (req, res, next) => {
   if (await adminHelpers.getAdminById(req.session.passport.user)) {

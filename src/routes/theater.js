@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require("passport");
 const sharp = require("sharp");
 
-const theaterHelpers = require("../helpers/theater-helpers");
+const theaterService = require("../services/theatreService");
 const verifyLogout = require("../middlewares/verify-theater-logout");
 const verifyLogin = require("../middlewares/verify-theater-login");
 const verifyTheater = require("../middlewares/verify-theater");
@@ -43,7 +43,7 @@ router.get("/", verifyLogin, verifyTheater, (req, res) => {
 // Screen Management
 router.get("/screen", verifyLogin, verifyTheater, (req, res) => {
   const ownerId = req.session.passport.user;
-  theaterHelpers.getScreens(ownerId).then((screens) => {
+  theaterService.getScreens(ownerId).then((screens) => {
     console.log(screens);
     res.render("theater/screen-management", {
       theaterRoute: true,
@@ -66,7 +66,7 @@ router.post("/screen/add-screen", verifyLogin, verifyTheater, (req, res) => {
   // console.log(req.body);
   // const screen = {};
   // screen.name = req.body.name;
-  theaterHelpers
+  theaterService
     .addScreen(req.body, ownerId)
     .then(() => res.redirect("/theater/screen"))
     .catch(() => res.redirect("/theater/screen/add-screen"));
@@ -78,7 +78,7 @@ router.get(
   verifyTheater,
   (req, res) => {
     const screenId = req.params.screenId;
-    theaterHelpers.getScreenDetailsById(screenId).then((screen) => {
+    theaterService.getScreenDetailsById(screenId).then((screen) => {
       // console.log(JSON.stringify(screen, null, 4));
       res.render("theater/screen-schedule", {
         theaterRoute: true,
@@ -96,7 +96,7 @@ router.get(
   verifyTheater,
   (req, res) => {
     const screenId = req.params.screenId;
-    theaterHelpers.getMovies().then((movies) => {
+    theaterService.getMovies().then((movies) => {
       res.render("theater/add-show", {
         theaterRoute: true,
         title: "Screen Management - Theater - Cinemax",
@@ -113,9 +113,9 @@ router.post(
   verifyTheater,
   async (req, res) => {
     const screenId = req.params.screenId;
-    const movie = await theaterHelpers.getMovieById(req.body.movie);
-    const screen = await theaterHelpers.getScreenDetailsById(screenId);
-    theaterHelpers.verifyShowTiming(
+    const movie = await theaterService.getMovieById(req.body.movie);
+    const screen = await theaterService.getScreenDetailsById(screenId);
+    theaterService.verifyShowTiming(
       screen.shows,
       movie,
       req.body,
@@ -123,7 +123,7 @@ router.post(
         if (err) {
           res.redirect(`/theater/screen/schedule/${screenId}/add-show`);
         } else {
-          theaterHelpers.addShow(screenId, show).then(() => {
+          theaterService.addShow(screenId, show).then(() => {
             res.redirect(`/theater/screen/schedule/${screenId}`);
           });
         }
@@ -142,7 +142,7 @@ router.get(
   verifyTheater,
   (req, res) => {
     const screenId = req.params.screenId;
-    theaterHelpers.getScreenById(screenId).then((screen) => {
+    theaterService.getScreenById(screenId).then((screen) => {
       res.render("theater/edit-screen", {
         theaterRoute: true,
         title: "Movie Management - Theater - Cinemax",
@@ -158,7 +158,7 @@ router.post(
   verifyTheater,
   (req, res) => {
     const screenId = req.params.screenId;
-    theaterHelpers
+    theaterService
       .editScreen(screenId, req.body)
       .then(() => res.redirect("/theater/screen"));
   }
@@ -171,14 +171,14 @@ router.get(
   (req, res) => {
     const screenId = req.params.screenId;
     const ownerId = req.session.passport.user;
-    theaterHelpers
+    theaterService
       .deleteScreen(screenId, ownerId)
       .then(() => res.redirect("/theater/screen"));
   }
 );
 // Movie Mangement
 router.get("/movie", verifyLogin, verifyTheater, (req, res) => {
-  theaterHelpers
+  theaterService
     .getMovies()
     .then((movies) => {
       res.render("theater/movie-management", {
@@ -223,7 +223,7 @@ router.post(
       .resize({ width: 540 })
       .toFile(`./public/images/movies/${fileName}`)
       .then(() => {
-        theaterHelpers
+        theaterService
           .addMovie(req.body)
           .then(() => {
             res.redirect("/theater/movie");
@@ -239,7 +239,7 @@ router.get(
   verifyTheater,
   (req, res) => {
     const movieId = req.params.movieId;
-    theaterHelpers.getMovieById(movieId).then((movie) => {
+    theaterService.getMovieById(movieId).then((movie) => {
       console.log(movie);
       res.render("theater/edit-movie", {
         theaterRoute: true,
@@ -256,7 +256,7 @@ router.post(
   verifyTheater,
   (req, res) => {
     const movieId = req.params.movieId;
-    theaterHelpers
+    theaterService
       .editMovie(req.body, movieId)
       .then(() => res.redirect("/theater/movie"));
   }
@@ -268,7 +268,7 @@ router.get(
   verifyTheater,
   (req, res) => {
     const movieId = req.params.movieId;
-    theaterHelpers
+    theaterService
       .deleteMovie(movieId)
       .then(() => res.redirect("/theater/movie"))
       .catch(() => res.redirect("/theater/movie"));

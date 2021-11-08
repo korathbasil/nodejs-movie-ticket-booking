@@ -3,7 +3,7 @@ const router = express.Router();
 const sharp = require("sharp");
 const passport = require("passport");
 
-const adminHelpers = require("../helpers/admin-helpers");
+const adminService = require("../services/adminService");
 const verifyLogout = require("../middlewares/verify-admin-logout");
 const verifylogin = require("../middlewares/verify-admin-login");
 const verifyAdmin = require("../middlewares/verify-admin");
@@ -12,7 +12,7 @@ const clearSession = require("../middlewares/clear-session");
 // Signup
 router.post("/signup", (req, res) => {
   console.log(req.body);
-  adminHelpers
+  adminService
     .signup(req.body)
     .then(() => {
       req.session.admin = false;
@@ -26,7 +26,7 @@ router.post("/signup", (req, res) => {
 router.get("/login", verifyLogout, (req, res) => {
   var flash = req.flash("message");
   console.log(flash);
-  adminHelpers
+  adminService
     .findAdmin()
     .then(() => {
       // console.log(req.session.adminErrors);
@@ -72,7 +72,7 @@ router.get("/", verifylogin, verifyAdmin, (req, res) => {
 });
 // Theatre Mangement
 router.get("/theater", verifylogin, verifyAdmin, (req, res) => {
-  adminHelpers.getAllTheterOwners().then((owners) => {
+  adminService.getAllTheterOwners().then((owners) => {
     res.render("admin/theater-management", {
       title: "Theater Management - Admin - CineMax",
       adminRoute: true,
@@ -88,7 +88,7 @@ router.get(
   verifyAdmin,
   (req, res) => {
     const ownerId = req.params.ownerId;
-    adminHelpers.getTheaterOwner(ownerId).then((ownerDetails) => {
+    adminService.getTheaterOwner(ownerId).then((ownerDetails) => {
       res.render("admin/theaters", {
         title: "Theater Management - Admin - CineMax",
         adminRoute: true,
@@ -123,7 +123,7 @@ router.post(
       req.body.email.split("@")[0] + Math.floor(Math.random() * 10000 + 1); // Generating a username with email address
     const password = Math.random().toString(36).substring(7); // Generating password
 
-    adminHelpers.sendAddTheaterOwnerMail(
+    adminService.sendAddTheaterOwnerMail(
       req.body.email,
       username,
       password,
@@ -136,7 +136,7 @@ router.post(
           await sharp(req.files.image.data)
             .resize({ width: 360 })
             .toFile(`./public/images/owners/${fileName}`);
-          adminHelpers
+          adminService
             .addTheaterOwner(req.body)
             .then(() => res.redirect("/admin/theater"))
             .catch(() => res.redirect("/admin/theater/add-owner"));
@@ -153,7 +153,7 @@ router.get(
   verifyAdmin,
   (req, res) => {
     const ownerId = req.params.ownerId;
-    adminHelpers.getTheaterOwner(ownerId).then((ownerDetails) => {
+    adminService.getTheaterOwner(ownerId).then((ownerDetails) => {
       res.render("admin/edit-theater-owner", {
         title: "Theater Management - Admin - CineMax",
         adminRoute: true,
@@ -166,7 +166,7 @@ router.get(
 router.post("/theater/edit-owner/:ownerId", verifyAdmin, (req, res) => {
   const ownerId = req.params.ownerId;
   // theaterHeplers.getOwnerById(ownerId)
-  adminHelpers
+  adminService
     .editTheaterOwner(req.body, ownerId)
     .then(() => {
       res.redirect("/admin/theater");
@@ -182,7 +182,7 @@ router.get(
   verifyAdmin,
   (req, res) => {
     const ownerId = req.params.ownerId;
-    adminHelpers
+    adminService
       .deleteTheaterOwner(ownerId)
       .then(() => res.redirect("/admin/theater"))
       .catch((e) => console.log(e));
