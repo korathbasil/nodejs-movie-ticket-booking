@@ -1,6 +1,6 @@
 const createError = require("http-errors");
-const express = require("express");
-const path = require("path");
+import express, {Request, Response} from  "express";
+import path from "path";
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const dotenv = require("dotenv");
@@ -92,4 +92,4 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-module.exports = app;
+export default app;
