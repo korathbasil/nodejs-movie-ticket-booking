@@ -1,12 +1,12 @@
-const bcrypt = require("bcrypt");
+import { hash, compare } from "bcrypt";
 const db = require("../config/dbConfig");
 const collections = require("../config/collections");
 const { ObjectID } = require("mongodb");
 
-module.exports = {
+export default {
   findAdmin: () => {
     // Checking if an Admin already exists
-    return new Promise(async (resolve, reject) => {
+    return new Promise<boolean>(async (resolve, reject) => {
       const admin = await db
         .getDb()
         .collection(collections.ADMIN_COLLECTION)
@@ -15,26 +15,28 @@ module.exports = {
       if (admin.length == 0) {
         reject();
       } else {
-        resolve();
+        resolve(true);
       }
     });
   },
-  getAdminById: async (id) => {
+
+  getAdminById: async (id: string) => {
     const admin = await db
       .getDb()
       .collection(collections.ADMIN_COLLECTION)
       .findOne({ _id: ObjectID(id) });
     return admin;
   },
-  signup: (data) => {
-    return new Promise(async (resolve, reject) => {
+
+  signup: (data: { email: string; password: string }) => {
+    return new Promise<void>(async (resolve, reject) => {
       const admin = await db
         .getDb()
         .collection(collections.ADMIN_COLLECTION)
         .find()
         .toArray();
       if (admin.length == 0) {
-        const hashedPassword = await bcrypt.hash(data.password, 10);
+        const hashedPassword = await hash(data.password, 10);
         const newAdmin = {
           email: data.email,
           password: hashedPassword,
@@ -48,14 +50,15 @@ module.exports = {
       }
     });
   },
-  login: (data) => {
+
+  login: (data: { email: string; password: string }) => {
     return new Promise(async (resolve, reject) => {
       const selectedUser = await db
         .getDb()
         .collection("admin")
         .findOne({ email: data.email });
       if (selectedUser) {
-        isPasswordTrue = await bcrypt.compare(
+        const isPasswordTrue = await compare(
           data.password,
           selectedUser.password
         );
@@ -69,8 +72,9 @@ module.exports = {
       }
     });
   },
+
   getAllTheterOwners: () => {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve) => {
       const owners = await db
         .getDb()
         .collection(collections.OWNERS_COLLECTION)
@@ -79,7 +83,13 @@ module.exports = {
       resolve(owners);
     });
   },
-  sendAddTheaterOwnerMail: (recieverId, username, password, cb) => {
+
+  sendAddTheaterOwnerMail: (
+    recieverId: string,
+    username: string,
+    password: string,
+    cb: any
+  ) => {
     // Configure Nodemailer
     const nodemailer = require("nodemailer");
     const transporter = nodemailer.createTransport({
@@ -158,12 +168,11 @@ module.exports = {
         html: mailBody,
       })
       .then(() => cb())
-      .catch((e) => cb(e));
+      .catch((e: any) => cb(e));
   },
-  addTheaterOwner: (ownerData) => {
-    return new Promise(async (resolve, reject) => {
-      const password = ownerData.password;
-      const hashedPassword = await bcrypt.hash(ownerData.password, 10);
+  addTheaterOwner: (ownerData: any) => {
+    return new Promise<void>(async (resolve, reject) => {
+      const hashedPassword = await hash(ownerData.password, 10);
       ownerData.password = hashedPassword;
       db.getDb()
         .collection(collections.OWNERS_COLLECTION)
@@ -172,18 +181,18 @@ module.exports = {
         .catch(() => reject());
     });
   },
-  getTheaterOwner: (ownerId) => {
-    return new Promise((resolve, reject) => {
+  getTheaterOwner: (ownerId: string) => {
+    return new Promise((resolve) => {
       db.getDb()
         .collection(collections.OWNERS_COLLECTION)
         .findOne({ _id: ObjectID(ownerId) })
-        .then((owner) => {
+        .then((owner: any) => {
           resolve(owner);
         });
     });
   },
-  editTheaterOwner: (newData, ownerId) => {
-    return new Promise(async (resolve, reject) => {
+  editTheaterOwner: (newData: any, ownerId: string) => {
+    return new Promise<void>(async (resolve, reject) => {
       const theaterOwner = await db
         .getDb()
         .collection(collections.OWNERS_COLLECTION)
@@ -207,7 +216,7 @@ module.exports = {
         const password = Math.random().toString(36).substring(7); // Generating password
 
         newData.username = username;
-        newData.password = await bcrypt.hash(password, 10);
+        newData.password = await hash(password, 10);
 
         // Configure Nodemailer
         const nodemailer = require("nodemailer");
@@ -296,15 +305,14 @@ module.exports = {
               .then(() => resolve())
               .catch(() => reject());
           })
-          .catch((e) => {
-            console.log(e);
+          .catch(() => {
             reject();
           });
       }
     });
   },
-  deleteTheaterOwner: (ownerId) => {
-    return new Promise((resolve, reject) => {
+  deleteTheaterOwner: (ownerId: string) => {
+    return new Promise<void>((resolve, reject) => {
       db.getDb()
         .collection(collections.OWNERS_COLLECTION)
         .deleteOne({ _id: ObjectID(ownerId) })
