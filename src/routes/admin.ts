@@ -1,5 +1,7 @@
 const express = require("express");
-const router = express.Router();
+
+import { Router, Request, Response } from "express";
+const router = Router();
 const sharp = require("sharp");
 const passport = require("passport");
 
@@ -10,7 +12,7 @@ const verifyAdmin = require("../middlewares/verify-admin");
 const clearSession = require("../middlewares/clear-session");
 
 // Signup
-router.post("/signup", (req, res) => {
+router.post("/signup", (req: Request, res: Response) => {
   console.log(req.body);
   adminService
     .signup(req.body)
@@ -112,9 +114,8 @@ router.post(
   verifyAdmin,
   async (req, res) => {
     const image = req.files.image;
-    const fileExtension = image.name.split(".")[
-      image.name.split(".").length - 1
-    ]; // Getting file extension by splitting on extesion dot(.)
+    const fileExtension =
+      image.name.split(".")[image.name.split(".").length - 1]; // Getting file extension by splitting on extesion dot(.)
     const fileName = new Date().toISOString() + "." + fileExtension; // Creating a new file name with new Date() and fileExtension
     const imagePath = "/images/owners/" + fileName; // Setting the public path
     req.body.image = imagePath;
