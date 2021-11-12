@@ -1,5 +1,5 @@
 const createError = require("http-errors");
-import express, {Request, Response} from  "express";
+import express, { Request, Response } from "express";
 import path from "path";
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
@@ -32,8 +32,8 @@ app.engine(
   })
 );
 // DB connect
-const db = require("./config/dbConfig");
-db.connect((err) => {
+const { connectToDatabase } = require("./config/dbConfig");
+connectToDatabase((err: any, _: any) => {
   if (err) {
     console.error(err);
   } else {
@@ -66,23 +66,18 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use((req, res, next) => {
-  // console.log(req.session.passport);
-  next();
-});
-
 app.use("/", userRouter);
 app.use("/admin", adminRouter);
 app.use("/theater", theaterRoute);
 app.post("/test");
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use(function (_, _a, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use(function (err: any, req: Request, res: Response) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
