@@ -5,6 +5,7 @@ declare global {
     interface Request {
       user?: any;
       session: any;
+      files: any;
     }
   }
 }
