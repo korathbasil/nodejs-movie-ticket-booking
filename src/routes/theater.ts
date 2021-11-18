@@ -1,7 +1,7 @@
 const express = require("express");
 const passport = require("passport");
 
-import theaterController from "src/controllers/theaterController";
+import theaterController from "../controllers/theaterController";
 
 const router = express.Router();
 

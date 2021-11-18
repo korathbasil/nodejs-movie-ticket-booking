@@ -1,6 +1,6 @@
 var express = require("express");
 
-import userController from "src/controllers/userController";
+import userController from "../controllers/userController";
 const verifyUserLogin = require("../middlewares/verifyUserLogin");
 
 var router = express.Router();

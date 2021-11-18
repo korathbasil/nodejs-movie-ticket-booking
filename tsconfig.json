@@ -3,8 +3,9 @@
     "target": "es2017",
     "module": "commonjs",
     "lib": ["dom", "es6", "es2017", "esnext.asynciterable"],
+    "allowJs": true,
     "skipLibCheck": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "outDir": "./dist",
     "moduleResolution": "node",
     "removeComments": true,
@@ -21,8 +22,11 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
-    "baseUrl": "."
+    "baseUrl": "src"
   },
   "exclude": ["node_modules"],
-  "include": ["./src/**/*.ts", "types"]
+  "include": ["./src/**/*.ts", "./src/**/*.hbs", "types"]
 }
+
+
+// "./src/**/*.ts"

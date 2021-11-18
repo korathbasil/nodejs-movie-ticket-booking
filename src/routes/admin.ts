@@ -1,7 +1,7 @@
 import { Router } from "express";
 const passport = require("passport");
 
-import adminController from "src/controllers/adminController";
+import adminController from "../controllers/adminController";
 
 const router = Router();
 

@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "nodemon dist/app.js",
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "build": "tsc",
+    "copy": "cp -r ./src/views ./dist/views && cp -r ./src/public ./dist/public"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
