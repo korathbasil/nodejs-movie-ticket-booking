@@ -5,7 +5,7 @@ const { ObjectID } = require("mongodb");
 const Razorpay = require("razorpay");
 const bcrypt = require("bcrypt");
 
-module.exports = {
+export default {
   signup: (userData) => {
     return new Promise(async (resolve, reject) => {
       userData.password = await bcrypt.hash(userData.password, 10);
