@@ -22,10 +22,10 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
-    "baseUrl": "src"
+    "baseUrl": "src",
   },
   "exclude": ["node_modules"],
-  "include": ["./src/**/*.ts", "./src/**/*.hbs", "types"]
+  "include": ["./src/**/*.ts", "./src/**/*.hbs", "@types"]
 }
 
 

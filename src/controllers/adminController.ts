@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import sharp from "sharp";
 
 import adminService from "../services/adminService";
 
@@ -101,7 +102,7 @@ export default {
       req.body.email,
       username,
       password,
-      async (e) => {
+      async (e: any) => {
         if (e) {
           res.redirect("/admin/theater/add-owner");
         } else {
