@@ -2,21 +2,28 @@ import { Users } from "models";
 
 const collections = require("../config/collections");
 const { ObjectID } = require("mongodb");
+import { ObjectId } from "mongodb";
 
 const Razorpay = require("razorpay");
 const bcrypt = require("bcrypt");
 
+import { passwordHelpers } from "helpers";
+
 export default {
-  signup: (userData) => {
-    return new Promise(async (resolve, reject) => {
-      userData.password = await bcrypt.hash(userData.password, 10);
-      // getDb()?
-      //   .collection(collections.USER_COLLECTION)
-      Users?.insertOne(userData).then((data) => {
-        resolve(data.ops[0]._id);
-      });
+  signup: (userDetails: { name: string; email: string; password: string }) => {
+    return new Promise<ObjectId>(async (resolve, reject) => {
+      userDetails.password = await passwordHelpers.hashPassword(
+        userDetails.password
+      );
+
+      Users?.insertOne(userDetails)
+        .then((data) => {
+          resolve(data.insertedId);
+        })
+        .catch(() => reject(new Error("Operation failed")));
     });
   },
+
   sendSignupOtp: (otp, email, cb) => {
     // Configure Nodemailer
     const nodemailer = require("nodemailer");
