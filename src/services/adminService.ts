@@ -25,7 +25,8 @@ export default {
       .getDb()
       .collection(collections.ADMIN_COLLECTION)
       .findOne({ _id: ObjectID(id) });
-    return admin;
+    if (admin) return admin;
+    return false;
   },
 
   signup: (data: { email: string; password: string }) => {
