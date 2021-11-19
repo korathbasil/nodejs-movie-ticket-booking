@@ -1,4 +1,5 @@
-import getDb from "../config/dbConfig";
+import { Users } from "models";
+
 const collections = require("../config/collections");
 const { ObjectID } = require("mongodb");
 
@@ -9,12 +10,11 @@ export default {
   signup: (userData) => {
     return new Promise(async (resolve, reject) => {
       userData.password = await bcrypt.hash(userData.password, 10);
-      getDb()?
-        .collection(collections.USER_COLLECTION)
-        .insertOne(userData)
-        .then((data) => {
-          resolve(data.ops[0]._id);
-        });
+      // getDb()?
+      //   .collection(collections.USER_COLLECTION)
+      Users?.insertOne(userData).then((data) => {
+        resolve(data.ops[0]._id);
+      });
     });
   },
   sendSignupOtp: (otp, email, cb) => {
