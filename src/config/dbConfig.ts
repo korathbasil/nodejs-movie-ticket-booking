@@ -25,7 +25,7 @@
 //   } else console.log("Error happened");
 // };
 
-import { MongoClient, AnyError, Db, Collection } from "mongodb";
+import { MongoClient, AnyError, Db } from "mongodb";
 
 import { DB_CONNECTION_URL } from "./constants";
 
