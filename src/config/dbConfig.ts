@@ -25,7 +25,7 @@
 //   } else console.log("Error happened");
 // };
 
-import { MongoClient, AnyError, Db } from "mongodb";
+import { MongoClient, AnyError, Db, Collection } from "mongodb";
 
 import { DB_CONNECTION_URL } from "./constants";
 
@@ -45,13 +45,11 @@ export const connectToDatabase = (
   });
 };
 
-const getDb = () => {
+export const getCollection = <T>(collectionName: string) => {
   if (db) {
-    return db;
+    return db.collection<T>(collectionName);
   } else {
     console.log("Not connected to any database");
     return;
   }
 };
-
-export default getDb;

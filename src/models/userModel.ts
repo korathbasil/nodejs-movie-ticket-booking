@@ -1,7 +1,13 @@
-class User {
+import { Document } from "mongodb";
+
+import { getCollection } from "config/dbConfig";
+
+interface User extends Document {
   name: string;
   email: string;
   password: string;
 }
 
-export default User;
+const users = getCollection<User>("user");
+
+export default users;

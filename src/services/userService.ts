@@ -1,4 +1,4 @@
-const db = require("../config/dbConfig");
+import getDb from "../config/dbConfig";
 const collections = require("../config/collections");
 const { ObjectID } = require("mongodb");
 
@@ -9,7 +9,7 @@ export default {
   signup: (userData) => {
     return new Promise(async (resolve, reject) => {
       userData.password = await bcrypt.hash(userData.password, 10);
-      db.getDb()
+      getDb()?
         .collection(collections.USER_COLLECTION)
         .insertOne(userData)
         .then((data) => {
