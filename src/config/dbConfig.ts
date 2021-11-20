@@ -27,7 +27,7 @@
 
 import { MongoClient, AnyError, Db } from "mongodb";
 
-import { DB_CONNECTION_URL } from "./constants";
+import { DB_CONNECTION_URL, NODE_ENV } from "./constants";
 
 let db: Db | null = null;
 
@@ -39,7 +39,11 @@ export const connectToDatabase = (
   client.connect((err, data) => {
     if (err) return cb(err, null);
     if (data) {
-      db = data.db("movie-ticket-booking-app");
+      if (NODE_ENV === "dev") db = data.db("movie-ticket-booking-app-dev");
+      else if (NODE_ENV === "test")
+        db = data.db("movie-ticket-booking-app-test");
+      else if (NODE_ENV === "prod") db = data.db("movie-ticket-booking-app");
+
       return cb(undefined, db);
     }
   });

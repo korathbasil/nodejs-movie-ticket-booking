@@ -1,7 +1,12 @@
 import { userServices } from "../services";
+import { connectToDatabase } from "../config/dbConfig";
+import { AnyError, Db } from "mongodb";
 
 describe("User Services", () => {
-  describe("signup", () => {
+  connectToDatabase((err: AnyError | undefined, _: Db | null) => {
+    if (err) console.log(err);
+  });
+  describe("signup", async () => {
     const signup = userServices.signup;
     it("returns Promise<ObjectId>", async () => {
       const newUser = {
