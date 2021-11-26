@@ -1,11 +1,12 @@
 import { userServices } from "../services";
+import { connectToDatabase } from "../config/dbConfig";
 
-import expressApp from "../app";
+import expressApp from "../app2";
 
 jest.setTimeout(10000);
 
 beforeEach(async () => {
-  // await connectToDatabase();
+  await connectToDatabase();
   expressApp.listen(4000, () => {
     console.log("app running on test env");
   });

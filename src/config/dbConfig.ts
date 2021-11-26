@@ -55,11 +55,15 @@ export async function connectToDatabase() {
 
   const client: MongoClient = new MongoClient(DB_CONNECTION_URL);
 
-  await client.connect();
+  try {
+    await client.connect();
+  } catch (e) {
+    console.log(e);
+  }
 
   db = client.db(`movie-ticket-booking-app-${process.env.NODE_ENV}`);
 
-  console.log(db);
+  console.log(db.collections);
 }
 
 export const getCollection = <T>(collectionName: string) => {
