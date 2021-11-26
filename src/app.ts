@@ -33,13 +33,11 @@ app.engine(
 );
 // DB connect
 const { connectToDatabase } = require("./config/dbConfig");
-connectToDatabase((err: any, _: any) => {
-  if (err) {
-    console.error(err);
-  } else {
-    console.log("Database connected");
-  }
-});
+
+async function startDb() {
+  await connectToDatabase();
+}
+startDb();
 // Passport initialize
 const passportConfig = require("./config/passportConfig");
 passportConfig(passport);
