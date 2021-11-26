@@ -137,7 +137,7 @@ export default {
       }
     });
   },
-  sendLoginOtp: (email:string, otp, cb) => {
+  sendLoginOtp: (email:string, otp: number, cb) => {
     // Configure Nodemailer
     const nodemailer = require("nodemailer");
     const transporter = nodemailer.createTransport({
