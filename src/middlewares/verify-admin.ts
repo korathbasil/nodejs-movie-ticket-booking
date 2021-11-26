@@ -1,6 +1,7 @@
+import { Request, Response, NextFunction } from "express";
 const adminHelpers = require("../services/admin-helpers");
 
-module.exports = async (req, res, next) => {
+export default async (req: Request, res: Response, next: NextFunction) => {
   if (await adminHelpers.getAdminById(req.session.passport.user)) {
     req.session.admin = await adminHelpers.getAdminById(
       req.session.passport.user

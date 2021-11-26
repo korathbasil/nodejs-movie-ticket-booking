@@ -1,11 +1,10 @@
-const bcrypt = require("bcrypt");
 const { ObjectID } = require("mongodb");
 
 const db = require("../config/dbConfig");
 const collections = require("../config/collections");
 
 export default {
-  getOwnerById: async (id) => {
+  getOwnerById: async (id: string) => {
     const owner = await db
       .getDb()
       .collection(collections.OWNERS_COLLECTION)

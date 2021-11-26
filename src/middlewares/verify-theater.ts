@@ -1,6 +1,7 @@
+import { Request, Response, NextFunction } from "express";
 const theaterHelpers = require("../helpers/theater-helpers");
 
-module.exports = async (req, res, next) => {
+export default async (req: Request, res: Response, next: NextFunction) => {
   if (await theaterHelpers.getOwnerById(req.session.passport.user)) {
     req.session.theater = await theaterHelpers.getOwnerById(
       req.session.passport.user
