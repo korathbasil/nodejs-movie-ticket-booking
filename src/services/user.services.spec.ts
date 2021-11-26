@@ -1,12 +1,14 @@
 import { userServices } from "../services";
 import { connectToDatabase } from "../config/dbConfig";
-import { AnyError, Db } from "mongodb";
+
+jest.setTimeout(10000);
+
+beforeEach(async () => {
+  await connectToDatabase();
+});
 
 describe("User Services", () => {
-  connectToDatabase((err: AnyError | undefined, _: Db | null) => {
-    if (err) console.log(err);
-  });
-  describe("signup", async () => {
+  describe("signup", () => {
     const signup = userServices.signup;
     it("returns Promise<ObjectId>", async () => {
       const newUser = {
@@ -15,6 +17,7 @@ describe("User Services", () => {
         password: "123",
       };
       const newUserId = await signup(newUser);
+      console.log(newUserId);
       expect(newUserId).toBe(true);
     });
   });
