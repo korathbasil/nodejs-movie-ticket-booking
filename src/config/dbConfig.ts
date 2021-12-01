@@ -25,10 +25,10 @@
 //   } else console.log("Error happened");
 // };
 
+import dotenv from "dotenv";
 import { MongoClient, Db } from "mongodb";
 
 import { DB_CONNECTION_URL } from "./constants";
-import dotenv from "dotenv";
 
 let db: Db;
 
