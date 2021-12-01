@@ -58,10 +58,10 @@ export async function connectToDatabase() {
   try {
     await client.connect();
   } catch (e) {
-    console.log(e);
+    // console.log(e);
   }
-
   db = client.db(`movie-ticket-booking-app-${process.env.NODE_ENV}`);
+  console.log(db);
 
   console.log(db.collections);
 }
