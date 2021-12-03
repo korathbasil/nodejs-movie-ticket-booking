@@ -1,34 +1,42 @@
 import { hash, compare } from "bcrypt";
+import { getCollection } from "config/dbConfig";
+import { Admin } from "models/adminModel";
+import { Collection } from "mongodb";
 const db = require("../config/dbConfig");
 const collections = require("../config/collections");
 const { ObjectID } = require("mongodb");
 
+export const adminServicesGenerator = (adminCollection: Collection<Admin>) => {
+  return {
+    getAdminById: async (id: string) => {
+      const admin = await adminCollection.findOne({ _id: ObjectID(id) });
+      if (admin) return admin;
+      return false;
+    },
+
+    isAdminAlreadyExists: () => {
+      return new Promise<boolean>(async (resolve, reject) => {
+        const admin = await adminCollection.find().toArray();
+        if (admin.length == 0) {
+          reject();
+        } else {
+          resolve(true);
+        }
+      });
+    },
+  };
+};
+
+const adminCollection = getCollection<Admin>("admin");
+export const adminServices = adminServicesGenerator(adminCollection!);
+
+export class AdminServices {
+  public static isAdminAlraedyExists(): Promise<Admin[]> | undefined {
+    return adminCollection?.find().toArray();
+  }
+}
+
 export default {
-  findAdmin: () => {
-    // Checking if an Admin already exists
-    return new Promise<boolean>(async (resolve, reject) => {
-      const admin = await db
-        .getDb()
-        .collection(collections.ADMIN_COLLECTION)
-        .find()
-        .toArray();
-      if (admin.length == 0) {
-        reject();
-      } else {
-        resolve(true);
-      }
-    });
-  },
-
-  getAdminById: async (id: string) => {
-    const admin = await db
-      .getDb()
-      .collection(collections.ADMIN_COLLECTION)
-      .findOne({ _id: ObjectID(id) });
-    if (admin) return admin;
-    return false;
-  },
-
   signup: (data: { email: string; password: string }) => {
     return new Promise<void>(async (resolve, reject) => {
       const admin = await db

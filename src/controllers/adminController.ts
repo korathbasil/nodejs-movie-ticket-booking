@@ -1,28 +1,13 @@
 import { Request, Response } from "express";
 import sharp from "sharp";
 
-import adminService from "../services/adminService";
+import { adminServices as adminService } from "../services/adminService";
 
 export default {
-  postSignup: (req: Request, res: Response) => {
-    adminService
-      .signup(req.body)
-      .then(() => {
-        req.session.admin = false;
-        res.redirect("/admin/login");
-      })
-      .catch(() => {
-        res.redirect("/admin/login");
-      });
-  },
-
   getLogin: (req: Request, res: Response) => {
-    var flash = req.flash("message");
-    console.log(flash);
     adminService
-      .findAdmin()
+      .isAdminAlreadyExists()
       .then(() => {
-        // console.log(req.session.adminErrors);
         res.render("admin/login", {
           title: "Login - Admin - Cinemax",
           adminRoute: true,
@@ -37,6 +22,17 @@ export default {
           adminRoute: true,
           adminExists: false,
         }); // Admin doesn't exist, render signup form
+      });
+  },
+  postSignup: (req: Request, res: Response) => {
+    adminService
+      .signup(req.body)
+      .then(() => {
+        req.session.admin = false;
+        res.redirect("/admin/login");
+      })
+      .catch(() => {
+        res.redirect("/admin/login");
       });
   },
 
