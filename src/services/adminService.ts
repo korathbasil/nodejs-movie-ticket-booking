@@ -34,54 +34,39 @@ export class AdminServices {
   public static isAdminAlraedyExists(): Promise<Admin[]> | undefined {
     return adminCollection?.find().toArray();
   }
+
+  public static async signup(data: {
+    name: string;
+    email: string;
+    password: string;
+  }) {
+    const admins = await this.isAdminAlraedyExists();
+
+    if (admins && admins.length === 0) return undefined;
+
+    const hashedPassword = await hash(data.password, 10);
+    const newAdmin = {
+      ...data,
+      password: hashedPassword,
+    };
+
+    return adminCollection?.insertOne(newAdmin);
+  }
+
+  public static async login(data: { email: string; password: string }) {
+    const selectedUser = await adminCollection?.findOne({ email: data.email });
+
+    if (!selectedUser) return;
+
+    const isPasswordTrue = await compare(data.password, selectedUser.password!);
+
+    if (!isPasswordTrue) return null;
+
+    return selectedUser;
+  }
 }
 
 export default {
-  signup: (data: { email: string; password: string }) => {
-    return new Promise<void>(async (resolve, reject) => {
-      const admin = await db
-        .getDb()
-        .collection(collections.ADMIN_COLLECTION)
-        .find()
-        .toArray();
-      if (admin.length == 0) {
-        const hashedPassword = await hash(data.password, 10);
-        const newAdmin = {
-          email: data.email,
-          password: hashedPassword,
-        };
-        db.getDb()
-          .collection(collections.ADMIN_COLLECTION)
-          .insertOne(newAdmin)
-          .then(() => resolve());
-      } else {
-        reject({ message: "Admin already Exists!!" });
-      }
-    });
-  },
-
-  login: (data: { email: string; password: string }) => {
-    return new Promise(async (resolve, reject) => {
-      const selectedUser = await db
-        .getDb()
-        .collection("admin")
-        .findOne({ email: data.email });
-      if (selectedUser) {
-        const isPasswordTrue = await compare(
-          data.password,
-          selectedUser.password
-        );
-        if (isPasswordTrue) {
-          resolve(selectedUser);
-        } else {
-          reject({ message: "Incorrect Password" });
-        }
-      } else {
-        reject({ message: "User Not Found" });
-      }
-    });
-  },
-
   getAllTheterOwners: () => {
     return new Promise(async (resolve) => {
       const owners = await db
