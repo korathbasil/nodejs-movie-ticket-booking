@@ -359,17 +359,6 @@ export default {
         });
     });
   },
-  getMovies: () => {
-    return new Promise(async (resolve, reject) => {
-      const movies = await db
-        .getDb()
-        .collection(collections.MOVIE_COLLECTION)
-        .find({})
-        .toArray();
-      console.log(movies);
-      resolve(movies);
-    });
-  },
   addMovie: (movieDetails) => {
     return new Promise((resolve, reject) => {
       movieDetails.runtimeInMin =
