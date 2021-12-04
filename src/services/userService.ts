@@ -1,4 +1,4 @@
-import { Collection, ObjectId } from "mongodb";
+import { Collection, InsertOneResult, ObjectId } from "mongodb";
 
 import { Users } from "../models";
 import { passwordHelpers } from "../helpers";
@@ -9,8 +9,48 @@ const Razorpay = require("razorpay");
 const bcrypt = require("bcrypt");
 
 import { getCollection } from "config/dbConfig";
+import { User } from "models/userModel";
+
+const userCollection = getCollection<User>("users")!;
+
+export class UserServices {
+  public static async signup(userDetails: { name: string; email: string; password: string }): Promise<InsertOneResult<User>> {
+    userDetails.password = await passwordHelpers.hashPassword(
+      userDetails.password
+    );
+
+    return userCollection.insertOne(userDetails)
+  }
+
+  public static async login(userCredentials: {email: string, password: string}) {
+    const selectedUSer = await userCollection.findOne({ email: userCredentials.email });
+
+    if (!selectedUSer) return;
+
+    return passwordHelpers.comparePassword(userCredentials.password, selectedUSer.password);
+  }
+}
 
 export default {
+  login: (userData) => {
+    return new Promise(async (resolve, reject) => {
+      const selectedUSer = await getCollection(Collections.USER_COLLECTION)?
+        .findOne({ email: userData.email });
+      if (!selectedUSer) {
+        reject({ message: "User not found" });
+      } else {
+        const isPasswordTrue = await bcrypt.compare(
+          userData.password,
+          selectedUSer.password
+        );
+        if (isPasswordTrue) {
+          resolve(selectedUSer);
+        } else {
+          reject({ message: "Incorrect password" });
+        }
+      }
+    });
+  },
   signup: (userDetails: { name: string; email: string; password: string }) => {
     return new Promise<ObjectId>(async (resolve, reject) => {
       userDetails.password = await passwordHelpers.hashPassword(
@@ -118,25 +158,7 @@ export default {
       }
     });
   },
-  login: (userData) => {
-    return new Promise(async (resolve, reject) => {
-      const selectedUSer = await getCollection(Collections.USER_COLLECTION)?
-        .findOne({ email: userData.email });
-      if (!selectedUSer) {
-        reject({ message: "User not found" });
-      } else {
-        const isPasswordTrue = await bcrypt.compare(
-          userData.password,
-          selectedUSer.password
-        );
-        if (isPasswordTrue) {
-          resolve(selectedUSer);
-        } else {
-          reject({ message: "Incorrect password" });
-        }
-      }
-    });
-  },
+  
   sendLoginOtp: (email:string, otp: number, cb: any) => {
     // Configure Nodemailer
     const nodemailer = require("nodemailer");
