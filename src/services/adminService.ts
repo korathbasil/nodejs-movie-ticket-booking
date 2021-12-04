@@ -2,10 +2,11 @@ import { hash } from "bcrypt";
 import { getCollection } from "config/dbConfig";
 import { passwordHelpers } from "helpers";
 import { Admin } from "models/adminModel";
-import { Collection } from "mongodb";
 const db = require("../config/dbConfig");
 const collections = require("../config/collections");
 const { ObjectID } = require("mongodb");
+
+const adminCollection = getCollection<Admin>("admin");
 
 export class AdminServices {
   public static isAdminAlraedyExists(): Promise<Admin[]> | undefined {
