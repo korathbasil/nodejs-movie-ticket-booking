@@ -387,14 +387,7 @@ export default {
         });
     });
   },
-  getMovieById: (movieId) => {
-    return new Promise((resolve, reject) => {
-      db.getDb()
-        .collection(collections.MOVIE_COLLECTION)
-        .findOne({ _id: ObjectID(movieId) })
-        .then((movie) => resolve(movie));
-    });
-  },
+
   editMovie: (newData, movieId) => {
     return new Promise((resolve, reject) => {
       db.getDb()
@@ -405,15 +398,6 @@ export default {
             $set: newData,
           }
         )
-        .then(() => resolve())
-        .catch(() => reject());
-    });
-  },
-  deleteMovie: (movieId) => {
-    return new Promise((resolve, reject) => {
-      db.getDb()
-        .collection(collections.MOVIE_COLLECTION)
-        .deleteOne({ _id: ObjectID(movieId) })
         .then(() => resolve())
         .catch(() => reject());
     });
