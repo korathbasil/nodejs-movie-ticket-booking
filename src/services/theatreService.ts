@@ -1,7 +1,35 @@
+import { getCollection } from "config/dbConfig";
+import { passwordHelpers } from "helpers";
+import { Theater } from "models/theaterModel";
+
 const { ObjectID } = require("mongodb");
 
 const db = require("../config/dbConfig");
 const collections = require("../config/collections");
+
+const theaterCollection = getCollection<Theater>("theaters")!;
+
+export class TheaterServices {
+  public static async getTheaterByID(id: string): Promise<Theater | null> {
+    return theaterCollection.findOne({ _id: ObjectID(id) });
+  }
+
+  public static async login(theaterCredentials: {
+    username: string;
+    password: string;
+  }) {
+    const selectedDocument = await theaterCollection.findOne({
+      username: theaterCredentials.username,
+    });
+
+    if (!selectedDocument) return;
+
+    return passwordHelpers.comparePassword(
+      theaterCredentials.password,
+      selectedDocument.password
+    );
+  }
+}
 
 export default {
   getOwnerById: async (id: string) => {
@@ -10,28 +38,6 @@ export default {
       .collection(collections.OWNERS_COLLECTION)
       .findOne({ _id: ObjectID(id) });
     return owner;
-  },
-  login: (data) => {
-    return new Promise(async (resolve, reject) => {
-      const selectedUser = await db
-        .getDb()
-        .collection(collections.OWNERS_COLLECTION)
-        .findOne({ username: data.username });
-      if (selectedUser) {
-        console.log("user found");
-        isPasswordTrue = await bcrypt.compare(
-          data.password,
-          selectedUser.password
-        );
-        if (isPasswordTrue) {
-          resolve(selectedUser);
-        } else {
-          reject({ message: "Incorrect Password" });
-        }
-      } else {
-        reject({ message: "User not fonud" });
-      }
-    });
   },
   getScreens: (ownerId) => {
     return new Promise(async (resolve, reject) => {
