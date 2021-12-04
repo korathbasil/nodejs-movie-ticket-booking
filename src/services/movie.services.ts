@@ -22,3 +22,38 @@ export default class MovieServices {
     return movieCollection.deleteOne({ _id: new ObjectId(id) });
   }
 }
+
+export const services = {
+  addMovie: (movieDetails) => {
+    return new Promise((resolve, reject) => {
+      movieDetails.runtimeInMin =
+        parseInt(movieDetails.runtimeHr) * 60 +
+        parseInt(movieDetails.runtimeMin);
+      delete movieDetails.runtimeHr;
+      delete movieDetails.runtimeMin;
+      db.getDb()
+        .collection(collections.MOVIE_COLLECTION)
+        .insertOne(movieDetails)
+        .then(() => resolve())
+        .catch((e) => {
+          console.log(e);
+          reject();
+        });
+    });
+  },
+
+  editMovie: (newData, movieId) => {
+    return new Promise((resolve, reject) => {
+      db.getDb()
+        .collection(collections.MOVIE_COLLECTION)
+        .updateOne(
+          { _id: ObjectID(movieId) },
+          {
+            $set: newData,
+          }
+        )
+        .then(() => resolve())
+        .catch(() => reject());
+    });
+  },
+};
