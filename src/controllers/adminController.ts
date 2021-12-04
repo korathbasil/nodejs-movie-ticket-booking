@@ -2,40 +2,39 @@ import { Request, Response } from "express";
 import sharp from "sharp";
 
 import { adminServices as adminService } from "../services/adminService";
+import { AdminServices } from "../services/adminService";
+
+export class AdminController {
+  public static async getLogin(req: Request, res: Response) {
+    const admins = await AdminServices.isAdminAlraedyExists();
+
+    if (admins?.length !== 0)
+      return res.render("admin/login", {
+        title: "Login - Admin - Cinemax",
+        adminRoute: true,
+        adminExists: true,
+        errorMessage: req.session.errorMessage,
+      }); // Admin exists
+
+    return res.render("admin/login", {
+      title: "Login - Admin - CineMax",
+      adminRoute: true,
+      adminExists: false,
+    }); // Admin does't exist
+  }
+
+  public static async postSignup(req: Request, res: Response) {
+    const name: string = req.body.name;
+    const email: string = req.body.email;
+    const password: string = req.body.password;
+
+    await AdminServices.signup({ name, email, password });
+
+    res.redirect("/admin/login");
+  }
+}
 
 export default {
-  getLogin: (req: Request, res: Response) => {
-    adminService
-      .isAdminAlreadyExists()
-      .then(() => {
-        res.render("admin/login", {
-          title: "Login - Admin - Cinemax",
-          adminRoute: true,
-          adminExists: true,
-          errorMessage: req.session.errorMessage,
-        }); // Admin exists, render login form. There would be only one admin
-        req.session.errorMessage = null;
-      })
-      .catch(() => {
-        res.render("admin/login", {
-          title: "Login - Admin - CineMax",
-          adminRoute: true,
-          adminExists: false,
-        }); // Admin doesn't exist, render signup form
-      });
-  },
-  postSignup: (req: Request, res: Response) => {
-    adminService
-      .signup(req.body)
-      .then(() => {
-        req.session.admin = false;
-        res.redirect("/admin/login");
-      })
-      .catch(() => {
-        res.redirect("/admin/login");
-      });
-  },
-
   getLogout: (req: Request, res: Response) => {
     req.session.admin = null;
     req.session.destroy();

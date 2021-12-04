@@ -1,34 +1,11 @@
-import { hash, compare } from "bcrypt";
+import { hash } from "bcrypt";
 import { getCollection } from "config/dbConfig";
+import { passwordHelpers } from "helpers";
 import { Admin } from "models/adminModel";
 import { Collection } from "mongodb";
 const db = require("../config/dbConfig");
 const collections = require("../config/collections");
 const { ObjectID } = require("mongodb");
-
-export const adminServicesGenerator = (adminCollection: Collection<Admin>) => {
-  return {
-    getAdminById: async (id: string) => {
-      const admin = await adminCollection.findOne({ _id: ObjectID(id) });
-      if (admin) return admin;
-      return false;
-    },
-
-    isAdminAlreadyExists: () => {
-      return new Promise<boolean>(async (resolve, reject) => {
-        const admin = await adminCollection.find().toArray();
-        if (admin.length == 0) {
-          reject();
-        } else {
-          resolve(true);
-        }
-      });
-    },
-  };
-};
-
-const adminCollection = getCollection<Admin>("admin");
-export const adminServices = adminServicesGenerator(adminCollection!);
 
 export class AdminServices {
   public static isAdminAlraedyExists(): Promise<Admin[]> | undefined {
@@ -58,13 +35,40 @@ export class AdminServices {
 
     if (!selectedUser) return;
 
-    const isPasswordTrue = await compare(data.password, selectedUser.password!);
+    const isPasswordTrue = await passwordHelpers.comparePassword(
+      data.password,
+      selectedUser.password!
+    );
 
     if (!isPasswordTrue) return null;
 
     return selectedUser;
   }
 }
+
+export const adminServicesGenerator = (adminCollection: Collection<Admin>) => {
+  return {
+    getAdminById: async (id: string) => {
+      const admin = await adminCollection.findOne({ _id: ObjectID(id) });
+      if (admin) return admin;
+      return false;
+    },
+
+    isAdminAlreadyExists: () => {
+      return new Promise<boolean>(async (resolve, reject) => {
+        const admin = await adminCollection.find().toArray();
+        if (admin.length == 0) {
+          reject();
+        } else {
+          resolve(true);
+        }
+      });
+    },
+  };
+};
+
+const adminCollection = getCollection<Admin>("admin");
+export const adminServices = adminServicesGenerator(adminCollection!);
 
 export default {
   getAllTheterOwners: () => {
