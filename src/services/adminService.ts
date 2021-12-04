@@ -12,6 +12,12 @@ export class AdminServices {
     return adminCollection?.find().toArray();
   }
 
+  public static async getADminById(
+    id: string
+  ): Promise<Admin | null | undefined> {
+    return adminCollection?.findOne({ _id: ObjectID(id) });
+  }
+
   public static async signup(data: {
     name: string;
     email: string;
@@ -44,31 +50,17 @@ export class AdminServices {
 
     return selectedUser;
   }
+
+  public static async getAllTheaters() {}
+
+  public static async addTheater() {}
+
+  public static async getTheater() {}
+
+  public static async editTheater() {}
+
+  public static async deleteTheater() {}
 }
-
-export const adminServicesGenerator = (adminCollection: Collection<Admin>) => {
-  return {
-    getAdminById: async (id: string) => {
-      const admin = await adminCollection.findOne({ _id: ObjectID(id) });
-      if (admin) return admin;
-      return false;
-    },
-
-    isAdminAlreadyExists: () => {
-      return new Promise<boolean>(async (resolve, reject) => {
-        const admin = await adminCollection.find().toArray();
-        if (admin.length == 0) {
-          reject();
-        } else {
-          resolve(true);
-        }
-      });
-    },
-  };
-};
-
-const adminCollection = getCollection<Admin>("admin");
-export const adminServices = adminServicesGenerator(adminCollection!);
 
 export default {
   getAllTheterOwners: () => {
