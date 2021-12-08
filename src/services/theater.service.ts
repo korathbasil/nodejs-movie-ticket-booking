@@ -64,8 +64,6 @@ export class TheaterServices {
     return theaterCollection.insertOne(newTheaterData);
   }
 
-  public static async getTheaterDetails() {}
-
   public static async editTheaterDetails() {}
 
   public static async deleteTheater() {}
@@ -157,16 +155,6 @@ export default {
       })
       .then(() => cb())
       .catch((e: any) => cb(e));
-  },
-  getTheaterOwner: (ownerId: string) => {
-    return new Promise((resolve) => {
-      db.getDb()
-        .collection(collections.OWNERS_COLLECTION)
-        .findOne({ _id: ObjectID(ownerId) })
-        .then((owner: any) => {
-          resolve(owner);
-        });
-    });
   },
   editTheaterOwner: (newData: any, ownerId: string) => {
     return new Promise<void>(async (resolve, reject) => {
