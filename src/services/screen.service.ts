@@ -8,7 +8,7 @@ const screenCollection = getCollection<Screen>("screens")!;
 const theaterCollection = getCollection<Theater>("theaters")!;
 
 export class ScreenService {
-  public static async getScreenByTheaterId(id: string) {
+  public static async getScreensByTheaterId(id: string) {
     return theaterCollection
       .aggregate([
         { $match: { _id: new ObjectId(id) } },
@@ -24,7 +24,9 @@ export class ScreenService {
       .toArray();
   }
 
-  public static async getAllScreens() {}
+  public static async getScreenById(screenId: string) {
+    return screenCollection.findOne({ _id: new ObjectId(screenId) });
+  }
 
   public static async addScreen(
     theaterId: string,
@@ -53,26 +55,6 @@ export class ScreenService {
 }
 
 export default {
-  addScreen: (screenData, ownerId) => {
-    return new Promise((resolve, reject) => {
-      screenData.shows = [];
-      db.getDb()
-        .collection(collections.SCREEN_COLLECTION)
-        .insertOne(screenData)
-        .then((data) => {
-          db.getDb()
-            .collection(collections.OWNERS_COLLECTION)
-            .updateOne(
-              { _id: ObjectID(ownerId) },
-              {
-                $push: { screens: ObjectID(data.ops[0]._id) },
-              }
-            )
-            .then(() => resolve());
-        })
-        .catch(() => reject());
-    });
-  },
   getScreenDetailsById: (screenId) => {
     return new Promise(async (resolve, reject) => {
       let screen = await db
@@ -124,15 +106,6 @@ export default {
     });
   },
 
-  getScreenById: (screenId) => {
-    return new Promise((resolve, reject) => {
-      db.getDb()
-        .collection(collections.SCREEN_COLLECTION)
-        .findOne({ _id: ObjectID(screenId) })
-        .then((screen) => resolve(screen))
-        .catch((e) => console.log(e));
-    });
-  },
   editScreen: (screenId, newData) => {
     return new Promise((resolve, reject) => {
       db.getDb()
