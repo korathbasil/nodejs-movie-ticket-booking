@@ -27,9 +27,13 @@ export class TheaterServices {
     );
   }
 
-  public static async getAllTheaters() {}
+  public static async getAllTheaters(): Promise<Theater[]> {
+    return theaterCollection.find().toArray();
+  }
 
-  public static async addTheater() {}
+  public static async addTheater(theaterData: {}) {
+    return theaterCollection.insertOne();
+  }
 
   public static async getTheaterDetails() {}
 
