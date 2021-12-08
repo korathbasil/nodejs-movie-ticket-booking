@@ -18,7 +18,7 @@ export class Theater implements Document {
   name: string;
   email: string;
   password: string;
-  adress: TheaterAddress;
+  address: TheaterAddress;
   owner: TheaterOwner;
 }
 

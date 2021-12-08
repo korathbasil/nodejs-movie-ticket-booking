@@ -6,6 +6,19 @@ import { Theater } from "models/theaterModel";
 
 const theaterCollection = getCollection<Theater>("theaters")!;
 
+type NewTheaterDetais = {
+  name: string;
+  email: string;
+
+  city: string;
+  state: string;
+  pincode: string;
+
+  ownerName: string;
+  ownerEmail: string;
+  ownerPhone: string;
+};
+
 export class TheaterServices {
   public static async getTheaterByID(id: string): Promise<Theater | null> {
     return theaterCollection.findOne({ _id: new ObjectId(id) });
@@ -31,8 +44,24 @@ export class TheaterServices {
     return theaterCollection.find().toArray();
   }
 
-  public static async addTheater(theaterData: {}) {
-    return theaterCollection.insertOne();
+  public static async addTheater(theaterData: NewTheaterDetais) {
+    const newTheaterData = {
+      name: theaterData.name,
+      email: theaterData.email,
+
+      address: {
+        city: theaterData.city,
+        state: theaterData.state,
+        pincode: theaterData.pincode,
+      },
+      owner: {
+        name: theaterData.ownerName,
+        email: theaterData.ownerEmail,
+        phone: theaterData.ownerPhone,
+      },
+    } as Theater;
+
+    return theaterCollection.insertOne(newTheaterData);
   }
 
   public static async getTheaterDetails() {}
@@ -43,17 +72,6 @@ export class TheaterServices {
 }
 
 export default {
-  getAllTheterOwners: () => {
-    return new Promise(async (resolve) => {
-      const owners = await db
-        .getDb()
-        .collection(collections.OWNERS_COLLECTION)
-        .find()
-        .toArray();
-      resolve(owners);
-    });
-  },
-
   sendAddTheaterOwnerMail: (
     recieverId: string,
     username: string,
@@ -139,17 +157,6 @@ export default {
       })
       .then(() => cb())
       .catch((e: any) => cb(e));
-  },
-  addTheaterOwner: (ownerData: any) => {
-    return new Promise<void>(async (resolve, reject) => {
-      const hashedPassword = await hash(ownerData.password, 10);
-      ownerData.password = hashedPassword;
-      db.getDb()
-        .collection(collections.OWNERS_COLLECTION)
-        .insertOne(ownerData)
-        .then(() => resolve())
-        .catch(() => reject());
-    });
   },
   getTheaterOwner: (ownerId: string) => {
     return new Promise((resolve) => {
