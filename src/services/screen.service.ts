@@ -28,6 +28,50 @@ export class ScreenService {
     return screenCollection.findOne({ _id: new ObjectId(screenId) });
   }
 
+  public static async getScreenByIdWithAllDetails(id: string) {
+    const screen = await screenCollection.findOne({ _id: new ObjectId(id) });
+
+    if (screen?.shows.length === 0) return screen;
+
+    const screenDetails = await screenCollection
+      .aggregate([
+        { $match: { _id: new ObjectId(id) } },
+        {
+          $lookup: {
+            from: "shows",
+            foreignField: "_id",
+            localField: "shows",
+            as: "shows",
+          },
+        },
+        {
+          $unwind: {
+            path: "$shows",
+            preserveNullAndEmptyArrays: true,
+          },
+        },
+        {
+          $lookup: {
+            from: "movies",
+            localField: "shows.movie",
+            foreignField: "_id",
+            as: "shows.movie",
+          },
+        },
+        { $unwind: "$shows.movie" },
+        {
+          $group: {
+            _id: "$_id",
+            name: { $first: "$name" },
+            shows: { $push: "$shows" },
+          },
+        },
+      ])
+      .toArray();
+
+    return screenDetails;
+  }
+
   public static async addScreen(
     theaterId: string,
     screenData: { name: string }
@@ -55,57 +99,6 @@ export class ScreenService {
 }
 
 export default {
-  getScreenDetailsById: (screenId) => {
-    return new Promise(async (resolve, reject) => {
-      let screen = await db
-        .getDb()
-        .collection(collections.SCREEN_COLLECTION)
-        .findOne({ _id: ObjectID(screenId) });
-      if (screen.shows.length === 0) {
-        resolve(screen);
-      } else {
-        screen = await db
-          .getDb()
-          .collection(collections.SCREEN_COLLECTION)
-          .aggregate([
-            { $match: { _id: ObjectID(screenId) } },
-            {
-              $lookup: {
-                from: collections.SHOW_COLLECTION,
-                foreignField: "_id",
-                localField: "shows",
-                as: "shows",
-              },
-            },
-            {
-              $unwind: {
-                path: "$shows",
-                preserveNullAndEmptyArrays: true,
-              },
-            },
-            {
-              $lookup: {
-                from: collections.MOVIE_COLLECTION,
-                localField: "shows.movie",
-                foreignField: "_id",
-                as: "shows.movie",
-              },
-            },
-            { $unwind: "$shows.movie" },
-            {
-              $group: {
-                _id: "$_id",
-                name: { $first: "$name" },
-                shows: { $push: "$shows" },
-              },
-            },
-          ])
-          .toArray();
-        resolve(screen[0]);
-      }
-    });
-  },
-
   editScreen: (screenId, newData) => {
     return new Promise((resolve, reject) => {
       db.getDb()
