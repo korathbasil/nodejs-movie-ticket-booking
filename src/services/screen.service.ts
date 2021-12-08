@@ -94,41 +94,25 @@ export class ScreenService {
     }
   }
 
-  public static async editScreen() {}
-  public static async deleteScreen() {}
-}
+  public static async editScreen(id: string, newData: any) {
+    return screenCollection.updateOne(
+      { _id: new ObjectId(id) },
+      {
+        $set: newData,
+      }
+    );
+  }
 
-export default {
-  editScreen: (screenId, newData) => {
-    return new Promise((resolve, reject) => {
-      db.getDb()
-        .collection(collections.SCREEN_COLLECTION)
-        .updateOne(
-          { _id: ObjectID(screenId) },
+  public static async deleteScreen(screenId: string, theaterId: string) {
+    screenCollection
+      .deleteOne({ _id: new ObjectId(screenId) })
+      .then(async () => {
+        await theaterCollection.updateOne(
+          { _id: new ObjectId(theaterId) },
           {
-            $set: newData,
+            $pull: { screens: new ObjectId(screenId) },
           }
-        )
-        .then(() => resolve())
-        .catch((e) => console.log(e));
-    });
-  },
-  deleteScreen: (screenId, ownerId) => {
-    return new Promise((resolve, reject) => {
-      db.getDb()
-        .collection(collections.SCREEN_COLLECTION)
-        .deleteOne({ _id: ObjectID(screenId) })
-        .then(() => {
-          db.getDb()
-            .collection(collections.OWNERS_COLLECTION)
-            .updateOne(
-              { _id: ObjectID(ownerId) },
-              {
-                $pull: { screens: ObjectID(screenId) },
-              }
-            )
-            .then(() => resolve());
-        });
-    });
-  },
-};
+        );
+      });
+  }
+}
