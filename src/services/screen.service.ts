@@ -25,7 +25,29 @@ export class ScreenService {
   }
 
   public static async getAllScreens() {}
-  public static asyncaddScreen() {}
+
+  public static async addScreen(
+    theaterId: string,
+    screenData: { name: string }
+  ) {
+    const newSCreenData = { ...screenData, shows: [] };
+
+    try {
+      const newScreenDocumentDetails = await screenCollection.insertOne(
+        newSCreenData
+      );
+      await theaterCollection.updateOne(
+        { _id: new ObjectId(theaterId) },
+        {
+          $push: { screens: new ObjectId(newScreenDocumentDetails.insertedId) },
+        }
+      );
+      return newScreenDocumentDetails.insertedId;
+    } catch (e) {
+      return;
+    }
+  }
+
   public static async editScreen() {}
   public static async deleteScreen() {}
 }
