@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import sharp from "sharp";
 
-import { adminServices as adminService } from "../services/adminService";
-import { AdminServices } from "../services/adminService";
+import { adminServices as adminService } from "../services/admin.service";
+import { AdminServices } from "../services/admin.service";
 
 export class AdminController {
   public static async getLogin(req: Request, res: Response) {
