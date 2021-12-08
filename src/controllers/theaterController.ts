@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import sharp from "sharp";
 
-import theaterService from "../services/theatreService";
+import theaterService from "../services/theater.service";
 
 export default {
   getLogin: (_: Request, res: Response) => {

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import userService from "../services/userService";
+import userService from "../services/user.service";
 
 export default {
   getSignup: (_: Request, res: Response) => {
