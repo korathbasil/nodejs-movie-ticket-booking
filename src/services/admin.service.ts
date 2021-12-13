@@ -4,17 +4,17 @@ import { getCollection } from "../config/dbConfig";
 import { passwordHelpers } from "helpers";
 import { Admin } from "../models";
 
-const adminCollection = getCollection<Admin>("admin");
+const adminCollection = getCollection<Admin>("admin")!;
 
 export class AdminServices {
   public static isAdminAlraedyExists(): Promise<Admin[]> | undefined {
-    return adminCollection?.find().toArray();
+    return adminCollection.find().toArray();
   }
 
   public static async getADminById(
     id: string
   ): Promise<Admin | null | undefined> {
-    return adminCollection?.findOne({ _id: ObjectID(id) });
+    return adminCollection.findOne({ _id: ObjectID(id) });
   }
 
   public static async signup(data: {
@@ -35,11 +35,11 @@ export class AdminServices {
       password: hashedPassword,
     };
 
-    return adminCollection?.insertOne(newAdmin);
+    return adminCollection.insertOne(newAdmin);
   }
 
   public static async login(data: { email: string; password: string }) {
-    const selectedUser = await adminCollection?.findOne({ email: data.email });
+    const selectedUser = await adminCollection.findOne({ email: data.email });
 
     if (!selectedUser) return;
 
