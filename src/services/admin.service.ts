@@ -17,25 +17,23 @@ export class AdminServices {
     return adminCollection.findOne({ _id: new ObjectId(id) });
   }
 
-  public static async signup(data: {
+  public static signup(data: {
     name: string;
     email: string;
     password: string;
   }) {
-    const admins = await this.isAdminAlraedyExists();
+    return new Promise<ObjectId>(async (resolve, reject) => {
+      const admins = await this.isAdminAlraedyExists();
+      if (admins) return reject("Admin already exists");
 
-    if (admins && admins.length === 0) return undefined;
-
-    const hashedPassword = await passwordHelpers.hashPassword(
-      data.password,
-      10
-    );
-    const newAdmin = {
-      ...data,
-      password: hashedPassword,
-    };
-
-    return adminCollection.insertOne(newAdmin);
+      const hashedPassword = await passwordHelpers.hashPassword(data.password);
+      const newAdmin = {
+        ...data,
+        password: hashedPassword,
+      };
+      const newAdminDocDetails = await adminCollection.insertOne(newAdmin);
+      return resolve(newAdminDocDetails.insertedId);
+    });
   }
 
   public static async login(data: { email: string; password: string }) {
