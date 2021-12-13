@@ -36,18 +36,23 @@ export class AdminServices {
     });
   }
 
-  public static async login(data: { email: string; password: string }) {
-    const selectedUser = await adminCollection.findOne({ email: data.email });
+  public static login(data: { email: string; password: string }) {
+    return new Promise<Admin>(async (resolve, reject) => {
+      const selectedDoc = await adminCollection.findOne({ email: data.email });
 
-    if (!selectedUser) return;
+      if (!selectedDoc) return reject("Admin not found");
+      if (!selectedDoc.password) return reject("Admin credentials not set");
 
-    const isPasswordTrue = await passwordHelpers.comparePassword(
-      data.password,
-      selectedUser.password!
-    );
+      const isPasswordTrue = await passwordHelpers.comparePassword(
+        data.password,
+        selectedDoc.password
+      );
 
-    if (!isPasswordTrue) return null;
+      if (!isPasswordTrue) return reject("Incorrect password");
 
-    return selectedUser;
+      const { password, ...admin } = selectedDoc;
+
+      return resolve(admin as Admin);
+    });
   }
 }
