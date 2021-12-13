@@ -4,7 +4,7 @@ import { Show } from "models/Show.model";
 
 const showCollection = getCollection<Show>(collections.SHOWS)!;
 
-export class ShowCollection {
+export default class ShowCollection {
   public static async addShow(showDetails: { time: Date }) {
     return showCollection.insertOne(showDetails);
   }
