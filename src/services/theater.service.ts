@@ -67,6 +67,16 @@ export class TheaterServices {
   public static async editTheaterDetails() {}
 
   public static async deleteTheater() {}
+
+  public static async getAllTheaters() {}
+
+  public static async addTheater() {}
+
+  public static async getTheater() {}
+
+  public static async editTheater() {}
+
+  public static async deleteTheater() {}
 }
 
 export default {

@@ -1,10 +1,8 @@
-import { hash } from "bcrypt";
-import { getCollection } from "config/dbConfig";
-import { passwordHelpers } from "helpers";
-import { Admin } from "models/adminModel";
-const db = require("../config/dbConfig");
-const collections = require("../config/collections");
 const { ObjectID } = require("mongodb");
+
+import { getCollection } from "../config/dbConfig";
+import { passwordHelpers } from "helpers";
+import { Admin } from "../models";
 
 const adminCollection = getCollection<Admin>("admin");
 
@@ -28,7 +26,10 @@ export class AdminServices {
 
     if (admins && admins.length === 0) return undefined;
 
-    const hashedPassword = await hash(data.password, 10);
+    const hashedPassword = await passwordHelpers.hashPassword(
+      data.password,
+      10
+    );
     const newAdmin = {
       ...data,
       password: hashedPassword,
@@ -51,14 +52,4 @@ export class AdminServices {
 
     return selectedUser;
   }
-
-  public static async getAllTheaters() {}
-
-  public static async addTheater() {}
-
-  public static async getTheater() {}
-
-  public static async editTheater() {}
-
-  public static async deleteTheater() {}
 }
