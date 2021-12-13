@@ -6,7 +6,7 @@ import { passwordHelpers } from "helpers";
 
 const adminCollection = getCollection<Admin>("admin")!;
 
-export class AdminServices {
+export class AdminService {
   public static async isAdminAlraedyExists(): Promise<boolean> {
     const admin = await adminCollection.find().toArray();
     if (admin.length === 0) return false;
