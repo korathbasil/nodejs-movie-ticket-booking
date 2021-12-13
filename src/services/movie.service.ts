@@ -25,26 +25,16 @@ export default class MovieServices {
     return movieCollection.find().toArray();
   }
 
-  public static async editMovie() {}
+  public static async editMovie(newMovieData: any, movieId: string) {
+    return movieCollection.updateOne(
+      { _id: new ObjectId(movieId) },
+      {
+        $set: newMovieData,
+      }
+    );
+  }
 
   public static deleteMovie(id: string) {
     return movieCollection.deleteOne({ _id: new ObjectId(id) });
   }
 }
-
-export const services = {
-  editMovie: (newData, movieId) => {
-    return new Promise((resolve, reject) => {
-      db.getDb()
-        .collection(collections.MOVIE_COLLECTION)
-        .updateOne(
-          { _id: ObjectID(movieId) },
-          {
-            $set: newData,
-          }
-        )
-        .then(() => resolve())
-        .catch(() => reject());
-    });
-  },
-};
