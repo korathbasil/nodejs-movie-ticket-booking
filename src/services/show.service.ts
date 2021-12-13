@@ -1,6 +1,7 @@
 import { getCollection } from "../config/dbConfig";
 import collections from "../config/collections";
 import { Show } from "../models/Show.model";
+import { Collection } from "mongodb";
 
 const showCollection = getCollection<Show>(collections.SHOWS)!;
 
@@ -9,6 +10,14 @@ export default class ShowCollection {
     return showCollection.insertOne(showDetails);
   }
 }
+
+export const makeShowService = (showCollection: Collection<Show>) => {
+  return {
+    addShow: (showDetails: { time: Date }) => {
+      return showCollection.insertOne(showDetails);
+    },
+  };
+};
 
 //   addShow: (screenId, showDetails) => {
 //     return new Promise(async (resolve, reject) => {
