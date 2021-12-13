@@ -1,7 +1,9 @@
 import { connectToDatabase, getCollection } from "./dbConfig";
 
+// jest.setTimeout(10000);
+
 beforeAll(async () => {
-  connectToDatabase();
+  await connectToDatabase();
 });
 
 describe("DB connection", () => {
