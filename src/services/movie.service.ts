@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 
-import { Movie, movieCollection } from "models/Movie.model";
+import { Movie, movieCollection } from "../models";
 
 type MovieData = {
   title: string;
