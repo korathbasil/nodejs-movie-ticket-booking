@@ -1,6 +1,6 @@
-import { getCollection } from "config/dbConfig";
+import { getCollection } from "../config/dbConfig";
 import collections from "../config/collections";
-import { Show } from "models/Show.model";
+import { Show } from "../models/Show.model";
 
 const showCollection = getCollection<Show>(collections.SHOWS)!;
 
