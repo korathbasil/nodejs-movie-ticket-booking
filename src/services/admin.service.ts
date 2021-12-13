@@ -1,4 +1,4 @@
-const { ObjectID } = require("mongodb");
+import { ObjectId } from "mongodb";
 
 import { getCollection } from "../config/dbConfig";
 import { passwordHelpers } from "helpers";
@@ -7,14 +7,14 @@ import { Admin } from "../models";
 const adminCollection = getCollection<Admin>("admin")!;
 
 export class AdminServices {
-  public static isAdminAlraedyExists(): Promise<Admin[]> | undefined {
-    return adminCollection.find().toArray();
+  public static async isAdminAlraedyExists(): Promise<boolean> {
+    const admin = await adminCollection.find().toArray();
+    if (admin.length === 0) return false;
+    return true;
   }
 
-  public static async getADminById(
-    id: string
-  ): Promise<Admin | null | undefined> {
-    return adminCollection.findOne({ _id: ObjectID(id) });
+  public static async getADminById(id: string): Promise<Admin | null> {
+    return adminCollection.findOne({ _id: new ObjectId(id) });
   }
 
   public static async signup(data: {
