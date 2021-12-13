@@ -1,8 +1,8 @@
 import { ObjectId } from "mongodb";
 
+import { Admin } from "../models";
 import { getCollection } from "../config/dbConfig";
 import { passwordHelpers } from "helpers";
-import { Admin } from "../models";
 
 const adminCollection = getCollection<Admin>("admin")!;
 
