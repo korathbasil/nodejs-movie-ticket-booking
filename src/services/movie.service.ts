@@ -8,7 +8,7 @@ type MovieData = {
   runtimeMin: number;
 };
 
-export default class MovieServices {
+export class MovieService {
   public static async addMovie(movieData: MovieData) {
     const newMovieData = {
       title: movieData.title,
