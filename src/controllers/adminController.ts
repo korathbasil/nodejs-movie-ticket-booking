@@ -1,20 +1,20 @@
 import { Request, Response } from "express";
 import sharp from "sharp";
 
-import { adminServices as adminService } from "../services/admin.service";
-import { AdminServices } from "../services/admin.service";
+import { AdminService } from "../services";
 
 export class AdminController {
   public static async getLogin(req: Request, res: Response) {
-    const admins = await AdminServices.isAdminAlraedyExists();
+    const isAdminExists = await AdminService.isAdminAlraedyExists();
 
-    if (admins?.length !== 0)
+    if (isAdminExists) {
       return res.render("admin/login", {
         title: "Login - Admin - Cinemax",
         adminRoute: true,
         adminExists: true,
         errorMessage: req.session.errorMessage,
       }); // Admin exists
+    }
 
     return res.render("admin/login", {
       title: "Login - Admin - CineMax",
