@@ -28,7 +28,7 @@ export class AdminController {
     const email: string = req.body.email;
     const password: string = req.body.password;
 
-    await AdminServices.signup({ name, email, password });
+    await AdminService.signup({ name, email, password });
 
     res.redirect("/admin/login");
   }
