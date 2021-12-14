@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import sharp from "sharp";
 
-import { AdminService } from "../services";
+import { AdminService, TheaterService } from "../services";
 
 export class AdminController {
   public static async getLogin(req: Request, res: Response) {
@@ -41,8 +41,16 @@ export class AdminController {
     });
   }
 
-  public static async getTheaters(req: Request, res: Response) {
-    const ownerId = req.params.ownerId;
+  public static async getTheater(req: Request, res: Response) {
+    const theaterId = req.params.theaterId;
+
+    const theater = await TheaterService.getTheaterByID(theaterId);
+    res.render("admin/theaters", {
+      title: "Theater Management - Admin - CineMax",
+      adminRoute: true,
+      admin: req.session.admin,
+      theaterDetails: theater,
+    });
   }
 }
 
@@ -52,18 +60,6 @@ export default {
     req.session.destroy();
     req.logout();
     res.redirect("/");
-  },
-
-  getTheaters: (req: Request, res: Response) => {
-    const ownerId = req.params.ownerId;
-    adminService.getTheaterOwner(ownerId).then((ownerDetails) => {
-      res.render("admin/theaters", {
-        title: "Theater Management - Admin - CineMax",
-        adminRoute: true,
-        admin: req.session.admin,
-        ownerDetails: ownerDetails,
-      });
-    });
   },
 
   getAddTheater: (req: Request, res: Response) => {
