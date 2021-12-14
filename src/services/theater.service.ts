@@ -1,4 +1,4 @@
-import { ObjectId } from "mongodb";
+import { InsertOneResult, ObjectId } from "mongodb";
 
 import { getCollection } from "config/dbConfig";
 import { passwordHelpers } from "helpers";
@@ -20,6 +20,28 @@ type NewTheaterDetais = {
 };
 
 export class TheaterServices {
+  public static async addTheater(
+    theaterData: NewTheaterDetais
+  ): Promise<InsertOneResult<Theater>> {
+    const newTheaterData = {
+      name: theaterData.name,
+      email: theaterData.email,
+
+      address: {
+        city: theaterData.city,
+        state: theaterData.state,
+        pincode: theaterData.pincode,
+      },
+      owner: {
+        name: theaterData.ownerName,
+        email: theaterData.ownerEmail,
+        phone: theaterData.ownerPhone,
+      },
+    } as Theater;
+
+    return theaterCollection.insertOne(newTheaterData);
+  }
+
   public static async getTheaterByID(id: string): Promise<Theater | null> {
     return theaterCollection.findOne({ _id: new ObjectId(id) });
   }
@@ -44,33 +66,11 @@ export class TheaterServices {
     return theaterCollection.find().toArray();
   }
 
-  public static async addTheater(theaterData: NewTheaterDetais) {
-    const newTheaterData = {
-      name: theaterData.name,
-      email: theaterData.email,
-
-      address: {
-        city: theaterData.city,
-        state: theaterData.state,
-        pincode: theaterData.pincode,
-      },
-      owner: {
-        name: theaterData.ownerName,
-        email: theaterData.ownerEmail,
-        phone: theaterData.ownerPhone,
-      },
-    } as Theater;
-
-    return theaterCollection.insertOne(newTheaterData);
-  }
-
   public static async editTheaterDetails() {}
 
   public static async deleteTheater() {}
 
   public static async getAllTheaters() {}
-
-  public static async addTheater() {}
 
   public static async getTheater() {}
 

@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nodemon dist/bin/www.js",
     "dev2": "nodemon --exec ts-node src/bin/www.ts",
-    "start": "node ./bin/www",
+    "start": "node dist/bin/www",
     "build": "tsc",
     "copy": "cp -r ./src/views ./dist/views && cp -r ./src/public ./dist/public",
     "test": "NODE_ENV=test jest --verbose ./src --detectOpenHandles"
