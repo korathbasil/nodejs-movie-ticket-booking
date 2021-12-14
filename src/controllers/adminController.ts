@@ -32,6 +32,18 @@ export class AdminController {
 
     res.redirect("/admin/login");
   }
+
+  public static async getDashboard(req: Request, res: Response) {
+    res.render("admin/dashboard", {
+      title: "Dashboard - Admin - CineMax",
+      adminRoute: true,
+      admin: req.session.admin,
+    });
+  }
+
+  public static async getTheaters(req: Request, res: Response) {
+    const ownerId = req.params.ownerId;
+  }
 }
 
 export default {
@@ -40,14 +52,6 @@ export default {
     req.session.destroy();
     req.logout();
     res.redirect("/");
-  },
-
-  getDashboard: (req: Request, res: Response) => {
-    res.render("admin/dashboard", {
-      title: "Dashboard - Admin - CineMax",
-      adminRoute: true,
-      admin: req.session.admin,
-    });
   },
 
   getTheaters: (req: Request, res: Response) => {

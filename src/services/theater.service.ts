@@ -19,7 +19,7 @@ type NewTheaterDetais = {
   ownerPhone: string;
 };
 
-export class TheaterServices {
+export class TheaterService {
   public static async addTheater(
     theaterData: NewTheaterDetais
   ): Promise<InsertOneResult<Theater>> {
