@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "watch": "tsc -w",
     "dev": "nodemon dist/bin/www.js",
     "dev2": "nodemon --exec ts-node src/bin/www.ts",
     "start": "node dist/bin/www",

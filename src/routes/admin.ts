@@ -28,7 +28,7 @@ router.get("/login", AdminController.getLogin);
 // router.get("/logout", verifylogin, verifyAdmin, AdminController.postLogout);
 
 // // Dashboard
-// router.get("/", verifylogin, verifyAdmin, AdminController.getDashboard);
+router.get("/", AdminController.getDashboard);
 
 // // Theatre Mangement
 // router.get("/theater", verifylogin, verifyAdmin, AdminController.getAddTheater);
