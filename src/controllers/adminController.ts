@@ -52,6 +52,17 @@ export class AdminController {
       theaterDetails: theater,
     });
   }
+
+  public static async getAddTheater(req: Request, res: Response) {
+    TheaterService.getAllTheaters().then((theaters) => {
+      res.render("admin/theater-management", {
+        title: "Theater Management - Admin - CineMax",
+        adminRoute: true,
+        admin: req.session.admin,
+        owners: theaters,
+      });
+    });
+  }
 }
 
 export default {
