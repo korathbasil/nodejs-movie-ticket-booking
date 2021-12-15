@@ -1,8 +1,8 @@
 import { InsertOneResult, ObjectId } from "mongodb";
 
-import { getCollection } from "config/dbConfig";
-import { passwordHelpers } from "helpers";
-import { Theater } from "models/theaterModel";
+import { getCollection } from "../config/dbConfig";
+import { passwordHelpers } from "../helpers";
+import { Theater } from "../models/theaterModel";
 
 const theaterCollection = getCollection<Theater>("theaters")!;
 

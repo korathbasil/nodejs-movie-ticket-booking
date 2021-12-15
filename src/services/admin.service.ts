@@ -2,7 +2,7 @@ import { ObjectId } from "mongodb";
 
 import { Admin } from "../models";
 import { getCollection } from "../config/dbConfig";
-import { passwordHelpers } from "helpers";
+import { passwordHelpers } from "../helpers";
 
 const adminCollection = getCollection<Admin>("admin")!;
 

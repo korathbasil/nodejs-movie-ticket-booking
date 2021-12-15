@@ -1,8 +1,8 @@
 import { ObjectId } from "mongodb";
 
-import { getCollection } from "config/dbConfig";
-import { Screen } from "models/Screen.model";
-import { Theater } from "models/theaterModel";
+import { getCollection } from "../config/dbConfig";
+import { Screen } from "../models/Screen.model";
+import { Theater } from "../models/theaterModel";
 
 const screenCollection = getCollection<Screen>("screens")!;
 const theaterCollection = getCollection<Theater>("theaters")!;

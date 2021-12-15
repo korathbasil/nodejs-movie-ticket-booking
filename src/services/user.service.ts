@@ -3,7 +3,7 @@ import { InsertOneResult } from "mongodb";
 import { passwordHelpers } from "../helpers";
 
 import { getCollection } from "../config/dbConfig";
-import { User } from "models/userModel";
+import { User } from "../models/userModel";
 
 const userCollection = getCollection<User>("users")!;
 
