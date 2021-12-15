@@ -14,7 +14,7 @@ const MongoStore = require("connect-mongo")(session);
 // Router imports
 const userRouter = require("./routes/user");
 const adminRouter = require("./routes/admin");
-const theaterRoute = require("./routes/theater");
+// const theaterRoute = require("./routes/theater");
 
 const app = express();
 dotenv.config();

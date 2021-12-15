@@ -1,18 +1,15 @@
 const localStrategy = require("passport-local").Strategy;
 
-import theatreServices from "services/theatreService";
-import adminServices from "../services/admin.service";
+import { AdminService, TheaterService } from "../services";
 
 export default (passport: any) => {
   const authenticateAdmin = (email: string, password: string, done: any) => {
-    adminServices
-      .login({ email: email, password: password })
+    AdminService.login({ email: email, password: password })
       .then((user) => done(null, user))
       .catch((e) => done(null, false, { message: e.message }));
   };
   const authenticateOwner = (username: string, password: string, done: any) => {
-    theatreServices
-      .login({ username: username, password: password })
+    TheaterService.login({ username: username, password: password })
       .then((user) => {
         done(null, user);
       })
@@ -27,10 +24,10 @@ export default (passport: any) => {
   passport.use("owner-local", new localStrategy(authenticateOwner));
   passport.serializeUser((user: any, done: any) => done(null, user._id));
   passport.deserializeUser(async (id: any, done: any) => {
-    if (await adminServices.getAdminById(id)) {
-      done(null, adminServices.getAdminById(id));
-    } else if (await theatreServices.getOwnerById(id)) {
-      done(null, theatreServices.getOwnerById(id));
+    if (await AdminService.getADminById(id)) {
+      done(null, AdminService.getADminById(id));
+    } else if (await TheaterService.getTheaterByID(id)) {
+      done(null, TheaterService.getTheaterByID(id));
     } else {
       console.log("User");
     }
