@@ -9,7 +9,7 @@ const adminCollection = getCollection<Admin>("admin")!;
 export class AdminService {
   public static async isAdminAlraedyExists(): Promise<boolean> {
     const admin = await adminCollection.find().toArray();
-    if (admin.length === 0) return false;
+    if (admin && admin.length === 0) return false;
     return true;
   }
 

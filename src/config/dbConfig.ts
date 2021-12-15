@@ -11,6 +11,7 @@ export async function connectToDatabase() {
     await client.connect();
 
     db = client.db(`movie-ticket-booking-app-${process.env.NODE_ENV}`);
+    console.log("connected");
   } catch (e) {
     throw new Error(e);
   }
@@ -23,4 +24,7 @@ export const getCollection = <T>(collectionName: string) => {
     console.log("Not connected to any database");
     return;
   }
+  // return db?.collection<T>(collectionName);
 };
+
+connectToDatabase();

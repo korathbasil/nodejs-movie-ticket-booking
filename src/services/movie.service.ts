@@ -1,12 +1,15 @@
+import { getCollection } from "../config/dbConfig";
 import { ObjectId } from "mongodb";
 
-import { Movie, movieCollection } from "../models";
+import { Movie } from "../models";
 
 type MovieData = {
   title: string;
   runtimeHr: number;
   runtimeMin: number;
 };
+
+const movieCollection = getCollection<Movie>("movies")!;
 
 export class MovieService {
   public static async addMovie(movieData: MovieData) {

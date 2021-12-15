@@ -1,5 +1,5 @@
-import { users, User } from "./userModel";
+import { User } from "./userModel";
 import { Admin } from "./Admin.model";
-import { Movie, movieCollection } from "./Movie.model";
+import { Movie } from "./Movie.model";
 
-export { users as Users, User as UserModel, Admin, Movie, movieCollection };
+export { User as UserModel, Admin, Movie };

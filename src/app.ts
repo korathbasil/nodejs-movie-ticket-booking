@@ -1,4 +1,6 @@
 const createError = require("http-errors");
+import "./config/dbConfig";
+
 import express, { Request, Response } from "express";
 import path from "path";
 const cookieParser = require("cookie-parser");
@@ -12,7 +14,6 @@ const flash = require("express-flash");
 const MongoStore = require("connect-mongo")(session);
 
 // Router imports
-import { AdminRouter, UserRouter } from "./routes";
 // const theaterRoute = require("./routes/theater");
 
 const app = express();
@@ -31,12 +32,7 @@ app.engine(
   })
 );
 // DB connect
-import { connectToDatabase } from "./config/dbConfig";
 
-async function startDb() {
-  await connectToDatabase();
-}
-startDb();
 // Passport initialize
 // const passportConfig = require("./config/passportConfig");
 import { passportConfig } from "./config/passportConfig";
@@ -63,6 +59,14 @@ app.use(
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
+
+// import { connectToDatabase } from "./config/dbConfig";
+
+// async function startDb() {
+//   await connectToDatabase();
+// }
+// startDb();
+import { AdminRouter, UserRouter } from "./routes";
 
 app.use("/", UserRouter);
 app.use("/admin", AdminRouter);

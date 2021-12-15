@@ -2,9 +2,10 @@ import { getCollection } from "../config/dbConfig";
 import collections from "../config/collections";
 import { Show } from "../models/Show.model";
 import { Collection, ObjectId } from "mongodb";
-import { movieCollection } from "../models";
+import { Movie } from "../models";
 
 const showCollection = getCollection<Show>(collections.SHOWS)!;
+const movieCollection = getCollection<Movie>(collections.MOVIE_COLLECTION)!;
 
 export default class ShowService {
   public static async addShow(showDetails: { time: Date }) {

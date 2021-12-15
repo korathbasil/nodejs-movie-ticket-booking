@@ -1,7 +1,5 @@
 import { Document } from "mongodb";
 
-import { getCollection } from "../config/dbConfig";
-
 type TheaterAddress = {
   city: string;
   state: string;
@@ -21,5 +19,3 @@ export class Theater implements Document {
   address: TheaterAddress;
   owner: TheaterOwner;
 }
-
-export const users = getCollection<Theater>("theaters");
