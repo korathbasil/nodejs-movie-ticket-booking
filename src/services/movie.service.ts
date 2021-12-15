@@ -38,123 +38,123 @@ export class MovieService {
     return movieCollection.deleteOne({ _id: new ObjectId(id) });
   }
 
-  public static async getAllMovieShows() {
-    return new Promise(async (resolve, reject) => {
-      const scheduledMovies = await db
-        .getDb()
-        .collection(collections.SHOW_COLLECTION)
-        .aggregate([
-          {
-            $lookup: {
-              from: collections.MOVIE_COLLECTION,
-              foreignField: "_id",
-              localField: "movie",
-              as: "movie",
-            },
-          },
-          { $unwind: "$movie" },
-          { $group: { _id: "$movie" } },
-        ])
-        .toArray();
-      resolve(scheduledMovies);
-    });
-  }
+  // public static async getAllMovieShows() {
+  //   return new Promise(async (resolve, reject) => {
+  //     const scheduledMovies = await db
+  //       .getDb()
+  //       .collection(collections.SHOW_COLLECTION)
+  //       .aggregate([
+  //         {
+  //           $lookup: {
+  //             from: collections.MOVIE_COLLECTION,
+  //             foreignField: "_id",
+  //             localField: "movie",
+  //             as: "movie",
+  //           },
+  //         },
+  //         { $unwind: "$movie" },
+  //         { $group: { _id: "$movie" } },
+  //       ])
+  //       .toArray();
+  //     resolve(scheduledMovies);
+  //   });
+  // }
 
-  public static async getShowsOfAMovieById() {
-    return new Promise(async (resolve, reject) => {
-      const theaters = await db
-        .getDb()
-        .collection(collections.OWNERS_COLLECTION)
-        .aggregate([
-          {
-            $lookup: {
-              from: collections.SCREEN_COLLECTION,
-              foreignField: "_id",
-              localField: "screens",
-              as: "screens",
-            },
-          },
-          { $unwind: "$screens" },
+  // public static async getShowsOfAMovieById() {
+  //   return new Promise(async (resolve, reject) => {
+  //     const theaters = await db
+  //       .getDb()
+  //       .collection(collections.OWNERS_COLLECTION)
+  //       .aggregate([
+  //         {
+  //           $lookup: {
+  //             from: collections.SCREEN_COLLECTION,
+  //             foreignField: "_id",
+  //             localField: "screens",
+  //             as: "screens",
+  //           },
+  //         },
+  //         { $unwind: "$screens" },
 
-          {
-            $lookup: {
-              from: collections.SHOW_COLLECTION,
-              foreignField: "_id",
-              localField: "screens.shows",
-              as: "screens.shows",
-              // let: { movie: "screen.shows.movie" },
-              // pipeline: [{ $match: { movie: ObjectID(movieId) } }],
-            },
-          },
-          {
-            $group: {
-              _id: {
-                _id: "$_id",
-                name: "$name",
-              },
-              // shows: { $push: "$screens.shows" },
-              screens: { $push: "$screens" },
-            },
-          },
-          {
-            $unwind: {
-              path: "$screens.shows",
-            },
-          },
+  //         {
+  //           $lookup: {
+  //             from: collections.SHOW_COLLECTION,
+  //             foreignField: "_id",
+  //             localField: "screens.shows",
+  //             as: "screens.shows",
+  //             // let: { movie: "screen.shows.movie" },
+  //             // pipeline: [{ $match: { movie: ObjectID(movieId) } }],
+  //           },
+  //         },
+  //         {
+  //           $group: {
+  //             _id: {
+  //               _id: "$_id",
+  //               name: "$name",
+  //             },
+  //             // shows: { $push: "$screens.shows" },
+  //             screens: { $push: "$screens" },
+  //           },
+  //         },
+  //         {
+  //           $unwind: {
+  //             path: "$screens.shows",
+  //           },
+  //         },
 
-          {
-            $match: {
-              "screens.shows.movie": ObjectID(movieId),
-            },
-          },
+  //         {
+  //           $match: {
+  //             "screens.shows.movie": ObjectID(movieId),
+  //           },
+  //         },
 
-          // {
-          //   $lookup: {
-          //     from: collections.MOVIE_COLLECTION,
-          //     let: { movie: ObjectID(movieId) },
-          //     pipeline: [
-          //       {
-          //         $match: {
-          //           $expr: {
-          //             $eq: ["$_id", "$movie"],
-          //           },
-          //         },
-          //       },
-          //     ],
-          //     as: "screens.shows.movie",
-          //   },
-          // },
-          // { $match: { screen } },
+  //         // {
+  //         //   $lookup: {
+  //         //     from: collections.MOVIE_COLLECTION,
+  //         //     let: { movie: ObjectID(movieId) },
+  //         //     pipeline: [
+  //         //       {
+  //         //         $match: {
+  //         //           $expr: {
+  //         //             $eq: ["$_id", "$movie"],
+  //         //           },
+  //         //         },
+  //         //       },
+  //         //     ],
+  //         //     as: "screens.shows.movie",
+  //         //   },
+  //         // },
+  //         // { $match: { screen } },
 
-          // {
-          //   $lookup: {
-          //     from: collections.MOVIE_COLLECTION,
-          //     foreignField: "_id",
-          //     localField: "screens.shows.movie",
-          //     as: "screens.shows.movie",
-          //   },
-          // },
-          // { $unwind: "$screens.shows.movie" },
-          // { $project: { theater: 1, screens: 1 } },
-          // {
-          //   $group: {
-          //     _id: {
-          //       _id: "$_id",
-          //       name: "$name",
-          //     },
-          //     screens: {
-          //       $group: {
-          //         _id: "$screens._id",
-          //       },
-          //     },
-          //     // screens$shows: { $push: "$screens.shows" },
-          //   },
-          // },
-        ])
-        .toArray();
-      console.log(theaters[0].screens);
-      resolve(theaters);
-      // console.log(JSON.stringify(movie, null, 4));
-    });
-  }
+  //         // {
+  //         //   $lookup: {
+  //         //     from: collections.MOVIE_COLLECTION,
+  //         //     foreignField: "_id",
+  //         //     localField: "screens.shows.movie",
+  //         //     as: "screens.shows.movie",
+  //         //   },
+  //         // },
+  //         // { $unwind: "$screens.shows.movie" },
+  //         // { $project: { theater: 1, screens: 1 } },
+  //         // {
+  //         //   $group: {
+  //         //     _id: {
+  //         //       _id: "$_id",
+  //         //       name: "$name",
+  //         //     },
+  //         //     screens: {
+  //         //       $group: {
+  //         //         _id: "$screens._id",
+  //         //       },
+  //         //     },
+  //         //     // screens$shows: { $push: "$screens.shows" },
+  //         //   },
+  //         // },
+  //       ])
+  //       .toArray();
+  //     console.log(theaters[0].screens);
+  //     resolve(theaters);
+  //     // console.log(JSON.stringify(movie, null, 4));
+  //   });
+  // }
 }
