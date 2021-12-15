@@ -2,7 +2,7 @@ const localStrategy = require("passport-local").Strategy;
 
 import { AdminService, TheaterService } from "../services";
 
-export default (passport: any) => {
+export const passportConfig = (passport: any) => {
   const authenticateAdmin = (email: string, password: string, done: any) => {
     AdminService.login({ email: email, password: password })
       .then((user) => done(null, user))

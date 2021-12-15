@@ -12,8 +12,7 @@ const flash = require("express-flash");
 const MongoStore = require("connect-mongo")(session);
 
 // Router imports
-const userRouter = require("./routes/user");
-const adminRouter = require("./routes/admin");
+import { AdminRouter, UserRouter } from "./routes";
 // const theaterRoute = require("./routes/theater");
 
 const app = express();
@@ -32,14 +31,15 @@ app.engine(
   })
 );
 // DB connect
-const { connectToDatabase } = require("./config/dbConfig");
+import { connectToDatabase } from "./config/dbConfig";
 
 async function startDb() {
   await connectToDatabase();
 }
 startDb();
 // Passport initialize
-const passportConfig = require("./config/passportConfig");
+// const passportConfig = require("./config/passportConfig");
+import { passportConfig } from "./config/passportConfig";
 passportConfig(passport);
 
 // Middlewares
@@ -64,8 +64,8 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/", userRouter);
-app.use("/admin", adminRouter);
+app.use("/", UserRouter);
+app.use("/admin", AdminRouter);
 // app.use("/theater", theaterRoute);
 // app.post("/test");
 

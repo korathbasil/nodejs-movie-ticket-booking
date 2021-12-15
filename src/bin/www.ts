@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-const app = require("../app");
+import ExpressApp from "../app";
 const debug = require("debug")("movie-ticket-booking-webapp:server");
 const http = require("http");
 
@@ -13,13 +13,13 @@ const http = require("http");
  */
 
 const port = normalizePort(process.env.PORT || "3000");
-app.set("port", port);
+ExpressApp.set("port", port);
 
 /**
  * Create HTTP server.
  */
 
-const server = http.createServer(app);
+const server = http.createServer(ExpressApp);
 
 /**
  * Listen on provided port, on all network interfaces.

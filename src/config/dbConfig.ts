@@ -5,14 +5,12 @@ import { DB_CONNECTION_URL } from "./constants";
 let db: Db;
 
 export async function connectToDatabase() {
-  process.env.NODE_ENV = "test";
   const client: MongoClient = new MongoClient(DB_CONNECTION_URL);
 
   try {
     await client.connect();
 
     db = client.db(`movie-ticket-booking-app-${process.env.NODE_ENV}`);
-    console.log(db);
   } catch (e) {
     throw new Error(e);
   }
