@@ -1,7 +1,7 @@
 import { Router } from "express";
 const passport = require("passport");
 
-import adminController from "../controllers/adminController";
+import { AdminController } from "../controllers";
 
 const router = Router();
 
@@ -11,9 +11,9 @@ const verifyAdmin = require("../middlewares/verify-admin");
 const clearSession = require("../middlewares/clear-session");
 
 // Signup
-router.post("/signup", adminController.postSignup);
+router.post("/signup", AdminController.postSignup);
 // Login
-router.get("/login", verifyLogout, adminController.getLogin);
+router.get("/login", verifyLogout, AdminController.getLogin);
 
 router.post(
   "/login",
@@ -25,20 +25,20 @@ router.post(
   })
 );
 // Logout
-router.get("/logout", verifylogin, verifyAdmin, adminController.getLogout);
+router.get("/logout", verifylogin, verifyAdmin, AdminController.postLogout);
 
 // Dashboard
-router.get("/", verifylogin, verifyAdmin, adminController.getDashboard);
+router.get("/", verifylogin, verifyAdmin, AdminController.getDashboard);
 
 // Theatre Mangement
-router.get("/theater", verifylogin, verifyAdmin, adminController.getAddTheater);
+router.get("/theater", verifylogin, verifyAdmin, AdminController.getAddTheater);
 
 // View All theaters of a selected owner
 router.get(
   "/theater/view-theaters/:ownerId",
   verifylogin,
   verifyAdmin,
-  adminController.getTheaters
+  AdminController.getTheaters
 );
 
 // Add theater owner
@@ -46,14 +46,14 @@ router.get(
   "/theater/add-owner",
   verifylogin,
   verifyAdmin,
-  adminController.getAddtheaterOwner
+  AdminController.getAddTheater
 );
 
 router.post(
   "/theater/add-owner",
   verifylogin,
   verifyAdmin,
-  adminController.postAddtheaterOwner
+  AdminController.postAddTheater
 );
 
 // Edit theater owner
@@ -61,13 +61,13 @@ router.get(
   "/theater/edit-owner/:ownerId",
   verifylogin,
   verifyAdmin,
-  adminController.getEditTheaterOwner
+  AdminController.getEditTheater
 );
 
 router.post(
   "/theater/edit-owner/:ownerId",
   verifyAdmin,
-  adminController.postEditTheaterOwner
+  AdminController.getEditTheater
 );
 
 // Delete theater owner
@@ -75,21 +75,21 @@ router.get(
   "/theater/delete-owner/:ownerId",
   verifylogin,
   verifyAdmin,
-  adminController.getDeleteTheaterOwner
+  AdminController.getDeleteTheater
 );
 // User Mangement
 router.get(
   "/user",
   verifylogin,
   verifyAdmin,
-  adminController.getUserManagement
+  AdminController.getUserManagement
 );
 // User Activity Tracker
 router.get(
   "/user-activity",
   verifylogin,
   verifyAdmin,
-  adminController.getUserActivityTracker
+  AdminController.getUserManagement
 );
 
 export default router;
