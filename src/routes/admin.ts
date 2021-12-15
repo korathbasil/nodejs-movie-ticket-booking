@@ -1,4 +1,5 @@
-import { Router } from "express";
+import { Request, Response, Router } from "express";
+import { AdminService } from "../services";
 // const passport = require("passport");
 
 import { AdminController } from "../controllers";
@@ -11,19 +12,19 @@ const router = Router();
 // // const clearSession = require("../middlewares/clear-session");
 
 // // Signup
-// router.post("/signup", AdminController.postSignup);
+router.post("/signup", AdminController.postSignup);
 // Login
 router.get("/login", AdminController.getLogin);
 
-// router.post(
-//   "/login",
-//   clearSession,
-//   passport.authenticate("admin-local", {
-//     successRedirect: "/admin",
-//     failureRedirect: "/admin/login",
-//     failureFlash: true,
-//   })
-// );
+router.post("/login", async (req: Request, res: Response) => {
+  const admin = await AdminService.login({
+    email: req.body.email!,
+    password: req.body.password,
+  });
+
+  if (!admin) return res.redirect("/admin/login");
+  return res.redirect("/admin/");
+});
 // Logout
 // router.get("/logout", verifylogin, verifyAdmin, AdminController.postLogout);
 
