@@ -53,7 +53,7 @@ export class AdminController {
     });
   }
 
-  public static async getAddTheater(req: Request, res: Response) {
+  public static async getTheaters(req: Request, res: Response) {
     TheaterService.getAllTheaters().then((theaters) => {
       res.render("admin/theater-management", {
         title: "Theater Management - Admin - CineMax",
@@ -61,6 +61,14 @@ export class AdminController {
         admin: req.session.admin,
         owners: theaters,
       });
+    });
+  }
+
+  public static getAddTheater(req: Request, res: Response) {
+    res.render("admin/add-theater-owner", {
+      title: "Theater Management - Admin - CineMax",
+      adminRoute: true,
+      admin: req.session.admin,
     });
   }
 }
@@ -71,25 +79,6 @@ export default {
     req.session.destroy();
     req.logout();
     res.redirect("/");
-  },
-
-  getAddTheater: (req: Request, res: Response) => {
-    adminService.getAllTheterOwners().then((owners) => {
-      res.render("admin/theater-management", {
-        title: "Theater Management - Admin - CineMax",
-        adminRoute: true,
-        admin: req.session.admin,
-        owners: owners,
-      });
-    });
-  },
-
-  getAddtheaterOwner: (req: Request, res: Response) => {
-    res.render("admin/add-theater-owner", {
-      title: "Theater Management - Admin - CineMax",
-      adminRoute: true,
-      admin: req.session.admin,
-    });
   },
 
   postAddtheaterOwner: async (req: Request, res: Response) => {
