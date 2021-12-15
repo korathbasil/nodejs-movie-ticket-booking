@@ -1,11 +1,17 @@
-// var express = require("express");
+import { Request, Response } from "express";
+
+var express = require("express");
 
 // import userController from "../controllers/userController";
 // const verifyUserLogin = require("../middlewares/verifyUserLogin");
 
-// var router = express.Router();
+var router = express.Router();
 
-// // Signup
+router.get("/", (_: Request, res: Response) => {
+  res.send("Hello World");
+});
+
+// Signup
 // router.get("/signup", verifyUserLogin, userController.getSignup);
 
 // router.post("/signup", userController.postSignup);
@@ -28,22 +34,22 @@
 
 // router.get("/show/:showid/payment", userController.getPaymentPage);
 
-// // router.get("/pay/razorpay", (req, res) => {
-// // });
-// // // Theaters page
-// // router.get("/cinemas", (req, res) => {
-// //   res.render("user/cinemas", { user: req.session.user, userRoute: true });
-// // });
-// // // Account page
-// // router.get("/account", (req, res) => {
-// //   res.render("user/account", { user: req.session.user, userRoute: true });
-// // });
+// router.get("/pay/razorpay", (req, res) => {
+// });
+// // Theaters page
+// router.get("/cinemas", (req, res) => {
+//   res.render("user/cinemas", { user: req.session.user, userRoute: true });
+// });
+// // Account page
+// router.get("/account", (req, res) => {
+//   res.render("user/account", { user: req.session.user, userRoute: true });
+// });
 
-// // router.get("/test", (req, res) => {
-// //   res.render("user/testPayment");
-// // });
-// // router.post("/pay/razorpay", (req, res) => {
-// //   userService.payRazorpay();
-// // });
+// router.get("/test", (req, res) => {
+//   res.render("user/testPayment");
+// });
+// router.post("/pay/razorpay", (req, res) => {
+//   userService.payRazorpay();
+// });
 
-// export default router;
+export default router;

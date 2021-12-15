@@ -66,8 +66,8 @@ app.use(passport.session());
 
 app.use("/", userRouter);
 app.use("/admin", adminRouter);
-app.use("/theater", theaterRoute);
-app.post("/test");
+// app.use("/theater", theaterRoute);
+// app.post("/test");
 
 // catch 404 and forward to error handler
 app.use(function (_, _a, next) {
