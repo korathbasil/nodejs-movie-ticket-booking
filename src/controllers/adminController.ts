@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import sharp from "sharp";
 
 import { AdminService, TheaterService } from "../services";
 
@@ -130,50 +129,34 @@ export class AdminController {
         res.redirect("/admin/theater");
       });
   }
-}
 
-export default {
-  getLogout: (req: Request, res: Response) => {
-    req.session.admin = null;
-    req.session.destroy();
-    req.logout();
-    res.redirect("/");
-  },
-
-  postEditTheaterOwner: (req: Request, res: Response) => {
-    const ownerId = req.params.ownerId;
-    // theaterHeplers.getOwnerById(ownerId)
-    adminService
-      .editTheaterOwner(req.body, ownerId)
-      .then(() => {
-        res.redirect("/admin/theater");
-      })
-      .catch(() => {
-        res.redirect("/admin/theater");
-      });
-  },
-
-  getDeleteTheaterOwner: (req: Request, res: Response) => {
-    const ownerId = req.params.ownerId;
-    adminService
-      .deleteTheaterOwner(ownerId)
+  public static getDeleteTheater(req: Request, res: Response) {
+    const theaterId = req.params.theaterId;
+    TheaterService.deleteTheater(theaterId)
       .then(() => res.redirect("/admin/theater"))
       .catch((e) => console.log(e));
-  },
+  }
 
-  getUserManagement: (req: Request, res: Response) => {
+  public static getUserManagement(req: Request, res: Response) {
     res.render("admin/user-management", {
       title: "User Management - Admin - CineMax",
       adminRoute: true,
       admin: req.session.admin,
     });
-  },
+  }
 
-  getUserActivityTracker: (req: Request, res: Response) => {
+  public static getActivityTracker(req: Request, res: Response) {
     res.render("admin/user-activity", {
       title: "User Activity Tracker - Admin - CineMax",
       adminRoute: true,
       admin: req.session.admin,
     });
-  },
-};
+  }
+
+  public static postLogout(req: Request, res: Response) {
+    req.session.admin = null;
+    req.session.destroy();
+    req.logout();
+    res.redirect("/");
+  }
+}
