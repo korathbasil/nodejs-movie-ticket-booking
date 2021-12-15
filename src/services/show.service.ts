@@ -1,7 +1,8 @@
 import { getCollection } from "../config/dbConfig";
 import collections from "../config/collections";
 import { Show } from "../models/Show.model";
-import { Collection } from "mongodb";
+import { Collection, ObjectId } from "mongodb";
+import { movieCollection } from "models";
 
 const showCollection = getCollection<Show>(collections.SHOWS)!;
 
@@ -10,27 +11,21 @@ export default class ShowService {
     return showCollection.insertOne(showDetails);
   }
 
-  public static async getAllShows(movieId: string) {
-    return new Promise(async (resolve, reject) => {
-      const shows = await db
-        .getDb()
-        .collection(collections.SHOW_COLLECTION)
-        .aggregate([
-          {
-            $lookup: {
-              from: collections.MOVIE_COLLECTION,
-              localField: "movie",
-              foreignField: "_id",
-              as: "movie",
-            },
+  public static getAllShows(movieId: string) {
+    return movieCollection
+      .aggregate([
+        {
+          $lookup: {
+            from: collections.MOVIE_COLLECTION,
+            localField: "movie",
+            foreignField: "_id",
+            as: "movie",
           },
-          { $unwind: "$movie" },
-          { $match: { "movie._id": ObjectID(movieId) } },
-        ])
-        .toArray();
-      resolve(shows);
-      // console.log(shows);
-    });
+        },
+        { $unwind: "$movie" },
+        { $match: { "movie._id": new ObjectId(movieId) } },
+      ])
+      .toArray();
   }
 }
 
