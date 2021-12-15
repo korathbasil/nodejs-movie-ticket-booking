@@ -5,9 +5,32 @@ import { Collection } from "mongodb";
 
 const showCollection = getCollection<Show>(collections.SHOWS)!;
 
-export default class ShowCollection {
+export default class ShowService {
   public static async addShow(showDetails: { time: Date }) {
     return showCollection.insertOne(showDetails);
+  }
+
+  public static async getAllShows(movieId: string) {
+    return new Promise(async (resolve, reject) => {
+      const shows = await db
+        .getDb()
+        .collection(collections.SHOW_COLLECTION)
+        .aggregate([
+          {
+            $lookup: {
+              from: collections.MOVIE_COLLECTION,
+              localField: "movie",
+              foreignField: "_id",
+              as: "movie",
+            },
+          },
+          { $unwind: "$movie" },
+          { $match: { "movie._id": ObjectID(movieId) } },
+        ])
+        .toArray();
+      resolve(shows);
+      // console.log(shows);
+    });
   }
 }
 
