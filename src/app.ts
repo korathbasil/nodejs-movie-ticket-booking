@@ -20,15 +20,15 @@ const app = express();
 dotenv.config();
 
 // view engine setup
-app.set("views", path.join(__dirname, "views"));
+app.set("views", path.join(__dirname, "..", "views"));
 app.set("view engine", "hbs");
 app.engine(
   "hbs",
   hbs({
     extname: "hbs",
     defaultLayout: "layout",
-    layoutsDir: __dirname + "/views/layouts",
-    partialsDir: __dirname + "/views/partials",
+    layoutsDir: path.join(__dirname, "..", "views", "layouts"),
+    partialsDir: path.join(__dirname, "..", "views", "partials"),
   })
 );
 // DB connect
