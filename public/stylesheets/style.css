@@ -7,8 +7,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 20px;
   padding: 0 2rem;
-  background-color: white;
   box-shadow: 3px 3px 3px rgba(211, 211, 211, 0.677);
 }
 .admin-header > h1,
@@ -16,7 +16,9 @@
   font-size: 30px;
   font-weight: 1000;
   letter-spacing: 5px;
-  color: var(--admin-tertiary);
+  /* color: var(--admin-tertiary);
+   */
+  color: red;
 }
 .admin-header-panel,
 .theater-header-panel {

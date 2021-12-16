@@ -10,7 +10,8 @@ body {
   --admin-secondary: #d8d8d8;
   --admin-tertiary: blue;
   --background: rgba(218, 205, 179, 0.387);
-  background-color: var(--background);
+  --background-light: #f8f8f8;
+  background-color: var(--background-light);
 
   /* User Colors */
 }
