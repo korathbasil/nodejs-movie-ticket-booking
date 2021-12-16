@@ -6,17 +6,18 @@
 .content-card {
   width: 100%;
   background-color: white;
-  box-shadow: 3px 3px 3px rgba(211, 211, 211, 0.677);
+  box-shadow: var(--box-shaow-high);
   padding: 20px;
 }
 /* Login */
 .admin-login-box {
   width: 400px;
   margin: 0 auto;
-  margin-top: 100px;
-  border: 1px solid lightgrey;
+  margin-top: 300px;
+  /* border: 1px solid lightgrey; */
   height: fit-content;
   position: relative;
+  border-radius: 10px;
 }
 .admin-login-box > h2 {
   font-size: 20px;
