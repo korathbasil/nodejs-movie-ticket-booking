@@ -1,23 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  /* Colors */
-  --admin-primary: #2f3547;
-  --admin-secondary: #d8d8d8;
-  --admin-tertiary: blue;
-  --background: rgba(218, 205, 179, 0.387);
-  background-color: var(--background);
-
-  /* User Colors */
-}
-
-a {
-  color: #00b7ff;
-}
 /* Layout Styling */
 /* Admin header */
 .admin-header,
