@@ -28,7 +28,7 @@
 .content-card {
   width: 100%;
   background-color: white;
-  box-shadow: var(--box-shaow-high);
+  box-shadow: var(--box-shadow-high);
   padding: 20px;
 }
 /* Login */

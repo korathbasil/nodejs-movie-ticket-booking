@@ -14,7 +14,7 @@ body {
   --background-light: #f8f8f8;
   background-color: var(--background-light);
 
-  --box-shaow-high: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  --box-shadow-high: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 
   /* User Colors */
 }

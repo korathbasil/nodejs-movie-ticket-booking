@@ -12,7 +12,7 @@
   margin-bottom: 0;
   padding: 0 2rem;
   background-color: white;
-  box-shadow: var(--box-shaow-high);
+  box-shadow: var(--box-shadow-high);
   border-radius: 10px;
 }
 .admin-header > h1,
