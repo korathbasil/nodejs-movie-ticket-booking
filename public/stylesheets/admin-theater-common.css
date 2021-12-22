@@ -1,0 +1,15 @@
+.app {
+  display: flex;
+  height: 100vh;
+}
+.main-app {
+  flex: 1;
+}
+
+/*  */
+.content-card {
+  width: 100%;
+  background-color: white;
+  box-shadow: var(--box-shaow-high);
+  padding: 20px;
+}

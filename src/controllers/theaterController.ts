@@ -7,6 +7,7 @@ export class TheaterController {
   public static getLogin(_: Request, res: Response) {
     res.render("theater/login", {
       theaterRoute: true,
+      hideSidebar: true,
       title: "Login - Theater - Cinemax",
     });
   }
