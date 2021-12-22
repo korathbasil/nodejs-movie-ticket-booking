@@ -1,3 +1,11 @@
+.theater-info > h5 {
+  font-size: 18px;
+}
+.theater-info > p {
+  font-size: 14px;
+  text-align: end;
+}
+
 /* Login */
 .theater-login-box {
   width: 400px;
