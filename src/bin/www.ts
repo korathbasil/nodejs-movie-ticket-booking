@@ -1,7 +1,7 @@
-import { app as ExpressApp } from "../app";
-// const debug = require("debug")("movie-ticket-booking-webapp:server");
-import buildDebug from "debug";
 const http = require("http");
+import buildDebug from "debug";
+
+import { app as ExpressApp } from "../app";
 
 const debug = buildDebug("movie-ticket-booking-webapp:server");
 
