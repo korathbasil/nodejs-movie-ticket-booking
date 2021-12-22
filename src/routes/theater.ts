@@ -1,17 +1,17 @@
-// const express = require("express");
+const express = require("express");
 // const passport = require("passport");
 
 // import theaterController from "../controllers/theaterController";
 
-// const router = express.Router();
+const router = express.Router();
 
 // const verifyLogout = require("../middlewares/verify-theater-logout");
 // const verifyLogin = require("../middlewares/verify-theater-login");
 // const verifyTheater = require("../middlewares/verify-theater");
 // const clearSession = require("../middlewares/clear-session");
 
-// // Login
-// router.get("/login", verifyLogout, theaterController.getLogin);
+// Login
+router.get("/login", verifyLogout, theaterController.getLogin);
 
 // router.post(
 //   "/login",
@@ -143,4 +143,4 @@
 //   theaterController.getAccount
 // );
 
-// module.exports = router;
+export { router as theaterRouter };
