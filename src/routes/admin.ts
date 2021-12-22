@@ -33,7 +33,7 @@ router.post("/login", async (req: Request, res: Response) => {
 router.get("/", AdminController.getDashboard);
 
 // // Theatre Mangement
-// router.get("/theater", verifylogin, verifyAdmin, AdminController.getAddTheater);
+router.get("/theater", AdminController.getAddTheater);
 
 // // View All theaters of a selected owner
 // router.get(
@@ -79,19 +79,9 @@ router.get("/", AdminController.getDashboard);
 //   verifyAdmin,
 //   AdminController.getDeleteTheater
 // );
-// // User Mangement
-// router.get(
-//   "/user",
-//   verifylogin,
-//   verifyAdmin,
-//   AdminController.getUserManagement
-// );
-// // User Activity Tracker
-// router.get(
-//   "/user-activity",
-//   verifylogin,
-//   verifyAdmin,
-//   AdminController.getUserManagement
-// );
+// User Mangement
+router.get("/user", AdminController.getUserManagement);
+// User Activity Tracker
+router.get("/user-activity", AdminController.getUserManagement);
 
 export { router as adminRouter };
