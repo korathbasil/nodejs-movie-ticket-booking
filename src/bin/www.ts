@@ -1,4 +1,4 @@
-const http = require("http");
+import http from "http";
 import buildDebug from "debug";
 
 import { app as ExpressApp } from "../app";
@@ -78,6 +78,6 @@ function onError(error: any) {
 
 function onListening() {
   const addr = server.address();
-  const bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
+  const bind = typeof addr === "string" ? "pipe " + addr : "port " + addr?.port;
   debug("Listening on " + bind);
 }
