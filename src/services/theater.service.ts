@@ -59,10 +59,14 @@ export class TheaterService {
   }
 
   public static async getTheaterByID(id: string): Promise<Theater | null> {
+    const theaterCollection = getCollection<Theater>("theaters")!;
+
     return theaterCollection.findOne({ _id: new ObjectId(id) });
   }
 
   public static async getAllTheaters(): Promise<Theater[]> {
+    const theaterCollection = getCollection<Theater>("theaters")!;
+
     return theaterCollection.find().toArray();
   }
 

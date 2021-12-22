@@ -39,7 +39,6 @@ export class AdminController {
       adminRoute: true,
       admin: req.session.admin,
     });
-    console.log(req.session);
   }
 
   public static async getTheater(req: Request, res: Response) {
@@ -54,13 +53,13 @@ export class AdminController {
     });
   }
 
-  public static async getTheaters(req: Request, res: Response) {
+  public static async getAllTheaters(req: Request, res: Response) {
     TheaterService.getAllTheaters().then((theaters) => {
       res.render("admin/theater-management", {
         title: "Theater Management - Admin - CineMax",
         adminRoute: true,
         admin: req.session.admin,
-        owners: theaters,
+        theaters: theaters,
       });
     });
   }

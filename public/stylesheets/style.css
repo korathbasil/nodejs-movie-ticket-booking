@@ -3,12 +3,13 @@
 .admin-header,
 .theater-header {
   position: fixed;
-  width: 90%;
+  width: calc(100% - 140px);
   height: 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 20px;
+  margin-bottom: 0;
   padding: 0 2rem;
   background-color: white;
   box-shadow: var(--box-shaow-high);

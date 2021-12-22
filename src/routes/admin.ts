@@ -33,7 +33,7 @@ router.post("/login", async (req: Request, res: Response) => {
 router.get("/", AdminController.getHome);
 
 // // Theatres
-router.get("/theater", AdminController.getAddTheater);
+router.get("/theater", AdminController.getAllTheaters);
 
 // Users
 router.get("/user", AdminController.getUserManagement);
