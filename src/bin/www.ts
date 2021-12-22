@@ -1,12 +1,9 @@
-#!/usr/bin/env node
-
-/**
- * Module dependencies.
- */
-
 import { app as ExpressApp } from "../app";
-const debug = require("debug")("movie-ticket-booking-webapp:server");
+// const debug = require("debug")("movie-ticket-booking-webapp:server");
+import buildDebug from "debug";
 const http = require("http");
+
+const debug = buildDebug("movie-ticket-booking-webapp:server");
 
 /**
  * Get port from environment and store in Express.
