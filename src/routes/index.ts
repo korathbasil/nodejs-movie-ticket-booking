@@ -1,4 +1,11 @@
-import AdminRouter from "./admin";
-import UserRouter from "./user";
+import { Router } from "express";
 
-export { AdminRouter, UserRouter };
+import { adminRouter } from "./admin";
+import { userRouter } from "./user";
+
+const router = Router();
+
+router.use("/admin", adminRouter);
+router.use("/", userRouter);
+
+export { router as appRouter };

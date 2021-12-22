@@ -93,4 +93,4 @@ router.get("/", AdminController.getDashboard);
 //   AdminController.getUserManagement
 // );
 
-export default router;
+export { router as adminRouter };

@@ -66,10 +66,9 @@ app.use(passport.session());
 //   await connectToDatabase();
 // }
 // startDb();
-import { AdminRouter, UserRouter } from "./routes";
+import { appRouter } from "./routes";
 
-app.use("/", UserRouter);
-app.use("/admin", AdminRouter);
+app.use("/", appRouter);
 // app.use("/theater", theaterRoute);
 // app.post("/test");
 

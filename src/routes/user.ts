@@ -52,4 +52,4 @@ router.get("/", (_: Request, res: Response) => {
 //   userService.payRazorpay();
 // });
 
-export default router;
+export { router as userRouter };
