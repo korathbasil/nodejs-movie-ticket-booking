@@ -29,11 +29,17 @@ router.post("/login", async (req: Request, res: Response) => {
 // Logout
 // router.get("/logout", verifylogin, verifyAdmin, AdminController.postLogout);
 
-// // Dashboard
-router.get("/", AdminController.getDashboard);
+// Home
+router.get("/", AdminController.getHome);
 
-// // Theatre Mangement
+// // Theatres
 router.get("/theater", AdminController.getAddTheater);
+
+// Users
+router.get("/user", AdminController.getUserManagement);
+
+// User Activity Tracker
+router.get("/user-activity", AdminController.getUserManagement);
 
 // // View All theaters of a selected owner
 // router.get(

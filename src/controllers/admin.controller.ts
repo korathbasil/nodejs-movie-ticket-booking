@@ -33,9 +33,9 @@ export class AdminController {
     res.redirect("/admin/login");
   }
 
-  public static async getDashboard(req: Request, res: Response) {
-    res.render("admin/dashboard", {
-      title: "Dashboard - Admin - CineMax",
+  public static async getHome(req: Request, res: Response) {
+    res.render("admin/home", {
+      title: "Home - Admin - CineMax",
       adminRoute: true,
       admin: req.session.admin,
     });
