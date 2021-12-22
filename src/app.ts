@@ -1,20 +1,20 @@
-const createError = require("http-errors");
-import "./config/dbConfig";
-
-import express, { Request, Response } from "express";
 import path from "path";
-const cookieParser = require("cookie-parser");
-const logger = require("morgan");
-const dotenv = require("dotenv");
-const hbs = require("express-handlebars");
-const session = require("express-session");
-const fileUpload = require("express-fileupload");
-const passport = require("passport");
-const flash = require("express-flash");
-const MongoStore = require("connect-mongo")(session);
+import express, { Request, Response, json } from "express";
+import createError from "http-errors";
+import logger from "morgan";
+import dotenv from "dotenv";
+import { engine } from "express-handlebars";
+import session from "express-session";
+import fileUpload from "express-fileupload";
+import passport from "passport";
+import flash from "express-flash";
+import connectMongo from "connect-mongo";
 
-// Router imports
-// const theaterRoute = require("./routes/theater");
+import "./config/dbConfig";
+import { passportConfig } from "./config/passportConfig";
+import { appRouter } from "./routes";
+
+const MongoStore = connectMongo(session);
 
 const app = express();
 dotenv.config();
@@ -24,30 +24,27 @@ app.set("views", path.join(__dirname, "..", "views"));
 app.set("view engine", "hbs");
 app.engine(
   "hbs",
-  hbs({
+  engine({
     extname: "hbs",
     defaultLayout: "layout",
     layoutsDir: path.join(__dirname, "..", "views", "layouts"),
     partialsDir: path.join(__dirname, "..", "views", "partials"),
   })
 );
-// DB connect
 
 // Passport initialize
-// const passportConfig = require("./config/passportConfig");
-import { passportConfig } from "./config/passportConfig";
 passportConfig(passport);
 
 // Middlewares
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(json());
 app.use(fileUpload());
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "..", "public")));
 app.use(
   session({
-    secret: process.env.SESSION_SECTRET,
+    secret: process.env.SESSION_SECTRET || "jibbrish",
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 16000000 },
@@ -60,17 +57,7 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-// import { connectToDatabase } from "./config/dbConfig";
-
-// async function startDb() {
-//   await connectToDatabase();
-// }
-// startDb();
-import { appRouter } from "./routes";
-
 app.use("/", appRouter);
-// app.use("/theater", theaterRoute);
-// app.post("/test");
 
 // catch 404 and forward to error handler
 app.use(function (_, _a, next) {
@@ -78,7 +65,7 @@ app.use(function (_, _a, next) {
 });
 
 // error handler
-app.use(function (err: any, req: Request, res: Response) {
+app.use((err: any, req: Request, res: Response) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
