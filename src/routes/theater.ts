@@ -25,14 +25,9 @@ router.get("/login", TheaterController.getLogin);
 // // Logout
 // router.get("/logout", verifyLogin, verifyTheater, theaterController.getLogout);
 // // Dashboard
-// router.get("/", verifyLogin, verifyTheater, theaterController.getDashboard);
-// // Screen Management
-// router.get(
-//   "/screen",
-//   verifyLogin,
-//   verifyTheater,
-//   theaterController.getScreenManagement
-// );
+router.get("/", TheaterController.getHome);
+// Screen Management
+// router.get("/screen", TheaterController.getScreenManagement);
 // // Add screen
 // router.get(
 //   "/screen/add-screen",

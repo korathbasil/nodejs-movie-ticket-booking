@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 // import sharp from "sharp";
 
-// import { TheaterService } from "../services";
+import { TheaterService } from "../services";
 
 export class TheaterController {
   public static getLogin(_: Request, res: Response) {
@@ -17,16 +17,16 @@ export class TheaterController {
   //   req.logout();
   //   res.redirect("/theater/login");
   // },
-  // getDashboard: (req: Request, res: Response) => {
-  //   res.render("theater/dashboard", {
-  //     theaterRoute: true,
-  //     title: "Dashboard - Theater - Cinemax",
-  //     theater: req.session.theater,
-  //   });
-  // },
-  // getScreenManagement: (req: Request, res: Response) => {
+  public static getHome(req: Request, res: Response) {
+    res.render("theater/home", {
+      theaterRoute: true,
+      title: "Home - Theater - Cinemax",
+      theater: req.session.theater,
+    });
+  }
+  // public static getScreenManagement(req: Request, res: Response) {
   //   const ownerId = req.session.passport.user;
-  //   TheaterService.getScreens(ownerId).then((screens: any) => {
+  //   TheaterService.getAScreens(ownerId).then((screens: any) => {
   //     console.log(screens);
   //     res.render("theater/screen-management", {
   //       theaterRoute: true,
