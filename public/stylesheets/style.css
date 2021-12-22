@@ -47,17 +47,24 @@
 }
 /* Sidebar */
 .sidebar {
-  width: 320px;
+  width: 100px;
   display: flex;
   flex-direction: column;
 }
 .admin-sidebar {
-  min-width: 270px;
+  /* min-width: 270px; */
   background-color: white;
   align-items: center;
   height: 100%;
   box-shadow: 3px 3px 3px rgba(211, 211, 211, 0.677);
 }
+/* .admin-sidebar:hover .admin-sidebar {
+  width: 350px;
+} */
+.admin-sidebar:hover .admin-nav-link > span {
+  display: block;
+}
+
 .fas {
   font-size: 25px;
   width: 50px;
@@ -76,7 +83,8 @@
 .admin-nav-link > span {
   font-weight: 800;
   font-size: 16px;
-  margin-left: 5px;
+  /* margin-left: 5px; */
+  display: none;
 }
 .admin-nav-link--active {
   color: white;

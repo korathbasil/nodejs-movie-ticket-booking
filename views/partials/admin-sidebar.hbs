@@ -1,29 +1,36 @@
-<div class="sidebar admin-sidebar">
+<aside id="admin-sidebar" class="sidebar admin-sidebar">
     <ul class="admin-nav">
         <li>
             <a id="dashboard" class="admin-nav-link" href="/admin">
                 <i class="fas fa-home"></i>
-                <span>Dashboard</span>
+                {{!-- <span>Dashboard</span> --}}
             </a>
         </li>
         <li>
             <a id="theater-management" class="admin-nav-link" href="/admin/theater">
                 <i class="fas fa-film"></i>
-                <span>Theater Management</span>
+                {{!-- <span>Theater Management</span> --}}
             </a>
         </li>
         <li>
             <a id="user-management" class="admin-nav-link" href="/admin/user">
                 <i class="fas fa-user"></i>
-                <span>User Management</span>
+                {{!-- <span>User Management</span> --}}
             </a>
         </li>
         <li class="admin-nav-item-aactive">
             <a id="user-activity" class="admin-nav-link" href="/admin/user-activity">
                 <i class="fas fa-chart-line"></i>
-                <span>User Activity Tracker</span>
+                {{!-- <span>User Activity Tracker</span> --}}
             </a>
         </li>
     </ul>
-</div>
+</aside>
 <script src="/javascripts/admin.js"></script>
+<script>
+    const adminSidebar = document.getElementById("admin-sidebar");
+
+    adminSidebar.addEventListener("hover", () => {
+        adminSidebar.style.width = "350px"
+    })
+</script>
