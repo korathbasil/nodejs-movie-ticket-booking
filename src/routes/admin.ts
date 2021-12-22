@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import { formValidator } from "helpers";
+import { formValidator } from "../helpers";
 
 import { AdminService } from "../services";
 // const passport = require("passport");
