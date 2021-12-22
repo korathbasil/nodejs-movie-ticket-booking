@@ -1,0 +1,67 @@
+<div class="admin-parent admin-add-theater-owner">
+    <div class="content-card">
+        <div class="admin-headings">
+            <div class="admin-header-selector"></div>
+            <h2>Add Theater Partner</h2>
+        </div>
+        <form class="add-theater-owner-form" action="/admin/theater/add-theater" method="POST"
+            enctype="multipart/form-data">
+            <p>Fill the form below.</p>
+            <label for="name">
+                Theater Name
+            </label>
+            <input type="text" name="name" required>
+            <label for="email">
+                Email
+            </label>
+            <input type="email" name="email" required>
+            <label for="phone">
+                Phone
+            </label>
+            <input type="tel" name="phone" required>
+            {{!-- <label for="theater">
+                Address 1st line
+            </label>
+            <input type="text" name="address-city" required>
+            <label for="theater">
+                Address 2nd line
+            </label>
+            <input type="text" name="address-city" required> --}}
+            <label for="addressCity">
+                City
+            </label>
+            <input type="text" name="addressCity" required>
+            <label for="addressState">
+                State
+            </label>
+            <input type="text" name="addressState" required>
+            <label for="addressPin">
+                PIN
+            </label>
+            <input type="text" name="addressPin" required>
+            {{!-- <div class="form-image-container">
+                <i class="fas fa-camera"></i>
+            </div> --}}
+            {{!-- <label for="image">Profile Image</label>
+            <input type="file" name="image" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" required> --}}
+            <label for="ownerName">
+                Owner Name
+            </label>
+            <input type="text" name="ownerName" required>
+            <label for="ownerEmail">
+                Owner Email
+            </label>
+            <input type="email" name="ownerEmail" required>
+            <label for="ownerPhone">
+                Owner Phone
+            </label>
+            <input type="tel" name="ownerPhone" required>
+
+            <button class="admin-form-submit-button" type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+{{!-- Scripts --}}
+<script>
+    setActiveTab("theater-management")
+</script>

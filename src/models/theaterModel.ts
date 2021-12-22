@@ -15,6 +15,7 @@ type TheaterOwner = {
 export class Theater implements Document {
   name: string;
   email: string;
+  phone: string;
   password: string;
   address: TheaterAddress;
   owner: TheaterOwner;

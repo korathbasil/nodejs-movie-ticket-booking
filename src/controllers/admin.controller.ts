@@ -65,7 +65,7 @@ export class AdminController {
   }
 
   public static getAddTheater(req: Request, res: Response) {
-    res.render("admin/add-theater-owner", {
+    res.render("admin/add-theater", {
       title: "Theater Management - Admin - CineMax",
       adminRoute: true,
       admin: req.session.admin,
@@ -74,7 +74,8 @@ export class AdminController {
 
   public static async postAddTheater(req: Request, res: Response) {
     fileHelper.uploadFile();
-    await TheaterService.addTheater(req.body);
+    // await TheaterService.addTheater(req.body);
+    console.log(req.body);
     res.redirect("/admin/theater");
   }
 

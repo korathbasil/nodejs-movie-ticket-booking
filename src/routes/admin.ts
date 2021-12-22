@@ -49,20 +49,10 @@ router.get("/user-activity", AdminController.getUserManagement);
 //   AdminController.getTheaters
 // );
 
-// // Add theater owner
-// router.get(
-//   "/theater/add-owner",
-//   verifylogin,
-//   verifyAdmin,
-//   AdminController.getAddTheater
-// );
+// Add theater owner
+router.get("/theater/add-theater", AdminController.getAddTheater);
 
-// router.post(
-//   "/theater/add-owner",
-//   verifylogin,
-//   verifyAdmin,
-//   AdminController.postAddTheater
-// );
+router.post("/theater/add-theater", AdminController.postAddTheater);
 
 // // Edit theater owner
 // router.get(
