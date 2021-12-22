@@ -26,7 +26,7 @@
   {{/if}}
 </head>
 
-<body>
+{{!-- <body>
   {{#if adminRoute}}
   {{>admin-header}}
   {{else if theaterRoute}}
@@ -44,6 +44,16 @@
     {{/if}}
     {{{body}}}
   </div>
-</body>
+</body> --}}
+
+
+{{#if adminRoute}}
+  {{>admin-app}}
+{{else if theaterRoute}}
+  {{>theater-app}}
+{{else}}
+  {{>user-app}}
+{{/if}}
+
 
 </html>

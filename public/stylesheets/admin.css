@@ -1,6 +1,14 @@
+.app {
+  display: flex;
+}
+.main-app {
+  flex: 1;
+}
+
 .admin-parent {
   width: 100%;
-  height: calc(100vh - 80px);
+  /* height: calc(100vh - 80px); */
+  padding-top: 120px;
   display: flex;
 }
 .content-card {

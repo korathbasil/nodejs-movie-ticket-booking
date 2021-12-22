@@ -3,7 +3,7 @@
 .admin-header,
 .theater-header {
   position: fixed;
-  width: calc(100% - 40px);
+  width: 90%;
   height: 80px;
   display: flex;
   align-items: center;
@@ -43,6 +43,7 @@
 .main-body {
   display: flex;
   height: calc(100vh - 80px);
+  padding-top: 120px;
 }
 /* Sidebar */
 .sidebar {
