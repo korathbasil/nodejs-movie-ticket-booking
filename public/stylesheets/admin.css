@@ -190,14 +190,14 @@
 .admin-theater-management {
   width: 100%;
   padding: 20px;
-  /* overflow-y: scroll;
-  position: relative; */
+  /* overflow-y: scroll; */
+  position: relative;
 }
 .admin-theater-management-add-link {
   position: absolute;
   top: 40px;
   right: 40px;
-  background-color: var(--color-primary);
+  background-color: var(--color-true-blue);
   padding: 10px 20px;
   border-radius: 30px;
   color: white;
