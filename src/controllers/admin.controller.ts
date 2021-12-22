@@ -37,7 +37,7 @@ export class AdminController {
   }
 
   public static async postSignup(req: Request, res: Response) {
-    const name: string = "admin";
+    const name: string = req.body.name;
     const email: string = req.body.email;
     const password: string = req.body.password;
 
