@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { validationResult } from "express-validator";
 
 import { AdminService, TheaterService } from "../services";
 import { fileHelper } from "../helpers";
@@ -74,8 +75,24 @@ export class AdminController {
 
   public static async postAddTheater(req: Request, res: Response) {
     fileHelper.uploadFile();
-    // await TheaterService.addTheater(req.body);
-    console.log(req.body);
+    const errors = validationResult(req);
+    console.log(errors.array());
+
+    const theaterData = {
+      name: req.body.theaterName,
+      email: req.body.email,
+      phone: req.body.phone,
+
+      city: req.body.addressCity,
+      state: req.body.addressState,
+      pincode: req.body.addressPin,
+
+      ownerName: req.body.ownerName,
+      ownerEmail: req.body.ownerEmail,
+      ownerPhone: req.body.ownerPhone,
+    };
+
+    await TheaterService.addTheater(theaterData);
     res.redirect("/admin/theater");
   }
 

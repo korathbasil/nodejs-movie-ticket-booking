@@ -9,6 +9,7 @@ const theaterCollection = getCollection<Theater>("theaters")!;
 type NewTheaterDetais = {
   name: string;
   email: string;
+  phone: string;
 
   city: string;
   state: string;
@@ -23,9 +24,12 @@ export class TheaterService {
   public static async addTheater(
     theaterData: NewTheaterDetais
   ): Promise<InsertOneResult<Theater>> {
+    const theaterCollection = getCollection<Theater>("theaters")!;
+
     const newTheaterData = {
       name: theaterData.name,
       email: theaterData.email,
+      phone: theaterData.phone,
 
       address: {
         city: theaterData.city,
@@ -46,6 +50,8 @@ export class TheaterService {
     username: string;
     password: string;
   }) {
+    const theaterCollection = getCollection<Theater>("theaters")!;
+
     const selectedDocument = await theaterCollection.findOne({
       username: theaterCredentials.username,
     });
@@ -71,6 +77,8 @@ export class TheaterService {
   }
 
   public static async editTheaterDetails(newData: any, theaterId: string) {
+    const theaterCollection = getCollection<Theater>("theaters")!;
+
     return theaterCollection.updateOne(
       { _id: new ObjectId(theaterId) },
       {

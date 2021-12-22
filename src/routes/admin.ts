@@ -1,4 +1,6 @@
 import { Request, Response, Router } from "express";
+import { body } from "express-validator";
+
 import { AdminService } from "../services";
 // const passport = require("passport");
 
@@ -52,7 +54,11 @@ router.get("/user-activity", AdminController.getUserManagement);
 // Add theater owner
 router.get("/theater/add-theater", AdminController.getAddTheater);
 
-router.post("/theater/add-theater", AdminController.postAddTheater);
+router.post(
+  "/theater/add-theater",
+  [body("theaterName").notEmpty(), body("email").normalizeEmail().isEmail()],
+  AdminController.postAddTheater
+);
 
 // // Edit theater owner
 // router.get(
