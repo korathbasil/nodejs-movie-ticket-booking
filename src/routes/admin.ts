@@ -14,6 +14,8 @@ const router = Router();
 // // const clearSession = require("../middlewares/clear-session");
 
 // // Signup
+router.get("/signup", AdminController.getSignup);
+
 router.post("/signup", AdminController.postSignup);
 // Login
 router.get("/login", AdminController.getLogin);

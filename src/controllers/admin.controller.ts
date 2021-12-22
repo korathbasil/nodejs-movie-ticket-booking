@@ -6,22 +6,34 @@ import { fileHelper } from "../helpers";
 
 export class AdminController {
   public static async getLogin(req: Request, res: Response) {
+    if (req.session.admin) return res.redirect("/admin/");
+
     const isAdminExists = await AdminService.isAdminAlraedyExists();
 
     if (isAdminExists) {
       return res.render("admin/login", {
         title: "Login - Admin - Cinemax",
         adminRoute: true,
-        adminExists: true,
+        hideSidebar: true,
         errorMessage: req.session.errorMessage,
       }); // Admin exists
     }
 
-    return res.render("admin/login", {
-      title: "Login - Admin - CineMax",
+    return res.redirect("/admin/signup"); // Admin does't exist
+  }
+
+  public static async getSignup(req: Request, res: Response) {
+    if (req.session.admin) return res.redirect("/admin/");
+
+    const isAdminExists = await AdminService.isAdminAlraedyExists();
+
+    if (isAdminExists) return res.redirect("/admin/login");
+
+    return res.render("admin/signup", {
+      title: "Signup - Admin - CineMax",
       adminRoute: true,
-      adminExists: false,
-    }); // Admin does't exist
+      hideSidebar: true,
+    });
   }
 
   public static async postSignup(req: Request, res: Response) {

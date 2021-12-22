@@ -1,6 +1,8 @@
 <body>
     <div class="app">
+        {{#unless hideSidebar}}
         {{>admin-sidebar}}
+        {{/unless}}
         <div class="main-app">
             {{>admin-header}}
 
