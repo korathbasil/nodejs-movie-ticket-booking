@@ -1,7 +1,7 @@
 const express = require("express");
 // const passport = require("passport");
 
-// import theaterController from "../controllers/theaterController";
+import { TheaterController } from "../controllers";
 
 const router = express.Router();
 
@@ -11,7 +11,7 @@ const router = express.Router();
 // const clearSession = require("../middlewares/clear-session");
 
 // Login
-router.get("/login", verifyLogout, theaterController.getLogin);
+router.get("/login", TheaterController.getLogin);
 
 // router.post(
 //   "/login",

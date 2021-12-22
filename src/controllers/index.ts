@@ -1,3 +1,4 @@
 import { AdminController } from "./admin.controller";
+import { TheaterController } from "./theaterController";
 
-export { AdminController };
+export { AdminController, TheaterController };
