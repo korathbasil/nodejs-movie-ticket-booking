@@ -1,8 +1,6 @@
 import { Request, Response } from "express";
 // import sharp from "sharp";
 
-import { TheaterService } from "../services";
-
 export class TheaterController {
   public static getLogin(_: Request, res: Response) {
     res.render("theater/login", {
