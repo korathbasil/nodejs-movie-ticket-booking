@@ -39,6 +39,7 @@ export class AdminController {
       adminRoute: true,
       admin: req.session.admin,
     });
+    console.log(req.session);
   }
 
   public static async getTheater(req: Request, res: Response) {

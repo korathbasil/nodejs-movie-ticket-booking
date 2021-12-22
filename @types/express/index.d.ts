@@ -14,5 +14,12 @@ declare namespace Express {
     session?: any;
     files?: any;
     flash?: any;
+    session: {
+      admin?: IAdminSession;
+    };
   }
+}
+
+interface IAdminSession {
+  email: string;
 }

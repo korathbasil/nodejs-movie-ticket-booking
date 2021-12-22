@@ -21,6 +21,7 @@ router.post("/login", async (req: Request, res: Response) => {
     email: req.body.email!,
     password: req.body.password,
   });
+  req.session.admin = { email: admin.email };
 
   if (!admin) return res.redirect("/admin/login");
   return res.redirect("/admin/");
