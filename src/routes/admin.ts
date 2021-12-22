@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import { body } from "express-validator";
+import { formValidator } from "helpers";
 
 import { AdminService } from "../services";
 // const passport = require("passport");
@@ -56,7 +56,7 @@ router.get("/theater/add-theater", AdminController.getAddTheater);
 
 router.post(
   "/theater/add-theater",
-  [body("theaterName").notEmpty(), body("email").normalizeEmail().isEmail()],
+  [formValidator.isEmail("email")],
   AdminController.postAddTheater
 );
 
