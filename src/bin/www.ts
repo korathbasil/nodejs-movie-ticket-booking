@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-import ExpressApp from "../app";
+import { app as ExpressApp } from "../app";
 const debug = require("debug")("movie-ticket-booking-webapp:server");
 const http = require("http");
 

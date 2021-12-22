@@ -88,4 +88,4 @@ app.use(function (err: any, req: Request, res: Response) {
   res.render("error");
 });
 
-export default app;
+export { app };
