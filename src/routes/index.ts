@@ -6,8 +6,8 @@ import { userRouter } from "./user";
 
 const router = Router();
 
+// router.use("/", userRouter);
 router.use("/admin", adminRouter);
 router.use("/theater", theaterRouter);
-router.use("/", userRouter);
 
-export { router as appRouter };
+export { router as appRouter, userRouter };

@@ -1,14 +1,17 @@
-import { Request, Response } from "express";
-
-var express = require("express");
+import { Router, Request, Response } from "express";
 
 // import userController from "../controllers/userController";
 // const verifyUserLogin = require("../middlewares/verifyUserLogin");
 
-var router = express.Router();
+const router = Router();
 
 router.get("/", (_: Request, res: Response) => {
-  res.send("Hello World");
+  console.log("dddsd");
+  res.send("Hello");
+});
+router.get("/a", (_: Request, res: Response) => {
+  console.log("dddsd");
+  res.render("user/home");
 });
 
 // Signup
