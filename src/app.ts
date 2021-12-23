@@ -19,7 +19,7 @@ const MongoStore = connectMongo(session);
 const app = express();
 dotenv.config();
 
-// view engine setup
+// // view engine setup
 app.set("views", path.join(__dirname, "..", "views"));
 app.set("view engine", "hbs");
 app.engine(
@@ -32,12 +32,11 @@ app.engine(
   })
 );
 
-// Passport initialize
+// // Passport initialize
 passportConfig(passport);
 
-// Middlewares
+// // Middlewares
 app.use(logger("dev"));
-app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(json());
 app.use(fileUpload());
