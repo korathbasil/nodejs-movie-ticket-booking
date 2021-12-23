@@ -4,13 +4,13 @@
 .theater-header {
   position: fixed;
   width: calc(100% - 140px);
-  height: 80px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 20px;
   margin-bottom: 0;
-  padding: 0 2rem;
+  padding: 0 15px;
   background-color: white;
   box-shadow: var(--box-shadow-high);
   border-radius: 10px;
