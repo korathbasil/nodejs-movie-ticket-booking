@@ -7,7 +7,7 @@ const router = Router();
 
 router.get("/", (_: Request, res: Response) => {
   console.log("dddsd");
-  res.send("Hello");
+  res.render("user/home");
 });
 router.get("/a", (_: Request, res: Response) => {
   console.log("dddsd");

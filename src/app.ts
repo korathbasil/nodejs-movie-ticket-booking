@@ -12,7 +12,7 @@ import connectMongo from "connect-mongo";
 
 import "./config/dbConfig";
 import { passportConfig } from "./config/passportConfig";
-import { userRouter, appRouter } from "./routes";
+import { appRouter } from "./routes";
 
 const MongoStore = connectMongo(session);
 
@@ -58,7 +58,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(appRouter);
-app.use("/", userRouter);
 
 // catch 404 and forward to error handler
 app.use(function (_, _a, next) {
