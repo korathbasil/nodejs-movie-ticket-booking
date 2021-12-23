@@ -13,6 +13,7 @@ type TheaterOwner = {
 };
 
 export class Theater implements Document {
+  regNumber: number;
   name: string;
   email: string;
   phone: string;

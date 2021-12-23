@@ -26,7 +26,12 @@ export class TheaterService {
   ): Promise<InsertOneResult<Theater>> {
     const theaterCollection = getCollection<Theater>("theaters")!;
 
+    const regNumber = 3457778;
+    const password = "theater";
+
     const newTheaterData = {
+      regNumber,
+      password,
       name: theaterData.name,
       email: theaterData.email,
       phone: theaterData.phone,
