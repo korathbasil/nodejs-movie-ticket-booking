@@ -47,7 +47,6 @@ header {
   border-radius: 999px;
 }
 .header__account > h4 {
-  color: white;
   margin-right: 10px;
 }
 
@@ -100,7 +99,6 @@ header {
 .hero__movie-info {
   position: absolute;
   bottom: 50px;
-  color: white;
 }
 .hero__movie-info > h1 {
   font-size: 30px;
@@ -116,4 +114,15 @@ header {
   margin-top: 10px;
   color: white;
   cursor: pointer;
+}
+
+/* Now Showing Section */
+.now__heading {
+  display: flex;
+}
+.now__heading > div {
+  width: 5px;
+  height: 20px;
+  background-color: var(--color-primary);
+  margin-right: 10px;
 }
