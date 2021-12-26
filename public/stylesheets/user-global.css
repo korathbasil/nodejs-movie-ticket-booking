@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  /* Colors */
+  --color-primary: #f24138;
+  --color-dark-background: rgb(31, 25, 25);
+
+  /* Shadows */
+  --box-shadow-high: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+  background-color: var(--color-dark-background);
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+a {
+  color: #00b7ff;
+}
