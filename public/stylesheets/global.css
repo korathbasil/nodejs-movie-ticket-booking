@@ -19,6 +19,11 @@ body {
   /* User Colors */
 }
 
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
 a {
   color: #00b7ff;
 }

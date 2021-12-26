@@ -1,14 +1,19 @@
-<header class="admin-header">
-    <h1>CineMax</h1>
-    {{#if user}}
-    {{!-- <a href="/logout">Logout</a> --}}
-    <a href="/login">Login / Signup</a>
-    {{else}}
-
-    <div class="header-account">
+<header class="header">
+    <div class="left">
+        Cinemax
+    </div>
+    <div class="right">
+        <ul>
+            <li>
+                <a href="/">MOVIES</a>
+                <a href="/">CINEMAS</a>
+                <a href="/">CONCERT</a>
+            </li>
+        </ul>
+        <div class="header-account">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Sabrina_Carpenter_2019.jpg/220px-Sabrina_Carpenter_2019.jpg"
             alt="">
         <h4>Sabrina Carpenter</h4>
     </div>
-    {{/if}}
+    </div>
 </header>
