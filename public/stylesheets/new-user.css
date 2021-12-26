@@ -9,7 +9,9 @@ header {
   height: 80px;
   align-items: center;
 }
-
+.header__left > h1 {
+  color: var(--color-primary);
+}
 .header__right {
   display: flex;
   align-items: center;
@@ -93,4 +95,25 @@ header {
   height: 100%;
   width: 100%;
   object-fit: cover;
+}
+
+.hero__movie-info {
+  position: absolute;
+  bottom: 50px;
+  color: white;
+}
+.hero__movie-info > h1 {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+.hero__movie-info > a > button {
+  padding: 10px 20px;
+  font-weight: 700;
+  background-color: var(--color-primary);
+  outline: none;
+  border-radius: 5px;
+  border: none;
+  margin-top: 10px;
+  color: white;
+  cursor: pointer;
 }
