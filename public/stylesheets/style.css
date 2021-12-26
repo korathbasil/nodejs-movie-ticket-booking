@@ -67,22 +67,3 @@
 }
 
 /* User Header */
-.header-account {
-  display: flex;
-  align-items: center;
-  background-color: #227373;
-  padding: 3px;
-  border-radius: 99px;
-}
-
-.header-account > img {
-  width: 35px;
-  height: 35px;
-  object-fit: cover;
-  margin-right: 10px;
-  border-radius: 999px;
-}
-.header-account > h4 {
-  color: white;
-  margin-right: 10px;
-}
