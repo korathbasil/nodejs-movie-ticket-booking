@@ -117,12 +117,46 @@ header {
 }
 
 /* Now Showing Section */
-.now__heading {
-  display: flex;
+.now {
+  padding: 50px 0;
 }
-.now__heading > div {
+.subheading {
+  display: flex;
+  margin-bottom: 30px;
+}
+.subheading > div {
   width: 5px;
   height: 20px;
   background-color: var(--color-primary);
   margin-right: 10px;
+}
+
+.now__movies {
+  display: grid;
+  grid-template-columns: repeat(5, calc(20% - 16px));
+  gap: 20px;
+}
+.movie-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.movie-card:hover > img {
+  transition: transform 0.3s ease-in;
+  transform: scale(1.05);
+  overflow: hidden;
+  z-index: -1;
+}
+.movie-card > img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+.movie-card > div {
+  background-color: var(--color-seccondary);
+  flex: 1;
+  padding: 10px;
 }
