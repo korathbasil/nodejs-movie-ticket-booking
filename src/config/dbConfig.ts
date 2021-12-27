@@ -10,7 +10,6 @@ export async function connectToDatabase(uri: string) {
     await mongoClient.connect();
 
     db = mongoClient.db(`movie-ticket-booking-app-${process.env.NODE_ENV}`);
-    console.log("connected");
   } catch (e) {
     console.error("Unable to connect to the database");
   }

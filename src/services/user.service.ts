@@ -1,11 +1,8 @@
 import { InsertOneResult } from "mongodb";
 
 import { passwordHelpers } from "../helpers";
-
 import { getCollection } from "../config/dbConfig";
 import { User } from "../models/userModel";
-
-const userCollection = getCollection<User>("users")!;
 
 export class UserService {
   public static async signup(userDetails: {
@@ -13,6 +10,8 @@ export class UserService {
     email: string;
     password: string;
   }): Promise<InsertOneResult<User>> {
+    const userCollection = getCollection<User>("users")!;
+
     userDetails.password = await passwordHelpers.hashPassword(
       userDetails.password
     );
@@ -24,6 +23,8 @@ export class UserService {
     email: string;
     password: string;
   }) {
+    const userCollection = getCollection<User>("users")!;
+
     const selectedUSer = await userCollection.findOne({
       email: userCredentials.email,
     });

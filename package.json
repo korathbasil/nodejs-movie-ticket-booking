@@ -9,15 +9,7 @@
     "start": "node dist/bin/www",
     "build": "tsc",
     "copy": "cp -r ./src/views ./dist/views && cp -r ./src/public ./dist/public",
-    "test": "NODE_ENV=test jest --verbose ./src --detectOpenHandles",
-    "test2": "jest --wathAll --no-chache"
-  },
-  "jest": {
-    "preset": "ts-jest",
-    "testEnvironment": "node",
-    "setupFilesAfterEnv": [
-      "./src/test/setup.ts"
-    ]
+    "test": "NODE_ENV=test jest --verbose ./src --detectOpenHandles --watchAll --no-chache"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",

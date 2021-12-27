@@ -1,14 +1,17 @@
 import { MongoMemoryServer } from "mongodb-memory-server";
 
-import { connectToDatabase, getMongoClient, getDb } from "config/dbConfig";
+import { connectToDatabase, getMongoClient, getDb } from "../config/dbConfig";
 
 let mongo: MongoMemoryServer;
 
 beforeAll(async () => {
-  mongo = new MongoMemoryServer();
+  mongo = await MongoMemoryServer.create();
   const mongoUri = mongo.getUri();
-
-  await connectToDatabase(mongoUri);
+  try {
+    await connectToDatabase(mongoUri);
+  } catch (e) {
+    console.error(e);
+  }
 });
 
 beforeEach(async () => {
