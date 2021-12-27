@@ -1,5 +1,3 @@
-import { InsertOneResult } from "mongodb";
-
 import { passwordHelpers } from "../helpers";
 import { getCollection } from "../config/dbConfig";
 import { User } from "../models/userModel";
@@ -9,8 +7,13 @@ export class UserService {
     name: string;
     email: string;
     password: string;
-  }): Promise<InsertOneResult<User>> {
+  }) {
     const userCollection = getCollection<User>("users")!;
+
+    const selectedUser = await userCollection.findOne({
+      email: userDetails.email,
+    });
+    if (selectedUser) return;
 
     userDetails.password = await passwordHelpers.hashPassword(
       userDetails.password

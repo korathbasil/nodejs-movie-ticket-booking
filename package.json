@@ -9,7 +9,7 @@
     "start": "node dist/bin/www",
     "build": "tsc",
     "copy": "cp -r ./src/views ./dist/views && cp -r ./src/public ./dist/public",
-    "test": "NODE_ENV=test jest --verbose ./src --detectOpenHandles --watchAll --no-chache"
+    "test": "NODE_ENV=test jest --verbose ./src --detectOpenHandles --watch --no-chache"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
