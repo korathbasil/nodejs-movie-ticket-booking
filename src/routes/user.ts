@@ -6,11 +6,9 @@ import { Router, Request, Response } from "express";
 const router = Router();
 
 router.get("/", (_: Request, res: Response) => {
-  console.log("dddsd");
   res.render("user/home");
 });
 router.get("/a", (_: Request, res: Response) => {
-  console.log("dddsd");
   res.render("user/home");
 });
 
@@ -39,10 +37,10 @@ router.get("/a", (_: Request, res: Response) => {
 
 // router.get("/pay/razorpay", (req, res) => {
 // });
-// // Theaters page
-// router.get("/cinemas", (req, res) => {
-//   res.render("user/cinemas", { user: req.session.user, userRoute: true });
-// });
+// Theaters page
+router.get("/cinemas", (req, res) => {
+  res.render("user/cinemas", { user: req.session.user, userRoute: true });
+});
 // // Account page
 // router.get("/account", (req, res) => {
 //   res.render("user/account", { user: req.session.user, userRoute: true });
