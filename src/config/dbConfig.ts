@@ -1,14 +1,15 @@
 import { MongoClient, Db } from "mongodb";
 
 let db: Db;
+let mongoClient: MongoClient;
 
 export async function connectToDatabase(uri: string) {
-  const client: MongoClient = new MongoClient(uri);
+  mongoClient = new MongoClient(uri);
 
   try {
-    await client.connect();
+    await mongoClient.connect();
 
-    db = client.db(`movie-ticket-booking-app-${process.env.NODE_ENV}`);
+    db = mongoClient.db(`movie-ticket-booking-app-${process.env.NODE_ENV}`);
     console.log("connected");
   } catch (e) {
     console.error("Unable to connect to the database");
@@ -24,3 +25,7 @@ export const getCollection = <T>(collectionName: string) => {
   }
   // return db?.collection<T>(collectionName);
 };
+
+export const getDb = () => db;
+
+export const getMongoClient = () => mongoClient;
