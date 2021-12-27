@@ -9,7 +9,15 @@
     "start": "node dist/bin/www",
     "build": "tsc",
     "copy": "cp -r ./src/views ./dist/views && cp -r ./src/public ./dist/public",
-    "test": "NODE_ENV=test jest --verbose ./src --detectOpenHandles"
+    "test": "NODE_ENV=test jest --verbose ./src --detectOpenHandles",
+    "test2": "jest --wathAll --no-chache"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": [
+      "./src/test/setup.ts"
+    ]
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
@@ -51,6 +59,7 @@
     "@types/passport": "^1.0.7",
     "@types/sharp": "^0.29.4",
     "jest": "^27.3.1",
+    "mongodb-memory-server": "^8.1.0",
     "nodemon": "^2.0.15",
     "ts-jest": "^27.0.7",
     "ts-node": "^10.4.0",

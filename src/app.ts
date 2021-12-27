@@ -10,7 +10,6 @@ import passport from "passport";
 import flash from "express-flash";
 import connectMongo from "connect-mongo";
 
-import "./config/dbConfig";
 import { passportConfig } from "./config/passportConfig";
 import { appRouter } from "./routes";
 

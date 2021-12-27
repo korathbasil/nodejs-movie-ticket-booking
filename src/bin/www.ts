@@ -2,6 +2,8 @@ import http from "http";
 import buildDebug from "debug";
 
 import { app as ExpressApp } from "../app";
+import { connectToDatabase } from "../config/dbConfig";
+import { DB_CONNECTION_URL } from "../config/constants";
 
 const debug = buildDebug("movie-ticket-booking-webapp:server");
 
@@ -21,10 +23,6 @@ const server = http.createServer(ExpressApp);
 /**
  * Listen on provided port, on all network interfaces.
  */
-
-server.listen(port);
-server.on("error", onError);
-server.on("listening", onListening);
 
 /**
  * Normalize a port into a number, string, or false.
@@ -81,3 +79,16 @@ function onListening() {
   const bind = typeof addr === "string" ? "pipe " + addr : "port " + addr?.port;
   debug("Listening on " + bind);
 }
+
+async function startApp() {
+  try {
+    await connectToDatabase(DB_CONNECTION_URL);
+    server.listen(port);
+    server.on("error", onError);
+    server.on("listening", onListening);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+startApp();

@@ -1,11 +1,9 @@
 import { MongoClient, Db } from "mongodb";
 
-import { DB_CONNECTION_URL } from "./constants";
-
 let db: Db;
 
-export async function connectToDatabase() {
-  const client: MongoClient = new MongoClient(DB_CONNECTION_URL);
+export async function connectToDatabase(uri: string) {
+  const client: MongoClient = new MongoClient(uri);
 
   try {
     await client.connect();
@@ -26,5 +24,3 @@ export const getCollection = <T>(collectionName: string) => {
   }
   // return db?.collection<T>(collectionName);
 };
-
-connectToDatabase();
