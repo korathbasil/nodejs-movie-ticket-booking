@@ -4,6 +4,8 @@ import { connectToDatabase, getMongoClient, getDb } from "../config/dbConfig";
 
 let mongo: MongoMemoryServer;
 
+jest.setTimeout(20000);
+
 beforeAll(async () => {
   mongo = await MongoMemoryServer.create();
   const mongoUri = mongo.getUri();
