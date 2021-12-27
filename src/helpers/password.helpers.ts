@@ -1,6 +1,6 @@
 import { hash, compare } from "bcrypt";
 
-export default {
+export const passwordHelpers = {
   hashPassword: async (password: string, salt: number = 10) => {
     const hashedPAssword = await hash(password, salt);
     return hashedPAssword;
@@ -8,8 +8,8 @@ export default {
 
   comparePassword: (
     password: string,
-    encruptedPssword: string
+    encriptedPssword: string
   ): Promise<boolean> => {
-    return compare(password, encruptedPssword);
+    return compare(password, encriptedPssword);
   },
 };
