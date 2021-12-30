@@ -4,8 +4,6 @@ import { getCollection } from "../config/dbConfig";
 import { passwordHelpers } from "../helpers";
 import { Theater } from "../models/theaterModel";
 
-const theaterCollection = getCollection<Theater>("theaters")!;
-
 type NewTheaterDetais = {
   name: string;
   email: string;
@@ -93,6 +91,8 @@ export class TheaterService {
   }
 
   public static async deleteTheater(theaterId: string) {
+    const theaterCollection = getCollection<Theater>("theaters")!;
+
     theaterCollection.deleteOne({ _id: new ObjectId(theaterId) });
   }
 }
