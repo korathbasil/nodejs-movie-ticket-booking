@@ -5,16 +5,18 @@ import { Movie } from "../models";
 
 type MovieData = {
   title: string;
+  year: number;
   runtimeHr: number;
   runtimeMin: number;
 };
 
-const movieCollection = getCollection<Movie>("movies")!;
-
 export class MovieService {
   public static async addMovie(movieData: MovieData) {
+    const movieCollection = getCollection<Movie>("movies")!;
+
     const newMovieData = {
       title: movieData.title,
+      year: movieData.year,
       runtimeInMinutes: movieData.runtimeHr * 60 + movieData.runtimeMin,
     } as Movie;
 
@@ -22,13 +24,19 @@ export class MovieService {
   }
 
   public static async getMovieByID(id: string): Promise<Movie | null> {
+    const movieCollection = getCollection<Movie>("movies")!;
+
     return movieCollection.findOne({ _id: new ObjectId(id) });
   }
   public static async getAllMovies(): Promise<Movie[]> {
+    const movieCollection = getCollection<Movie>("movies")!;
+
     return movieCollection.find().toArray();
   }
 
   public static async editMovie(newMovieData: any, movieId: string) {
+    const movieCollection = getCollection<Movie>("movies")!;
+
     return movieCollection.updateOne(
       { _id: new ObjectId(movieId) },
       {
@@ -38,6 +46,8 @@ export class MovieService {
   }
 
   public static deleteMovie(id: string) {
+    const movieCollection = getCollection<Movie>("movies")!;
+
     return movieCollection.deleteOne({ _id: new ObjectId(id) });
   }
 
