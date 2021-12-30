@@ -3,6 +3,8 @@ import { Router, Request, Response } from "express";
 // import userController from "../controllers/userController";
 // const verifyUserLogin = require("../middlewares/verifyUserLogin");
 
+import { UserController } from "../controllers";
+
 const router = Router();
 
 router.get("/", (_: Request, res: Response) => {
@@ -28,8 +30,8 @@ router.get("/a", (_: Request, res: Response) => {
 // router.get("/logout", userController.getLogout);
 // // Home Page
 // router.get("/", userController.getUserHome);
-// // Movie page
-// router.get("/movie/:id", userController.getMovie);
+// Movie page
+router.get("/movie/:id", UserController.getMovie);
 // // Seat selection
 // router.get("/show/:showId", userController.getSeatselection);
 

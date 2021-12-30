@@ -1,6 +1,18 @@
-// import { Request, Response } from "express";
+import { Request, Response } from "express";
 
 // import userService from "../services/user.service";
+
+export class UserController {
+  public static async getMovie(req: Request, res: Response) {
+    // const movieId = req.params.id;
+
+    res.render("user/movie", {
+      theaters: [],
+      user: req.session.user,
+      userRoute: true,
+    });
+  }
+}
 
 // export default {
 //   getSignup: (_: Request, res: Response) => {
@@ -93,14 +105,7 @@
 //   },
 
 //   getMovie: (req: Request, res: Response) => {
-//     const movieId = req.params.id;
-//     // userHelpers.getMovieShowsById(movieId).then((theaters) => {
-//     //   res.render("user/movie", {
-//     //     theaters: theaters,
-//     //     user: req.session.user,
-//     //     userRoute: true,
-//     //   });
-//     // });
+
 //     userService.getAllShows(movieId).then((shows) => {
 //       res.render("user/movie", {
 //         shows: shows,
