@@ -23,7 +23,7 @@ export class MovieService {
     return movieCollection.insertOne(newMovieData);
   }
 
-  public static async getMovieByID(id: string): Promise<Movie | null> {
+  public static async getMovieById(id: string): Promise<Movie | null> {
     const movieCollection = getCollection<Movie>("movies")!;
 
     return movieCollection.findOne({ _id: new ObjectId(id) });
