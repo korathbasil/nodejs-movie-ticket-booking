@@ -41,8 +41,8 @@ describe("Movie Service", () => {
     });
 
     it("gives back undefined for invalid ids ", async () => {
-      //   const movie = await MovieService.getMovieById(new ObjectId().toString());
-      //   expect(typeof movie).toBe("undefined");
+      const movie = await MovieService.getMovieById(new ObjectId().toString());
+      expect(movie).toEqual(null);
     });
   });
 });
