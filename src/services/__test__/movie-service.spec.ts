@@ -45,4 +45,21 @@ describe("Movie Service", () => {
       expect(movie).toEqual(null);
     });
   });
+
+  describe("getAllMovies", () => {
+    it("returns empty array before adding any movies", async () => {
+      const movies = await MovieService.getAllMovies();
+
+      expect(movies.length).toEqual(0);
+    });
+
+    it("returns an array containing the inserted movie", async () => {
+      await MovieService.addMovie(movieData);
+
+      const movies = await MovieService.getAllMovies();
+
+      expect(movies.length).toEqual(1);
+      expect(movies[0].title).toEqual("Avengers");
+    });
+  });
 });
