@@ -198,6 +198,7 @@ header {
   width: 100%;
   z-index: 1;
   display: flex;
+  align-items: flex-end;
 }
 
 .moviehero__left {
@@ -210,4 +211,18 @@ header {
   width: 100%;
   object-fit: cover;
   border-radius: 20px;
+}
+.moviehoro__right {
+  padding: 20px;
+}
+.moviehoro__right > h1 {
+  font-size: 35px;
+}
+.moviehero__rightlang,
+.moviehero__rightinfo {
+  display: flex;
+  margin-top: 10px;
+}
+.moviehero__rightlang > div {
+  display: flex;
 }
