@@ -12,6 +12,13 @@ export class UserController {
       userRoute: true,
     });
   }
+
+  public static async getSeatSelection(req: Request, res: Response) {
+    res.render("user/show-seat-selection", {
+      user: req.session.user,
+      userRoute: true,
+    });
+  }
 }
 
 // export default {

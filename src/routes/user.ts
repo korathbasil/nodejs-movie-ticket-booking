@@ -32,8 +32,8 @@ router.get("/a", (_: Request, res: Response) => {
 // router.get("/", userController.getUserHome);
 // Movie page
 router.get("/movie/:id", UserController.getMovie);
-// // Seat selection
-// router.get("/show/:showId", userController.getSeatselection);
+// Seat selection
+router.get("/show/:showId", UserController.getSeatSelection);
 
 // router.get("/show/:showid/payment", userController.getPaymentPage);
 
