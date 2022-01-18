@@ -22,6 +22,14 @@ export class UserController {
       userRoute: true,
     });
   }
+
+  public static getExtras(_: Request, res: Response) {
+    res.render("user/extras");
+  }
+
+  public static getPayments(_: Request, res: Response) {
+    res.render("user/payments");
+  }
 }
 
 // export default {

@@ -14,6 +14,10 @@ router.get("/cinemas", (req, res) => {
   res.render("user/cinemas", { user: req.session.user, userRoute: true });
 });
 
+router.get("/extras", UserController.getExtras);
+
+router.get("/payments", UserController.getPayments);
+
 // Signup
 // router.get("/signup", verifyUserLogin, userController.getSignup);
 
