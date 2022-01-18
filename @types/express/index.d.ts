@@ -16,6 +16,7 @@ declare namespace Express {
     flash?: any;
     session: {
       admin?: IAdminSession;
+      user?: UserSession;
     };
   }
 }
@@ -23,3 +24,9 @@ declare namespace Express {
 interface IAdminSession {
   email: string;
 }
+
+type UserSession = {
+  _id: string;
+  name: string;
+  email: string;
+};
