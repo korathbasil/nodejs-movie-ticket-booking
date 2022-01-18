@@ -1,9 +1,9 @@
 import { hash, compare } from "bcrypt";
 
 export const passwordHelpers = {
-  hashPassword: async (password: string, salt: number = 10) => {
-    const hashedPAssword = await hash(password, salt);
-    return hashedPAssword;
+  hashPassword: async (password: string) => {
+    const salt = "jibbrish";
+    return hash(password, salt);
   },
 
   comparePassword: (

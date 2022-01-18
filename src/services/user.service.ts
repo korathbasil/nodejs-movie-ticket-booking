@@ -1,26 +1,35 @@
+import { WithId } from "mongodb";
+
 import { passwordHelpers } from "../helpers";
 import { getCollection } from "../config/dbConfig";
 import { User } from "../models/userModel";
-import { WithId } from "mongodb";
 
 export class UserService {
-  public static async signup(userDetails: {
+  public static signup(userDetails: {
     name: string;
     email: string;
     password: string;
   }) {
     const userCollection = getCollection<User>("users")!;
 
-    const selectedUser = await userCollection.findOne({
-      email: userDetails.email,
+    return new Promise<WithId<User>>(async (resolve, reject) => {
+      const selectedUser = await userCollection.findOne({
+        email: userDetails.email,
+      });
+      if (selectedUser) return reject("Email already in use");
+
+      userDetails.password = await passwordHelpers.hashPassword(
+        userDetails.password
+      );
+
+      const newUserDoc = await userCollection.insertOne(userDetails);
+      const user = await userCollection.findOne({
+        _id: newUserDoc.insertedId,
+      });
+
+      if (!user) return reject("Something went wrong");
+      return resolve(user);
     });
-    if (selectedUser) return;
-
-    userDetails.password = await passwordHelpers.hashPassword(
-      userDetails.password
-    );
-
-    return userCollection.insertOne(userDetails);
   }
 
   public static login(userCredentials: { email: string; password: string }) {
