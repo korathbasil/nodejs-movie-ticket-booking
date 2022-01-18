@@ -7,26 +7,23 @@ import { DB_CONNECTION_URL } from "../config/constants";
 
 const debug = buildDebug("movie-ticket-booking-webapp:server");
 
-/**
- * Get port from environment and store in Express.
- */
-
 const port = normalizePort(process.env.PORT || "3000");
 ExpressApp.set("port", port);
 
-/**
- * Create HTTP server.
- */
-
 const server = http.createServer(ExpressApp);
 
-/**
- * Listen on provided port, on all network interfaces.
- */
+startApp();
 
-/**
- * Normalize a port into a number, string, or false.
- */
+async function startApp() {
+  try {
+    await connectToDatabase(DB_CONNECTION_URL);
+    server.listen(port);
+    server.on("error", onError);
+    server.on("listening", onListening);
+  } catch (e) {
+    console.error(e);
+  }
+}
 
 function normalizePort(val: any) {
   const port = parseInt(val, 10);
@@ -44,9 +41,11 @@ function normalizePort(val: any) {
   return false;
 }
 
-/**
- * Event listener for HTTP server "error" event.
- */
+function onListening() {
+  const addr = server.address();
+  const bind = typeof addr === "string" ? "pipe " + addr : "port " + addr?.port;
+  debug("Listening on " + bind);
+}
 
 function onError(error: any) {
   if (error.syscall !== "listen") {
@@ -69,26 +68,3 @@ function onError(error: any) {
       throw error;
   }
 }
-
-/**
- * Event listener for HTTP server "listening" event.
- */
-
-function onListening() {
-  const addr = server.address();
-  const bind = typeof addr === "string" ? "pipe " + addr : "port " + addr?.port;
-  debug("Listening on " + bind);
-}
-
-async function startApp() {
-  try {
-    await connectToDatabase(DB_CONNECTION_URL);
-    server.listen(port);
-    server.on("error", onError);
-    server.on("listening", onListening);
-  } catch (e) {
-    console.error(e);
-  }
-}
-
-startApp();
