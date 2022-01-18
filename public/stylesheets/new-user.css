@@ -47,11 +47,11 @@
 }
 .login-form > label,
 .signup-form > label {
-  color: var(--color-seccondary);
   font-size: 14px;
   font-weight: 500;
   margin-left: 5px;
   margin-bottom: 5px;
+  color: var(--color-seccondary);
 }
 .login-form > input,
 .signup-form > input {
@@ -59,12 +59,15 @@
   padding: 8px 10px;
   margin-bottom: 20px;
   font-size: 16px;
-  font-weight: 600;
   background-color: transparent;
   color: var(--color-seccondary);
-  border: 2px solid var(--color-seccondary);
-  border-radius: 10px;
+  border: none;
+  border-radius: 5px;
   outline: none;
+  background-color: rgb(24, 20, 20);
+}
+.login-form > input:focus {
+  border-bottom: 1px solid var(--color-seccondary);
 }
 .login-form > button,
 .signup-form > button {
