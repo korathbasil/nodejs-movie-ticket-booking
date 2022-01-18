@@ -11,32 +11,50 @@
   align-items: center;
   justify-content: center;
 }
-.login-modal {
+.modal-container {
   width: 400px;
-  min-height: 400px;
   background-color: var(--color-dark-background);
   padding: 15px;
   border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.login-modal,
+.signup-modal {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
-.login-form {
+.login-modal > h2,
+.signup-modal > h2 {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+.login-modal > p,
+.signup-modal > p {
+  color: var(--color-primary);
+  font-weight: 800;
+}
+.login-form,
+.signup-form {
   width: 100%;
   margin: 30px 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
-.login-form > label {
+.login-form > label,
+.signup-form > label {
   color: var(--color-seccondary);
   font-size: 14px;
   font-weight: 500;
   margin-left: 5px;
   margin-bottom: 5px;
 }
-.login-form > input {
+.login-form > input,
+.signup-form > input {
   width: 100%;
   padding: 8px 10px;
   margin-bottom: 20px;
@@ -45,10 +63,11 @@
   background-color: transparent;
   color: var(--color-seccondary);
   border: 2px solid var(--color-seccondary);
-  border-radius: 30px;
+  border-radius: 10px;
   outline: none;
 }
-.login-form > button {
+.login-form > button,
+.signup-form > button {
   color: white;
   font-weight: 800;
   background-color: var(--color-primary);
@@ -57,6 +76,9 @@
   border: none;
   border-radius: 5px;
   margin: 0 auto;
+}
+.signup-modal {
+  display: none;
 }
 
 /* App */

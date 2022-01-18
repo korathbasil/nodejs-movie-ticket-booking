@@ -6,7 +6,7 @@
     </div>
     <div class="user-overlay">
         <div class="modal-container">
-        <div class="login-modal">
+        <div class="login-modal" id="login-modal">
             <h2>CineMax</h2>
             <form action="" class="login-form">
                 <label for="email">Email</label>
@@ -15,7 +15,32 @@
                 <input type="password">
                 <button type="submit">Log in</button>
             </form>
+            <p onclick="toggleForms()">Sign up</p>
+        </div>
+        <div class="signup-modal" id="signup-modal">
+            <h2>CineMax</h2>
+            <form action="" class="signup-form">
+                <label for="email">Email</label>
+                <input type="email" name="email" >
+                <label for="password">Password</label>
+                <input type="password">
+                <button type="submit">Signup</button>
+            </form>
+            <p onclick="toggleForms()">Login</p>
         </div>
         </div>
     </div>
 </body>
+
+<script>
+    const loginModal = document.getElementById("login-modal");
+    const signupModal = document.getElementById("signup-modal");
+
+    let hideSignupForm = true;
+
+    function toggleForms() {
+        loginModal.style.display = hideSignupForm ? "none": "flex";
+        signupModal.style.display = hideSignupForm ? "flex": "none";
+        hideSignupForm = !hideSignupForm
+    }
+</script>
