@@ -3,6 +3,9 @@ import { Request, Response } from "express";
 // import userService from "../services/user.service";
 
 export class UserController {
+  public static getHome(_: Request, res: Response) {
+    res.render("user/home");
+  }
   public static async getMovie(req: Request, res: Response) {
     // const movieId = req.params.id;
 

@@ -1,17 +1,17 @@
-import { Router, Request, Response } from "express";
-
-// import userController from "../controllers/userController";
-// const verifyUserLogin = require("../middlewares/verifyUserLogin");
+import { Router } from "express";
 
 import { UserController } from "../controllers";
 
 const router = Router();
 
-router.get("/", (_: Request, res: Response) => {
-  res.render("user/home");
-});
-router.get("/a", (_: Request, res: Response) => {
-  res.render("user/home");
+router.get("/", UserController.getHome);
+
+router.get("/movie/:id", UserController.getMovie);
+// Seat selection
+router.get("/show/:showId", UserController.getSeatSelection);
+
+router.get("/cinemas", (req, res) => {
+  res.render("user/cinemas", { user: req.session.user, userRoute: true });
 });
 
 // Signup
@@ -31,18 +31,13 @@ router.get("/a", (_: Request, res: Response) => {
 // // Home Page
 // router.get("/", userController.getUserHome);
 // Movie page
-router.get("/movie/:id", UserController.getMovie);
-// Seat selection
-router.get("/show/:showId", UserController.getSeatSelection);
 
 // router.get("/show/:showid/payment", userController.getPaymentPage);
 
 // router.get("/pay/razorpay", (req, res) => {
 // });
 // Theaters page
-router.get("/cinemas", (req, res) => {
-  res.render("user/cinemas", { user: req.session.user, userRoute: true });
-});
+
 // // Account page
 // router.get("/account", (req, res) => {
 //   res.render("user/account", { user: req.session.user, userRoute: true });
