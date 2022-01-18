@@ -1,3 +1,66 @@
+/* Overlay */
+.user-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0000008a;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-modal {
+  width: 400px;
+  min-height: 400px;
+  background-color: var(--color-dark-background);
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-form {
+  width: 100%;
+  margin: 30px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.login-form > label {
+  color: var(--color-seccondary);
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
+.login-form > input {
+  width: 100%;
+  padding: 8px 10px;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  background-color: transparent;
+  color: var(--color-seccondary);
+  border: 2px solid var(--color-seccondary);
+  border-radius: 30px;
+  outline: none;
+}
+.login-form > button {
+  color: white;
+  font-weight: 800;
+  background-color: var(--color-primary);
+  padding: 10px 20px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  margin: 0 auto;
+}
+
+/* App */
+
 header {
   position: fixed;
   z-index: 1;
