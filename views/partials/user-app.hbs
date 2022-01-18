@@ -4,7 +4,7 @@
         {{{body}}}
         {{>user-footer}}
     </div>
-    <div class="user-overlay">
+    <div class="user-overlay" id="overlay">
         <div class="modal-container">
         <div class="login-modal" id="login-modal">
             <h2>CineMax</h2>
@@ -20,6 +20,8 @@
         <div class="signup-modal" id="signup-modal">
             <h2>CineMax</h2>
             <form action="" class="signup-form">
+                <label for="name">Name</label>
+                <input type="text" name="name" >
                 <label for="email">Email</label>
                 <input type="email" name="email" >
                 <label for="password">Password</label>
@@ -33,14 +35,30 @@
 </body>
 
 <script>
+    const overlay = document.getElementById("overlay");
     const loginModal = document.getElementById("login-modal");
     const signupModal = document.getElementById("signup-modal");
 
     let hideSignupForm = true;
 
+    function openAuthModal() {
+        overlay.style.display = "flex"
+        if(!hideSignupForm) toggleForms();
+    }
+
+    function closeAuthModal() {
+        overlay.style.display = "none"
+    }
+
     function toggleForms() {
         loginModal.style.display = hideSignupForm ? "none": "flex";
         signupModal.style.display = hideSignupForm ? "flex": "none";
         hideSignupForm = !hideSignupForm
+    }
+
+    window.onclick = function(event) {
+        if (event.target == overlay) {
+            closeAuthModal()
+        }
     }
 </script>
