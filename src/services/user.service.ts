@@ -1,6 +1,7 @@
 import { passwordHelpers } from "../helpers";
 import { getCollection } from "../config/dbConfig";
 import { User } from "../models/userModel";
+import { WithId } from "mongodb";
 
 export class UserService {
   public static async signup(userDetails: {
@@ -22,22 +23,25 @@ export class UserService {
     return userCollection.insertOne(userDetails);
   }
 
-  public static async login(userCredentials: {
-    email: string;
-    password: string;
-  }) {
+  public static login(userCredentials: { email: string; password: string }) {
     const userCollection = getCollection<User>("users")!;
 
-    const selectedUSer = await userCollection.findOne({
-      email: userCredentials.email,
+    return new Promise<WithId<User>>(async (resolve, reject) => {
+      const selectedUSer = await userCollection.findOne({
+        email: userCredentials.email,
+      });
+
+      if (!selectedUSer) return reject(new Error("User not found"));
+
+      const passwordsMatch = await passwordHelpers.comparePassword(
+        userCredentials.password,
+        selectedUSer.password
+      );
+
+      if (!passwordsMatch) return reject(new Error("Incorrect credentials"));
+
+      return resolve(selectedUSer);
     });
-
-    if (!selectedUSer) return;
-
-    return passwordHelpers.comparePassword(
-      userCredentials.password,
-      selectedUSer.password
-    );
   }
 }
 

@@ -1,11 +1,44 @@
 import { Request, Response } from "express";
 
+import { UserService } from "../services";
+
 // import userService from "../services/user.service";
 
 export class UserController {
   public static getHome(_: Request, res: Response) {
     res.render("user/home");
   }
+
+  public static async postLogin(req: Request, res: Response) {
+    const { email, password } = req.body;
+
+    // if (!!email || !!password) return res.redirect("/");
+
+    try {
+      await UserService.login({ email, password });
+      console.log("User Logged in");
+      return res.redirect("/");
+    } catch (e) {
+      console.log(e.message);
+      return res.redirect("/");
+    }
+  }
+
+  public static async postSignup(req: Request, res: Response) {
+    const { name, email, password } = req.body;
+
+    if (!!name || !!email || !!password) return res.redirect("/");
+
+    try {
+      await UserService.signup({ name, email, password });
+      console.log("User Signed up");
+      return res.redirect("/");
+    } catch (e) {
+      console.log(e);
+      return res.redirect("/");
+    }
+  }
+
   public static async getMovie(req: Request, res: Response) {
     // const movieId = req.params.id;
 

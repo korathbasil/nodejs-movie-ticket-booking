@@ -6,6 +6,10 @@ const router = Router();
 
 router.get("/", UserController.getHome);
 
+router.post("/login", UserController.postLogin);
+
+router.post("/signup", UserController.postSignup);
+
 router.get("/movie/:id", UserController.getMovie);
 // Seat selection
 router.get("/show/:showId", UserController.getSeatSelection);
