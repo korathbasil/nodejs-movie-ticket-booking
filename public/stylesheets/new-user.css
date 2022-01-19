@@ -316,6 +316,31 @@ header {
   display: flex;
 }
 
+/****************************************/
+/***** Movie Page - Shows Section ******/
+/**************************************/
+.movieshows__filters {
+  display: flex;
+}
+.movieshows__filters > div {
+  width: 200px;
+  margin-right: 20px;
+}
+.movieshows__filters > div > p {
+  color: var(--color-seccondary);
+  margin-bottom: 5px;
+}
+.movieshows__filters > div > select {
+  width: 100%;
+  color: var(--color-seccondary);
+  font-size: 20px;
+  background-color: var(--color-less-dark);
+  border: none;
+  outline: none;
+  padding: 3px;
+  border-radius: 3px;
+}
+
 /*********************************************/
 /************* Payments Page ****************/
 /*******************************************/

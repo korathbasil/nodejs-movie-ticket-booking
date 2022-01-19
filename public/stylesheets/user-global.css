@@ -9,6 +9,7 @@ body {
   --color-primary: #f24138;
   --color-seccondary: #7367f0;
   --color-dark-background: rgb(31, 25, 25);
+  --color-less-dark: rgb(63, 58, 58);
 
   /* Shadows */
   --box-shadow-high: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
