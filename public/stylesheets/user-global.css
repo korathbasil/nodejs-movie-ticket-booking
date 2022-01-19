@@ -18,13 +18,17 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+a {
+  text-decoration: none;
+}
+
 .container {
   max-width: 1300px;
   margin: 0 auto;
 }
 
-a {
-  text-decoration: none;
+.content-child {
+  padding-top: 80px;
 }
 
 /************************/
@@ -109,8 +113,4 @@ header {
   padding: 30px;
   display: flex;
   justify-content: center;
-}
-
-.content-child {
-  padding-top: 80px;
 }
