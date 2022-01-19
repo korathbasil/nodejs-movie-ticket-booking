@@ -326,6 +326,9 @@ header {
   padding: 20px;
   border-radius: 5px;
 }
+.payments__highlight {
+  color: var(--color-seccondary);
+}
 .payments__left > h5,
 .payments__left > h4,
 .payments__info {
