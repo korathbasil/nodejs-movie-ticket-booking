@@ -319,6 +319,9 @@ header {
 /****************************************/
 /***** Movie Page - Shows Section ******/
 /**************************************/
+.moviehows__child {
+  margin-top: 50px;
+}
 .movieshows__filters {
   display: flex;
 }
@@ -334,11 +337,32 @@ header {
   width: 100%;
   color: var(--color-seccondary);
   font-size: 20px;
+  font-weight: 800;
   background-color: var(--color-less-dark);
   border: none;
   outline: none;
   padding: 3px;
   border-radius: 3px;
+}
+
+.movieshows__shows-container {
+  margin: 20px 0;
+  display: grid;
+  grid-template-columns: repeat(2, calc(50% - 5px));
+  gap: 10px;
+}
+.movieshows__show-card {
+  padding: 20px;
+  background-color: var(--color-less-dark);
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in;
+}
+.movieshows__show-card:hover {
+  background-color: var(--color-seccondary);
 }
 
 /*********************************************/
