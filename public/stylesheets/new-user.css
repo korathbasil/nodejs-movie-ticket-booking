@@ -86,59 +86,6 @@
 }
 
 /* App */
-
-header {
-  position: fixed;
-  z-index: 1;
-  width: 100%;
-}
-.header__child {
-  display: flex;
-  justify-content: space-between;
-  height: 80px;
-  align-items: center;
-}
-.header__left > h1 {
-  color: var(--color-primary);
-}
-.header__right {
-  display: flex;
-  align-items: center;
-}
-
-.header__navigation {
-  display: flex;
-}
-.header__navigation > li {
-  margin-left: 40px;
-  list-style: none;
-}
-.header__navigation > li > a {
-  text-decoration: none;
-  color: white;
-  font-weight: 600;
-}
-
-.header__account {
-  display: flex;
-  align-items: center;
-  background-color: #227373;
-  padding: 3px;
-  border-radius: 99px;
-  margin-left: 30px;
-}
-
-.header__account > img {
-  width: 30px;
-  height: 30px;
-  object-fit: cover;
-  margin-right: 10px;
-  border-radius: 999px;
-}
-.header__account > h4 {
-  margin-right: 10px;
-}
-
 /* Hero-Section */
 .hero {
   height: 80vh;
