@@ -20,9 +20,16 @@
                     </ul>
                 </nav>
 
-                <div onclick="openAuthModal()" class="header__account">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Sabrina_Carpenter_2019.jpg/220px-Sabrina_Carpenter_2019.jpg" alt="">
-                    <h4>Sabrina Carpenter</h4>
+                <div class="header__auth">
+                    {{#if user}}
+                        <div  class="header__account">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Sabrina_Carpenter_2019.jpg/220px-Sabrina_Carpenter_2019.jpg" alt="">
+                            <h4>{{user.name}}</h4>
+                        </div>
+                    {{else}}
+                        <button  onclick="openAuthModal()" class="header__login">Login / Signup</button>
+                    {{/if}}
+                    
                 </div>
             </div>
         </div>

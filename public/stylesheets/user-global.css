@@ -61,14 +61,33 @@ header {
   color: white;
   font-weight: 600;
 }
+.header__auth {
+  display: flex;
+  align-items: center;
+}
+.header__login {
+  background-color: var(--color-seccondary);
+  font-weight: 600;
+  margin-left: 30px;
+  padding: 10px;
+  outline: none;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in;
+}
+.header__login:hover {
+  background-color: var(--color-primary);
+}
 
 .header__account {
   display: flex;
   align-items: center;
-  background-color: #227373;
+  background-color: var(--color-seccondary);
   padding: 3px;
   border-radius: 99px;
   margin-left: 30px;
+  cursor: pointer;
 }
 
 .header__account > img {

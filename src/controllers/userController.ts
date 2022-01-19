@@ -6,7 +6,11 @@ import { UserService } from "../services";
 
 export class UserController {
   public static getHome(_: Request, res: Response) {
-    res.render("user/home");
+    res.render("user/home", {
+      user: {
+        name: "Bradley Cooper",
+      },
+    });
   }
 
   public static async postSignup(req: Request, res: Response) {
