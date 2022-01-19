@@ -315,3 +315,29 @@ header {
 .moviehero__rightlang > div {
   display: flex;
 }
+
+/*********************************************/
+/************* Payments Page ****************/
+/*******************************************/
+.payments__box {
+  display: flex;
+  align-items: center;
+  background-color: rgb(76, 71, 71);
+  padding: 20px;
+  border-radius: 5px;
+}
+.payments__left > h5 {
+  margin-top: 10px;
+}
+.payments__right {
+  flex: 1;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+.payments__info {
+  margin-top: 10px;
+}
+.payments__info > p {
+  color: var(--color-seccondary);
+}
