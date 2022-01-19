@@ -24,7 +24,7 @@ body {
 }
 
 a {
-  color: #00b7ff;
+  text-decoration: none;
 }
 
 /************************/
@@ -41,7 +41,10 @@ header {
   height: 80px;
   align-items: center;
 }
-.header__left > h1 {
+.header__left > a {
+  text-decoration: none;
+}
+.header__left > a > h1 {
   color: var(--color-primary);
 }
 .header__right {
