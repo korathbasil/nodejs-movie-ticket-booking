@@ -313,6 +313,28 @@
 }
 
 /*********************************************/
+/************* Addon Page ******************/
+/*******************************************/
+.addons__container {
+  display: flex;
+}
+.addons__nav {
+  width: 20%;
+}
+.addons-display {
+  flex: 1;
+}
+.addons__display-snacks {
+  height: 300px;
+  width: 100%;
+  background-color: red;
+}
+.addons__display-bev {
+  height: 300px;
+  width: 100%;
+  background-color: green;
+}
+/*********************************************/
 /************* Payments Page ****************/
 /*******************************************/
 .payments__box {

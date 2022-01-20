@@ -58,8 +58,8 @@ export class UserController {
     });
   }
 
-  public static getExtras(_: Request, res: Response) {
-    res.render("user/extras");
+  public static getAddons(_: Request, res: Response) {
+    res.render("user/addons");
   }
 
   public static getPayments(_: Request, res: Response) {

@@ -18,7 +18,7 @@ router.get("/cinemas", (req, res) => {
   res.render("user/cinemas", { user: req.session.user, userRoute: true });
 });
 
-router.get("/extras", UserController.getExtras);
+router.get("/addons", UserController.getAddons);
 
 router.get("/payments", UserController.getPayments);
 
