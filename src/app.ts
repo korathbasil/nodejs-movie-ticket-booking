@@ -1,3 +1,4 @@
+import compression from "compression";
 import path from "path";
 import express, { Request, Response, json } from "express";
 import createError from "http-errors";
@@ -17,6 +18,8 @@ const MongoStore = connectMongo(session);
 
 const app = express();
 dotenv.config();
+
+app.use(compression());
 
 // // view engine setup
 app.set("views", path.join(__dirname, "..", "views"));
