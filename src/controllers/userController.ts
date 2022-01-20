@@ -5,12 +5,14 @@ import { UserService } from "../services";
 // import userService from "../services/user.service";
 
 export class UserController {
-  public static getHome(_: Request, res: Response) {
-    res.render("user/home", {
-      user: {
-        name: "Bradley Cooper",
-      },
-    });
+  public static getHome(req: Request, res: Response) {
+    if (req.session.user) {
+      return res.render("user/home", {
+        user: req.session.user,
+      });
+    }
+
+    res.render("user/home");
   }
 
   public static async postSignup(req: Request, res: Response) {
@@ -26,18 +28,18 @@ export class UserController {
     }
   }
 
+  // API
   public static async postLogin(req: Request, res: Response) {
     const { email, password } = req.body;
 
-    // if (!!email || !!password) return res.redirect("/");
+    // TODO: input validation
 
     try {
-      await UserService.login({ email, password });
-      console.log("User Logged in");
-      return res.redirect("/");
+      const user = await UserService.login({ email, password });
+      // req.session.user = user;
+      return res.json({ success: true, user });
     } catch (e) {
-      console.log(e.message);
-      return res.redirect("/");
+      return res.json({ success: false, error: e.message });
     }
   }
 
