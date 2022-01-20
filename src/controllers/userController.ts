@@ -18,13 +18,14 @@ export class UserController {
   public static async postSignup(req: Request, res: Response) {
     const { name, email, password } = req.body;
 
+    // TODO: input validation
+
     try {
-      await UserService.signup({ name, email, password });
-      console.log("User Signed up");
-      return res.redirect("/");
+      const user = await UserService.signup({ name, email, password });
+      // req.session.user = user;
+      return res.status(201).json({ success: true, user });
     } catch (e) {
-      console.log(e);
-      return res.redirect("/");
+      return res.status(400).json({ success: false, error: e.message });
     }
   }
 
@@ -37,9 +38,9 @@ export class UserController {
     try {
       const user = await UserService.login({ email, password });
       // req.session.user = user;
-      return res.json({ success: true, user });
+      return res.status(200).json({ success: true, user });
     } catch (e) {
-      return res.json({ success: false, error: e.message });
+      return res.status(400).json({ success: false, error: e.message });
     }
   }
 

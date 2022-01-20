@@ -16,7 +16,7 @@ export class UserService {
       const selectedUser = await userCollection.findOne({
         email: userDetails.email,
       });
-      if (selectedUser) return reject("Email already in use");
+      if (selectedUser) return reject(new Error("Email already in use"));
 
       userDetails.password = await passwordHelpers.hashPassword(
         userDetails.password
@@ -27,7 +27,7 @@ export class UserService {
         _id: newUserDoc.insertedId,
       });
 
-      if (!user) return reject("Something went wrong");
+      if (!user) return reject(new Error("Something went wrong"));
       return resolve(user);
     });
   }
