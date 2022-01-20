@@ -10,6 +10,7 @@ body {
   --color-seccondary: #7367f0;
   --color-dark-background: rgb(31, 25, 25);
   --color-less-dark: rgb(63, 58, 58);
+  --color-more-dark: rgb(20, 19, 19);
 
   /* Shadows */
   --box-shadow-high: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -38,6 +39,7 @@ header {
   position: fixed;
   z-index: 1;
   width: 100%;
+  transition: background-color 0.2s ease-in;
 }
 .header__child {
   display: flex;

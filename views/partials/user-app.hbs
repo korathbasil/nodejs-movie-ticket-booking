@@ -38,6 +38,7 @@
     const overlay = document.getElementById("overlay");
     const loginModal = document.getElementById("login-modal");
     const signupModal = document.getElementById("signup-modal");
+    const header = document.getElementById("header");
 
     let hideSignupForm = true;
 
@@ -61,4 +62,14 @@
             closeAuthModal()
         }
     }
+
+    window.addEventListener("scroll", (e) => {
+        if(window.scrollY > 80) {
+            header.style.backgroundColor = "var(--color-more-dark)";
+            header.style.borderBottom = "1px solid var(--color-seccondary)";
+        } else {
+            header.style.backgroundColor = "transparent";
+            header.style.borderBottom = "none";
+        }
+    })
 </script>
