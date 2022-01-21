@@ -1,6 +1,6 @@
 import compression from "compression";
 import path from "path";
-import express, { Request, Response, json } from "express";
+import express, { Request, Response, json as jsonParser } from "express";
 import createError from "http-errors";
 import logger from "morgan";
 import dotenv from "dotenv";
@@ -39,8 +39,8 @@ passportConfig(passport);
 
 // // Middlewares
 app.use(logger("dev"));
+app.use(jsonParser());
 app.use(express.urlencoded({ extended: false }));
-app.use(json());
 app.use(fileUpload());
 app.use(express.static(path.join(__dirname, "..", "public")));
 app.use(

@@ -34,7 +34,6 @@ export class UserController {
     const { email, password } = req.body;
 
     // TODO: input validation
-
     try {
       const user = await UserService.login({ email, password });
       // req.session.user = user;
