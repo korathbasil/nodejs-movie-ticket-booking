@@ -4,15 +4,16 @@ import { Show } from "../models/Show.model";
 import { Collection, ObjectId } from "mongodb";
 import { Movie } from "../models";
 
-const showCollection = getCollection<Show>(collections.SHOWS)!;
-const movieCollection = getCollection<Movie>(collections.MOVIE_COLLECTION)!;
-
 export default class ShowService {
   public static async addShow(showDetails: { time: Date }) {
+    const showCollection = getCollection<Show>(collections.SHOWS)!;
+
     return showCollection.insertOne(showDetails);
   }
 
   public static getAllShows(movieId: string) {
+    const movieCollection = getCollection<Movie>(collections.MOVIE_COLLECTION)!;
+
     return movieCollection
       .aggregate([
         {
@@ -28,6 +29,12 @@ export default class ShowService {
       ])
       .toArray();
   }
+
+  // TODO: Get all the movies that has shows listed
+  public static async getAllMoviesWithShows() {}
+
+  // TODO: Get full data of a perticular show
+  public static async getShowDetails() {}
 }
 
 export const makeShowService = (showCollection: Collection<Show>) => {
