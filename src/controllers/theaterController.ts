@@ -15,11 +15,10 @@ export class TheaterController {
   //   req.logout();
   //   res.redirect("/theater/login");
   // },
-  public static getHome(req: Request, res: Response) {
+  public static getHome(_: Request, res: Response) {
     res.render("theater/home", {
       theaterRoute: true,
       title: "Home - Theater - Cinemax",
-      theater: req.session.theater,
     });
   }
   // public static getScreenManagement(req: Request, res: Response) {
