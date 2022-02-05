@@ -12,6 +12,11 @@ export class TheaterController {
       title: "Login - Theater - Cinemax",
     });
   }
+
+  public static postLogin(req: Request, res: Response) {
+    console.log(req.body);
+    res.send("POsted");
+  }
   // getLogout: (req: Request, res: Response) => {
   //   req.session.theater = null;
   //   req.session.destroy();

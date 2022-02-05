@@ -12,6 +12,7 @@ const router = express.Router();
 
 // Login
 router.get("/login", TheaterController.getLogin);
+router.post("/login", TheaterController.postLogin);
 
 // router.post(
 //   "/login",
