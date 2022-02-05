@@ -1,10 +1,13 @@
 import { Request, Response } from "express";
 // import sharp from "sharp";
 
+const __theater_styles_dir__ = "/styles/theater/";
+
 export class TheaterController {
   public static getLogin(_: Request, res: Response) {
     res.render("theater/login", {
       theaterRoute: true,
+      pageStyle: __theater_styles_dir__ + "login.css",
       hideSidebar: true,
       title: "Login - Theater - Cinemax",
     });
