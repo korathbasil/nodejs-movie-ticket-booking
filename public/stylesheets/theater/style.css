@@ -7,6 +7,10 @@ body {
   /******* Colors ***********/
   --col-grey-background: #f8f8f8;
 
+  /* Shadows */
+  --shadow-light: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+  font-family: "Roboto", sans-serif;
   background-color: var(--col-grey-background);
 }
 
@@ -14,14 +18,15 @@ body {
   display: flex;
   height: 100vh;
   width: 100%;
-  background-color: lightgreen;
+}
+.main-app {
+  flex: 1;
 }
 
 /* Header */
-.admin-header,
 .theater-header {
   position: fixed;
-  width: calc(100% - 140px);
+  width: calc(100% - 40px);
   height: 60px;
   display: flex;
   align-items: center;
@@ -30,10 +35,9 @@ body {
   margin-bottom: 0;
   padding: 0 15px;
   background-color: white;
-  box-shadow: var(--box-shadow-high);
+  box-shadow: var(--shadow-light);
   border-radius: 10px;
 }
-.admin-header > h1,
 .theater-header > h1 {
   font-size: 30px;
   font-weight: 1000;
@@ -42,14 +46,12 @@ body {
    */
   color: red;
 }
-.admin-header-panel,
 .theater-header-panel {
   font-size: 20px;
   color: var(--admin-primary);
   letter-spacing: 2px;
   font-weight: 700;
 }
-.admin-header > a,
 .theater-header > a {
   background-color: blue;
   padding: 10px 20px;
