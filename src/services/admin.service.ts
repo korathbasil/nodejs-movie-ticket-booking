@@ -39,25 +39,26 @@ export class AdminService {
     return newAdminDocDetails.insertedId;
   }
 
-  public static login(data: { email: string; password: string }) {
+  public static async login(data: {
+    email: string;
+    password: string;
+  }): Promise<Admin> {
     const adminCollection = getCollection<Admin>("admin")!;
 
-    return new Promise<Admin>(async (resolve, reject) => {
-      const selectedDoc = await adminCollection.findOne({ email: data.email });
+    const selectedDoc = await adminCollection.findOne({ email: data.email });
 
-      if (!selectedDoc) return reject("Admin not found");
-      if (!selectedDoc.password) return reject("Admin credentials not set");
+    if (!selectedDoc) throw new Error("Admin not found");
+    if (!selectedDoc.password) throw new Error("Admin credentials not set");
 
-      const isPasswordTrue = await passwordHelpers.comparePassword(
-        data.password,
-        selectedDoc.password
-      );
+    const isPasswordTrue = await passwordHelpers.comparePassword(
+      data.password,
+      selectedDoc.password
+    );
 
-      if (!isPasswordTrue) return reject("Incorrect password");
+    if (!isPasswordTrue) throw new Error("Incorrect password");
 
-      const { password, ...admin } = selectedDoc;
+    const { password, ...admin } = selectedDoc;
 
-      return resolve(admin as Admin);
-    });
+    return admin;
   }
 }
