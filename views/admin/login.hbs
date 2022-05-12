@@ -3,24 +3,13 @@
     <h3><span><i class="fas fa-exclamation-circle"></i>
         </span>{{messages.error}}</h3>
     {{/if}}
-    {{#if adminExists}}
     <h2>Admin, Welcome back.</h2>
     <form action="/admin/login" method="POST">
         <label for="email">Email</label>
         <input type="email" name="email" id="">
         <label for="password">Password</label>
         <input type="password" name="password" id="">
-        <button type="submit">Create</button>
+        <button type="submit">Login</button>
     </form>
     <p><a href="">Forgot password?</a></p>
-    {{else}}
-    <h2>Create Admin</h2>
-    <form action="/admin/signup" method="POST">
-        <label for="email">Email</label>
-        <input type="email" name="email" id="">
-        <label for="password">Password</label>
-        <input type="password" name="password" id="">
-        <button type="submit">Create</button>
-    </form>
-    {{/if}}
 </div>

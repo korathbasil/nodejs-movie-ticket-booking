@@ -1,15 +1,21 @@
-<div class="content-card theater-login-box">
-    <h2>Login</h2>
-    {{#if messages.error}}
-    <h3><span><i class="fas fa-exclamation-circle"></i>
-        </span>{{messages.error}}</h3>
-    {{/if}}
-    <form action="/theater/login" method="POST">
-        <label for="username">Username</label>
-        <input type="text" name="username" id="">
-        <label for="password">Password</label>
-        <input type="password" name="password" id="">
-        <button type="submit">Login</button>
-        {{!-- <p><a href="">Forgot password?</a></p> --}}
-    </form>
-</div>
+<section class="login">
+    <div class="login__content">
+        <div class="left">
+            <h3><span class="welcome_text">Welcome</span></h3>
+            <h3> to <span class="title">CineMax</span>'s theater management portal.</h3>
+            <h5>Please login with your credentials.</h5>
+        </div>
+        <div class="right">
+            <h2>Login</h2>
+            <form action="/theater/login" method="POST">
+                <label for="email">Email</label>
+                <input type="email" name="email">
+
+                <label for="password">Password</label>
+                <input type="password" name="password">
+
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+</section>

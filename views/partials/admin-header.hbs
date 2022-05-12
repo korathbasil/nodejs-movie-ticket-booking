@@ -1,7 +1,15 @@
 <header class="admin-header">
     <h1>CineMax <span class="admin-header-panel">Admin Panel</span></h1>
     {{#if admin}}
-    <a href="/admin/logout">Logout</a>
+    {{!-- <a href="/admin/logout">Logout</a> --}}
+    <div class="header-profile-info">
+        <div class="header-profile-info__left">
+            <h5>John Sebastian</h5>
+            <p>Admin</p>
+        </div>
+
+        <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+    </div>
     {{else}}
     <a href="/">Home</a>
     {{/if}}

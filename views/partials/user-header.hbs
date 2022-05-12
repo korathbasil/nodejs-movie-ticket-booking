@@ -1,14 +1,32 @@
-<header class="admin-header">
-    <h1>CineMax</h1>
-    {{#if user}}
-    {{!-- <a href="/logout">Logout</a> --}}
-    <a href="/login">Login / Signup</a>
-    {{else}}
+<header id="header">
+    <div class="container">
+        <div class="header__child">
+            <div class="header__left">
+                <a href="/"><h1>Cinemax</h1></a>
+            </div>
 
-    <div class="header-account">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Sabrina_Carpenter_2019.jpg/220px-Sabrina_Carpenter_2019.jpg"
-            alt="">
-        <h4>Sabrina Carpenter</h4>
+            <div class="header__right">
+                <nav>
+                    <ul class="header__navigation">
+                        <li>
+                            <a href="/cinemas">CINEMAS</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="header__auth">
+                    {{#if user}}
+                        <div  class="header__account">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Sabrina_Carpenter_2019.jpg/220px-Sabrina_Carpenter_2019.jpg" alt="">
+                            <h4>{{user.name}}</h4>
+                        </div>
+                    {{else}}
+                        <button  onclick="openAuthModal()" class="header__login">Login / Signup</button>
+                    {{/if}}
+                    
+                </div>
+            </div>
+        </div>
     </div>
-    {{/if}}
+    
 </header>

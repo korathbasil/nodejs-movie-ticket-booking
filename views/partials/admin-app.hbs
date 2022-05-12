@@ -1,0 +1,14 @@
+<body>
+    <div class="app">
+        {{#unless hideSidebar}}
+        {{>admin-sidebar}}
+        {{/unless}}
+        <div class="main-app">
+            {{>admin-header}}
+
+            <div class="admin-content">
+                {{{body}}}
+            </div>
+        </div>
+    </div>
+</body>

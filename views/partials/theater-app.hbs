@@ -1,0 +1,12 @@
+<body>
+    <div class="app">
+        {{#unless hideSidebar}}
+        {{>theater-sidebar}}
+        {{/unless}}
+        <div class="main-app">
+            {{>theater-header}}
+
+            {{{body}}}
+        </div>
+    </div>
+</body>

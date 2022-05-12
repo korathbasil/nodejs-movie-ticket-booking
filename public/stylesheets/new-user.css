@@ -1,0 +1,386 @@
+/* Overlay */
+.user-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0000009d;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+.modal-container {
+  width: 400px;
+  background-color: var(--color-dark-background);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+.login-modal,
+.signup-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login-modal > h2,
+.signup-modal > h2 {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+.login-modal > p,
+.signup-modal > p {
+  color: var(--color-primary);
+  font-weight: 800;
+  cursor: pointer;
+}
+.login-form,
+.signup-form {
+  width: 100%;
+  margin: 30px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.login-form > label,
+.signup-form > label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 5px;
+  margin-bottom: 5px;
+  color: var(--color-seccondary);
+}
+.login-form > input,
+.signup-form > input {
+  width: 100%;
+  padding: 8px 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  background-color: transparent;
+  color: var(--color-seccondary);
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  background-color: rgb(24, 20, 20);
+}
+.login-form > input:focus,
+.signup-form > input:focus {
+  border-bottom: 1px solid var(--color-seccondary);
+}
+.login-form > button,
+.signup-form > button {
+  color: white;
+  font-weight: 800;
+  background-color: var(--color-primary);
+  padding: 10px 20px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  margin: 0 auto;
+}
+.signup-modal {
+  display: none;
+}
+
+/* App */
+/* Hero-Section */
+.hero {
+  height: 80vh;
+  max-height: 1000px;
+  width: 100%;
+  position: relative;
+}
+.hero__bg-image-mask {
+  height: 100%;
+  width: 100%;
+  /* background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0) 50%,
+    rgba(0, 0, 0, 1) 100%
+  ); */
+  /* background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0) 30%,
+    var(--color-dark-background) 100%
+  ); */
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.hero__bottom-gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 500px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--color-dark-background)
+  );
+}
+.hero > img {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.hero__movie-info {
+  position: absolute;
+  bottom: 50px;
+}
+.hero__movie-info > h1 {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+.hero__movie-info > a > button {
+  padding: 10px 20px;
+  font-weight: 700;
+  background-color: var(--color-primary);
+  outline: none;
+  border-radius: 5px;
+  border: none;
+  margin-top: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Now Showing Section */
+.now {
+  padding: 50px 0;
+}
+.subheading {
+  display: flex;
+  margin-bottom: 30px;
+}
+.subheading > div {
+  width: 5px;
+  height: 20px;
+  background-color: var(--color-primary);
+  margin-right: 10px;
+}
+
+.now__movies {
+  display: grid;
+  grid-template-columns: repeat(5, calc(20% - 16px));
+  gap: 20px;
+}
+.movie-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.movie-card:hover > img {
+  transition: transform 0.3s ease-in;
+  transform: scale(1.05);
+  overflow: hidden;
+  z-index: -1;
+}
+.movie-card > img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+.movie-card > div {
+  background-color: var(--color-seccondary);
+  flex: 1;
+  padding: 10px;
+}
+
+/* Movie Page */
+/* Hero-Section */
+.moviehero {
+  height: 70vh;
+  max-height: 1000px;
+  width: 100%;
+  position: relative;
+}
+.moviehero__bottom-gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 500px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--color-dark-background)
+  );
+  z-index: -1;
+}
+.moviehero > img {
+  position: absolute;
+  z-index: -99;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.moviehero__child {
+  height: 70vh;
+  padding-top: 80px;
+  width: 100%;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+}
+
+.moviehero__left {
+  width: 30%;
+  height: 100%;
+  padding: 20px;
+}
+.moviehero__left > img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+.moviehoro__right {
+  padding: 20px;
+}
+.moviehoro__right > h1 {
+  font-size: 35px;
+}
+.moviehero__rightlang,
+.moviehero__rightinfo {
+  display: flex;
+  margin-top: 10px;
+}
+.moviehero__rightlang > div {
+  display: flex;
+}
+
+/****************************************/
+/***** Movie Page - Shows Section ******/
+/**************************************/
+.moviehows__child {
+  margin-top: 50px;
+}
+.movieshows__filters {
+  display: flex;
+}
+.movieshows__filters > div {
+  width: 200px;
+  margin-right: 20px;
+}
+.movieshows__filters > div > p {
+  color: var(--color-seccondary);
+  margin-bottom: 5px;
+}
+.movieshows__filters > div > select {
+  width: 100%;
+  color: var(--color-seccondary);
+  font-size: 20px;
+  font-weight: 800;
+  background-color: var(--color-less-dark);
+  border: none;
+  outline: none;
+  padding: 3px;
+  border-radius: 3px;
+}
+
+.movieshows__shows-container {
+  margin: 20px 0;
+  display: grid;
+  grid-template-columns: repeat(2, calc(50% - 5px));
+  gap: 10px;
+}
+.movieshows__show-card {
+  padding: 20px;
+  background-color: var(--color-less-dark);
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in;
+}
+.movieshows__show-card:hover {
+  background-color: var(--color-seccondary);
+}
+
+/*********************************************/
+/************* Addon Page ******************/
+/*******************************************/
+.addons__container {
+  display: flex;
+}
+.addons__nav {
+  width: 20%;
+}
+.addons-display {
+  flex: 1;
+}
+.addons__display-snacks {
+  height: 300px;
+  width: 100%;
+  background-color: red;
+}
+.addons__display-bev {
+  height: 300px;
+  width: 100%;
+  background-color: green;
+}
+/*********************************************/
+/************* Payments Page ****************/
+/*******************************************/
+.payments__box {
+  display: flex;
+  align-items: center;
+  background-color: rgb(76, 71, 71);
+  padding: 20px;
+  border-radius: 5px;
+}
+.payments__highlight {
+  color: var(--color-seccondary);
+}
+.payments__left > h5,
+.payments__left > h4,
+.payments__info {
+  margin-top: 10px;
+}
+.payments__right {
+  flex: 1;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+.payments__info > p {
+  color: var(--color-seccondary);
+}
+
+/********************************************/
+/************* Cinemas Page ****************/
+/******************************************/
+.cinemas__theater-card {
+  width: 100%;
+  height: 300px;
+  margin-bottom: 30px;
+  position: relative;
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.cinemas__theater-card > img {
+  width: 33.33%;
+  object-fit: cover;
+  filter: brightness(0.5);
+}
+.cinemas__theater-info {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}

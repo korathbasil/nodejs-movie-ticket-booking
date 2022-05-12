@@ -1,0 +1,63 @@
+.app {
+  display: flex;
+  height: 100vh;
+}
+.main-app {
+  flex: 1;
+}
+
+/* Header */
+.admin-header,
+.theater-header {
+  position: fixed;
+  width: calc(100% - 140px);
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px;
+  margin-bottom: 0;
+  padding: 0 15px;
+  background-color: white;
+  box-shadow: var(--box-shadow-high);
+  border-radius: 10px;
+}
+.admin-header > h1,
+.theater-header > h1 {
+  font-size: 30px;
+  font-weight: 1000;
+  letter-spacing: 5px;
+  /* color: var(--admin-tertiary);
+   */
+  color: red;
+}
+.admin-header-panel,
+.theater-header-panel {
+  font-size: 20px;
+  color: var(--admin-primary);
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+.admin-header > a,
+.theater-header > a {
+  background-color: blue;
+  padding: 10px 20px;
+  border-radius: 30px;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/*  */
+.content {
+  width: 100%;
+  padding: 20px;
+  padding-top: 100px;
+}
+.content-card {
+  width: 100%;
+  background-color: white;
+  box-shadow: var(--box-shadow-high);
+  padding: 20px;
+}

@@ -1,77 +1,28 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  /* Colors */
-  --admin-primary: #2f3547;
-  --admin-secondary: #d8d8d8;
-  --admin-tertiary: blue;
-  --background: rgba(218, 205, 179, 0.387);
-  background-color: var(--background);
-
-  /* User Colors */
-}
-
-a {
-  color: #00b7ff;
-}
-/* Layout Styling */
-/* Admin header */
-.admin-header,
-.theater-header {
-  width: 100%;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 2rem;
-  background-color: white;
-  box-shadow: 3px 3px 3px rgba(211, 211, 211, 0.677);
-}
-.admin-header > h1,
-.theater-header > h1 {
-  font-size: 30px;
-  font-weight: 1000;
-  letter-spacing: 5px;
-  color: var(--admin-tertiary);
-}
-.admin-header-panel,
-.theater-header-panel {
-  font-size: 20px;
-  color: var(--admin-primary);
-  letter-spacing: 2px;
-  font-weight: 700;
-}
-.admin-header > a,
-.theater-header > a {
-  background-color: blue;
-  padding: 10px 20px;
-  border-radius: 30px;
-  color: white;
-  font-size: 20px;
-  font-weight: 600;
-  text-decoration: none;
-}
 .main-body {
   display: flex;
   height: calc(100vh - 80px);
+  padding-top: 120px;
 }
 /* Sidebar */
 .sidebar {
-  width: 320px;
+  width: 100px;
   display: flex;
   flex-direction: column;
 }
 .admin-sidebar {
-  min-width: 270px;
+  /* min-width: 270px; */
   background-color: white;
   align-items: center;
   height: 100%;
   box-shadow: 3px 3px 3px rgba(211, 211, 211, 0.677);
 }
+/* .admin-sidebar:hover .admin-sidebar {
+  width: 350px;
+} */
+.admin-sidebar:hover .admin-nav-link > span {
+  display: block;
+}
+
 .fas {
   font-size: 25px;
   width: 50px;
@@ -90,7 +41,8 @@ a {
 .admin-nav-link > span {
   font-weight: 800;
   font-size: 16px;
-  margin-left: 5px;
+  /* margin-left: 5px; */
+  display: none;
 }
 .admin-nav-link--active {
   color: white;
@@ -115,22 +67,3 @@ a {
 }
 
 /* User Header */
-.header-account {
-  display: flex;
-  align-items: center;
-  background-color: #227373;
-  padding: 3px;
-  border-radius: 99px;
-}
-
-.header-account > img {
-  width: 35px;
-  height: 35px;
-  object-fit: cover;
-  margin-right: 10px;
-  border-radius: 999px;
-}
-.header-account > h4 {
-  color: white;
-  margin-right: 10px;
-}

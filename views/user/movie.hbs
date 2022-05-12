@@ -1,31 +1,103 @@
-<div class="user-parent">
-    <div class="banner">
-        <img src="https://d2kektcjb0ajja.cloudfront.net/images/posts/feature_images/000/000/072/large-1466557422-feature.jpg?1466557422"
-            alt="" class="movie-background">
-        <img src="https://d2kektcjb0ajja.cloudfront.net/images/posts/feature_images/000/000/072/large-1466557422-feature.jpg?1466557422"
-            alt="" class="movie-poster">
-        <div class="movie-info">
-            <h2>{{movie.title}}</h2>
-            <h4>ENG (U/A)</h4>
-            <h4>Sci-Fi</h4>
-            <h4>Runtime: 2Hr 30Min</h4>
-            <h4>{{movie.director}}</h4>
-            <h4>Cast: {{movie.cast}}</h4>
+<section class="moviehero">
+    <div class="moviehero__bottom-gradient"></div>
+    <img src="https://images.squarespace-cdn.com/content/v1/507b2f30e4b066e116488db6/1366581664395-1EOF0V8KL1COY6OENC67/Oblivion-Poster.jpg?format=1000w" alt="" class="movie-background">
+
+    <div class="container">
+        <div class="moviehero__child">
+            <div class="moviehero__left">
+                <img src="https://alternativemovieposters.com/wp-content/uploads/2020/09/NeilDavies_Oblivion.jpg" alt="" class="movie-background" alt="">
+            </div>
+            <div class="moviehoro__right">
+                <h1>OBLIVION</h1>
+                <div class="moviehero__rightlang">
+                    <p>2D</p>
+                    <div>
+                        <p>TELUGU</p>
+                        <p>TAMIL</p>
+                    </div>
+                </div>
+                <div class="moviehero__rightinfo">
+                    <p>2hr 59min</p>
+                    <p>Action, Thriller</p>
+                    <p>UA</p>
+                    <p>17 DEC 2021</p>
+                </div>
+                <div class="moviehero__rightcrew">
+
+                </div>
+            </div>
         </div>
     </div>
-    {{!-- {{#each theaters}}
-    <a href="">{{this._id.name}}</a>
-    <h2>{{this._id.name}}</h2>
-    {{#each this.screens}}
-    <h3>{{this.name}}</h3>
-    {{#each this.shows}}
-    <h5>{{this.showStartTime}}</h5>
-    {{/each}}
-    {{/each}}
-    {{/each}} --}}
-    {{#each shows}}
-    <a href="/show/{{this._id}}">
-        <h3>{{this.showStartTime}}</h3>
-    </a>
-    {{/each}}
-</div>
+</section>
+
+<section class="movieshows">
+    <div class="container">
+        <div class="moviehows__child">
+            <div class="subheading">
+                <div></div>
+                <h3>UPCOMING SHOWS</h3>
+            </div>
+
+            <div class="movieshows__filters">
+                <div>
+                    <p>Date</p>
+                    <select name="date" id="date">
+                        <option value="01">AUG 21</option>
+                    </select>
+                </div>
+                <div>
+                    <p>No. of Seats</p>
+                    <select name="seats" id="seats">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="movieshows__shows-container">
+                <div class="movieshows__show-card">
+                    <div class="movieshows__show-card-left">
+                        <h3>SATHYAM CINEMAS - 06:30 PM</h3>
+                    </div>
+                    <div class="movieshows__show-card-right">
+                        <h4>2.3 KM</h4>
+                    </div>
+                </div>
+                <div class="movieshows__show-card">
+                    <div class="movieshows__show-card-left">
+                        <h3>ESCAPE CINEMAS - 03:30 PM</h3>
+                    </div>
+                    <div class="movieshows__show-card-right">
+                        <h4>2.3 KM</h4>
+                    </div>
+                </div>
+                <div class="movieshows__show-card">
+                    <div class="movieshows__show-card-left">
+                        <h3>PRATHIBHA THEATERS - 09:30 PM</h3>
+                    </div>
+                    <div class="movieshows__show-card-right">
+                        <h4>2.3 KM</h4>
+                    </div>
+                </div>
+                <div class="movieshows__show-card">
+                    <div class="movieshows__show-card-left">
+                        <h3>PVR CINEMAS - 07:30 PM</h3>
+                    </div>
+                    <div class="movieshows__show-card-right">
+                        <h4>2.3 KM</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{!-- <img src="https://d2kektcjb0ajja.cloudfront.net/images/posts/feature_images/000/000/072/large-1466557422-feature.jpg?1466557422" alt="" class="movie-background"> --}}

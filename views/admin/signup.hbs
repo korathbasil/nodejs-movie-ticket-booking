@@ -1,0 +1,17 @@
+<div class="content-card admin-login-box">
+    {{#if messages.error}}
+    <h3><span><i class="fas fa-exclamation-circle"></i>
+        </span>{{messages.error}}</h3>
+    {{/if}}
+  
+    <h2>Create Admin</h2>
+    <form action="/admin/signup" method="POST">
+        <label for="name">Name</label>
+        <input type="text" name="name">
+        <label for="email">Email</label>
+        <input type="email" name="email">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="">
+        <button type="submit">Create</button>
+    </form>
+</div>
