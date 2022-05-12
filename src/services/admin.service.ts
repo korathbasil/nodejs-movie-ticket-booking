@@ -17,28 +17,26 @@ export class AdminService {
   public static async getADminById(id: string): Promise<Admin | null> {
     const adminCollection = getCollection<Admin>("admin")!;
 
-    return adminCollection?.findOne({ _id: new ObjectId(id) });
+    return adminCollection.findOne({ _id: new ObjectId(id) });
   }
 
-  public static signup(data: {
+  public static async signup(data: {
     name: string;
     email: string;
     password: string;
-  }) {
-    return new Promise<ObjectId>(async (resolve, reject) => {
-      const adminCollection = getCollection<Admin>("admin")!;
+  }): Promise<ObjectId> {
+    const adminCollection = getCollection<Admin>("admin")!;
 
-      const admins = await this.isAdminAlraedyExists();
-      if (admins) return reject("Admin already exists");
+    const admins = await this.isAdminAlraedyExists();
+    if (admins) throw new Error("Admin alrready exists");
 
-      const hashedPassword = await passwordHelpers.hashPassword(data.password);
-      const newAdmin = {
-        ...data,
-        password: hashedPassword,
-      };
-      const newAdminDocDetails = await adminCollection?.insertOne(newAdmin);
-      return resolve(newAdminDocDetails.insertedId);
-    });
+    const hashedPassword = await passwordHelpers.hashPassword(data.password);
+    const newAdmin = {
+      ...data,
+      password: hashedPassword,
+    };
+    const newAdminDocDetails = await adminCollection.insertOne(newAdmin);
+    return newAdminDocDetails.insertedId;
   }
 
   public static login(data: { email: string; password: string }) {
