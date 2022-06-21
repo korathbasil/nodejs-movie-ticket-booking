@@ -1,36 +1,57 @@
-<aside id="admin-sidebar" class="sidebar admin-sidebar">
-    <ul class="admin-nav">
-        <li>
-            <a id="dashboard" class="admin-nav-link" href="/admin">
-                <i class="fas fa-home"></i>
-                {{!-- <span>Dashboard</span> --}}
-            </a>
-        </li>
-        <li>
-            <a id="theater-management" class="admin-nav-link" href="/admin/theater">
-                <i class="fas fa-film"></i>
-                {{!-- <span>Theater Management</span> --}}
-            </a>
-        </li>
-        <li>
-            <a id="user-management" class="admin-nav-link" href="/admin/user">
-                <i class="fas fa-user"></i>
-                {{!-- <span>User Management</span> --}}
-            </a>
-        </li>
-        <li class="admin-nav-item-aactive">
-            <a id="user-activity" class="admin-nav-link" href="/admin/user-activity">
-                <i class="fas fa-chart-line"></i>
-                {{!-- <span>User Activity Tracker</span> --}}
-            </a>
-        </li>
+<aside id="admin-sidebar" class="sidebar">
+  <h1>CineMax</h1>
+
+  <nav>
+    <ul class="navigation">
+      <li>
+        <a id="dashboard-link" class="nav-link" href="/admin">
+          <img src="/assets/icons/home-outlined.png" alt="" />
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a id="owners-link" class="nav-link" href="/admin/owners">
+          <img src="/assets/icons/owner-outlined.png" alt="" />
+          <span>Theater Owners</span>
+        </a>
+      </li>
+      <li>
+        <a id="theaters-link" class="nav-link" href="/admin/theater">
+          <img src="/assets/icons/theater-outlined.png" alt="" />
+          <span>Theaters</span>
+        </a>
+      </li>
+      <li>
+        <a id="users-link" class="nav-link" href="/admin/user">
+          <img src="/assets/icons/users-outlined.png" alt="" />
+          <span>Users</span>
+        </a>
+      </li>
+      <li>
+        <a
+          id="users-activity-link"
+          class="nav-link"
+          href="/admin/user-activity"
+        >
+          <img src="/assets/icons/analytics-outlined.png" alt="" />
+          <span>Activities</span>
+        </a>
+      </li>
+      <li>
+        <a id="managers-link" class="nav-link" href="/admin/managers">
+          <img src="/assets/icons/admin-outlined.png" alt="" />
+          <span>Managers</span>
+        </a>
+      </li>
     </ul>
+
+  </nav>
 </aside>
-<script src="/javascripts/admin.js"></script>
+{{! <script src="/javascripts/admin.js"></script>
 <script>
     const adminSidebar = document.getElementById("admin-sidebar");
 
     adminSidebar.addEventListener("hover", () => {
         adminSidebar.style.width = "350px"
     })
-</script>
+</script> }}

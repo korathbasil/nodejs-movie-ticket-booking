@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    /* Colors */
+    --color-primary: #7367f0;
+    --admin-secondary: #d8d8d8;
+    --admin-tertiary: #7367f0;
+    --color-true-blue: #047bd5;
+    --background: rgba(218, 205, 179, 0.387);
+    --background-light: #f8f8f8;
+    background-color: var(--background-light);
+  
+    --box-shadow-high: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  
+    /* User Colors */
+  }
+  
+  .container {
+    max-width: 1300px;
+    margin: 0 auto;
+    height: 100%;
+  }
+  
+  a {
+    color: #00b7ff;
+  }
+  
+
+  .app {
+    width: 100vw;
+    height: 100vh;
+  }
