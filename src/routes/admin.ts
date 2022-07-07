@@ -10,6 +10,9 @@ router.get("", AdminController.getHome);
 // owners page => GET /admin/owners
 router.get("/owners", AdminController.getOwners);
 
+// add owner page => /admin/owners/add
+router.get("/owners/add", AdminController.getAddOwner);
+
 // theaters page => GET /admin/theaters
 router.get("/theaters", AdminController.getTheaters);
 

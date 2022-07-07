@@ -66,6 +66,14 @@ export class AdminController {
     });
   }
 
+  // GET /admin/owners/add
+  public static getAddOwner(_: Request, res: Response) {
+    res.render("admin/add-owner", {
+      title: "Add Owner - Admin - Cinemax",
+      adminRoute: true,
+    });
+  }
+
   // GET /admin/theaters
   public static getTheaters(_: Request, res: Response) {
     res.render("admin/theaters", {
