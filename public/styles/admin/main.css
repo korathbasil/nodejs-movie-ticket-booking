@@ -50,7 +50,7 @@
     color: white;
 }
 
-.nav-link__active {
+.nav-link__active, .nav-link__active:hover {
     background-color: var(--col-admin-primary);
 }
 

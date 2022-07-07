@@ -87,5 +87,3 @@
 // router.get("/user", AdminController.getUserManagement);
 // // User Activity Tracker
 // router.get("/user-activity", AdminController.getUserManagement);
-
-export { router as adminRouter };
