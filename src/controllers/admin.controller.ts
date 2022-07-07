@@ -5,6 +5,13 @@ import { AdminService, TheaterService } from "../services";
 import { fileHelper } from "../helpers";
 
 export class AdminController {
+  public static getOwners(_: Request, res: Response) {
+    res.render("admin/owners", {
+      title: "Thater Owners - Admin - Cinemax",
+      adminRoute: true,
+    });
+  }
+
   public static async getLogin(req: Request, res: Response) {
     if (req.session.admin) return res.redirect("/admin/");
 

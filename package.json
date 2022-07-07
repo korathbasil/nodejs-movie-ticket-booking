@@ -5,7 +5,7 @@
   "scripts": {
     "watch": "tsc -w",
     "dev2": "nodemon dist/bin/www.js",
-    "dev": "NODE_ENV=dev ts-node-dev --respawn ./src/bin/www.ts",
+    "dev": "NODE_ENV=dev ts-node-dev --respawn -P tsconfig.json ./src/bin/www.ts",
     "start": "node dist/bin/www",
     "build": "tsc",
     "copy": "cp -r ./src/views ./dist/views && cp -r ./src/public ./dist/public",

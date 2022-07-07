@@ -2,6 +2,17 @@
     display: flex;
 }
 
+.main-app {
+    flex: 1;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    justify-content: space-between;
+}
+
 .sidebar {
     width: 220px;
     height: 100vh;
