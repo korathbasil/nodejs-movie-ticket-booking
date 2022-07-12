@@ -7,3 +7,7 @@ public/images
 .env
 
 test.html
+
+# sass out folder
+public/styles/*
+!public/styles/.gitkeep

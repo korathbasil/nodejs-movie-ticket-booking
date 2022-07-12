@@ -14,12 +14,16 @@
   {{!----------- Fonts End -----------}}
 
 
-    {{!-- Global Sytles --}}
-  <link rel="stylesheet" href="/stylesheets/style.css" />
+  {{!-- Global Sytles --}}
+  <link rel="stylesheet" href="/styles/global.css" />
   {{#if adminRoute}}
-  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <link rel="stylesheet" href="/styles/admin/main.css">
+  {{!-- <link rel="stylesheet" href="/stylesheets/style.css" />
   <link rel="stylesheet" href="/stylesheets/admin-theater-common.css" />
-  <link rel="stylesheet" href="/stylesheets/admin.css" />
+  <link rel="stylesheet" href="/stylesheets/admin.css" /> --}}
+
+  <script src="/scripts/admin/main.js" ></script>
+
   {{else if theaterRoute}}
   <link rel="stylesheet" href="/styles/theater/common.css" />
       {{#if pageStyle}}
